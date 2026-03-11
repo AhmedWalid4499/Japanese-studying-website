@@ -405,10 +405,102 @@ footer span{color:var(--pink);}
 .shi-date{font-size:.65rem;color:#bbb;}
 .srs-progress-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem;}
 .srs-pill{border-radius:2rem;padding:.25rem .8rem;font-size:.74rem;font-weight:700;}
+
+/* ===== DARK MODE ===== */
+body.dark{
+  --pink:#ff85a1;--pink-light:#c4607a;--pink-pale:#2d1a23;
+  --dark:#f0d0dc;--mid:#ffb3c8;--shadow:rgba(0,0,0,0.45);
+  --card-bg:rgba(35,18,28,0.95);
+  background:linear-gradient(135deg,#1a0d14 0%,#1f1020 50%,#150d1e 100%) !important;
+  color:#f0d0dc;
+}
+body.dark header{background:linear-gradient(135deg,#2d1020,#1a0818) !important;}
+body.dark nav button{background:rgba(255,133,161,.12);border-color:rgba(255,133,161,.3);color:#ffb3c8;}
+body.dark nav button:hover,body.dark nav button.active{background:var(--pink);color:white;}
+body.dark .card,body.dark .grammar-card,body.dark .kanji-detail-card,
+body.dark .listen-card,body.dark .ctr-block,body.dark .prog-stat,
+body.dark .prog-section-card,body.dark .score-history-item{
+  background:#2a1422 !important;border-color:rgba(255,133,161,.2) !important;color:#f0d0dc;
+}
+body.dark .grammar-example,body.dark .grammar-explanation,
+body.dark .grammar-structure{background:#1f0f1a !important;color:#e8c0d0;}
+body.dark .grammar-example .jp,body.dark .listen-jp,body.dark .ctr-jp{color:#ffd0e0;}
+body.dark .section-title,body.dark .grammar-cat-title{color:#ffb3c8;}
+body.dark .grammar-meaning-tag{background:#3d1828;color:#ff85a1;}
+body.dark input,body.dark select{background:#2a1422;color:#f0d0dc;border-color:rgba(255,133,161,.3);}
+body.dark .option-btn{background:#2a1422;border-color:rgba(255,133,161,.25);color:#f0d0dc;}
+body.dark .option-btn:hover{background:#3d1828;border-color:var(--pink);}
+body.dark .ctr-table td,body.dark .ctr-table th{border-color:rgba(255,133,161,.15);}
+body.dark .ctr-table tr:nth-child(even) td{background:rgba(255,133,161,.06);}
+body.dark .score-history-item{background:#2a1422 !important;}
+body.dark .shi-type{background:#3d1828;border-color:rgba(255,133,161,.3);}
+body.dark .prog-bar-wrap{background:#3d1828;}
+body.dark .filter-tab{background:#2a1422;border-color:rgba(255,133,161,.25);color:#ffb3c8;}
+body.dark .filter-tab.active{background:var(--pink);color:white;}
+body.dark .tts-btn{background:linear-gradient(135deg,#0d2a3d,#0d3d5a);border-color:#1a6090;color:#74b9ff;}
+body.dark .srs-know-btn{background:linear-gradient(135deg,#0d2a1a,#0d3d1a);border-color:#1a6030;color:#81c784;}
+body.dark .srs-review-btn{background:linear-gradient(135deg,#2a1a00,#3d2800);border-color:#6d4c00;color:#ffcc80;}
+body.dark .listen-cat-header{background:linear-gradient(135deg,rgba(255,133,161,.12),rgba(199,125,255,.08));}
+body.dark .ctr-note{background:#1f0f1a;border-color:rgba(255,133,161,.3);color:#e8c0d0;}
+body.dark .collapsible-btn{color:#ff85a1;}
+body.dark .conj-table td{border-color:rgba(255,133,161,.15);background:#1f0f1a;}
+body.dark .conj-table tr:nth-child(even) td{background:#2a1422;}
+body.dark footer{background:linear-gradient(135deg,rgba(255,133,161,.07),rgba(199,125,255,.05));border-color:rgba(255,133,161,.2);}
+body.dark footer p{color:#c47090;}
+body.dark .htl-card{background:#2a1422 !important;}
+body.dark .welcome-banner{background:linear-gradient(135deg,#3d1020,#2d0a30) !important;}
+/* dark toggle button */
+#dark-toggle{
+  position:fixed;bottom:1.25rem;right:1.25rem;z-index:9999;
+  width:48px;height:48px;border-radius:50%;border:none;cursor:pointer;
+  background:linear-gradient(135deg,#2d1020,#1a0818);
+  box-shadow:0 4px 16px rgba(0,0,0,.4);
+  font-size:1.3rem;display:flex;align-items:center;justify-content:center;
+  transition:all .25s;
+}
+#dark-toggle:hover{transform:scale(1.12);box-shadow:0 6px 22px rgba(0,0,0,.5);}
+body:not(.dark) #dark-toggle{background:linear-gradient(135deg,#2d1020,#4a1535);}
+
+/* ===== BOOKMARKS ===== */
+.bm-star{background:none;border:none;cursor:pointer;font-size:1.1rem;padding:.1rem .3rem;line-height:1;transition:transform .2s;vertical-align:middle;}
+.bm-star:hover{transform:scale(1.3);}
+.bm-star.active{filter:drop-shadow(0 0 4px #ffd700);}
+/* bookmarks section */
+.bm-empty{text-align:center;padding:2rem;color:#aaa;font-size:.88rem;}
+.bm-item{background:white;border-radius:1.1rem;padding:.9rem 1.1rem;border:2px solid rgba(255,182,193,.25);box-shadow:0 3px 10px var(--shadow);margin-bottom:.7rem;position:relative;}
+body.dark .bm-item{background:#2a1422 !important;border-color:rgba(255,133,161,.2) !important;}
+.bm-tag{font-size:.65rem;font-weight:800;border-radius:.4rem;padding:.1rem .5rem;margin-right:.4rem;}
+.bm-remove{position:absolute;top:.6rem;right:.7rem;background:none;border:none;cursor:pointer;font-size:.85rem;color:#ccc;font-family:inherit;}
+.bm-remove:hover{color:#e05f88;}
+
+/* ===== CONFETTI ===== */
+#confetti-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:99999;}
+.celebration-banner{
+  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);
+  background:linear-gradient(135deg,#ff85a1,#c77dff,#4cc9f0);
+  border-radius:2rem;padding:2rem 3rem;text-align:center;
+  box-shadow:0 20px 60px rgba(0,0,0,.3);z-index:99998;
+  transition:transform .4s cubic-bezier(.34,1.56,.64,1);
+  color:white;max-width:340px;width:90%;
+}
+.celebration-banner.show{transform:translate(-50%,-50%) scale(1);}
+.celeb-emoji{font-size:3.5rem;display:block;margin-bottom:.5rem;}
+.celeb-title{font-size:1.6rem;font-weight:900;margin-bottom:.3rem;}
+.celeb-sub{font-size:.9rem;opacity:.9;margin-bottom:1.1rem;}
+.celeb-close{background:rgba(255,255,255,.25);border:2px solid rgba(255,255,255,.5);color:white;border-radius:2rem;padding:.4rem 1.5rem;font-size:.85rem;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;}
+.celeb-close:hover{background:rgba(255,255,255,.4);}
 </style>
 </head>
 <body>
 <div id="petals"></div>
+<button id="dark-toggle" onclick="toggleDark()" title="Toggle dark mode">🌙</button>
+<canvas id="confetti-canvas"></canvas>
+<div class="celebration-banner" id="celeb-banner">
+  <span class="celeb-emoji" id="celeb-emoji">🎉</span>
+  <div class="celeb-title" id="celeb-title">Outstanding!</div>
+  <div class="celeb-sub" id="celeb-sub">You aced it! 頑張ったね！</div>
+  <button class="celeb-close" onclick="closeCeleb()">Keep studying! 🌸</button>
+</div>
 
 <!-- ===== MASCOT: Hana-chan ===== -->
 <div class="mascot-wrap" id="mascot-wrap">
@@ -467,6 +559,7 @@ footer span{color:var(--pink);}
     <button onclick="showSection('counters')">🔢 Counters</button>
     <button onclick="showSection('listening')">🎧 Listening</button>
     <button onclick="showSection('progress')">📊 Progress</button>
+    <button onclick="showSection('bookmarks')">⭐ Bookmarks</button>
   </nav>
 </header>
 
@@ -975,7 +1068,22 @@ footer span{color:var(--pink);}
   <div class="section-title">📊 My Progress</div>
   <div id="prog-content"></div>
 </div>
-</main>
+
+<!-- ====== BOOKMARKS ====== -->
+<div class="section" id="bookmarks">
+  <div class="section-title">⭐ My Bookmarks</div>
+  <div class="card" style="background:linear-gradient(135deg,rgba(255,215,0,.1),rgba(255,183,197,.15));margin-bottom:1.25rem;">
+    <p style="font-size:.87rem;color:#777;line-height:1.7;">Star any <strong>grammar pattern</strong> or <strong>kanji</strong> using the ⭐ button on their cards. They'll all appear here for quick review! Bookmarks are saved to your browser.</p>
+  </div>
+  <div class="ctr-filter-bar" id="bm-filter-bar">
+    <button class="filter-tab active" onclick="filterBookmarks('all',this)">⭐ All</button>
+    <button class="filter-tab" onclick="filterBookmarks('grammar',this)">📖 Grammar</button>
+    <button class="filter-tab" onclick="filterBookmarks('kanji',this)">漢字 Kanji</button>
+  </div>
+  <div id="bookmarks-list"></div>
+</div>
+
+<!-- ====== STUDY PLAN ====== -->
 <div class="section" id="study-plan">
   <div class="section-title">📅 8-Week N5 Study Plan</div>
   <div class="card" style="background:linear-gradient(135deg,rgba(255,183,197,.2),rgba(199,125,255,.1));margin-bottom:1.25rem;">
@@ -2072,6 +2180,7 @@ function showSection(id){
   });
   // Render progress dashboard when that section is shown
   if(id === 'progress') setTimeout(renderProgress, 0);
+  if(id === 'bookmarks') setTimeout(renderBookmarks, 0);
   // Mascot tip — runs after data is defined (deferred)
   setTimeout(()=>{
     if(typeof mascotBubbleTimer==='undefined') return;
@@ -2139,10 +2248,13 @@ function renderGrammar(filterText=''){
           </div>
         </div>`;
       }).join('');
-      html+=`<div class="grammar-card">
+      html+=`<div class="grammar-card" id="gc_${uid}">
         <div class="grammar-card-header">
           <div>${badge}<span class="grammar-pattern">${item.pattern}</span></div>
-          <span class="grammar-meaning-tag">${item.meaning}</span>
+          <div style="display:flex;align-items:center;gap:.4rem;">
+            <button class="bm-star" id="bms_gc_${uid}" onclick="toggleBookmark('grammar','gc_${uid}',this)" title="Bookmark">${getBookmarkStar('gc_'+uid)}</button>
+            <span class="grammar-meaning-tag">${item.meaning}</span>
+          </div>
         </div>
         <div class="grammar-structure">${item.structure}</div>
         <div class="grammar-explanation">${item.explanation}</div>
@@ -2321,9 +2433,14 @@ function resetKanaQuiz(){
 function renderKanji(filter='all'){
   const grid=document.getElementById('kanji-grid');
   const list=filter==='all'?KANJI:KANJI.filter(k=>k.cat===filter);
-  grid.innerHTML=list.map(k=>`
-    <div class="kanji-detail-card" onclick="this.style.borderColor='var(--pink)';this.style.background='#fff8fb';" title="Click to highlight">
-      <span class="kanji-big">${k.char}</span>
+  grid.innerHTML=list.map((k,i)=>{
+    const bid=`kanji_${k.char}`;
+    return `
+    <div class="kanji-detail-card" id="${bid}">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <span class="kanji-big" style="cursor:pointer;" onclick="speakJP('${k.char}',this)">${k.char}</span>
+        <button class="bm-star" id="bms_${bid}" onclick="toggleBookmark('kanji','${bid}',this)" title="Bookmark">${getBookmarkStar(bid)}</button>
+      </div>
       <div class="kanji-info">
         <strong>On:</strong> ${k.on}<br>
         <strong>Kun:</strong> ${k.kun||'—'}<br>
@@ -2331,8 +2448,9 @@ function renderKanji(filter='all'){
       </div>
       <span class="kanji-stroke">✏️ ${k.strokes} stroke${k.strokes!==1?'s':''}</span>
       <span class="kanji-jlpt">N5</span>
-      ${k.words.map(w=>`<div class="kanji-example-word"><span class="kw-jp">${w.jp}</span> <span style="color:#aaa;font-size:.7rem;">(${w.read})</span><div class="kw-en">${w.en}</div></div>`).join('')}
-    </div>`).join('');
+      ${k.words.map(w=>`<div class="kanji-example-word"><span class="kw-jp" style="cursor:pointer;" onclick="speakJP('${w.jp}',this)">${w.jp}</span> <span style="color:#aaa;font-size:.7rem;">(${w.read})</span><div class="kw-en">${w.en}</div></div>`).join('')}
+    </div>`;
+  }).join('');
 }
 function filterKanji(cat,btn){
   document.querySelectorAll('#kanji-filters .filter-tab').forEach(b=>b.classList.remove('active'));
@@ -3683,6 +3801,196 @@ function renderProgress() {
       <button class="listen-play-btn" style="background:linear-gradient(135deg,#4cc9f0,#0077b6);" onclick="showSection('listening')">🎧 Listening</button>
       <button class="listen-play-btn" style="background:linear-gradient(135deg,#06d6a0,#028a5b);" onclick="showSection('grammar')">📖 Grammar</button>
     </div>`;
+}
+
+// ============================================================
+//  DARK MODE
+// ============================================================
+function toggleDark() {
+  const isDark = document.body.classList.toggle('dark');
+  document.getElementById('dark-toggle').textContent = isDark ? '☀️' : '🌙';
+  try { localStorage.setItem('sakura_dark', isDark ? '1' : '0'); } catch(e) {}
+}
+try {
+  if (localStorage.getItem('sakura_dark') === '1') {
+    document.body.classList.add('dark');
+    document.getElementById('dark-toggle').textContent = '☀️';
+  }
+} catch(e) {}
+
+// ============================================================
+//  BOOKMARKS
+// ============================================================
+function getBookmarks() {
+  try { return JSON.parse(localStorage.getItem('sakura_bm') || '{}'); } catch(e) { return {}; }
+}
+function saveBookmarks(d) { try { localStorage.setItem('sakura_bm', JSON.stringify(d)); } catch(e) {} }
+function getBookmarkStar(id) { return getBookmarks()[id] ? '⭐' : '☆'; }
+
+function toggleBookmark(type, id, btn) {
+  const bm = getBookmarks();
+  if (bm[id]) {
+    delete bm[id];
+    btn.textContent = '☆'; btn.classList.remove('active');
+  } else {
+    const card = document.getElementById(id);
+    let label = '', detail = '', char = '';
+    if (type === 'grammar') {
+      label = card?.querySelector('.grammar-pattern')?.textContent || id;
+      detail = card?.querySelector('.grammar-meaning-tag')?.textContent || '';
+    } else if (type === 'kanji') {
+      char = card?.querySelector('.kanji-big')?.textContent || '';
+      label = char;
+      detail = card?.querySelector('.kanji-info')?.textContent?.replace(/\s+/g,' ').trim() || '';
+    }
+    bm[id] = { type, label, detail, char, date: new Date().toISOString() };
+    btn.textContent = '⭐'; btn.classList.add('active');
+    showToast('⭐ Bookmarked!');
+  }
+  saveBookmarks(bm);
+  if (document.getElementById('bookmarks').classList.contains('active')) renderBookmarks();
+}
+
+function showToast(msg) {
+  let t = document.getElementById('bm-toast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'bm-toast';
+    t.style.cssText = 'position:fixed;bottom:5.5rem;right:1.25rem;background:linear-gradient(135deg,var(--pink),#e05f88);color:white;padding:.5rem 1.2rem;border-radius:2rem;font-size:.82rem;font-weight:700;z-index:99997;box-shadow:0 4px 16px rgba(255,133,161,.4);transition:opacity .4s;pointer-events:none;opacity:0;';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg; t.style.opacity = '1';
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => { t.style.opacity = '0'; }, 1800);
+}
+
+function renderBookmarks(filter = 'all') {
+  const bm = getBookmarks();
+  const list = document.getElementById('bookmarks-list');
+  if (!list) return;
+  const entries = Object.entries(bm).filter(([,item]) => filter === 'all' || item.type === filter);
+  if (entries.length === 0) {
+    list.innerHTML = `<div class="bm-empty">
+      <div style="font-size:3rem;margin-bottom:.75rem;">☆</div>
+      <div style="font-weight:700;color:#bbb;margin-bottom:.4rem;">No bookmarks yet!</div>
+      <div>Tap the ☆ on any grammar card or kanji to save it here. 🌸</div>
+      <div style="margin-top:1.1rem;display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;">
+        <button class="listen-play-btn" style="font-size:.78rem;" onclick="showSection('grammar')">📖 Grammar</button>
+        <button class="listen-play-btn" style="background:linear-gradient(135deg,#4cc9f0,#0077b6);font-size:.78rem;" onclick="showSection('kanji')">漢字 Kanji</button>
+      </div>
+    </div>`;
+    return;
+  }
+  list.innerHTML = entries.sort((a,b) => new Date(b[1].date)-new Date(a[1].date)).map(([id,item]) => {
+    const tc = item.type==='grammar'?'#ff85a1':'#4cc9f0';
+    const tl = item.type==='grammar'?'📖 Grammar':'漢字 Kanji';
+    const go = item.type==='grammar'?`showSection('grammar')`:`showSection('kanji')`;
+    const safe = (item.char||item.label||'').replace(/'/g,"\\'");
+    return `<div class="bm-item" id="bmi_${id}">
+      <div style="display:flex;align-items:flex-start;gap:.75rem;">
+        ${item.type==='kanji'?`<div style="font-size:2.5rem;font-weight:900;color:var(--mid);flex-shrink:0;line-height:1.1;">${item.char}</div>`:''}
+        <div style="flex:1;min-width:0;">
+          <div style="display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;margin-bottom:.3rem;">
+            <span class="bm-tag" style="background:${tc}22;color:${tc};border:1px solid ${tc}44;">${tl}</span>
+            <span style="font-weight:800;color:var(--mid);font-size:.92rem;">${item.label}</span>
+          </div>
+          <div style="font-size:.78rem;color:#888;line-height:1.5;max-height:2.5em;overflow:hidden;">${item.detail}</div>
+          <div style="display:flex;gap:.4rem;margin-top:.55rem;flex-wrap:wrap;">
+            ${safe?`<button class="tts-btn" onclick="speakJP('${safe}',this)">🔊 Listen</button>`:''}
+            <button class="listen-slow-btn" style="font-size:.72rem;" onclick="${go}">→ Go to section</button>
+          </div>
+        </div>
+      </div>
+      <button class="bm-remove" onclick="removeBookmark('${id}')" title="Remove">✕</button>
+    </div>`;
+  }).join('');
+}
+
+function removeBookmark(id) {
+  const bm = getBookmarks(); delete bm[id]; saveBookmarks(bm);
+  const star = document.getElementById('bms_'+id);
+  if (star) { star.textContent='☆'; star.classList.remove('active'); }
+  const activeBtn = document.querySelector('#bm-filter-bar .filter-tab.active');
+  const f = activeBtn?.textContent?.includes('Grammar')?'grammar':activeBtn?.textContent?.includes('Kanji')?'kanji':'all';
+  renderBookmarks(f);
+}
+function filterBookmarks(f,btn){
+  document.querySelectorAll('#bm-filter-bar .filter-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active'); renderBookmarks(f);
+}
+
+// ============================================================
+//  CONFETTI
+// ============================================================
+const confettiCanvas = document.getElementById('confetti-canvas');
+const confettiCtx = confettiCanvas.getContext('2d');
+let confettiFrame = null;
+
+function launchConfetti(duration=3500) {
+  confettiCanvas.width = window.innerWidth;
+  confettiCanvas.height = window.innerHeight;
+  const colors = ['#ff85a1','#c77dff','#4cc9f0','#ffd700','#06d6a0','#ffb347','#ff6b6b'];
+  const particles = Array.from({length:180},()=>({
+    x: Math.random()*confettiCanvas.width, y:-10-Math.random()*300,
+    r:3+Math.random()*7, vx:Math.random()*2-1, vy:1.5+Math.random()*2.5,
+    color:colors[Math.floor(Math.random()*colors.length)],
+    tilt:0, ts:0.04+Math.random()*0.06,
+    shape:Math.random()>.4?'rect':'circle', rot:Math.random()*360
+  }));
+  const end = Date.now()+duration;
+  if (confettiFrame) cancelAnimationFrame(confettiFrame);
+  function draw() {
+    confettiCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);
+    const now = Date.now(), remaining = end-now;
+    const alpha = remaining<600 ? remaining/600 : 1;
+    particles.forEach(p=>{
+      confettiCtx.save();
+      confettiCtx.globalAlpha = alpha*0.9;
+      confettiCtx.fillStyle = p.color;
+      confettiCtx.translate(p.x,p.y);
+      confettiCtx.rotate(p.rot*Math.PI/180);
+      if(p.shape==='rect') confettiCtx.fillRect(-p.r/2,-p.r*.3,p.r,p.r*.6);
+      else { confettiCtx.beginPath(); confettiCtx.arc(0,0,p.r/2,0,Math.PI*2); confettiCtx.fill(); }
+      confettiCtx.restore();
+      p.x+=p.vx+Math.sin(p.tilt)*.8; p.y+=p.vy;
+      p.rot+=2; p.tilt+=p.ts;
+      if(p.y>confettiCanvas.height+20){p.y=-10;p.x=Math.random()*confettiCanvas.width;}
+    });
+    if(now<end) confettiFrame=requestAnimationFrame(draw);
+    else confettiCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);
+  }
+  draw();
+}
+
+function showCelebration(emoji,title,sub,pct=80){
+  document.getElementById('celeb-emoji').textContent=emoji;
+  document.getElementById('celeb-title').textContent=title;
+  document.getElementById('celeb-sub').textContent=sub;
+  document.getElementById('celeb-banner').classList.add('show');
+  launchConfetti(pct>=95?5500:pct>=80?3500:2500);
+}
+function closeCeleb(){
+  document.getElementById('celeb-banner').classList.remove('show');
+  if(confettiFrame) cancelAnimationFrame(confettiFrame);
+  confettiCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);
+}
+
+// Patch quiz endings for confetti
+const _confEE = endExam;
+function endExam(){
+  _confEE();
+  const pct=Math.round(exScore/examQs.length*100);
+  if(pct>=80) setTimeout(()=>showCelebration(
+    pct===100?'🏆':pct>=90?'🌸':'🎉',
+    pct===100?'Perfect Score!!':pct>=90?'Outstanding!':'Great Work!',
+    `${pct}% on the Mock Exam! ${pct>=90?'N5 is yours! 頑張ったね！':'もう少し！Keep going!'}`,
+    pct),400);
+}
+const _confKQ = endKanjiQuiz;
+function endKanjiQuiz(){
+  _confKQ();
+  const pct=Math.round(kqScore/kqQuestionPool.length*100);
+  if(pct>=80) setTimeout(()=>showCelebration('✏️',pct===100?'Kanji Perfect!':'Kanji Master!',`${pct}% on Kanji Quiz! すごい！`,pct),400);
 }
 
 const pc=document.getElementById('petals');
