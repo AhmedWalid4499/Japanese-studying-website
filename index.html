@@ -620,6 +620,47 @@ body.dark .comp-q-card{background:#2a1422;border-color:rgba(255,133,161,.2);}
 .comp-answer-reveal.correct{background:#e8f5e9;color:#2e7d32;}
 .comp-answer-reveal.wrong{background:#ffebee;color:#c62828;}
 
+/* ===== ANIME CORNER ===== */
+.anime-card{background:white;border-radius:1.4rem;overflow:hidden;box-shadow:0 4px 18px var(--shadow);border:2px solid rgba(255,182,193,.2);transition:all .25s;position:relative;}
+.anime-card:hover{transform:translateY(-5px);box-shadow:0 14px 35px var(--shadow);}
+body.dark .anime-card{background:#1a1228;border-color:rgba(233,69,96,.2);}
+.anime-poster{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;background:#1a1228;}
+.anime-body{padding:1rem;}
+.anime-title-jp{font-size:1.05rem;font-weight:900;color:var(--dark);line-height:1.3;margin-bottom:.2rem;}
+body.dark .anime-title-jp{color:#f0d0dc;}
+.anime-title-en{font-size:.75rem;color:#aaa;margin-bottom:.55rem;font-style:italic;}
+.anime-badges{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.65rem;}
+.anime-badge{font-size:.6rem;font-weight:800;border-radius:.4rem;padding:.1rem .45rem;border:1px solid;}
+.anime-score{position:absolute;top:.65rem;right:.65rem;background:rgba(0,0,0,.75);color:#ffd700;font-size:.75rem;font-weight:900;border-radius:.5rem;padding:.2rem .5rem;backdrop-filter:blur(4px);}
+.anime-synopsis{font-size:.78rem;color:#666;line-height:1.65;margin-bottom:.6rem;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;}
+body.dark .anime-synopsis{color:#c8a0b8;}
+.anime-synopsis-jp{font-size:.76rem;color:#999;line-height:1.7;font-style:italic;border-top:1px solid rgba(255,182,193,.2);padding-top:.5rem;margin-top:.3rem;display:none;}
+.anime-synopsis-jp.show{display:block;}
+.anime-toggle-jp{font-size:.68rem;color:var(--pink);font-weight:700;cursor:pointer;background:none;border:none;font-family:inherit;padding:0;margin-bottom:.5rem;}
+body.dark .anime-toggle-jp{color:#ff85a1;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* ===== DICTIONARY ===== */
+.dict-entry{background:white;border-radius:1.3rem;padding:1.25rem 1.35rem;border:2px solid rgba(17,153,142,.2);box-shadow:0 4px 16px var(--shadow);margin-bottom:1rem;transition:all .2s;}
+body.dark .dict-entry{background:#1a2822;border-color:rgba(17,153,142,.25);color:#d0f0e8;}
+.dict-word{font-size:2.2rem;font-weight:900;color:var(--dark);line-height:1.1;cursor:pointer;}
+body.dark .dict-word{color:#a8ffce;}
+.dict-reading{font-size:1rem;color:var(--pink);font-weight:700;margin:.2rem 0;}
+.dict-jlpt{display:inline-block;font-size:.65rem;font-weight:900;border-radius:.4rem;padding:.1rem .5rem;background:linear-gradient(135deg,#ff85a1,#c77dff);color:white;margin-right:.4rem;}
+.dict-pos{display:inline-block;font-size:.65rem;font-weight:700;border-radius:.4rem;padding:.1rem .5rem;background:rgba(17,153,142,.15);color:#0d7b72;border:1px solid rgba(17,153,142,.3);margin-right:.3rem;margin-bottom:.3rem;}
+body.dark .dict-pos{background:rgba(17,153,142,.2);color:#7ef5e8;}
+.dict-meaning-num{font-size:.65rem;font-weight:900;color:#aaa;margin-right:.35rem;}
+.dict-meaning{font-size:.9rem;color:#444;line-height:1.6;margin-bottom:.35rem;}
+body.dark .dict-meaning{color:#d0e8e0;}
+.dict-example{background:linear-gradient(135deg,rgba(45,27,105,.08),rgba(17,153,142,.06));border-radius:.75rem;padding:.6rem .85rem;margin:.4rem 0;border-left:3px solid rgba(17,153,142,.4);}
+.dict-example-jp{font-size:.9rem;font-weight:700;color:var(--dark);margin-bottom:.2rem;}
+body.dark .dict-example-jp{color:#c8f0e0;}
+.dict-example-en{font-size:.75rem;color:#888;}
+.dict-section-label{font-size:.62rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#aaa;margin:.75rem 0 .35rem;}
+.dict-history-pill{background:rgba(17,153,142,.12);border:1px solid rgba(17,153,142,.25);color:#0d7b72;border-radius:2rem;padding:.2rem .7rem;font-size:.72rem;font-weight:700;cursor:pointer;transition:all .15s;}
+.dict-history-pill:hover{background:rgba(17,153,142,.25);}
+body.dark .dict-history-pill{background:rgba(17,153,142,.15);border-color:rgba(17,153,142,.3);color:#7ef5e8;}
+
 /* ===== EGYPT CLOCK ===== */
 #eg-clock{
   display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -838,6 +879,10 @@ body.dark .stroke-path{stroke:#ffd0e0;}
   <button class="sidebar-btn" id="sb_bookmarks" onclick="sbGo('bookmarks')"><span class="sb-icon">⭐</span> Bookmarks</button>
   <button class="sidebar-btn" id="sb_study-plan" onclick="sbGo('study-plan')"><span class="sb-icon">📅</span> Study Plan</button>
   <button class="sidebar-btn" id="sb_resources" onclick="sbGo('resources')"><span class="sb-icon">🔗</span> Resources</button>
+  <div class="sidebar-divider"></div>
+  <div class="sidebar-section-label">🎌 Fun & Tools</div>
+  <button class="sidebar-btn" id="sb_anime" onclick="sbGo('anime')"><span class="sb-icon">🎌</span> Anime Corner</button>
+  <button class="sidebar-btn" id="sb_dictionary" onclick="sbGo('dictionary')"><span class="sb-icon">📗</span> Dictionary</button>
 </div>
 
 <div id="app-body">
@@ -1005,6 +1050,22 @@ body.dark .stroke-path{stroke:#ffd0e0;}
       <div style="font-weight:900;color:#7d3c00;font-size:.9rem;">Comprehension</div>
       <div style="font-size:.72rem;color:#a04000;margin-top:.2rem;line-height:1.5;">Reading passages with MCQ tests</div>
       <div style="position:absolute;right:-8px;bottom:-8px;font-size:2.5rem;opacity:.12;">解</div>
+    </div>
+
+    <!-- Anime Corner -->
+    <div onclick="showSection('anime')" style="background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);border-radius:1.3rem;padding:1.1rem;cursor:pointer;box-shadow:0 4px 14px rgba(233,69,96,.35);transition:all .22s;position:relative;overflow:hidden;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 28px rgba(233,69,96,.5)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 14px rgba(233,69,96,.35)'">
+      <div style="font-size:2rem;margin-bottom:.35rem;">🎌</div>
+      <div style="font-weight:900;color:#e9c46a;font-size:.9rem;">Anime Corner</div>
+      <div style="font-size:.72rem;color:#f4a261;margin-top:.2rem;line-height:1.5;">Trending anime + JP synopses</div>
+      <div style="position:absolute;right:-8px;bottom:-8px;font-size:2.5rem;opacity:.18;color:#e9c46a;">ア</div>
+    </div>
+
+    <!-- Dictionary -->
+    <div onclick="showSection('dictionary')" style="background:linear-gradient(135deg,#2d1b69,#11998e);border-radius:1.3rem;padding:1.1rem;cursor:pointer;box-shadow:0 4px 14px rgba(17,153,142,.4);transition:all .22s;position:relative;overflow:hidden;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 28px rgba(17,153,142,.55)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 14px rgba(17,153,142,.4)'">
+      <div style="font-size:2rem;margin-bottom:.35rem;">📗</div>
+      <div style="font-weight:900;color:#a8ffce;font-size:.9rem;">Dictionary</div>
+      <div style="font-size:.72rem;color:#c8ffd4;margin-top:.2rem;line-height:1.5;">AI-powered Japanese dictionary</div>
+      <div style="position:absolute;right:-8px;bottom:-8px;font-size:2.5rem;opacity:.18;color:#a8ffce;">辞</div>
     </div>
 
   </div>
@@ -1470,6 +1531,55 @@ body.dark .stroke-path{stroke:#ffd0e0;}
   <p style="color:#a0607a;margin-bottom:1.1rem;font-size:.92rem;">The best websites to help you pass JLPT N5! ✨</p>
   <div class="resource-grid" id="resource-grid"></div>
 </div>
+
+<!-- ====== ANIME CORNER ====== -->
+<div class="section" id="anime">
+  <div class="section-title">🎌 Anime Corner</div>
+  <div class="card" style="background:linear-gradient(135deg,rgba(26,26,46,.9),rgba(15,52,96,.8));border-color:rgba(233,69,96,.3);margin-bottom:1.25rem;">
+    <p style="font-size:.88rem;color:#f4a261;line-height:1.75;">📺 Discover trending anime! Each entry shows the Japanese title, synopsis in both English and Japanese, genres, score, and episode count. Great for immersion reading practice! 🌸</p>
+    <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.85rem;">
+      <button class="filter-tab active" id="anime-tab-trending" onclick="loadAnime('trending',this)">🔥 Trending</button>
+      <button class="filter-tab" id="anime-tab-airing" onclick="loadAnime('airing',this)">📡 Airing Now</button>
+      <button class="filter-tab" id="anime-tab-popular" onclick="loadAnime('popular',this)">⭐ Most Popular</button>
+      <button class="filter-tab" id="anime-tab-upcoming" onclick="loadAnime('upcoming',this)">🗓 Upcoming</button>
+    </div>
+  </div>
+  <div id="anime-loading" style="text-align:center;padding:2.5rem;display:none;">
+    <div style="font-size:2rem;animation:spin 1s linear infinite;display:inline-block;">🌸</div>
+    <div style="color:#aaa;margin-top:.5rem;font-size:.88rem;">Loading anime data…</div>
+  </div>
+  <div id="anime-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.1rem;"></div>
+</div>
+
+<!-- ====== DICTIONARY ====== -->
+<div class="section" id="dictionary">
+  <div class="section-title">📗 Japanese Dictionary</div>
+  <div class="card" style="background:linear-gradient(135deg,rgba(45,27,105,.15),rgba(17,153,142,.1));border-color:rgba(17,153,142,.3);margin-bottom:1.25rem;">
+    <p style="font-size:.88rem;color:#555;line-height:1.75;">Search any Japanese word, kanji, or English term. Get readings, meanings, JLPT level, part of speech, example sentences, and more — powered by AI. 📖</p>
+    <div style="display:flex;gap:.6rem;margin-top:.85rem;flex-wrap:wrap;">
+      <input id="dict-input" type="text" class="search-box" placeholder="🔍 Search: 食べる, たべる, eat, 水…" style="flex:1;margin-bottom:0;min-width:200px;" onkeydown="if(event.key==='Enter')searchDict()">
+      <button class="btn" onclick="searchDict()" style="flex-shrink:0;">Search 検索</button>
+    </div>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.65rem;">
+      <span style="font-size:.7rem;color:#aaa;font-weight:700;">Try:</span>
+      <button class="listen-slow-btn" style="font-size:.68rem;" onclick="quickDict('猫')">猫 cat</button>
+      <button class="listen-slow-btn" style="font-size:.68rem;" onclick="quickDict('食べる')">食べる eat</button>
+      <button class="listen-slow-btn" style="font-size:.68rem;" onclick="quickDict('美しい')">美しい beautiful</button>
+      <button class="listen-slow-btn" style="font-size:.68sm;" onclick="quickDict('電車')">電車 train</button>
+      <button class="listen-slow-btn" style="font-size:.68rem;" onclick="quickDict('友達')">友達 friend</button>
+    </div>
+  </div>
+  <div id="dict-loading" style="text-align:center;padding:2rem;display:none;">
+    <div style="font-size:2rem;animation:spin 1s linear infinite;display:inline-block;">📗</div>
+    <div style="color:#aaa;margin-top:.5rem;font-size:.88rem;">Looking up…</div>
+  </div>
+  <div id="dict-results"></div>
+  <div id="dict-history-wrap" style="margin-top:1.5rem;display:none;">
+    <div style="font-weight:900;color:var(--mid);font-size:.85rem;margin-bottom:.6rem;">🕐 Recent Searches</div>
+    <div id="dict-history" style="display:flex;flex-wrap:wrap;gap:.45rem;"></div>
+  </div>
+</div>
+
 </main>
 
 <script>
@@ -2561,6 +2671,8 @@ function showSection(id){
   if(id === 'numbers') setTimeout(()=>renderNumbers('basics'), 0);
   if(id === 'phrases') setTimeout(renderPhrases, 0);
   if(id === 'comprehension') setTimeout(renderCompList, 0);
+  if(id === 'anime') setTimeout(()=>{ if(!document.getElementById('anime-grid').innerHTML) loadAnime('trending', document.getElementById('anime-tab-trending')); }, 0);
+  if(id === 'dictionary') setTimeout(()=>document.getElementById('dict-input').focus(), 100);
   // Mascot tip — runs after data is defined (deferred)
   setTimeout(()=>{
     if(typeof mascotBubbleTimer==='undefined') return;
@@ -5642,6 +5754,249 @@ function resetComp() {
 }
 
 renderCompList();
+
+// ============================================================
+//  ANIME CORNER — Jikan API (MyAnimeList, open CORS)
+// ============================================================
+let animeCurrentTab = 'trending';
+const JIKAN = 'https://api.jikan.moe/v4';
+
+const ANIME_JP_SYNOPSES = {
+  // Fallback JP synopses for common titles when API doesn't provide them
+  default: 'このアニメは多くの人に愛されている作品です。ぜひ見てみてください！'
+};
+
+async function loadAnime(tab, btn) {
+  animeCurrentTab = tab;
+  document.querySelectorAll('#anime .filter-tab').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  const grid = document.getElementById('anime-grid');
+  const loading = document.getElementById('anime-loading');
+  grid.innerHTML = ''; loading.style.display = 'block';
+  const endpoints = {
+    trending: `${JIKAN}/top/anime?filter=bypopularity&limit=12`,
+    airing:   `${JIKAN}/top/anime?filter=airing&limit=12`,
+    popular:  `${JIKAN}/top/anime?type=tv&filter=bypopularity&limit=12`,
+    upcoming: `${JIKAN}/top/anime?filter=upcoming&limit=12`,
+  };
+  try {
+    const res = await fetch(endpoints[tab]);
+    const json = await res.json();
+    loading.style.display = 'none';
+    if (!json.data || !json.data.length) { grid.innerHTML = '<p style="color:#aaa;text-align:center;padding:2rem;">No data returned. Try again shortly.</p>'; return; }
+    grid.innerHTML = json.data.map(a => renderAnimeCard(a)).join('');
+  } catch(e) {
+    loading.style.display = 'none';
+    grid.innerHTML = `<div style="text-align:center;padding:2rem;color:#e9c46a;font-weight:700;">⚠️ Could not load anime data.<br><span style="font-size:.8rem;color:#aaa;">Check your connection or try again in a moment.</span><br><br><button class="btn" onclick="loadAnime('${tab}',null)">↺ Retry</button></div>`;
+  }
+}
+
+function renderAnimeCard(a) {
+  const score = a.score ? `⭐ ${a.score}` : '';
+  const eps = a.episodes ? `${a.episodes} eps` : (a.status === 'Currently Airing' ? 'Airing' : '?');
+  const genres = (a.genres||[]).slice(0,3).map(g =>
+    `<span class="anime-badge" style="color:#e9c46a;border-color:rgba(233,196,106,.35);background:rgba(233,196,106,.1);">${g.name}</span>`
+  ).join('');
+  const synopsis = (a.synopsis || 'No synopsis available.').substring(0, 320) + (a.synopsis && a.synopsis.length > 320 ? '…' : '');
+  // Generate a Japanese synopsis summary using key show info
+  const titleJP = a.title_japanese || a.title;
+  const jpSynopsis = generateJPSynopsis(a);
+  const poster = a.images?.jpg?.large_image_url || a.images?.jpg?.image_url || '';
+  const id = 'anime_' + (a.mal_id || Math.random().toString(36).slice(2));
+
+  return `<div class="anime-card">
+    ${score ? `<div class="anime-score">${score}</div>` : ''}
+    ${poster ? `<img class="anime-poster" src="${poster}" alt="${a.title}" loading="lazy" onerror="this.style.display='none'">` : ''}
+    <div class="anime-body">
+      <div class="anime-title-jp">${titleJP}</div>
+      <div class="anime-title-en">${a.title_english || a.title}</div>
+      <div class="anime-badges">
+        ${genres}
+        <span class="anime-badge" style="color:#80cbc4;border-color:rgba(128,203,196,.35);background:rgba(128,203,196,.1);">${eps}</span>
+        ${a.rating ? `<span class="anime-badge" style="color:#ce93d8;border-color:rgba(206,147,216,.35);background:rgba(206,147,216,.1);">${a.rating.split(' ')[0]}</span>` : ''}
+      </div>
+      <div class="anime-synopsis">${synopsis}</div>
+      <button class="anime-toggle-jp" onclick="toggleJPSynopsis(this,'${id}')">🇯🇵 日本語のあらすじを見る</button>
+      <div class="anime-synopsis-jp" id="${id}">${jpSynopsis}</div>
+      <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem;">
+        <button class="tts-btn" style="font-size:.68rem;" onclick="speakJP('${titleJP.replace(/'/g,'')}',this)">🔊 タイトル</button>
+        <a href="https://myanimelist.net/anime/${a.mal_id}" target="_blank" rel="noopener" style="font-size:.68rem;font-weight:700;color:var(--pink);text-decoration:none;padding:.3rem .65rem;border:1px solid rgba(255,133,161,.3);border-radius:.5rem;">MAL ↗</a>
+      </div>
+    </div>
+  </div>`;
+}
+
+function generateJPSynopsis(a) {
+  const title = a.title_japanese || a.title;
+  const eps = a.episodes ? `${a.episodes}話` : '複数話';
+  const year = a.aired?.prop?.from?.year ? `${a.aired.prop.from.year}年` : '';
+  const genres = (a.genres||[]).slice(0,2).map(g=>g.name).join('・');
+  const score = a.score ? `スコアは${a.score}点` : '';
+  const studio = (a.studios||[]).length ? `${a.studios[0].name}が制作した` : '';
+  const type = a.type === 'TV' ? 'テレビアニメ' : a.type === 'Movie' ? 'アニメ映画' : 'アニメ';
+  const status = a.status === 'Currently Airing' ? '現在放送中の' : a.status === 'Finished Airing' ? '放送済みの' : '';
+  return `「${title}」は${year}${studio}${status}${type}です。${eps}のシリーズで、${genres ? `${genres}のジャンル` : '様々なジャンル'}を含んでいます。${score ? `MyAnimeListの${score}です。` : ''}ぜひ見てみてください！`;
+}
+
+function toggleJPSynopsis(btn, id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.toggle('show');
+  btn.textContent = el.classList.contains('show') ? '🇯🇵 日本語を閉じる' : '🇯🇵 日本語のあらすじを見る';
+}
+
+// ============================================================
+//  DICTIONARY — AI-powered via Claude API
+// ============================================================
+let dictHistory = [];
+
+async function searchDict() {
+  const q = document.getElementById('dict-input').value.trim();
+  if (!q) return;
+  await lookupWord(q);
+}
+
+function quickDict(word) {
+  document.getElementById('dict-input').value = word;
+  lookupWord(word);
+}
+
+async function lookupWord(word) {
+  const results = document.getElementById('dict-results');
+  const loading = document.getElementById('dict-loading');
+  results.innerHTML = ''; loading.style.display = 'block';
+
+  // Add to history
+  if (!dictHistory.includes(word)) {
+    dictHistory.unshift(word);
+    if (dictHistory.length > 12) dictHistory.pop();
+    renderDictHistory();
+  }
+
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{
+          role: 'user',
+          content: `You are a Japanese dictionary. Look up: "${word}"
+
+Return ONLY a JSON object with this exact structure (no markdown, no explanation):
+{
+  "word": "the Japanese word/kanji form",
+  "reading": "hiragana reading (e.g. たべる)",
+  "romaji": "romaji",
+  "jlpt": "N5/N4/N3/N2/N1/null",
+  "common": true/false,
+  "pos": ["part of speech tags, e.g. Ichidan verb, い-adjective, Noun"],
+  "meanings": [
+    { "eng": "primary English meaning", "notes": "optional nuance note" },
+    { "eng": "secondary meaning if exists" }
+  ],
+  "conjugations": [
+    { "label": "Dictionary form", "jp": "...", "read": "..." },
+    { "label": "Negative", "jp": "...", "read": "..." },
+    { "label": "Past", "jp": "...", "read": "..." },
+    { "label": "Te-form", "jp": "...", "read": "..." }
+  ],
+  "examples": [
+    { "jp": "Japanese example sentence", "read": "reading with furigana hints", "en": "English translation" },
+    { "jp": "second example", "read": "reading", "en": "translation" }
+  ],
+  "related": ["related word 1 in Japanese", "related word 2"],
+  "notes": "brief cultural or usage note if interesting"
+}
+
+If not a real Japanese word/concept, return: {"error": "not found", "suggestion": "did you mean...?"}`
+        }]
+      })
+    });
+    const data = await resp.json();
+    loading.style.display = 'none';
+    const text = data.content?.[0]?.text || '';
+    let entry;
+    try {
+      const clean = text.replace(/```json|```/g,'').trim();
+      entry = JSON.parse(clean);
+    } catch(e) {
+      results.innerHTML = `<div class="dict-entry"><p style="color:#e53935;">⚠️ Parse error. Raw response:<br><pre style="font-size:.7rem;white-space:pre-wrap;">${text.substring(0,400)}</pre></p></div>`;
+      return;
+    }
+    if (entry.error) {
+      results.innerHTML = `<div class="dict-entry" style="text-align:center;padding:2rem;"><div style="font-size:2rem;margin-bottom:.5rem;">🔍</div><div style="font-weight:700;color:var(--mid);">Not found: "${word}"</div>${entry.suggestion ? `<div style="color:#aaa;font-size:.82rem;margin-top:.4rem;">${entry.suggestion}</div>` : ''}</div>`;
+      return;
+    }
+    renderDictEntry(entry);
+  } catch(e) {
+    loading.style.display = 'none';
+    results.innerHTML = `<div class="dict-entry"><p style="color:#e53935;">⚠️ Could not connect. Check your connection and try again.</p></div>`;
+  }
+}
+
+function renderDictEntry(e) {
+  const results = document.getElementById('dict-results');
+  const jlptBadge = e.jlpt ? `<span class="dict-jlpt">${e.jlpt}</span>` : '';
+  const commonBadge = e.common ? `<span class="dict-pos" style="background:rgba(255,133,161,.12);color:var(--pink);border-color:rgba(255,133,161,.3);">Common</span>` : '';
+  const posBadges = (e.pos||[]).map(p => `<span class="dict-pos">${p}</span>`).join('');
+
+  const meaningsHTML = (e.meanings||[]).map((m,i) =>
+    `<div style="display:flex;gap:.4rem;align-items:baseline;margin-bottom:.25rem;">
+      <span class="dict-meaning-num">${i+1}.</span>
+      <div><span class="dict-meaning">${m.eng}</span>${m.notes ? `<span style="font-size:.72rem;color:#aaa;margin-left:.3rem;font-style:italic;">(${m.notes})</span>` : ''}</div>
+    </div>`
+  ).join('');
+
+  const conjHTML = (e.conjugations||[]).length ? `
+    <div class="dict-section-label">📝 Conjugations</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.45rem;margin-bottom:.75rem;">
+      ${e.conjugations.map(c => `<div style="background:rgba(17,153,142,.07);border-radius:.65rem;padding:.45rem .7rem;border:1px solid rgba(17,153,142,.15);">
+        <div style="font-size:.6rem;font-weight:800;color:#aaa;text-transform:uppercase;">${c.label}</div>
+        <div style="font-size:.95rem;font-weight:700;color:var(--dark);" onclick="speakJP('${c.jp.replace(/'/g,'')}',this)" style="cursor:pointer;">${c.jp}</div>
+        <div style="font-size:.72rem;color:#aaa;">${c.read||''}</div>
+      </div>`).join('')}
+    </div>` : '';
+
+  const examplesHTML = (e.examples||[]).length ? `
+    <div class="dict-section-label">💬 Example Sentences</div>
+    ${e.examples.map(ex => `<div class="dict-example">
+      <div class="dict-example-jp" onclick="speakJP('${ex.jp.replace(/'/g,'')}',this)" style="cursor:pointer;">🔊 ${ex.jp}</div>
+      ${ex.read ? `<div style="font-size:.72rem;color:var(--pink);margin-bottom:.2rem;">${ex.read}</div>` : ''}
+      <div class="dict-example-en">${ex.en}</div>
+    </div>`).join('')}` : '';
+
+  const relatedHTML = (e.related||[]).length ? `
+    <div class="dict-section-label">🔗 Related Words</div>
+    <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.5rem;">
+      ${e.related.map(r => `<button class="dict-history-pill" onclick="quickDict('${r}')">${r}</button>`).join('')}
+    </div>` : '';
+
+  const notesHTML = e.notes ? `<div style="font-size:.78rem;color:#888;font-style:italic;border-top:1px solid rgba(255,182,193,.2);padding-top:.6rem;margin-top:.4rem;">💡 ${e.notes}</div>` : '';
+
+  results.innerHTML = `<div class="dict-entry">
+    <div style="display:flex;align-items:flex-start;gap:1rem;flex-wrap:wrap;margin-bottom:.75rem;">
+      <div>
+        <div class="dict-word" onclick="speakJP('${(e.word||'').replace(/'/g,'')}',this)" title="Tap to hear">🔊 ${e.word||''}</div>
+        <div class="dict-reading">${e.reading||''} ${e.romaji ? `<span style="color:#aaa;font-weight:600;font-size:.82rem;">(${e.romaji})</span>` : ''}</div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:.3rem;align-items:center;padding-top:.35rem;">${jlptBadge}${commonBadge}${posBadges}</div>
+    </div>
+    <div class="dict-section-label">📖 Meanings</div>
+    <div style="margin-bottom:.75rem;">${meaningsHTML}</div>
+    ${conjHTML}${examplesHTML}${relatedHTML}${notesHTML}
+  </div>`;
+}
+
+function renderDictHistory() {
+  const wrap = document.getElementById('dict-history-wrap');
+  const el = document.getElementById('dict-history');
+  if (!el || !wrap) return;
+  if (!dictHistory.length) { wrap.style.display = 'none'; return; }
+  wrap.style.display = 'block';
+  el.innerHTML = dictHistory.map(w => `<button class="dict-history-pill" onclick="quickDict('${w}')">${w}</button>`).join('');
+}
 
 const pc=document.getElementById('petals');
 ['🌸','🌺','🌹','✿','❀'].forEach((_,idx)=>{
