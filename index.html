@@ -280,13 +280,15 @@ main{position:relative;z-index:5;padding:1.5rem;max-width:1200px;margin:0 auto;}
 .mascot-svg:active{transform:scale(.95);}
 
 /* ===== FOOTER ===== */
+footer{
   position:relative;z-index:5;
   text-align:center;padding:1.25rem 1.5rem;
   background:linear-gradient(135deg,rgba(255,133,161,.12),rgba(199,125,255,.08));
   border-top:1.5px solid rgba(255,182,193,.3);
   margin-top:1rem;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
 }
-footer p{font-size:.75rem;color:#a0607a;font-weight:600;}
+footer p{font-size:.75rem;color:#a0607a;font-weight:600;text-align:center;width:100%;}
 footer span{color:var(--pink);}
 
 /* ===== HOME TIMELINE MINI ===== */
@@ -412,44 +414,176 @@ footer span{color:var(--pink);}
 <main>
 <!-- ====== HOME ====== -->
 <div class="section active" id="home">
-  <div class="welcome-banner">
-    <h2>ようこそ！Welcome! 🌸</h2>
-    <p>Your complete, cute N5 Japanese study companion. Let's pass this together! 頑張ろう！</p>
-    <div class="bg-char">日本語</div>
+
+  <!-- Hero Banner -->
+  <div style="background:linear-gradient(135deg,#ff85a1 0%,#c77dff 50%,#4cc9f0 100%);border-radius:1.75rem;padding:2.5rem 2rem 2rem;text-align:center;position:relative;overflow:hidden;margin-bottom:1.75rem;box-shadow:0 8px 32px rgba(255,133,161,.35);">
+    <div style="position:absolute;top:-20px;right:-20px;font-size:8rem;opacity:.08;line-height:1;pointer-events:none;">日本語</div>
+    <div style="position:absolute;bottom:-10px;left:-10px;font-size:5rem;opacity:.08;pointer-events:none;">🌸</div>
+    <div style="font-size:3.5rem;margin-bottom:.5rem;">🌸</div>
+    <h2 style="font-size:2rem;font-weight:900;color:white;margin-bottom:.4rem;text-shadow:0 2px 8px rgba(0,0,0,.15);">Sakura Study! へようこそ</h2>
+    <p style="color:rgba(255,255,255,.92);font-size:1rem;font-weight:600;margin-bottom:1.2rem;line-height:1.7;">Your beautiful Japanese study companion 🌸<br>Master Japanese step by step — from hiragana to fluency!</p>
+    <div style="display:inline-flex;gap:.65rem;flex-wrap:wrap;justify-content:center;">
+      <span style="background:rgba(255,255,255,.25);backdrop-filter:blur(8px);border:1.5px solid rgba(255,255,255,.4);border-radius:2rem;padding:.35rem 1rem;font-size:.8rem;font-weight:700;color:white;">🎌 Japanese for Everyone</span>
+      <span style="background:rgba(255,255,255,.25);backdrop-filter:blur(8px);border:1.5px solid rgba(255,255,255,.4);border-radius:2rem;padding:.35rem 1rem;font-size:.8rem;font-weight:700;color:white;">✨ Free Forever</span>
+      <span style="background:rgba(255,255,255,.25);backdrop-filter:blur(8px);border:1.5px solid rgba(255,255,255,.4);border-radius:2rem;padding:.35rem 1rem;font-size:.8rem;font-weight:700;color:white;">🌸 Made with Love</span>
+    </div>
   </div>
-  <div class="home-grid">
-    <div class="home-card" onclick="showSection('grammar')"><span class="icon">📖</span><h3>Grammar</h3><p>Full N5 grammar with verb groups & adjective rules</p></div>
-    <div class="home-card" onclick="showSection('kanji')"><span class="icon">漢</span><h3>Kanji</h3><p>80 kanji with strokes, readings & example words</p></div>
-    <div class="home-card" onclick="showSection('vocab')"><span class="icon">📝</span><h3>Vocabulary</h3><p>N5 words by category</p></div>
-    <div class="home-card" onclick="showSection('adjectives')"><span class="icon">🔄</span><h3>Adj. Opposites</h3><p>い and な adjectives with pairs</p></div>
-    <div class="home-card" onclick="showSection('flashcards')"><span class="icon">🃏</span><h3>Flashcards</h3><p>Flip cards for vocab, kanji & grammar</p></div>
-    <div class="home-card" onclick="showSection('kanji-mcq')"><span class="icon">✏️</span><h3>Kanji Quiz</h3><p>Timed kanji MCQ test</p></div>
-    <div class="home-card" onclick="showSection('reading')"><span class="icon">📚</span><h3>Reading Test</h3><p>N5 reading comprehension</p></div>
-    <div class="home-card" onclick="showSection('writing')"><span class="icon">✍️</span><h3>Writing Test</h3><p>Translate to Japanese</p></div>
-    <div class="home-card" onclick="showSection('mock-exam')"><span class="icon">📋</span><h3>Mock Exam</h3><p>Full 30-question N5 exam</p></div>
-    <div class="home-card" onclick="showSection('study-plan')"><span class="icon">📅</span><h3>Study Plan</h3><p>8-week timeline to N5</p></div>
-    <div class="home-card" onclick="showSection('resources')"><span class="icon">🔗</span><h3>Resources</h3><p>Best N5 study websites</p></div>
+
+  <!-- Coming Soon Levels Banner -->
+  <div style="background:white;border-radius:1.4rem;padding:1.3rem 1.5rem;border:2px solid rgba(255,182,193,.3);box-shadow:0 4px 14px var(--shadow);margin-bottom:1.75rem;">
+    <div style="font-weight:900;color:var(--mid);font-size:.95rem;margin-bottom:.9rem;">📚 Available Levels — More Coming Soon!</div>
+    <div style="display:flex;flex-wrap:wrap;gap:.65rem;align-items:center;">
+      <div style="display:flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,#ff85a1,#e05f88);color:white;border-radius:1rem;padding:.5rem 1.1rem;font-weight:800;font-size:.85rem;box-shadow:0 3px 10px rgba(255,133,161,.4);">
+        <span style="font-size:1.1rem;">🌸</span> N5 — Available Now!
+      </div>
+      <div style="display:flex;align-items:center;gap:.5rem;background:rgba(200,200,200,.15);color:#aaa;border-radius:1rem;padding:.5rem 1.1rem;font-weight:700;font-size:.85rem;border:2px dashed #ddd;">
+        <span>🌿</span> N4 — Coming Soon
+      </div>
+      <div style="display:flex;align-items:center;gap:.5rem;background:rgba(200,200,200,.15);color:#aaa;border-radius:1rem;padding:.5rem 1.1rem;font-weight:700;font-size:.85rem;border:2px dashed #ddd;">
+        <span>⚡</span> N3 — Coming Soon
+      </div>
+      <div style="display:flex;align-items:center;gap:.5rem;background:rgba(200,200,200,.15);color:#aaa;border-radius:1rem;padding:.5rem 1.1rem;font-weight:700;font-size:.85rem;border:2px dashed #ddd;">
+        <span>🏯</span> N2 — Coming Soon
+      </div>
+      <div style="display:flex;align-items:center;gap:.5rem;background:rgba(200,200,200,.15);color:#aaa;border-radius:1rem;padding:.5rem 1.1rem;font-weight:700;font-size:.85rem;border:2px dashed #ddd;">
+        <span>👑</span> N1 — Coming Soon
+      </div>
+    </div>
+    <p style="font-size:.78rem;color:#a0607a;margin-top:.75rem;line-height:1.6;">🎯 Sakura Study is designed for <strong>all learners</strong> — from complete beginners to advanced students. Right now <strong>N5</strong> is fully available with grammar, kanji, vocabulary, counters, kana, quizzes, a mock exam, and more. More levels are in the works! 頑張れ！</p>
   </div>
-  <!-- HOME MINI TIMELINE -->
-  <div class="card" style="margin-top:1.25rem;">
+
+  <!-- Main Study Cards Grid -->
+  <div style="font-weight:900;color:var(--mid);font-size:1rem;margin-bottom:.9rem;">🗂 N5 Study Sections — Pick where to start!</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:.85rem;margin-bottom:1.75rem;">
+
+    <!-- Kana -->
+    <div onclick="showSection('kana')" style="background:linear-gradient(135deg,#ffecd2,#fcb69f);border-radius:1.3rem;padding:1.1rem;cursor:pointer;border:2px solid transparent;box-shadow:0 4px 14px rgba(252,182,159,.35);transition:all .22s;position:relative;overflow:hidden;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 28px rgba(252,182,159,.5)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 14px rgba(252,182,159,.35)'">
+      <div style="font-size:2rem;margin-bottom:.35rem;">あ</div>
+      <div style="font-weight:900;color:#7d3c00;font-size:.9rem;">Kana</div>
+      <div style="font-size:.72rem;color:#a05020;margin-top:.2rem;line-height:1.5;">Hiragana & Katakana charts + quiz</div>
+      <div style="position:absolute;right:-8px;bottom:-8px;font-size:2.5rem;opacity:.15;">カ</div>
+    </div>
+
+    <!-- Grammar -->
+    <div onclick="showSection('grammar')" style="background:linear-gradient(135deg,#ffd6e7,#ffb3c6);border-radius:1.3rem;padding:1.1rem;cursor:pointer;box-shadow:0 4px 14px rgba(255,182,193,.4);transition:all .22s;position:relative;overflow:hidden;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 28px rgba(255,133,161,.5)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 14px rgba(255,182,193,.4)'">
+      <div style="font-size:2rem;margin-bottom:.35rem;">📖</div>
+      <div style="font-weight:900;color:#7b2d4a;font-size:.9rem;">Grammar</div>
+      <div style="font-size:.72rem;color:#a04060;margin-top:.2rem;line-height:1.5;">て形・ない形・た形 + all patterns</div>
+      <div style="position:absolute;right:-8px;bottom:-8px;font-size:2.5rem;opacity:.12;">文</div>
+    </div>
+
+    <!-- Counters -->
+    <div onclick="showSection('counters')" style="background:linear-gradient(135deg,#e8f5e9,#a5d6a7);border-radius:1.3rem;padding:1.1rem;cursor:pointer;box-shadow:0 4px 14px rgba(165,214,167,.45);transition:all .22s;position:relative;overflow:hidden;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 28px rgba(76,175,80,.4)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 14px rgba(165,214,167,.45)'">
+      <div style="font-size:2rem;margin-bottom:.35rem;">🔢</div>
+      <div style="font-weight:900;color:#1b5e20;font-size:.9rem;">Counters</div>
+      <div style="font-size:.72rem;color:#2e7d32;margin-top:.2rem;line-height:1.5;">〜本・〜枚・〜人・time & more</div>
+      <div style="position:absolute;right:-8px;bottom:-8px;font-size:2.5rem;opacity:.12;">数</div>
+    </div>
+
+    <!-- Kanji -->
+    <div onclick="showSection('kanji')" style="background:linear-gradient(135deg,#e3f2fd,#90caf9);border-radius:1.3rem;padding:1.1rem;cursor:pointer;box-shadow:0 4px 14px rgba(144,202,249,.4);transition:all .22s;position:relative;overflow:hidden;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 28px rgba(33,150,243,.35)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 14px rgba(144,202,249,.4)'">
+      <div style="font-size:2rem;margin-bottom:.35rem;">漢</div>
+      <div style="font-weight:900;color:#0d47a1;font-size:.9rem;">Kanji</div>
+      <div style="font-size:.72rem;color:#1565c0;margin-top:.2rem;line-height:1.5;">80 N5 kanji with readings & words</div>
+      <div style="position:absolute;right:-8px;bottom:-8px;font-size:2.5rem;opacity:.12;">字</div>
+    </div>
+
+    <!-- Vocabulary -->
+    <div onclick="showSection('vocab')" style="background:linear-gradient(135deg,#fff3e0,#ffcc80);border-radius:1.3rem;padding:1.1rem;cursor:pointer;box-shadow:0 4px 14px rgba(255,204,128,.4);transition:all .22s;position:relative;overflow:hidden;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 28px rgba(255,152,0,.35)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 14px rgba(255,204,128,.4)'">
+      <div style="font-size:2rem;margin-bottom:.35rem;">📝</div>
+      <div style="font-weight:900;color:#6d4c00;font-size:.9rem;">Vocabulary</div>
+      <div style="font-size:.72rem;color:#8d5e00;margin-top:.2rem;line-height:1.5;">N5 words sorted by category</div>
+      <div style="position:absolute;right:-8px;bottom:-8px;font-size:2.5rem;opacity:.12;">語</div>
+    </div>
+
+    <!-- Adj Opposites -->
+    <div onclick="showSection('adjectives')" style="background:linear-gradient(135deg,#fce4ec,#f48fb1);border-radius:1.3rem;padding:1.1rem;cursor:pointer;box-shadow:0 4px 14px rgba(244,143,177,.4);transition:all .22s;position:relative;overflow:hidden;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 28px rgba(233,30,99,.3)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 14px rgba(244,143,177,.4)'">
+      <div style="font-size:2rem;margin-bottom:.35rem;">🔄</div>
+      <div style="font-weight:900;color:#880e4f;font-size:.9rem;">Adj. Opposites</div>
+      <div style="font-size:.72rem;color:#ad1457;margin-top:.2rem;line-height:1.5;">28 い and な adjective pairs</div>
+      <div style="position:absolute;right:-8px;bottom:-8px;font-size:2.5rem;opacity:.12;">形</div>
+    </div>
+
+    <!-- Flashcards -->
+    <div onclick="showSection('flashcards')" style="background:linear-gradient(135deg,#ede7f6,#b39ddb);border-radius:1.3rem;padding:1.1rem;cursor:pointer;box-shadow:0 4px 14px rgba(179,157,219,.4);transition:all .22s;position:relative;overflow:hidden;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 28px rgba(103,58,183,.3)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 14px rgba(179,157,219,.4)'">
+      <div style="font-size:2rem;margin-bottom:.35rem;">🃏</div>
+      <div style="font-weight:900;color:#311b92;font-size:.9rem;">Flashcards</div>
+      <div style="font-size:.72rem;color:#4527a0;margin-top:.2rem;line-height:1.5;">Vocab, kanji, grammar & adj pairs</div>
+      <div style="position:absolute;right:-8px;bottom:-8px;font-size:2.5rem;opacity:.12;">暗</div>
+    </div>
+
+    <!-- Kanji Quiz -->
+    <div onclick="showSection('kanji-mcq')" style="background:linear-gradient(135deg,#e0f7fa,#80deea);border-radius:1.3rem;padding:1.1rem;cursor:pointer;box-shadow:0 4px 14px rgba(128,222,234,.4);transition:all .22s;position:relative;overflow:hidden;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 28px rgba(0,188,212,.35)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 14px rgba(128,222,234,.4)'">
+      <div style="font-size:2rem;margin-bottom:.35rem;">✏️</div>
+      <div style="font-weight:900;color:#006064;font-size:.9rem;">Kanji Quiz</div>
+      <div style="font-size:.72rem;color:#00838f;margin-top:.2rem;line-height:1.5;">Timed MCQ — 30 sec per question</div>
+      <div style="position:absolute;right:-8px;bottom:-8px;font-size:2.5rem;opacity:.12;">問</div>
+    </div>
+
+    <!-- Reading -->
+    <div onclick="showSection('reading')" style="background:linear-gradient(135deg,#f3e5f5,#ce93d8);border-radius:1.3rem;padding:1.1rem;cursor:pointer;box-shadow:0 4px 14px rgba(206,147,216,.4);transition:all .22s;position:relative;overflow:hidden;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 28px rgba(156,39,176,.3)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 14px rgba(206,147,216,.4)'">
+      <div style="font-size:2rem;margin-bottom:.35rem;">📚</div>
+      <div style="font-weight:900;color:#4a148c;font-size:.9rem;">Reading Test</div>
+      <div style="font-size:.72rem;color:#6a1b9a;margin-top:.2rem;line-height:1.5;">5 N5 passages, random each time</div>
+      <div style="position:absolute;right:-8px;bottom:-8px;font-size:2.5rem;opacity:.12;">読</div>
+    </div>
+
+    <!-- Writing -->
+    <div onclick="showSection('writing')" style="background:linear-gradient(135deg,#fff8e1,#ffe082);border-radius:1.3rem;padding:1.1rem;cursor:pointer;box-shadow:0 4px 14px rgba(255,224,130,.4);transition:all .22s;position:relative;overflow:hidden;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 28px rgba(255,193,7,.35)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 14px rgba(255,224,130,.4)'">
+      <div style="font-size:2rem;margin-bottom:.35rem;">✍️</div>
+      <div style="font-weight:900;color:#5d4200;font-size:.9rem;">Writing Test</div>
+      <div style="font-size:.72rem;color:#7d5700;margin-top:.2rem;line-height:1.5;">Translate to Japanese, self-rate</div>
+      <div style="position:absolute;right:-8px;bottom:-8px;font-size:2.5rem;opacity:.12;">書</div>
+    </div>
+
+    <!-- Mock Exam -->
+    <div onclick="showSection('mock-exam')" style="background:linear-gradient(135deg,#ffebee,#ef9a9a);border-radius:1.3rem;padding:1.1rem;cursor:pointer;box-shadow:0 4px 14px rgba(239,154,154,.4);transition:all .22s;position:relative;overflow:hidden;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 28px rgba(244,67,54,.3)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 14px rgba(239,154,154,.4)'">
+      <div style="font-size:2rem;margin-bottom:.35rem;">📋</div>
+      <div style="font-weight:900;color:#7f0000;font-size:.9rem;">Mock Exam</div>
+      <div style="font-size:.72rem;color:#b71c1c;margin-top:.2rem;line-height:1.5;">30 questions — full N5 format</div>
+      <div style="position:absolute;right:-8px;bottom:-8px;font-size:2.5rem;opacity:.12;">試</div>
+    </div>
+
+    <!-- Study Plan -->
+    <div onclick="showSection('study-plan')" style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border-radius:1.3rem;padding:1.1rem;cursor:pointer;box-shadow:0 4px 14px rgba(200,230,201,.5);transition:all .22s;position:relative;overflow:hidden;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 28px rgba(76,175,80,.3)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 14px rgba(200,230,201,.5)'">
+      <div style="font-size:2rem;margin-bottom:.35rem;">📅</div>
+      <div style="font-weight:900;color:#1b5e20;font-size:.9rem;">Study Plan</div>
+      <div style="font-size:.72rem;color:#2e7d32;margin-top:.2rem;line-height:1.5;">8-week roadmap to pass N5</div>
+      <div style="position:absolute;right:-8px;bottom:-8px;font-size:2.5rem;opacity:.12;">計</div>
+    </div>
+
+    <!-- Resources -->
+    <div onclick="showSection('resources')" style="background:linear-gradient(135deg,#e8eaf6,#9fa8da);border-radius:1.3rem;padding:1.1rem;cursor:pointer;box-shadow:0 4px 14px rgba(159,168,218,.4);transition:all .22s;position:relative;overflow:hidden;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 28px rgba(63,81,181,.3)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 14px rgba(159,168,218,.4)'">
+      <div style="font-size:2rem;margin-bottom:.35rem;">🔗</div>
+      <div style="font-weight:900;color:#1a237e;font-size:.9rem;">Resources</div>
+      <div style="font-size:.72rem;color:#283593;margin-top:.2rem;line-height:1.5;">Best N5 study websites</div>
+      <div style="position:absolute;right:-8px;bottom:-8px;font-size:2.5rem;opacity:.12;">参</div>
+    </div>
+
+  </div>
+
+  <!-- N5 Stats strip -->
+  <div style="background:white;border-radius:1.4rem;padding:1.1rem 1.3rem;border:2px solid rgba(255,182,193,.3);box-shadow:0 4px 14px var(--shadow);margin-bottom:1.5rem;">
+    <div style="font-weight:900;color:var(--mid);font-size:.88rem;margin-bottom:.75rem;">💡 JLPT N5 At a Glance</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:.55rem;">
+      <div style="text-align:center;background:linear-gradient(135deg,#fff0f5,#ffe4ec);padding:.65rem .4rem;border-radius:.9rem;border:1.5px solid var(--pink-light);"><div style="font-size:1.3rem;font-weight:900;color:var(--pink);">~800</div><div style="font-size:.65rem;color:#888;font-weight:600;">Vocab words</div></div>
+      <div style="text-align:center;background:linear-gradient(135deg,#e8f4ff,#d0eaff);padding:.65rem .4rem;border-radius:.9rem;border:1.5px solid #90caf9;"><div style="font-size:1.3rem;font-weight:900;color:#1565c0;">80</div><div style="font-size:.65rem;color:#888;font-weight:600;">Kanji</div></div>
+      <div style="text-align:center;background:linear-gradient(135deg,#f3e5f5,#e1bee7);padding:.65rem .4rem;border-radius:.9rem;border:1.5px solid #ce93d8;"><div style="font-size:1.3rem;font-weight:900;color:#6a1b9a;">~50</div><div style="font-size:.65rem;color:#888;font-weight:600;">Grammar pts</div></div>
+      <div style="text-align:center;background:linear-gradient(135deg,#e8f5e9,#c8e6c9);padding:.65rem .4rem;border-radius:.9rem;border:1.5px solid #a5d6a7;"><div style="font-size:1.3rem;font-weight:900;color:#2e7d32;">110</div><div style="font-size:.65rem;color:#888;font-weight:600;">Passing score</div></div>
+      <div style="text-align:center;background:linear-gradient(135deg,#fff8e1,#ffe082);padding:.65rem .4rem;border-radius:.9rem;border:1.5px solid #ffe082;"><div style="font-size:1.3rem;font-weight:900;color:#f57f17;">92</div><div style="font-size:.65rem;color:#888;font-weight:600;">Kana chars</div></div>
+      <div style="text-align:center;background:linear-gradient(135deg,#fce4ec,#f8bbd0);padding:.65rem .4rem;border-radius:.9rem;border:1.5px solid #f48fb1;"><div style="font-size:1.3rem;font-weight:900;color:#880e4f;">18+</div><div style="font-size:.65rem;color:#888;font-weight:600;">Counters</div></div>
+    </div>
+  </div>
+
+  <!-- Home Mini Timeline -->
+  <div style="background:white;border-radius:1.4rem;padding:1.1rem 1.3rem;border:2px solid rgba(255,182,193,.3);box-shadow:0 4px 14px var(--shadow);">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem;flex-wrap:wrap;gap:.5rem;">
-      <div style="font-weight:900;color:var(--mid);font-size:1rem;">📅 Your 8-Week Study Roadmap</div>
+      <div style="font-weight:900;color:var(--mid);font-size:.92rem;">📅 Your 8-Week Study Roadmap</div>
       <button class="btn" style="font-size:.75rem;padding:.35rem 1rem;" onclick="showSection('study-plan')">See Full Plan →</button>
     </div>
     <div class="home-timeline" id="home-timeline"></div>
   </div>
 
-  <div class="card" style="background:linear-gradient(135deg,rgba(255,183,197,.25),rgba(155,246,255,.15));">
-    <div style="font-weight:800;color:var(--mid);margin-bottom:.75rem;">💡 N5 At a Glance</div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.6rem;">
-      <div style="text-align:center;background:white;padding:.7rem;border-radius:1rem;border:2px solid var(--pink-light);"><div style="font-size:1.4rem;font-weight:900;color:var(--pink);">~800</div><div style="font-size:.7rem;color:#888;">Vocabulary</div></div>
-      <div style="text-align:center;background:white;padding:.7rem;border-radius:1rem;border:2px solid var(--pink-light);"><div style="font-size:1.4rem;font-weight:900;color:var(--pink);">80</div><div style="font-size:.7rem;color:#888;">Kanji</div></div>
-      <div style="text-align:center;background:white;padding:.7rem;border-radius:1rem;border:2px solid var(--pink-light);"><div style="font-size:1.4rem;font-weight:900;color:var(--pink);">~50</div><div style="font-size:.7rem;color:#888;">Grammar pts</div></div>
-      <div style="text-align:center;background:white;padding:.7rem;border-radius:1rem;border:2px solid var(--pink-light);"><div style="font-size:1.4rem;font-weight:900;color:var(--pink);">110</div><div style="font-size:.7rem;color:#888;">Passing score</div></div>
-      <div style="text-align:center;background:white;padding:.7rem;border-radius:1rem;border:2px solid var(--pink-light);"><div style="font-size:1.4rem;font-weight:900;color:var(--pink);">3</div><div style="font-size:.7rem;color:#888;">Verb groups</div></div>
-      <div style="text-align:center;background:white;padding:.7rem;border-radius:1rem;border:2px solid var(--pink-light);"><div style="font-size:1.4rem;font-weight:900;color:var(--pink);">2</div><div style="font-size:.7rem;color:#888;">Adj. types</div></div>
-    </div>
-  </div>
 </div>
 
 <!-- ====== GRAMMAR ====== -->
@@ -3093,7 +3227,7 @@ const pc=document.getElementById('petals');
 
 <footer>
   <p>🌸 <span>Sakura Study!</span> — JLPT N5 Complete Study Guide</p>
-  <p style="margin-top:.3rem;">© 2025 <span>Ahmed El Bourgy</span>. All rights reserved. Made with 💕 for Japanese learners everywhere.</p>
+  <p style="margin-top:.3rem;">© 2026 <span>Ahmed El Bourgy</span>. All rights reserved. Made with 💕 for Japanese learners everywhere.</p>
 </footer>
 
 </body>
