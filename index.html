@@ -22,13 +22,13 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
 @keyframes fall{0%{transform:translateY(-10vh) rotate(0deg);opacity:.7;}100%{transform:translateY(110vh) rotate(720deg);opacity:0;}}
 
 /* HEADER */
-header{position:sticky;top:0;z-index:100;background:linear-gradient(135deg,#ff85a1,#e05f88);padding:.75rem 1.5rem;box-shadow:0 4px 20px var(--shadow);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;}
-.logo{display:flex;align-items:center;gap:.6rem;}
-.logo-icon{font-size:2.2rem;filter:drop-shadow(0 2px 4px rgba(0,0,0,.2));}
-.logo-text h1{font-size:1.4rem;font-weight:900;color:white;letter-spacing:-.5px;}
-.logo-text p{font-size:.7rem;color:rgba(255,255,255,.85);}
-nav{display:flex;flex-wrap:wrap;gap:.35rem;}
-nav button{background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.35);color:white;font-family:inherit;font-size:.75rem;font-weight:700;padding:.3rem .75rem;border-radius:2rem;cursor:pointer;transition:all .2s;}
+header{position:sticky;top:0;z-index:100;background:linear-gradient(135deg,#ff85a1,#e05f88);padding:.6rem 1.5rem;box-shadow:0 4px 20px var(--shadow);display:flex;align-items:center;gap:.75rem;flex-wrap:nowrap;}
+.logo{display:flex;align-items:center;gap:.6rem;flex-shrink:0;}
+.logo-icon{font-size:2rem;filter:drop-shadow(0 2px 4px rgba(0,0,0,.2));}
+.logo-text h1{font-size:1.3rem;font-weight:900;color:white;letter-spacing:-.5px;}
+.logo-text p{font-size:.65rem;color:rgba(255,255,255,.85);}
+nav{display:flex;flex-wrap:nowrap;gap:.35rem;margin-left:auto;}
+nav button{background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.35);color:white;font-family:inherit;font-size:.75rem;font-weight:700;padding:.3rem .75rem;border-radius:2rem;cursor:pointer;transition:all .2s;white-space:nowrap;}
 nav button:hover,nav button.active{background:white;color:var(--pink);transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.15);}
 
 /* MAIN */
@@ -449,17 +449,17 @@ body.dark footer{background:linear-gradient(135deg,rgba(255,133,161,.07),rgba(19
 body.dark footer p{color:#c47090;}
 body.dark .htl-card{background:#2a1422 !important;}
 body.dark .welcome-banner{background:linear-gradient(135deg,#3d1020,#2d0a30) !important;}
-/* dark toggle button */
+/* dark toggle button — now in header */
 #dark-toggle{
-  position:fixed;bottom:1.25rem;right:1.25rem;z-index:9999;
-  width:48px;height:48px;border-radius:50%;border:none;cursor:pointer;
-  background:linear-gradient(135deg,#2d1020,#1a0818);
-  box-shadow:0 4px 16px rgba(0,0,0,.4);
-  font-size:1.3rem;display:flex;align-items:center;justify-content:center;
-  transition:all .25s;
+  display:flex;align-items:center;gap:.4rem;
+  background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.35);
+  color:white;font-family:inherit;font-size:.75rem;font-weight:700;
+  padding:.3rem .85rem;border-radius:2rem;cursor:pointer;
+  transition:all .2s;white-space:nowrap;flex-shrink:0;
 }
-#dark-toggle:hover{transform:scale(1.12);box-shadow:0 6px 22px rgba(0,0,0,.5);}
-body:not(.dark) #dark-toggle{background:linear-gradient(135deg,#2d1020,#4a1535);}
+#dark-toggle:hover{background:white;color:var(--pink);transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.15);}
+body.dark #dark-toggle{background:rgba(255,200,220,.15);border-color:rgba(255,200,220,.4);}
+body.dark #dark-toggle:hover{background:rgba(255,255,255,.9);color:#3d1a2e;}
 
 /* ===== BOOKMARKS ===== */
 .bm-star{background:none;border:none;cursor:pointer;font-size:1.1rem;padding:.1rem .3rem;line-height:1;transition:transform .2s;vertical-align:middle;}
@@ -489,11 +489,79 @@ body.dark .bm-item{background:#2a1422 !important;border-color:rgba(255,133,161,.
 .celeb-sub{font-size:.9rem;opacity:.9;margin-bottom:1.1rem;}
 .celeb-close{background:rgba(255,255,255,.25);border:2px solid rgba(255,255,255,.5);color:white;border-radius:2rem;padding:.4rem 1.5rem;font-size:.85rem;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;}
 .celeb-close:hover{background:rgba(255,255,255,.4);}
+/* ===== SENTENCE PRACTICE ===== */
+.sp-card{background:white;border-radius:1.2rem;padding:1.1rem 1.2rem;border:2px solid rgba(255,182,193,.25);box-shadow:0 3px 10px var(--shadow);margin-bottom:.85rem;transition:border-color .2s;}
+body.dark .sp-card{background:#2a1422 !important;border-color:rgba(255,133,161,.2) !important;}
+.sp-sentence{font-size:1.1rem;font-weight:700;color:var(--dark);line-height:1.8;margin-bottom:.6rem;display:flex;flex-wrap:wrap;align-items:center;gap:.25rem;}
+.sp-blank{display:inline-block;border-bottom:2.5px solid var(--pink);min-width:70px;text-align:center;font-size:1rem;color:var(--pink);font-weight:700;padding:.1rem .5rem;transition:all .2s;cursor:pointer;}
+.sp-blank.correct{border-color:#4caf50;color:#4caf50;background:#e8f5e9;border-radius:.4rem;border-bottom:none;padding:.15rem .5rem;}
+.sp-blank.wrong{border-color:#e53935;color:#e53935;background:#ffebee;border-radius:.4rem;border-bottom:none;padding:.15rem .5rem;}
+.sp-options{display:flex;gap:.45rem;flex-wrap:wrap;margin-top:.5rem;}
+.sp-opt-btn{background:#fff8fb;border:1.5px solid rgba(255,182,193,.4);border-radius:.8rem;padding:.3rem .85rem;font-size:.85rem;font-weight:700;color:var(--dark);cursor:pointer;font-family:inherit;transition:all .18s;}
+.sp-opt-btn:hover:not(:disabled){background:var(--pink-pale);border-color:var(--pink);transform:translateY(-1px);}
+.sp-opt-btn:disabled{opacity:.5;cursor:default;}
+.sp-opt-btn.correct{background:#e8f5e9;border-color:#4caf50;color:#2e7d32;}
+.sp-opt-btn.wrong{background:#ffebee;border-color:#e53935;color:#c62828;}
+.sp-hint{font-size:.75rem;color:#999;margin-top:.45rem;font-style:italic;}
+.sp-eng{font-size:.82rem;color:#888;margin-top:.3rem;}
+body.dark .sp-opt-btn{background:#1f0f1a;border-color:rgba(255,133,161,.25);color:#f0d0dc;}
+body.dark .sp-opt-btn:hover:not(:disabled){background:#3d1828;border-color:var(--pink);}
+
+/* ===== NUMBERS ===== */
+.num-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:.65rem;margin-bottom:1.25rem;}
+.num-card{background:white;border-radius:1.1rem;padding:.8rem .7rem;text-align:center;border:2px solid rgba(255,182,193,.25);box-shadow:0 3px 8px var(--shadow);cursor:pointer;transition:all .2s;}
+.num-card:hover{border-color:var(--pink);transform:translateY(-2px);}
+body.dark .num-card{background:#2a1422;border-color:rgba(255,133,161,.2);}
+.num-arabic{font-size:1.5rem;font-weight:900;color:var(--mid);}
+.num-jp{font-size:1.05rem;font-weight:700;color:var(--dark);}
+.num-rom{font-size:.68rem;color:var(--pink);font-style:italic;}
+.num-section-title{font-size:1rem;font-weight:900;color:var(--mid);margin:.9rem 0 .55rem;display:flex;align-items:center;gap:.4rem;}
+.num-table{width:100%;border-collapse:collapse;margin-bottom:1.1rem;font-size:.85rem;}
+.num-table th{background:linear-gradient(135deg,var(--pink),#e05f88);color:white;padding:.5rem .7rem;text-align:left;font-weight:700;}
+.num-table td{padding:.4rem .7rem;border-bottom:1px solid rgba(255,182,193,.2);}
+.num-table tr:nth-child(even) td{background:rgba(255,182,193,.06);}
+body.dark .num-table td{border-color:rgba(255,133,161,.15);}
+body.dark .num-table tr:nth-child(even) td{background:rgba(255,133,161,.06);}
+.num-quiz-card{background:white;border-radius:1.2rem;padding:1.2rem;border:2px solid rgba(255,182,193,.25);box-shadow:0 3px 10px var(--shadow);margin-bottom:.8rem;}
+body.dark .num-quiz-card{background:#2a1422;border-color:rgba(255,133,161,.2);}
+
+/* ===== PHRASES ===== */
+.phr-card{background:white;border-radius:1.2rem;padding:1rem 1.15rem;border:2px solid rgba(255,182,193,.25);box-shadow:0 3px 10px var(--shadow);margin-bottom:.7rem;transition:border-color .2s;}
+body.dark .phr-card{background:#2a1422 !important;border-color:rgba(255,133,161,.2) !important;}
+.phr-card:hover{border-color:var(--pink-light);}
+.phr-situation{display:inline-block;font-size:.65rem;font-weight:800;border-radius:.4rem;padding:.1rem .5rem;margin-bottom:.4rem;}
+.phr-jp{font-size:1.15rem;font-weight:700;color:var(--dark);margin-bottom:.2rem;}
+.phr-rom{font-size:.78rem;color:var(--pink);font-style:italic;margin-bottom:.15rem;}
+.phr-en{font-size:.82rem;color:#666;margin-bottom:.5rem;}
+.phr-actions{display:flex;gap:.4rem;flex-wrap:wrap;align-items:center;}
+.phr-tip{font-size:.72rem;color:#999;font-style:italic;margin-top:.4rem;}
+.phr-category-header{font-weight:900;color:var(--mid);font-size:.95rem;margin:.9rem 0 .55rem;display:flex;align-items:center;gap:.45rem;padding:.4rem .8rem;background:linear-gradient(135deg,rgba(255,183,197,.25),rgba(199,125,255,.12));border-radius:.8rem;}
+
+/* ===== COMPREHENSION ===== */
+.comp-card{background:white;border-radius:1.3rem;padding:1.15rem 1.25rem;border:2px solid rgba(255,182,193,.25);box-shadow:0 4px 14px var(--shadow);margin-bottom:.85rem;cursor:pointer;transition:all .22s;position:relative;overflow:hidden;}
+.comp-card:hover{transform:translateY(-3px);border-color:var(--pink);box-shadow:0 10px 28px var(--shadow);}
+body.dark .comp-card{background:#2a1422 !important;border-color:rgba(255,133,161,.2);}
+.comp-card-tag{display:inline-block;font-size:.65rem;font-weight:800;border-radius:.4rem;padding:.1rem .55rem;margin-bottom:.45rem;}
+.comp-card-title{font-size:1rem;font-weight:900;color:var(--mid);margin-bottom:.25rem;}
+.comp-card-preview{font-size:.82rem;color:#777;line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.comp-card-meta{display:flex;gap:.55rem;margin-top:.6rem;flex-wrap:wrap;align-items:center;}
+.comp-diff{font-size:.65rem;font-weight:800;border-radius:.4rem;padding:.1rem .5rem;}
+.comp-passage{background:linear-gradient(135deg,#fffef8,#fff8f0);border:2px solid rgba(255,197,159,.4);border-radius:1.1rem;padding:1.2rem 1.3rem;margin-bottom:1.1rem;line-height:2;font-size:1.05rem;color:var(--dark);}
+body.dark .comp-passage{background:#1f1408 !important;border-color:rgba(247,197,159,.2) !important;color:#f0d0dc;}
+.comp-passage-rom{font-size:.78rem;color:#999;margin-top:.65rem;line-height:1.8;font-style:italic;}
+.comp-q-card{background:white;border-radius:1rem;padding:1rem 1.1rem;border:2px solid rgba(255,182,193,.2);margin-bottom:.75rem;box-shadow:0 2px 8px var(--shadow);}
+body.dark .comp-q-card{background:#2a1422;border-color:rgba(255,133,161,.2);}
+.comp-q-num{font-size:.7rem;font-weight:800;color:var(--pink);margin-bottom:.3rem;}
+.comp-q-text{font-weight:700;color:var(--dark);margin-bottom:.6rem;font-size:.92rem;line-height:1.6;}
+.comp-score-banner{background:linear-gradient(135deg,#ff85a1,#c77dff,#4cc9f0);border-radius:1.5rem;padding:2rem;text-align:center;color:white;margin-bottom:1.25rem;}
+.comp-score-big{font-size:3.5rem;font-weight:900;line-height:1;}
+.comp-score-label{font-size:1rem;opacity:.9;margin-top:.3rem;}
+.comp-answer-reveal{margin-top:.5rem;padding:.5rem .75rem;border-radius:.7rem;font-size:.8rem;font-weight:700;}
+.comp-answer-reveal.correct{background:#e8f5e9;color:#2e7d32;}
+.comp-answer-reveal.wrong{background:#ffebee;color:#c62828;}
 </style>
-</head>
 <body>
 <div id="petals"></div>
-<button id="dark-toggle" onclick="toggleDark()" title="Toggle dark mode">🌙</button>
 <canvas id="confetti-canvas"></canvas>
 <div class="celebration-banner" id="celeb-banner">
   <span class="celeb-emoji" id="celeb-emoji">🎉</span>
@@ -542,22 +610,11 @@ body.dark .bm-item{background:#2a1422 !important;border-color:rgba(255,133,161,.
     <span class="logo-icon">🌸</span>
     <div class="logo-text"><h1>Sakura Study!</h1><p>JLPT N5 — Complete Study Guide</p></div>
   </div>
+  <button id="dark-toggle" onclick="toggleDark()">🌙 Dark</button>
   <nav>
     <button class="active" onclick="showSection('home')">🏠 Home</button>
-    <button onclick="showSection('grammar')">📖 Grammar</button>
-    <button onclick="showSection('kana')">あ Kana</button>
-    <button onclick="showSection('kanji')">漢字 Kanji</button>
-    <button onclick="showSection('vocab')">📝 Vocab</button>
-    <button onclick="showSection('adjectives')">🔄 Adj. Opposites</button>
-    <button onclick="showSection('flashcards')">🃏 Flashcards</button>
-    <button onclick="showSection('kanji-mcq')">✏️ Kanji Quiz</button>
-    <button onclick="showSection('reading')">📚 Reading</button>
-    <button onclick="showSection('writing')">✍️ Writing</button>
-    <button onclick="showSection('mock-exam')">📋 Mock Exam</button>
-    <button onclick="showSection('study-plan')">📅 Study Plan</button>
-    <button onclick="showSection('resources')">🔗 Resources</button>
-    <button onclick="showSection('counters')">🔢 Counters</button>
     <button onclick="showSection('listening')">🎧 Listening</button>
+    <button onclick="showSection('comprehension')">🧠 Comprehension</button>
     <button onclick="showSection('progress')">📊 Progress</button>
     <button onclick="showSection('bookmarks')">⭐ Bookmarks</button>
   </nav>
@@ -710,6 +767,22 @@ body.dark .bm-item{background:#2a1422 !important;border-color:rgba(255,133,161,.
       <div style="font-weight:900;color:#1a237e;font-size:.9rem;">Resources</div>
       <div style="font-size:.72rem;color:#283593;margin-top:.2rem;line-height:1.5;">Best N5 study websites</div>
       <div style="position:absolute;right:-8px;bottom:-8px;font-size:2.5rem;opacity:.12;">参</div>
+    </div>
+
+    <!-- Listening Practice -->
+    <div onclick="showSection('listening')" style="background:linear-gradient(135deg,#e0f2f1,#80cbc4);border-radius:1.3rem;padding:1.1rem;cursor:pointer;box-shadow:0 4px 14px rgba(128,203,196,.4);transition:all .22s;position:relative;overflow:hidden;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 28px rgba(0,150,136,.35)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 14px rgba(128,203,196,.4)'">
+      <div style="font-size:2rem;margin-bottom:.35rem;">🎧</div>
+      <div style="font-weight:900;color:#004d40;font-size:.9rem;">Listening</div>
+      <div style="font-size:.72rem;color:#00695c;margin-top:.2rem;line-height:1.5;">60+ sentences with TTS playback</div>
+      <div style="position:absolute;right:-8px;bottom:-8px;font-size:2.5rem;opacity:.12;">聴</div>
+    </div>
+
+    <!-- Comprehension Tests -->
+    <div onclick="showSection('comprehension')" style="background:linear-gradient(135deg,#fdf6ec,#f7c59f);border-radius:1.3rem;padding:1.1rem;cursor:pointer;box-shadow:0 4px 14px rgba(247,197,159,.45);transition:all .22s;position:relative;overflow:hidden;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 28px rgba(230,126,34,.35)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 14px rgba(247,197,159,.45)'">
+      <div style="font-size:2rem;margin-bottom:.35rem;">🧠</div>
+      <div style="font-weight:900;color:#7d3c00;font-size:.9rem;">Comprehension</div>
+      <div style="font-size:.72rem;color:#a04000;margin-top:.2rem;line-height:1.5;">Reading passages with MCQ tests</div>
+      <div style="position:absolute;right:-8px;bottom:-8px;font-size:2.5rem;opacity:.12;">解</div>
     </div>
 
   </div>
@@ -1067,6 +1140,91 @@ body.dark .bm-item{background:#2a1422 !important;border-color:rgba(255,133,161,.
 <div class="section" id="progress">
   <div class="section-title">📊 My Progress</div>
   <div id="prog-content"></div>
+</div>
+
+<!-- ====== COMPREHENSION TESTS ====== -->
+<div class="section" id="comprehension">
+  <div class="section-title">🧠 Reading Comprehension</div>
+  <div class="card" style="background:linear-gradient(135deg,rgba(247,197,159,.25),rgba(255,183,197,.2));margin-bottom:1.25rem;">
+    <p style="font-size:.88rem;color:#555;line-height:1.75;">Read a Japanese passage, then answer multiple-choice questions to test your understanding. Passages range from beginner to solid N5 level. 📖 Each test is randomly selected — try them all!</p>
+  </div>
+  <div id="comp-setup">
+    <div class="ctr-filter-bar" id="comp-filter-bar">
+      <button class="filter-tab active" onclick="filterComp('all',this)">📚 All Topics</button>
+      <button class="filter-tab" onclick="filterComp('daily',this)">🏠 Daily Life</button>
+      <button class="filter-tab" onclick="filterComp('school',this)">🏫 School</button>
+      <button class="filter-tab" onclick="filterComp('travel',this)">✈️ Travel</button>
+      <button class="filter-tab" onclick="filterComp('culture',this)">🎌 Culture</button>
+      <button class="filter-tab" onclick="filterComp('nature',this)">🌿 Nature</button>
+    </div>
+    <div id="comp-passage-list"></div>
+  </div>
+  <div id="comp-test-area" style="display:none;">
+    <div id="comp-passage-card"></div>
+    <div id="comp-questions-area"></div>
+    <div style="display:flex;gap:.7rem;margin-top:1rem;flex-wrap:wrap;">
+      <button class="btn" id="comp-submit-btn" onclick="submitComp()">✅ Submit Answers</button>
+      <button class="listen-slow-btn" onclick="resetComp()">← Back to passages</button>
+    </div>
+  </div>
+  <div id="comp-score-area" style="display:none;"></div>
+</div>
+
+<!-- ====== SENTENCE PATTERNS PRACTICE ====== -->
+<div class="section" id="sentences">
+  <div class="section-title">📝 Sentence Patterns Practice</div>
+  <div class="card" style="background:linear-gradient(135deg,rgba(255,183,197,.2),rgba(199,125,255,.1));margin-bottom:1.25rem;">
+    <p style="font-size:.88rem;color:#555;line-height:1.75;">Fill in the blank with the correct particle, verb form, or grammar pattern. Choose your category and get targeted grammar practice! 🎯</p>
+  </div>
+  <div class="ctr-filter-bar" id="sp-filter-bar">
+    <button class="filter-tab active" onclick="filterSP('all',this)">📚 All</button>
+    <button class="filter-tab" onclick="filterSP('particles',this)">🔵 Particles</button>
+    <button class="filter-tab" onclick="filterSP('te-form',this)">🟢 て-form</button>
+    <button class="filter-tab" onclick="filterSP('conjugation',this)">🟡 Conjugation</button>
+    <button class="filter-tab" onclick="filterSP('patterns',this)">🟣 Patterns</button>
+  </div>
+  <div id="sp-score-bar" style="display:none;background:white;border-radius:1rem;padding:.6rem 1rem;margin-bottom:1rem;display:flex;align-items:center;gap:.8rem;border:2px solid rgba(255,182,193,.25);flex-wrap:wrap;">
+    <span style="font-size:.8rem;font-weight:700;color:var(--mid);">Score:</span>
+    <span id="sp-score-num" style="font-size:1.1rem;font-weight:900;color:var(--pink);">0 / 0</span>
+    <div style="flex:1;min-width:80px;"><div style="background:#ffe4ec;border-radius:2rem;height:8px;overflow:hidden;"><div id="sp-score-bar-fill" style="height:100%;border-radius:2rem;background:linear-gradient(90deg,#ff85a1,#c77dff);transition:width .5s;width:0%;"></div></div></div>
+    <button class="listen-slow-btn" style="font-size:.72rem;" onclick="resetSP()">🔄 Reset</button>
+  </div>
+  <div id="sp-list"></div>
+</div>
+
+<!-- ====== NUMBER PRACTICE ====== -->
+<div class="section" id="numbers">
+  <div class="section-title">🔢 Number Practice</div>
+  <div class="card" style="background:linear-gradient(135deg,rgba(76,201,240,.12),rgba(6,214,160,.1));margin-bottom:1.25rem;">
+    <p style="font-size:.88rem;color:#555;line-height:1.75;">Numbers show up everywhere on the N5 exam — prices, times, dates, phone numbers! Practice reading and writing them all here. Click 🔊 to hear pronunciation. 👂</p>
+  </div>
+  <div class="ctr-filter-bar" id="num-filter-bar">
+    <button class="filter-tab active" onclick="filterNumbers('basics',this)">🔢 Basics</button>
+    <button class="filter-tab" onclick="filterNumbers('time',this)">🕐 Time</button>
+    <button class="filter-tab" onclick="filterNumbers('dates',this)">📅 Dates</button>
+    <button class="filter-tab" onclick="filterNumbers('money',this)">💴 Money</button>
+    <button class="filter-tab" onclick="filterNumbers('quiz',this)">🎯 Quiz</button>
+  </div>
+  <div id="numbers-content"></div>
+</div>
+
+<!-- ====== SURVIVAL PHRASES ====== -->
+<div class="section" id="phrases">
+  <div class="section-title">💬 Survival Japanese</div>
+  <div class="card" style="background:linear-gradient(135deg,rgba(6,214,160,.12),rgba(76,201,240,.1));margin-bottom:1.25rem;">
+    <p style="font-size:.88rem;color:#555;line-height:1.75;">Essential phrases you could use in Japan <strong>tomorrow</strong>! Organised by real-life situation. Tap 🔊 to hear any phrase, ⭐ to save favourites, and 🐢 for slow playback. 🇯🇵</p>
+  </div>
+  <div class="ctr-filter-bar" id="phr-filter-bar">
+    <button class="filter-tab active" onclick="filterPhrases('all',this)">🌟 All</button>
+    <button class="filter-tab" onclick="filterPhrases('greetings',this)">👋 Greetings</button>
+    <button class="filter-tab" onclick="filterPhrases('shopping',this)">🛒 Shopping</button>
+    <button class="filter-tab" onclick="filterPhrases('directions',this)">🗺️ Directions</button>
+    <button class="filter-tab" onclick="filterPhrases('restaurant',this)">🍜 Restaurant</button>
+    <button class="filter-tab" onclick="filterPhrases('emergency',this)">🆘 Emergency</button>
+    <button class="filter-tab" onclick="filterPhrases('transport',this)">🚉 Transport</button>
+    <button class="filter-tab" onclick="filterPhrases('hotel',this)">🏨 Hotel</button>
+  </div>
+  <div id="phrases-list"></div>
 </div>
 
 <!-- ====== BOOKMARKS ====== -->
@@ -2181,6 +2339,10 @@ function showSection(id){
   // Render progress dashboard when that section is shown
   if(id === 'progress') setTimeout(renderProgress, 0);
   if(id === 'bookmarks') setTimeout(renderBookmarks, 0);
+  if(id === 'sentences') setTimeout(renderSP, 0);
+  if(id === 'numbers') setTimeout(()=>renderNumbers('basics'), 0);
+  if(id === 'phrases') setTimeout(renderPhrases, 0);
+  if(id === 'comprehension') setTimeout(renderCompList, 0);
   // Mascot tip — runs after data is defined (deferred)
   setTimeout(()=>{
     if(typeof mascotBubbleTimer==='undefined') return;
@@ -2614,7 +2776,7 @@ function startKTmr(){kqTimeLeft=30;clearInterval(kqTimer);updateKTmr();kqTimer=s
 function updateKTmr(){document.getElementById('kq-timer').textContent=`⏱ 0:${kqTimeLeft.toString().padStart(2,'0')}`;document.getElementById('kq-timer-fill').style.width=`${(kqTimeLeft/30)*100}%`;}
 function disableKOpts(){document.querySelectorAll('#kq-options .option-btn').forEach(b=>b.disabled=true);document.querySelectorAll('#kq-options .option-btn')[kqQuestionPool[kqIndex].ans].classList.add('correct');}
 function answerKanjiQ(i){clearInterval(kqTimer);disableKOpts();const ans=kqQuestionPool[kqIndex].ans;const fb=document.getElementById('kq-feedback');document.querySelectorAll('#kq-options .option-btn')[i].classList.add(i===ans?'correct':'wrong');if(i===ans){kqScore++;fb.className='feedback correct';fb.textContent='✅ Correct!';}else{fb.className='feedback wrong';fb.textContent=`❌ Answer: ${kqQuestionPool[kqIndex].opts[ans]}`;}setTimeout(()=>{kqIndex++;showKanjiQ();},1600);}
-function endKanjiQuiz(){clearInterval(kqTimer);document.getElementById('kq-quiz').style.display='none';document.getElementById('kq-score').style.display='block';const pct=Math.round((kqScore/kqQuestionPool.length)*100);document.getElementById('kq-score-num').textContent=`${kqScore}/${kqQuestionPool.length}`;const msgs=['📚 Keep going! Review and try again!','💪 Getting there! Practice more kanji!','✨ Good work! Keep it up!','🌸 Excellent! You know your kanji!'];const msg=pct>=80?msgs[3]:pct>=60?msgs[2]:pct>=40?msgs[1]:msgs[0];document.getElementById('kq-score-msg').textContent=msg;document.getElementById('kq-score-sub').textContent=`${pct}% accuracy`;}
+function endKanjiQuiz(){clearInterval(kqTimer);document.getElementById('kq-quiz').style.display='none';document.getElementById('kq-score').style.display='block';const pct=Math.round((kqScore/kqQuestionPool.length)*100);document.getElementById('kq-score-num').textContent=`${kqScore}/${kqQuestionPool.length}`;const msgs=['📚 Keep going! Review and try again!','💪 Getting there! Practice more kanji!','✨ Good work! Keep it up!','🌸 Excellent! You know your kanji!'];const msg=pct>=80?msgs[3]:pct>=60?msgs[2]:pct>=40?msgs[1]:msgs[0];document.getElementById('kq-score-msg').textContent=msg;document.getElementById('kq-score-sub').textContent=`${pct}% accuracy`;saveScore('Kanji Quiz ✏️',kqScore,kqQuestionPool.length);if(pct>=80)setTimeout(()=>showCelebration('✏️',pct===100?'Kanji Perfect!':'Kanji Master!',`${pct}% — すごい！You really know your kanji!`,pct),400);}
 function resetKanjiQuiz(){document.getElementById('kq-setup').style.display='block';document.getElementById('kq-quiz').style.display='none';document.getElementById('kq-score').style.display='none';}
 
 // --- READING ---
@@ -2635,7 +2797,7 @@ function startReading(){
 function startRdTmr(){clearInterval(rdTimer);updateRdTmr();rdTimer=setInterval(()=>{rdTimeLeft--;updateRdTmr();if(rdTimeLeft<=0){clearInterval(rdTimer);submitReading();}},1000);}
 function updateRdTmr(){const m=Math.floor(rdTimeLeft/60),s=rdTimeLeft%60;document.getElementById('rd-timer').textContent=`⏱ ${m}:${s.toString().padStart(2,'0')}`;document.getElementById('rd-timer-fill').style.width=`${(rdTimeLeft/600)*100}%`;}
 function selRd(qi,opt){rdAnswers[qi]=opt;for(let j=0;j<4;j++){const b=document.getElementById(`rdq${qi}opt${j}`);if(b){b.style.borderColor='';b.style.background='';}}const sel=document.getElementById(`rdq${qi}opt${opt}`);if(sel){sel.style.borderColor='var(--pink)';sel.style.background='#fff0f3';}}
-function submitReading(){clearInterval(rdTimer);document.getElementById('reading-quiz').style.display='none';document.getElementById('reading-score').style.display='block';const test=READING_TESTS[rdCurrentTest];let score=0;test.questions.forEach((q,i)=>{if(rdAnswers[i]===q.ans)score++;});const pct=Math.round((score/test.questions.length)*100);document.getElementById('rd-score-num').textContent=`${score}/${test.questions.length}`;document.getElementById('rd-score-msg').textContent=pct>=75?'🌸 Great reading!':pct>=50?'✨ Nice! Review the passage again.':'📖 Keep practicing reading!';document.getElementById('rd-score-sub').textContent=`${pct}% accuracy`;}
+function submitReading(){clearInterval(rdTimer);document.getElementById('reading-quiz').style.display='none';document.getElementById('reading-score').style.display='block';const test=READING_TESTS[rdCurrentTest];let score=0;test.questions.forEach((q,i)=>{if(rdAnswers[i]===q.ans)score++;});const pct=Math.round((score/test.questions.length)*100);document.getElementById('rd-score-num').textContent=`${score}/${test.questions.length}`;document.getElementById('rd-score-msg').textContent=pct>=75?'🌸 Great reading!':pct>=50?'✨ Nice! Review the passage again.':'📖 Keep practicing reading!';document.getElementById('rd-score-sub').textContent=`${pct}% accuracy`;saveScore('Reading 📚',score,test.questions.length);if(pct>=80)setTimeout(()=>showCelebration('📚','Great Reading!',`${pct}% — 上手！Excellent comprehension!`,pct),400);}
 function resetReading(){document.getElementById('reading-setup').style.display='block';document.getElementById('reading-quiz').style.display='none';document.getElementById('reading-score').style.display='none';}
 
 // --- WRITING ---
@@ -2701,7 +2863,7 @@ function showExamQ(){
 }
 function answerExam(i){if(exAnswered)return;exAnswered=true;const q=examQs[exIndex];document.querySelectorAll('#ex-options .option-btn').forEach(b=>b.disabled=true);document.querySelectorAll('#ex-options .option-btn')[q.ans].classList.add('correct');const fb=document.getElementById('ex-feedback');if(i===q.ans){exScore++;exBreakdown[q.type]++;document.querySelectorAll('#ex-options .option-btn')[i].classList.add('correct');fb.className='feedback correct';fb.textContent=`✅ Correct! ${q.exp}`;}else{document.querySelectorAll('#ex-options .option-btn')[i].classList.add('wrong');fb.className='feedback wrong';fb.textContent=`❌ ${q.exp}`;}document.getElementById('ex-next').style.display='inline-block';}
 function examNext(){exIndex++;showExamQ();}
-function endExam(){clearInterval(exTimer);document.getElementById('exam-quiz').style.display='none';document.getElementById('exam-score').style.display='block';const pct=Math.round((exScore/examQs.length)*100);document.getElementById('ex-score-num').textContent=`${exScore}/${examQs.length}`;const msgs=['📚 Keep studying! You\'ve got this!','💪 Good effort! Focus on weak areas.','✨ Great work! Almost ready!','🌸 Outstanding! You\'re ready for N5!'];document.getElementById('ex-score-msg').textContent=pct>=80?msgs[3]:pct>=70?msgs[2]:pct>=50?msgs[1]:msgs[0];document.getElementById('ex-score-sub').textContent=`${pct}% — ${pct>=60?'Pass level reached! 🎉':'Keep studying to reach passing level (60%+)'}`;const gT=EXAM_QUESTIONS.filter(q=>q.type==='grammar').length,kT=EXAM_QUESTIONS.filter(q=>q.type==='kanji').length,vT=EXAM_QUESTIONS.filter(q=>q.type==='vocab').length;document.getElementById('ex-breakdown').innerHTML=`<div style="font-weight:700;color:var(--mid);margin-bottom:.4rem;">Section Breakdown:</div><div style="display:flex;flex-direction:column;gap:.3rem;"><div style="display:flex;justify-content:space-between;background:#fff0f3;padding:.35rem .7rem;border-radius:.7rem;"><span>📖 Grammar</span><span style="font-weight:800;color:var(--pink);">${exBreakdown.grammar}/${gT}</span></div><div style="display:flex;justify-content:space-between;background:#fff0f3;padding:.35rem .7rem;border-radius:.7rem;"><span>漢字 Kanji</span><span style="font-weight:800;color:var(--pink);">${exBreakdown.kanji}/${kT}</span></div><div style="display:flex;justify-content:space-between;background:#fff0f3;padding:.35rem .7rem;border-radius:.7rem;"><span>📝 Vocab</span><span style="font-weight:800;color:var(--pink);">${exBreakdown.vocab}/${vT}</span></div></div>`;}
+function endExam(){clearInterval(exTimer);document.getElementById('exam-quiz').style.display='none';document.getElementById('exam-score').style.display='block';const pct=Math.round((exScore/examQs.length)*100);document.getElementById('ex-score-num').textContent=`${exScore}/${examQs.length}`;const msgs=['📚 Keep studying! You\'ve got this!','💪 Good effort! Focus on weak areas.','✨ Great work! Almost ready!','🌸 Outstanding! You\'re ready for N5!'];document.getElementById('ex-score-msg').textContent=pct>=80?msgs[3]:pct>=70?msgs[2]:pct>=50?msgs[1]:msgs[0];document.getElementById('ex-score-sub').textContent=`${pct}% — ${pct>=60?'Pass level reached! 🎉':'Keep studying to reach passing level (60%+)'}`;const gT=EXAM_QUESTIONS.filter(q=>q.type==='grammar').length,kT=EXAM_QUESTIONS.filter(q=>q.type==='kanji').length,vT=EXAM_QUESTIONS.filter(q=>q.type==='vocab').length;document.getElementById('ex-breakdown').innerHTML=`<div style="font-weight:700;color:var(--mid);margin-bottom:.4rem;">Section Breakdown:</div><div style="display:flex;flex-direction:column;gap:.3rem;"><div style="display:flex;justify-content:space-between;background:#fff0f3;padding:.35rem .7rem;border-radius:.7rem;"><span>📖 Grammar</span><span style="font-weight:800;color:var(--pink);">${exBreakdown.grammar}/${gT}</span></div><div style="display:flex;justify-content:space-between;background:#fff0f3;padding:.35rem .7rem;border-radius:.7rem;"><span>漢字 Kanji</span><span style="font-weight:800;color:var(--pink);">${exBreakdown.kanji}/${kT}</span></div><div style="display:flex;justify-content:space-between;background:#fff0f3;padding:.35rem .7rem;border-radius:.7rem;"><span>📝 Vocab</span><span style="font-weight:800;color:var(--pink);">${exBreakdown.vocab}/${vT}</span></div></div>`;saveScore('Mock Exam 📋',exScore,examQs.length);if(pct>=80)setTimeout(()=>showCelebration(pct===100?'🏆':pct>=90?'🌸':'🎉',pct===100?'Perfect Score!!':pct>=90?'Outstanding!':'Great Work!',`${pct}% on the Mock Exam! ${pct>=90?'N5 is yours! 頑張ったね！':'もう少し！Keep pushing!'}`,pct),400);}
 function resetExam(){document.getElementById('exam-setup').style.display='block';document.getElementById('exam-quiz').style.display='none';document.getElementById('exam-score').style.display='none';}
 
 // --- HOME MINI TIMELINE ---
@@ -3519,22 +3681,6 @@ function getScores() {
   try { return JSON.parse(localStorage.getItem('sakura_scores') || '[]'); } catch(e) { return []; }
 }
 
-// Patch quiz end functions to save scores
-const _ee = endExam;
-function endExam() {
-  _ee();
-  saveScore('Mock Exam 📋', exScore, examQs.length);
-}
-const _sr = submitReading;
-function submitReading() {
-  _sr();
-  const test = READING_TESTS[rdCurrentTest];
-  if (!test) return;
-  let s = 0;
-  test.questions.forEach((q, i) => { if (rdAnswers[i] === q.ans) s++; });
-  saveScore('Reading 📚', s, test.questions.length);
-}
-
 // ============================================================
 //  STREAK TRACKER
 // ============================================================
@@ -3808,13 +3954,13 @@ function renderProgress() {
 // ============================================================
 function toggleDark() {
   const isDark = document.body.classList.toggle('dark');
-  document.getElementById('dark-toggle').textContent = isDark ? '☀️' : '🌙';
+  document.getElementById('dark-toggle').innerHTML = isDark ? '☀️ Light' : '🌙 Dark';
   try { localStorage.setItem('sakura_dark', isDark ? '1' : '0'); } catch(e) {}
 }
 try {
   if (localStorage.getItem('sakura_dark') === '1') {
     document.body.classList.add('dark');
-    document.getElementById('dark-toggle').textContent = '☀️';
+    document.getElementById('dark-toggle').innerHTML = '☀️ Light';
   }
 } catch(e) {}
 
@@ -3975,23 +4121,652 @@ function closeCeleb(){
   confettiCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);
 }
 
-// Patch quiz endings for confetti
-const _confEE = endExam;
-function endExam(){
-  _confEE();
-  const pct=Math.round(exScore/examQs.length*100);
-  if(pct>=80) setTimeout(()=>showCelebration(
-    pct===100?'🏆':pct>=90?'🌸':'🎉',
-    pct===100?'Perfect Score!!':pct>=90?'Outstanding!':'Great Work!',
-    `${pct}% on the Mock Exam! ${pct>=90?'N5 is yours! 頑張ったね！':'もう少し！Keep going!'}`,
-    pct),400);
+// ============================================================
+//  SENTENCE PATTERNS PRACTICE
+// ============================================================
+const SP_QUESTIONS = [
+  {cat:'particles',sentence:['わたし','___','がくせいです。'],blank:1,opts:['は','が','を','に'],ans:0,hint:'Topic marker particle',eng:'I am a student.'},
+  {cat:'particles',sentence:['にほんご','___','べんきょうします。'],blank:1,opts:['を','は','が','で'],ans:0,hint:'Object marker particle',eng:'I study Japanese.'},
+  {cat:'particles',sentence:['うち','___','かえります。'],blank:1,opts:['に','を','は','が'],ans:0,hint:'Direction/destination particle',eng:'I go home.'},
+  {cat:'particles',sentence:['バスてい','___','まちます。'],blank:1,opts:['で','に','を','は'],ans:0,hint:'Location of action particle',eng:'I wait at the bus stop.'},
+  {cat:'particles',sentence:['ともだち','___','てがみをかきます。'],blank:1,opts:['に','を','は','が'],ans:0,hint:'Recipient particle',eng:'I write a letter to my friend.'},
+  {cat:'particles',sentence:['ペン','___','かきます。'],blank:1,opts:['で','に','を','は'],ans:0,hint:'Means/tool particle',eng:'I write with a pen.'},
+  {cat:'particles',sentence:['あそこ','___','ゆうびんきょくがあります。'],blank:1,opts:['に','で','を','は'],ans:0,hint:'Existence location particle',eng:'There is a post office over there.'},
+  {cat:'particles',sentence:['くるま','___','がっこうへいきます。'],blank:1,opts:['で','に','を','が'],ans:0,hint:'Means of transport particle',eng:'I go to school by car.'},
+  {cat:'particles',sentence:['りんごとみかん','___','すきです。'],blank:1,opts:['が','は','を','に'],ans:0,hint:'Subject marker (with adjective)',eng:'I like apples and oranges.'},
+  {cat:'particles',sentence:['さとうさん','___','にほんごがじょうずです。'],blank:1,opts:['は','が','を','に'],ans:0,hint:'Topic marker particle',eng:'As for Sato-san, her Japanese is good.'},
+  {cat:'te-form',sentence:['たべ','___','ください。'],blank:1,opts:['て','た','ない','ます'],ans:0,hint:'て-form + ください = please do',eng:'Please eat.'},
+  {cat:'te-form',sentence:['いまテレビをみ','___','います。'],blank:1,opts:['て','た','ない','で'],ans:0,hint:'〜ています = currently doing',eng:'I am watching TV right now.'},
+  {cat:'te-form',sentence:['しゅくだいをし','___','から、あそびます。'],blank:1,opts:['て','た','ない','で'],ans:0,hint:'〜てから = after doing ~',eng:'After doing homework, I will play.'},
+  {cat:'te-form',sentence:['まどをあけ','___','もいいですか。'],blank:1,opts:['て','た','ない','で'],ans:0,hint:'〜てもいいですか = may I?',eng:'May I open the window?'},
+  {cat:'te-form',sentence:['ここでたばこをすっ','___','はいけません。'],blank:1,opts:['て','た','ない','で'],ans:0,hint:'〜てはいけない = must not',eng:'You must not smoke here.'},
+  {cat:'te-form',sentence:['かれはにほんにすん','___','います。'],blank:1,opts:['で','て','た','に'],ans:0,hint:'〜でいます (む→んで)',eng:'He is living in Japan.'},
+  {cat:'te-form',sentence:['ドアをしめ','___','ください。'],blank:1,opts:['て','た','ない','で'],ans:0,hint:'て-form of しめる (Group 2)',eng:'Please close the door.'},
+  {cat:'te-form',sentence:['てをあらっ','___','からたべます。'],blank:1,opts:['て','た','ない','で'],ans:0,hint:'あらう → あらって (Group 1 u→tte)',eng:'After washing hands, I will eat.'},
+  {cat:'conjugation',sentence:['たべ','___',' — negative polite'],blank:1,opts:['ません','ないです','なかった','ませんでした'],ans:0,hint:'〜ません = polite negative present',eng:'I don\'t eat.'},
+  {cat:'conjugation',sentence:['いき','___',' — past polite'],blank:1,opts:['ました','ます','ません','ませんでした'],ans:0,hint:'〜ました = polite past',eng:'I went.'},
+  {cat:'conjugation',sentence:['しずか','___','へやです。'],blank:1,opts:['な','の','に','で'],ans:0,hint:'な-adjective + な before a noun',eng:'It is a quiet room.'},
+  {cat:'conjugation',sentence:['にほんごがじょうずに','___','なりたいです。'],blank:1,opts:['に','な','で','の'],ans:0,hint:'〜になります requires に',eng:'I want to become good at Japanese.'},
+  {cat:'conjugation',sentence:['もっとはやく','___','ください。'],blank:1,opts:['はなして','はなす','はなした','はなし'],ans:0,hint:'て-form of はなす = はなして',eng:'Please speak faster.'},
+  {cat:'patterns',sentence:['もっとねた','___','いいですよ。'],blank:1,opts:['ほうが','ことが','だけが','のが'],ans:0,hint:'〜たほうがいい = you had better',eng:'You had better sleep more.'},
+  {cat:'patterns',sentence:['くすりをのま','___','なりません。'],blank:1,opts:['なければ','ないと','ずに','ないで'],ans:0,hint:'〜なければなりません = must do',eng:'I must take medicine.'},
+  {cat:'patterns',sentence:['このケーキはおいし','___','です。'],blank:1,opts:['そう','よう','らしい','だろう'],ans:0,hint:'〜そうです = looks/seems like (visual)',eng:'This cake looks delicious.'},
+  {cat:'patterns',sentence:['にほんごはえいご','___','むずかしいです。'],blank:1,opts:['より','ほど','だけ','まで'],ans:0,hint:'〜より = than (comparisons)',eng:'Japanese is more difficult than English.'},
+  {cat:'patterns',sentence:['あしたあめが','___','かもしれません。'],blank:1,opts:['ふる','ふって','ふった','ふり'],ans:0,hint:'〜かもしれません comes after plain form',eng:'It might rain tomorrow.'},
+  {cat:'patterns',sentence:['えいがをみ','___','いきたいです。'],blank:1,opts:['に','て','が','を'],ans:0,hint:'verb stem + に + motion verb = go to do',eng:'I want to go see a movie.'},
+  {cat:'patterns',sentence:['すしもさしみ','___','たべました。'],blank:1,opts:['も','を','が','は'],ans:0,hint:'も = also/too (after another も)',eng:'I ate both sushi and sashimi.'},
+];
+
+let spAnswered = {}, spCorrect = 0, spFilter = 'all', spCurrent = [];
+
+function filterSP(cat, btn) {
+  document.querySelectorAll('#sp-filter-bar .filter-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  spFilter = cat; spAnswered = {}; spCorrect = 0;
+  renderSP();
 }
-const _confKQ = endKanjiQuiz;
-function endKanjiQuiz(){
-  _confKQ();
-  const pct=Math.round(kqScore/kqQuestionPool.length*100);
-  if(pct>=80) setTimeout(()=>showCelebration('✏️',pct===100?'Kanji Perfect!':'Kanji Master!',`${pct}% on Kanji Quiz! すごい！`,pct),400);
+
+function renderSP() {
+  spCurrent = spFilter === 'all' ? SP_QUESTIONS : SP_QUESTIONS.filter(q => q.cat === spFilter);
+  const list = document.getElementById('sp-list');
+  if (!list) return;
+  document.getElementById('sp-score-bar').style.display = 'flex';
+  updateSPScore();
+  list.innerHTML = spCurrent.map((q, i) => {
+    const id = `sp_${i}`;
+    const ans = spAnswered[id];
+    const sentHtml = q.sentence.map((p, pi) => {
+      if (pi === q.blank) {
+        const cls = ans ? (ans.correct ? 'correct' : 'wrong') : '';
+        const txt = ans ? (ans.correct ? q.opts[q.ans] : `✗ ${q.opts[q.ans]}`) : '___';
+        return `<span class="sp-blank ${cls}">${txt}</span>`;
+      }
+      return `<span>${p}</span>`;
+    }).join(' ');
+    const optsHtml = q.opts.map((o, oi) => {
+      let cls = '';
+      if (ans) cls = oi === q.ans ? 'correct' : (oi === ans.chosen ? 'wrong' : '');
+      return `<button class="sp-opt-btn ${cls}" onclick="answerSP(${i},${oi})" ${ans ? 'disabled' : ''}>${o}</button>`;
+    }).join('');
+    const fbHtml = ans
+      ? `<div class="sp-hint" style="color:${ans.correct?'#4caf50':'#e53935'};">${ans.correct?'✅ Correct!':'❌ Answer: '+q.opts[q.ans]} — ${q.hint}</div>`
+      : `<div class="sp-hint">💡 ${q.hint}</div>`;
+    const safeJp = q.sentence.join('').replace(/___/g,'').replace(/'/g,"\\'").replace(/— .*/,'').trim();
+    return `<div class="sp-card">
+      <div class="sp-sentence">${sentHtml}</div>
+      <div class="sp-eng">${q.eng}</div>
+      ${fbHtml}
+      <div class="sp-options">${optsHtml}</div>
+      <div style="margin-top:.45rem;"><button class="tts-btn" onclick="speakJP('${safeJp}',this)">🔊 Listen</button></div>
+    </div>`;
+  }).join('');
 }
+
+function answerSP(qi, chosen) {
+  const id = `sp_${qi}`;
+  if (spAnswered[id]) return;
+  const q = spCurrent[qi];
+  const correct = chosen === q.ans;
+  spAnswered[id] = { correct, chosen };
+  if (correct) spCorrect++;
+  updateSPScore();
+  renderSP();
+  if (Object.keys(spAnswered).length === spCurrent.length && spCurrent.length > 0) {
+    const pct = Math.round(spCorrect / spCurrent.length * 100);
+    saveScore('Sentence Practice 📝', spCorrect, spCurrent.length);
+    if (pct >= 80) setTimeout(() => showCelebration('📝', 'Grammar Master!', `${pct}% — Pattern Pro! すごい！`, pct), 400);
+  }
+}
+
+function updateSPScore() {
+  const done = Object.keys(spAnswered).length;
+  document.getElementById('sp-score-num').textContent = `${spCorrect} / ${done} answered (${spCurrent.length} total)`;
+  document.getElementById('sp-score-bar-fill').style.width = done ? `${Math.round(spCorrect/done*100)}%` : '0%';
+}
+function resetSP() { spAnswered = {}; spCorrect = 0; renderSP(); }
+renderSP();
+
+// ============================================================
+//  NUMBER PRACTICE
+// ============================================================
+const NUM_BASICS = [
+  {n:'0',jp:'ぜろ／れい',rom:'zero / rei'},{n:'1',jp:'いち',rom:'ichi'},{n:'2',jp:'に',rom:'ni'},
+  {n:'3',jp:'さん',rom:'san'},{n:'4',jp:'し／よん',rom:'shi / yon'},{n:'5',jp:'ご',rom:'go'},
+  {n:'6',jp:'ろく',rom:'roku'},{n:'7',jp:'しち／なな',rom:'shichi / nana'},{n:'8',jp:'はち',rom:'hachi'},
+  {n:'9',jp:'きゅう／く',rom:'kyuu / ku'},{n:'10',jp:'じゅう',rom:'juu'},{n:'11',jp:'じゅういち',rom:'juuichi'},
+  {n:'20',jp:'にじゅう',rom:'nijuu'},{n:'30',jp:'さんじゅう',rom:'sanjuu'},{n:'40',jp:'よんじゅう',rom:'yonjuu'},
+  {n:'100',jp:'ひゃく',rom:'hyaku'},{n:'200',jp:'にひゃく',rom:'nihyaku'},{n:'300',jp:'さんびゃく',rom:'sanbyaku'},
+  {n:'600',jp:'ろっぴゃく',rom:'roppyaku'},{n:'800',jp:'はっぴゃく',rom:'happyaku'},
+  {n:'1,000',jp:'せん',rom:'sen'},{n:'3,000',jp:'さんぜん',rom:'sanzen'},{n:'8,000',jp:'はっせん',rom:'hassen'},
+  {n:'10,000',jp:'いちまん',rom:'ichiman'},
+];
+const NUM_TIME = [
+  {label:'1:00',jp:'いちじ',rom:'ichi-ji'},{label:'2:00',jp:'にじ',rom:'ni-ji'},{label:'3:00',jp:'さんじ',rom:'san-ji'},
+  {label:'4:00',jp:'よじ',rom:'yo-ji'},{label:'5:00',jp:'ごじ',rom:'go-ji'},{label:'6:00',jp:'ろくじ',rom:'roku-ji'},
+  {label:'7:00',jp:'しちじ',rom:'shichi-ji'},{label:'8:00',jp:'はちじ',rom:'hachi-ji'},{label:'9:00',jp:'くじ',rom:'ku-ji'},
+  {label:'10:00',jp:'じゅうじ',rom:'juu-ji'},{label:'11:00',jp:'じゅういちじ',rom:'juuichi-ji'},{label:'12:00',jp:'じゅうにじ',rom:'juuni-ji'},
+  {label:'Half past',jp:'〜じはん',rom:'~ji han'},{label:'30 min',jp:'さんじっぷん',rom:'sanjuppun'},
+  {label:'AM',jp:'ごぜん',rom:'gozen'},{label:'PM',jp:'ごご',rom:'gogo'},
+  {label:'What time?',jp:'なんじですか',rom:'nanji desu ka?'},{label:'Now',jp:'いま',rom:'ima'},
+];
+const NUM_DATES = [
+  {label:'1st',jp:'ついたち',rom:'tsuitachi'},{label:'2nd',jp:'ふつか',rom:'futsuka'},{label:'3rd',jp:'みっか',rom:'mikka'},
+  {label:'4th',jp:'よっか',rom:'yokka'},{label:'5th',jp:'いつか',rom:'itsuka'},{label:'6th',jp:'むいか',rom:'muika'},
+  {label:'7th',jp:'なのか',rom:'nanoka'},{label:'8th',jp:'ようか',rom:'youka'},{label:'9th',jp:'ここのか',rom:'kokonoka'},
+  {label:'10th',jp:'とおか',rom:'tooka'},{label:'14th',jp:'じゅうよっか',rom:'juuyokka'},{label:'20th',jp:'はつか',rom:'hatsuka'},
+  {label:'Jan',jp:'いちがつ',rom:'ichi-gatsu'},{label:'Feb',jp:'にがつ',rom:'ni-gatsu'},
+  {label:'Mar',jp:'さんがつ',rom:'san-gatsu'},{label:'Apr',jp:'しがつ',rom:'shi-gatsu'},
+  {label:'May',jp:'ごがつ',rom:'go-gatsu'},{label:'Jun',jp:'ろくがつ',rom:'roku-gatsu'},
+  {label:'Jul',jp:'しちがつ',rom:'shichi-gatsu'},{label:'Aug',jp:'はちがつ',rom:'hachi-gatsu'},
+  {label:'Sep',jp:'くがつ',rom:'ku-gatsu'},{label:'Oct',jp:'じゅうがつ',rom:'juu-gatsu'},
+  {label:'Nov',jp:'じゅういちがつ',rom:'juuichi-gatsu'},{label:'Dec',jp:'じゅうにがつ',rom:'juuni-gatsu'},
+];
+const NUM_MONEY = [
+  {label:'¥100',jp:'ひゃくえん',rom:'hyaku-en'},{label:'¥500',jp:'ごひゃくえん',rom:'gohyaku-en'},
+  {label:'¥1,000',jp:'せんえん',rom:'sen-en'},{label:'¥1,500',jp:'せんごひゃくえん',rom:'sengohyaku-en'},
+  {label:'¥2,000',jp:'にせんえん',rom:'nisen-en'},{label:'¥3,800',jp:'さんぜんはっぴゃくえん',rom:'sanzenhappyaku-en'},
+  {label:'¥5,000',jp:'ごせんえん',rom:'gosen-en'},{label:'¥10,000',jp:'いちまんえん',rom:'ichiman-en'},
+  {label:'How much?',jp:'いくらですか',rom:'ikura desu ka?'},{label:'Cheap',jp:'やすい',rom:'yasui'},
+  {label:'Expensive',jp:'たかい',rom:'takai'},{label:'Change',jp:'おつり',rom:'otsuri'},
+  {label:'Receipt',jp:'レシート',rom:'reshiito'},{label:'Tax incl.',jp:'ぜいこみ',rom:'zeikomi'},
+];
+const NUM_QUIZ_Q = [
+  {q:'How do you say 14?',opts:['じゅうし','しじゅう','よんじゅう','ひゃくよん'],ans:0},
+  {q:'What number is さんびゃく?',opts:['30','3,000','300','3'],ans:2},
+  {q:'How do you say 4 o\'clock?',opts:['しじ','よじ','よんじ','しちじ'],ans:1},
+  {q:'What is the 20th of the month?',opts:['にじゅうにち','はつか','にじゅうか','ふつか'],ans:1},
+  {q:'How do you say ¥1,500?',opts:['いちせんごひゃくえん','せんごひゃくえん','いちまんごひゃくえん','ごひゃくせんえん'],ans:1},
+  {q:'What is じゅういちじ?',opts:['10:00','12:00','11:00','1:00'],ans:2},
+  {q:'How do you say March?',opts:['さんがつ','みつき','さんげつ','みがつ'],ans:0},
+  {q:'What does ごぜん mean?',opts:['PM','AM','evening','noon'],ans:1},
+  {q:'How do you say the 2nd?',opts:['ふたにち','にか','ふつか','にちめ'],ans:2},
+  {q:'What is まん (万)?',opts:['1,000','100','100,000','10,000'],ans:3},
+  {q:'How do you say half past?',opts:['はんじ','じはん','はんぷん','じゅう'],ans:1},
+  {q:'What is ¥800 in Japanese?',opts:['はちえん','はちじゅうえん','はっぴゃくえん','はちひゃくえん'],ans:2},
+];
+let numQuizA = {}, numQuizC = 0;
+
+function filterNumbers(type, btn) {
+  document.querySelectorAll('#num-filter-bar .filter-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderNumbers(type);
+}
+
+function numCardGrid(arr) {
+  return `<div class="num-grid">${arr.map(n => `<div class="num-card" onclick="speakJP('${(n.jp||'').split('／')[0].trim()}',this)">
+    <div class="num-arabic" style="font-size:${n.n?'1.4rem':'.9rem'};">${n.n||n.label}</div>
+    <div class="num-jp">${n.jp}</div>
+    <div class="num-rom" style="font-size:.62rem;">${n.rom}</div>
+  </div>`).join('')}</div>`;
+}
+
+function renderNumbers(type = 'basics') {
+  const el = document.getElementById('numbers-content');
+  if (!el) return;
+  if (type === 'basics') {
+    el.innerHTML = `<div class="num-section-title">🔢 Basic Numbers — tap any card to hear it!</div>
+      ${numCardGrid(NUM_BASICS)}
+      <div class="card" style="margin-top:.5rem;">
+        <div class="num-section-title" style="margin-top:0;">⚠️ Key Sound Changes</div>
+        <table class="num-table"><thead><tr><th>Number</th><th>Japanese</th><th>Why?</th></tr></thead><tbody>
+          <tr><td>300</td><td>さんびゃく</td><td>ひゃく→びゃく after さん</td></tr>
+          <tr><td>600</td><td>ろっぴゃく</td><td>ひゃく→ぴゃく after ろく</td></tr>
+          <tr><td>800</td><td>はっぴゃく</td><td>ひゃく→ぴゃく after はち</td></tr>
+          <tr><td>3,000</td><td>さんぜん</td><td>せん→ぜん after さん</td></tr>
+          <tr><td>8,000</td><td>はっせん</td><td>Double consonant</td></tr>
+        </tbody></table>
+      </div>`;
+  } else if (type === 'time') {
+    el.innerHTML = `<div class="num-section-title">🕐 Telling Time — tap to hear!</div>
+      ${numCardGrid(NUM_TIME)}
+      <div class="card" style="margin-top:.5rem;">
+        <div class="num-section-title" style="margin-top:0;">💡 Time Examples</div>
+        <table class="num-table"><thead><tr><th>Japanese</th><th>Meaning</th></tr></thead><tbody>
+          ${[['ごぜん くじ','9:00 AM'],['ごご さんじはん','3:30 PM'],['じゅうにじ じゅうごふん','12:15'],['いまなんじですか？','What time is it?'],['よじに あいましょう','Let\'s meet at 4:00'],['ごじまで べんきょうします','I study until 5:00']].map(([j,e])=>`<tr><td style="cursor:pointer;font-weight:700;" onclick="speakJP('${j}',this)">${j}</td><td>${e}</td></tr>`).join('')}
+        </tbody></table>
+      </div>`;
+  } else if (type === 'dates') {
+    el.innerHTML = `<div class="num-section-title">📅 Dates & Months — tap to hear!</div>
+      ${numCardGrid(NUM_DATES)}
+      <div class="card" style="margin-top:.5rem;">
+        <div class="num-section-title" style="margin-top:0;">⚠️ Irregular Days — must memorise!</div>
+        <table class="num-table"><thead><tr><th>Day</th><th>Japanese</th><th>Reading</th></tr></thead><tbody>
+          ${[['1st','ついたち','tsuitachi'],['2nd','ふつか','futsuka'],['3rd','みっか','mikka'],['4th','よっか','yokka'],['8th','ようか','youka'],['9th','ここのか','kokonoka'],['10th','とおか','tooka'],['14th','じゅうよっか','juuyokka'],['20th','はつか','hatsuka'],['24th','にじゅうよっか','nijuuyokka']].map(([d,j,r])=>`<tr><td>${d}</td><td style="cursor:pointer;font-weight:700;" onclick="speakJP('${j}',this)">${j}</td><td style="color:var(--pink);font-style:italic;">${r}</td></tr>`).join('')}
+        </tbody></table>
+      </div>`;
+  } else if (type === 'money') {
+    el.innerHTML = `<div class="num-section-title">💴 Money & Prices — tap to hear!</div>
+      ${numCardGrid(NUM_MONEY)}
+      <div class="card" style="margin-top:.5rem;">
+        <div class="num-section-title" style="margin-top:0;">💡 Shopping Phrases</div>
+        <table class="num-table"><thead><tr><th>Japanese</th><th>Meaning</th></tr></thead><tbody>
+          ${[['これはいくらですか？','How much is this?'],['___をください','Please give me ___'],['たかいですね','That\'s expensive, isn\'t it'],['やすくなりませんか？','Can it be cheaper?'],['クレジットカードはつかえますか？','Can I use a credit card?'],['レシートをください','Please give me a receipt'],['べつべつにおねがいします','Separate bills please']].map(([j,e])=>`<tr><td style="cursor:pointer;font-weight:700;" onclick="speakJP('${j}',this)">${j}</td><td>${e}</td></tr>`).join('')}
+        </tbody></table>
+      </div>`;
+  } else if (type === 'quiz') {
+    numQuizA = {}; numQuizC = 0;
+    el.innerHTML = `<div class="num-section-title">🎯 Number Quiz — test yourself!</div>` +
+      NUM_QUIZ_Q.map((q, i) => `<div class="num-quiz-card" id="nq_${i}">
+        <div style="font-size:.72rem;font-weight:800;color:var(--pink);margin-bottom:.35rem;">Question ${i+1} / ${NUM_QUIZ_Q.length}</div>
+        <div style="font-weight:700;color:var(--dark);margin-bottom:.6rem;">${q.q}</div>
+        <div style="display:flex;gap:.4rem;flex-wrap:wrap;">
+          ${q.opts.map((o, oi) => `<button class="sp-opt-btn" id="nq_${i}_o${oi}" onclick="answerNQ(${i},${oi})">${o}</button>`).join('')}
+        </div>
+        <div id="nq_${i}_fb" style="font-size:.78rem;margin-top:.4rem;"></div>
+      </div>`).join('') +
+      `<div id="nq-total" style="display:none;text-align:center;padding:1.2rem;font-weight:900;color:var(--mid);font-size:1.1rem;"></div>`;
+  }
+}
+
+function answerNQ(qi, chosen) {
+  const id = `nq_${qi}`;
+  if (numQuizA[id]) return;
+  const q = NUM_QUIZ_Q[qi];
+  numQuizA[id] = true;
+  const correct = chosen === q.ans;
+  if (correct) numQuizC++;
+  q.opts.forEach((_, oi) => {
+    const b = document.getElementById(`${id}_o${oi}`);
+    if (b) { b.disabled = true; if(oi===q.ans) b.classList.add('correct'); else if(oi===chosen) b.classList.add('wrong'); }
+  });
+  const fb = document.getElementById(id + '_fb');
+  if (fb) fb.innerHTML = correct ? `<span style="color:#4caf50;">✅ Correct!</span>` : `<span style="color:#e53935;">❌ Answer: ${q.opts[q.ans]}</span>`;
+  if (Object.keys(numQuizA).length === NUM_QUIZ_Q.length) {
+    const pct = Math.round(numQuizC / NUM_QUIZ_Q.length * 100);
+    const t = document.getElementById('nq-total');
+    if (t) { t.style.display='block'; t.innerHTML=`🎯 Final: ${numQuizC}/${NUM_QUIZ_Q.length} (${pct}%)<br><button class="listen-slow-btn" style="margin-top:.5rem;" onclick="filterNumbers('quiz',document.querySelector('#num-filter-bar .filter-tab:last-child'))">🔄 Try again</button>`; }
+    saveScore('Numbers Quiz 🔢', numQuizC, NUM_QUIZ_Q.length);
+    if (pct >= 80) setTimeout(() => showCelebration('🔢', 'Number Master!', `${pct}% — すごい！`, pct), 400);
+  }
+}
+
+renderNumbers('basics');
+
+// ============================================================
+//  SURVIVAL PHRASES
+// ============================================================
+const SURVIVAL_PHRASES = [
+  {cat:'greetings',jp:'おはようございます。',rom:'Ohayou gozaimasu.',en:'Good morning. (formal)',tip:'おはよう for close friends & family'},
+  {cat:'greetings',jp:'こんにちは！',rom:'Konnichiwa!',en:'Hello! Good afternoon!',tip:'Roughly noon to 5pm'},
+  {cat:'greetings',jp:'こんばんは。',rom:'Konbanwa.',en:'Good evening.',tip:'After sunset'},
+  {cat:'greetings',jp:'はじめまして。どうぞよろしくおねがいします。',rom:'Hajimemashite. Douzo yoroshiku onegaishimasu.',en:'Nice to meet you. Pleased to meet you.',tip:'Essential first meeting phrase — must know!'},
+  {cat:'greetings',jp:'わたしは___です。',rom:'Watashi wa ___ desu.',en:'I am ___. / My name is ___.'},
+  {cat:'greetings',jp:'おなまえは？',rom:'Onamae wa?',en:'What is your name?',tip:'Polite form'},
+  {cat:'greetings',jp:'おげんきですか。',rom:'Ogenki desu ka?',en:'How are you? (formal)'},
+  {cat:'greetings',jp:'はい、げんきです。ありがとうございます。',rom:'Hai, genki desu. Arigatou gozaimasu.',en:'Yes, I\'m fine. Thank you.'},
+  {cat:'greetings',jp:'すみません。',rom:'Sumimasen.',en:'Excuse me. / Sorry.',tip:'Use to get someone\'s attention politely'},
+  {cat:'greetings',jp:'ありがとうございます。',rom:'Arigatou gozaimasu.',en:'Thank you very much.',tip:'One of the most important phrases!'},
+  {cat:'greetings',jp:'どういたしまして。',rom:'Dou itashimashite.',en:'You\'re welcome.',tip:'Formal response to thank you'},
+  {cat:'greetings',jp:'またね！またあした！',rom:'Mata ne! Mata ashita!',en:'See you! See you tomorrow!',tip:'Casual farewell'},
+  {cat:'greetings',jp:'おやすみなさい。',rom:'Oyasuminasai.',en:'Good night.',tip:'When going to sleep or leaving at night'},
+  {cat:'greetings',jp:'いってきます！／いってらっしゃい。',rom:'Ittekimasu! / Itterasshai.',en:'I\'m heading out! / Have a safe trip!',tip:'Said when leaving home — very Japanese!'},
+  {cat:'shopping',jp:'これはいくらですか？',rom:'Kore wa ikura desu ka?',en:'How much is this?',tip:'Point at what you want'},
+  {cat:'shopping',jp:'これをください。',rom:'Kore o kudasai.',en:'Please give me this.',tip:'Universal shopping phrase'},
+  {cat:'shopping',jp:'___をひとつください。',rom:'___ o hitotsu kudasai.',en:'One ___ please.',tip:'ひとつ=1, ふたつ=2, みっつ=3'},
+  {cat:'shopping',jp:'たかいですね。もうすこしやすくなりませんか。',rom:'Takai desu ne. Mou sukoshi yasuku narimasen ka?',en:'That\'s expensive. Can it be a little cheaper?',tip:'Worth trying at markets!'},
+  {cat:'shopping',jp:'ちょっとみているだけです。',rom:'Chotto mite iru dake desu.',en:'I\'m just browsing, thanks.',tip:'Stops staff following you!'},
+  {cat:'shopping',jp:'クレジットカードはつかえますか？',rom:'Kurejitto kaado wa tsukaemasu ka?',en:'Can I use a credit card?'},
+  {cat:'shopping',jp:'べつべつにおねがいします。',rom:'Betsubetsu ni onegaishimasu.',en:'Separate bills please.',tip:'When splitting costs with friends'},
+  {cat:'shopping',jp:'レシートをください。',rom:'Reshiito o kudasai.',en:'Receipt please.'},
+  {cat:'shopping',jp:'ふくろはいりますか？',rom:'Fukuro wa irimasu ka?',en:'Do you need a bag?',tip:'Staff will ask you this — now you know!'},
+  {cat:'directions',jp:'___はどこですか？',rom:'___ wa doko desu ka?',en:'Where is ___?',tip:'Most useful direction phrase!'},
+  {cat:'directions',jp:'すみません、えきはどこですか？',rom:'Sumimasen, eki wa doko desu ka?',en:'Excuse me, where is the station?',tip:'Always start with すみません'},
+  {cat:'directions',jp:'まっすぐいってください。',rom:'Massugu itte kudasai.',en:'Please go straight.',tip:'まっすぐ = straight ahead'},
+  {cat:'directions',jp:'みぎにまがってください。',rom:'Migi ni magatte kudasai.',en:'Please turn right.',tip:'みぎ=right'},
+  {cat:'directions',jp:'ひだりにまがってください。',rom:'Hidari ni magatte kudasai.',en:'Please turn left.',tip:'ひだり=left'},
+  {cat:'directions',jp:'ちかくにコンビニはありますか？',rom:'Chikaku ni konbini wa arimasu ka?',en:'Is there a convenience store nearby?',tip:'Konbini = lifesaver in Japan!'},
+  {cat:'directions',jp:'あるいて___ふんです。',rom:'Aruite ___ fun desu.',en:'It\'s ___ minutes on foot.'},
+  {cat:'directions',jp:'どのくらいかかりますか？',rom:'Dono kurai kakarimasu ka?',en:'How long does it take?'},
+  {cat:'directions',jp:'ちずをかいてもらえますか？',rom:'Chizu o kaite moraemasu ka?',en:'Could you draw me a map?',tip:'Very helpful when totally lost!'},
+  {cat:'restaurant',jp:'なんめいさまですか？',rom:'Nan-mei-sama desu ka?',en:'How many in your party?',tip:'Staff will ask you this!'},
+  {cat:'restaurant',jp:'ひとりです。／ふたりです。',rom:'Hitori desu. / Futari desu.',en:'Just one. / Two people.',tip:'Essential at restaurants'},
+  {cat:'restaurant',jp:'メニューをみせてください。',rom:'Menyuu o misete kudasai.',en:'Please show me the menu.'},
+  {cat:'restaurant',jp:'おすすめはなんですか？',rom:'Osusume wa nan desu ka?',en:'What do you recommend?',tip:'Great for local specialties!'},
+  {cat:'restaurant',jp:'___をひとつおねがいします。',rom:'___ o hitotsu onegaishimasu.',en:'One ___ please.',tip:'Universal ordering phrase'},
+  {cat:'restaurant',jp:'おかいけいをおねがいします。',rom:'Okaikei o onegaishimasu.',en:'The bill, please.',tip:'Or draw a check mark in the air!'},
+  {cat:'restaurant',jp:'いただきます！',rom:'Itadakimasu!',en:'Let\'s eat! (before meals)',tip:'Always say this before eating in Japan!'},
+  {cat:'restaurant',jp:'ごちそうさまでした。',rom:'Gochisousama deshita.',en:'Thank you for the meal.',tip:'Say when leaving a restaurant'},
+  {cat:'restaurant',jp:'からいのはにがてです。',rom:'Karai no wa nigate desu.',en:'I\'m not good with spicy food.',tip:'Useful for dietary preferences'},
+  {cat:'emergency',jp:'たすけてください！',rom:'Tasukete kudasai!',en:'Help me please!',tip:'Emergency phrase — know this one!'},
+  {cat:'emergency',jp:'けいさつをよんでください！',rom:'Keisatsu o yonde kudasai!',en:'Please call the police!',tip:'110 = police in Japan'},
+  {cat:'emergency',jp:'きゅうきゅうしゃをよんでください！',rom:'Kyuukyuusha o yonde kudasai!',en:'Please call an ambulance!',tip:'119 = ambulance/fire in Japan'},
+  {cat:'emergency',jp:'びょういんはどこですか？',rom:'Byouin wa doko desu ka?',en:'Where is the hospital?'},
+  {cat:'emergency',jp:'___がいたいです。',rom:'___ ga itai desu.',en:'My ___ hurts.',tip:'あたま=head, おなか=stomach, あし=leg'},
+  {cat:'emergency',jp:'アレルギーがあります。',rom:'Arerugii ga arimasu.',en:'I have an allergy.',tip:'Follow with the allergen name'},
+  {cat:'emergency',jp:'えいごがはなせるひとはいますか？',rom:'Eigo ga hanaseru hito wa imasu ka?',en:'Is there someone who speaks English?',tip:'Ask at any konbini or hotel'},
+  {cat:'emergency',jp:'パスポートをなくしました。',rom:'Pasupooto o nakushimashita.',en:'I lost my passport.',tip:'Go to the nearest koban (police box)'},
+  {cat:'transport',jp:'___いきのきっぷをいちまいください。',rom:'___ iki no kippu o ichimai kudasai.',en:'One ticket to ___, please.',tip:'きっぷ=ticket'},
+  {cat:'transport',jp:'このでんしゃは___にとまりますか？',rom:'Kono densha wa ___ ni tomarimasu ka?',en:'Does this train stop at ___?',tip:'Confirm your stop!'},
+  {cat:'transport',jp:'つぎのえきはなんですか？',rom:'Tsugi no eki wa nan desu ka?',en:'What is the next station?'},
+  {cat:'transport',jp:'なんじにでますか？',rom:'Nanji ni demasu ka?',en:'What time does it depart?'},
+  {cat:'transport',jp:'なんばんせんですか？',rom:'Nan-bansen desu ka?',en:'Which platform number?',tip:'ばんせん = track number'},
+  {cat:'transport',jp:'___まで おねがいします。',rom:'___ made onegaishimasu.',en:'To ___, please. (taxi)',tip:'Great taxi opener'},
+  {cat:'transport',jp:'このきっぷはつかえますか？',rom:'Kono kippu wa tsukaemasu ka?',en:'Can I use this ticket?'},
+  {cat:'hotel',jp:'よやくしたものです。___といいます。',rom:'Yoyaku shita mono desu. ___ to iimasu.',en:'I have a reservation. My name is ___.'},
+  {cat:'hotel',jp:'チェックインをおねがいします。',rom:'Chekkuin o onegaishimasu.',en:'Check-in please.'},
+  {cat:'hotel',jp:'チェックアウトはなんじですか？',rom:'Chekkuauto wa nanji desu ka?',en:'What time is check-out?',tip:'Good to ask on arrival'},
+  {cat:'hotel',jp:'WiFiのパスワードをおしえてください。',rom:'WiFi no pasuwaado o oshiete kudasai.',en:'Please tell me the WiFi password.',tip:'The most essential modern phrase!'},
+  {cat:'hotel',jp:'タオルをもってきてください。',rom:'Taoru o motte kite kudasai.',en:'Please bring some towels.'},
+  {cat:'hotel',jp:'ちかくにおすすめのレストランはありますか？',rom:'Chikaku ni osusume no resutoran wa arimasu ka?',en:'Are there any recommended restaurants nearby?',tip:'Hotel staff know the best spots!'},
+];
+
+let phrasesFilter = 'all';
+function filterPhrases(cat, btn) {
+  document.querySelectorAll('#phr-filter-bar .filter-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active'); phrasesFilter = cat; renderPhrases();
+}
+function renderPhrases() {
+  const el = document.getElementById('phrases-list');
+  if (!el) return;
+  const CAT_META = {
+    greetings:{label:'👋 Greetings & Introductions',color:'#ff85a1'},
+    shopping:{label:'🛒 Shopping',color:'#ff9800'},
+    directions:{label:'🗺️ Asking Directions',color:'#4cc9f0'},
+    restaurant:{label:'🍜 Restaurants & Food',color:'#06d6a0'},
+    emergency:{label:'🆘 Emergency',color:'#e53935'},
+    transport:{label:'🚉 Transport',color:'#c77dff'},
+    hotel:{label:'🏨 Hotel',color:'#ffd700'},
+  };
+  const cats = phrasesFilter === 'all' ? Object.keys(CAT_META) : [phrasesFilter];
+  el.innerHTML = cats.map(cat => {
+    const items = SURVIVAL_PHRASES.filter(p => p.cat === cat);
+    const meta = CAT_META[cat];
+    return `<div class="phr-category-header" style="border-left:4px solid ${meta.color};">${meta.label}</div>
+      ${items.map((p, ii) => {
+        const id = `phr_${cat}_${ii}`;
+        const safe = p.jp.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+        return `<div class="phr-card" id="${id}">
+          <div class="phr-jp">${p.jp}</div>
+          <div class="phr-rom">${p.rom}</div>
+          <div class="phr-en">${p.en}</div>
+          ${p.tip?`<div class="phr-tip">💡 ${p.tip}</div>`:''}
+          <div class="phr-actions">
+            <button class="listen-play-btn" style="font-size:.73rem;padding:.28rem .85rem;" onclick="speakJP('${safe}',this)">▶ Play</button>
+            <button class="listen-slow-btn" style="font-size:.71rem;" onclick="speakJP('${safe}',this,0.45)">🐢 Slow</button>
+            <button class="srs-know-btn" style="font-size:.67rem;padding:.14rem .55rem;" onclick="markSRS('phrases','${id}','known');this.textContent='✅ Saved!'">✅ Know it</button>
+            <button class="srs-review-btn" style="font-size:.67rem;padding:.14rem .55rem;" onclick="markSRS('phrases','${id}','review');this.textContent='🔁 Saved!'">🔁 Review</button>
+          </div>
+        </div>`;
+      }).join('')}`;
+  }).join('');
+}
+renderPhrases();
+
+// ============================================================
+//  COMPREHENSION TESTS
+// ============================================================
+const COMP_PASSAGES = [
+  // DAILY LIFE
+  {
+    id:'c1', cat:'daily', diff:'beginner', title:'わたしの いちにち', titleEn:'My Day',
+    passage:'わたしは まいにち ろくじに おきます。あさごはんを たべてから、がっこうへ いきます。がっこうは くじに はじまります。ひるごはんは ともだちと たべます。ごごさんじに うちに かえります。そして しゅくだいを します。よるは かぞくと ばんごはんを たべます。じゅうじごろ ねます。',
+    passageEn:'Every day I wake up at 6 o\'clock. After eating breakfast, I go to school. School starts at 9 o\'clock. I eat lunch with my friends. I go home at 3 in the afternoon. Then I do homework. In the evening I eat dinner with my family. I go to sleep around 10 o\'clock.',
+    questions:[
+      {q:'なんじに おきますか？',opts:['しちじ','ろくじ','はちじ','ごじ'],ans:1,exp:'まいにち ろくじに おきます'},
+      {q:'ひるごはんは だれと たべますか？',opts:['かぞくと','ひとりで','せんせいと','ともだちと'],ans:3,exp:'ともだちと たべます'},
+      {q:'うちに かえるのは なんじですか？',opts:['にじ','ごじ','さんじ','よじ'],ans:2,exp:'ごごさんじに うちに かえります'},
+      {q:'よるは だれと ばんごはんを たべますか？',opts:['ともだち','ひとり','かぞく','せんせい'],ans:2,exp:'かぞくと ばんごはんを たべます'},
+      {q:'なんじごろ ねますか？',opts:['はちじ','くじ','じゅういちじ','じゅうじ'],ans:3,exp:'じゅうじごろ ねます'},
+    ]
+  },
+  {
+    id:'c2', cat:'daily', diff:'beginner', title:'わたしの へや', titleEn:'My Room',
+    passage:'わたしの へやは ちいさいですが、きれいです。つくえの うえに パソコンと ほんが あります。まどの そばに ベッドが あります。かべに にほんごの ポスターが はって あります。へやに テレビは ありません。でも、スマートフォンで よく どうがを みます。わたしは じぶんの へやが すきです。',
+    passageEn:'My room is small but clean. On the desk there is a computer and books. Near the window there is a bed. On the wall a Japanese poster is hung. There is no TV in the room. But I often watch videos on my smartphone. I like my own room.',
+    questions:[
+      {q:'へやは どうですか？',opts:['おおきくて きれい','ちいさくて きれい','きたなくて おおきい','ちいさくて きたない'],ans:1,exp:'ちいさいですが、きれいです'},
+      {q:'つくえの うえに なにが ありますか？',opts:['テレビと ほん','パソコンと ほん','ベッドと ポスター','スマートフォン'],ans:1,exp:'パソコンと ほんが あります'},
+      {q:'ベッドは どこに ありますか？',opts:['つくえの そば','かべの そば','まどの そば','ドアの そば'],ans:2,exp:'まどの そばに あります'},
+      {q:'へやに テレビは ありますか？',opts:['はい、あります','いいえ、ありません','ちいさい テレビが あります','かべに あります'],ans:1,exp:'テレビは ありません'},
+      {q:'どうがは どうやって みますか？',opts:['テレビで','パソコンで','スマートフォンで','えいがかんで'],ans:2,exp:'スマートフォンで どうがを みます'},
+    ]
+  },
+  {
+    id:'c3', cat:'daily', diff:'intermediate', title:'あさの ルーティン', titleEn:'Morning Routine',
+    passage:'たなかさんは まいあさ しちじに おきます。まず、かおを あらいます。それから、シャワーを あびます。あさごはんは パンと コーヒーです。はみがきを してから、きがえます。がっこうへは でんしゃで いきます。えきまで あるいて じゅっぷんです。でんしゃは はっぷんで がっこうの ちかくの えきに つきます。たなかさんは まいあさ はちじごろ がっこうに つきます。',
+    passageEn:'Tanaka-san wakes up at 7am every morning. First she washes her face. Then she takes a shower. Breakfast is bread and coffee. After brushing her teeth, she gets dressed. She goes to school by train. It is 10 minutes walking to the station. The train takes 8 minutes to arrive at the station near school. Tanaka-san arrives at school around 8am every morning.',
+    questions:[
+      {q:'たなかさんは なんじに おきますか？',opts:['ろくじ','しちじ','はちじ','くじ'],ans:1,exp:'まいあさ しちじに おきます'},
+      {q:'あさごはんは なんですか？',opts:['ごはんと みそしる','パンと コーヒー','たまごと パン','コーヒーと おかし'],ans:1,exp:'パンと コーヒーです'},
+      {q:'がっこうへ どうやって いきますか？',opts:['バスで','くるまで','でんしゃで','あるいて'],ans:2,exp:'でんしゃで いきます'},
+      {q:'えきまで どのくらい かかりますか？',opts:['ごふん','じゅっぷん','はっぷん','じゅうごふん'],ans:1,exp:'あるいて じゅっぷんです'},
+      {q:'たなかさんは なんじごろ がっこうに つきますか？',opts:['しちじ','はちじ','くじ','ろくじ'],ans:1,exp:'はちじごろ がっこうに つきます'},
+    ]
+  },
+  // SCHOOL
+  {
+    id:'c4', cat:'school', diff:'beginner', title:'がっこうの きょうしつ', titleEn:'The Classroom',
+    passage:'わたしの きょうしつは にかいに あります。きょうしつに は つくえが さんじゅっこ あります。まえに おおきい こくばんが あります。せんせいの つくえは まどの そばに あります。きょうしつの かべに せかいちずと にほんの ちずが あります。まいにち にほんごと すうがくと えいごを べんきょうします。',
+    passageEn:'My classroom is on the second floor. In the classroom there are 30 desks. At the front there is a large blackboard. The teacher\'s desk is near the window. On the classroom wall there are a world map and a map of Japan. Every day I study Japanese, math, and English.',
+    questions:[
+      {q:'きょうしつは なんかいですか？',opts:['いっかい','にかい','さんかい','よんかい'],ans:1,exp:'にかいに あります'},
+      {q:'つくえは いくつ ありますか？',opts:['にじゅっこ','さんじゅっこ','よんじゅっこ','じゅっこ'],ans:1,exp:'さんじゅっこ あります'},
+      {q:'せんせいの つくえは どこですか？',opts:['ドアの そば','まどの そば','こくばんの そば','うしろ'],ans:1,exp:'まどの そばに あります'},
+      {q:'かべに なにが ありますか？',opts:['にほんごの ポスター','せかいちずと にほんの ちず','えいごの ほん','カレンダー'],ans:1,exp:'せかいちずと にほんの ちずが あります'},
+      {q:'まいにち なにを べんきょうしますか？',opts:['にほんごだけ','えいごと すうがく','にほんごと すうがくと えいご','かがくと れきし'],ans:2,exp:'にほんごと すうがくと えいごを べんきょうします'},
+    ]
+  },
+  {
+    id:'c5', cat:'school', diff:'intermediate', title:'がっこうの しょくどう', titleEn:'The School Cafeteria',
+    passage:'うちの がっこうに おおきい しょくどうが あります。ひるやすみは じゅうにじから いちじまでです。しょくどうには たくさんの りょうりが あります。きょうの ランチは カレーライスと サラダと みそしるです。カレーライスは さんびゃくえんです。わたしは まいにち しょくどうで ひるごはんを たべます。ともだちの さとうさんは おべんとうを もってきます。ふたりで いつも いっしょに たべます。',
+    passageEn:'Our school has a large cafeteria. Lunch break is from 12 o\'clock to 1 o\'clock. There are many dishes in the cafeteria. Today\'s lunch is curry rice, salad, and miso soup. Curry rice is 300 yen. I eat lunch in the cafeteria every day. My friend Sato-san brings a bento box. We always eat together, the two of us.',
+    questions:[
+      {q:'ひるやすみは なんじから なんじまでですか？',opts:['じゅういちじから じゅうにじ','じゅうにじから いちじ','いちじから にじ','じゅうじから じゅういちじ'],ans:1,exp:'じゅうにじから いちじまでです'},
+      {q:'きょうの ランチは なんですか？',opts:['カレーライスと みそしる','ラーメンと サラダ','カレーライスと サラダと みそしる','すしと みそしる'],ans:2,exp:'カレーライスと サラダと みそしるです'},
+      {q:'カレーライスは いくらですか？',opts:['にひゃくえん','さんびゃくえん','ごひゃくえん','ひゃくえん'],ans:1,exp:'さんびゃくえんです'},
+      {q:'さとうさんは どこで ひるごはんを たべますか？',opts:['しょくどうで','きょうしつで','こうえんで','うちで'],ans:1,exp:'さとうさんは おべんとうを もってきます。ふたりで いっしょに たべます'},
+      {q:'ふたりは どうやって たべますか？',opts:['べつべつに','はやく','いっしょに','しずかに'],ans:2,exp:'ふたりで いつも いっしょに たべます'},
+    ]
+  },
+  // TRAVEL
+  {
+    id:'c6', cat:'travel', diff:'intermediate', title:'とうきょうの りょこう', titleEn:'Trip to Tokyo',
+    passage:'せんしゅう、かぞくと とうきょうへ いきました。しんかんせんで いきました。しんかんせんは とても はやくて、きれいでした。とうきょうでは、あさくさじんじゃと しんじゅくを みました。あさくさじんじゃは むかしの たてものが たくさんあって、すてきでした。しんじゅくは おみせが おおくて、にぎやかでした。ホテルは えきの ちかくで、べんりでした。みっかかん とうきょうに いました。またいきたいです。',
+    passageEn:'Last week I went to Tokyo with my family. We went by Shinkansen. The Shinkansen was very fast and clean. In Tokyo we saw Asakusa Shrine and Shinjuku. Asakusa Shrine had many old buildings and was wonderful. Shinjuku had many shops and was lively. The hotel was near the station and was convenient. We were in Tokyo for three days. I want to go again.',
+    questions:[
+      {q:'いつ とうきょうへ いきましたか？',opts:['きょねん','せんしゅう','らいしゅう','きのう'],ans:1,exp:'せんしゅう、かぞくと いきました'},
+      {q:'どうやって とうきょうへ いきましたか？',opts:['ひこうきで','くるまで','しんかんせんで','バスで'],ans:2,exp:'しんかんせんで いきました'},
+      {q:'あさくさじんじゃは どうでしたか？',opts:['にぎやかだった','むかしの たてものが おおかった','あたらしかった','ちいさかった'],ans:1,exp:'むかしの たてものが たくさんあって、すてきでした'},
+      {q:'ホテルは どこに ありましたか？',opts:['えきの そば','こうえんの そば','しんじゅくの なか','あさくさじんじゃの そば'],ans:0,exp:'えきの ちかくで、べんりでした'},
+      {q:'なんにちかん とうきょうに いましたか？',opts:['ふつかかん','みっかかん','いっかかん','よっかかん'],ans:1,exp:'みっかかん とうきょうに いました'},
+    ]
+  },
+  {
+    id:'c7', cat:'travel', diff:'intermediate', title:'えきで', titleEn:'At the Station',
+    passage:'やまださんは えきに きました。きっぷを かいたいですが、どこで かうか わかりません。えきいんに ききました。「すみません、おおさかまでの きっぷは どこで かえますか？」えきいんは「じどうはんばいきで かえます。あちらです」と おしえてくれました。じどうはんばいきは えきの いりぐちの そばに ありました。きっぷは にせんえんでした。やまださんは きっぷを かって、なんばんせんか かくにんしました。でんしゃは あと じゅっぷんで きます。',
+    passageEn:'Yamada-san came to the station. He wants to buy a ticket but doesn\'t know where to buy one. He asked a station employee. "Excuse me, where can I buy a ticket to Osaka?" The employee told him "You can buy it at the vending machine. It\'s over there." The vending machine was near the station entrance. The ticket was 2000 yen. Yamada-san bought the ticket and confirmed which platform number. The train comes in 10 more minutes.',
+    questions:[
+      {q:'やまださんは なにを したいですか？',opts:['でんしゃに のりたい','きっぷを かいたい','えきいんに あいたい','おおさかへ いきたい'],ans:1,exp:'きっぷを かいたいですが、どこで かうか わかりません'},
+      {q:'えきいんは なんと いいましたか？',opts:['みどりの まどぐちで かえます','じどうはんばいきで かえます','インターネットで かえます','コンビニで かえます'],ans:1,exp:'じどうはんばいきで かえます'},
+      {q:'きっぷは いくらでしたか？',opts:['せんえん','にせんえん','さんぜんえん','ごひゃくえん'],ans:1,exp:'きっぷは にせんえんでした'},
+      {q:'じどうはんばいきは どこに ありましたか？',opts:['ホームに','えきの そとに','いりぐちの そばに','えきいんの となりに'],ans:2,exp:'えきの いりぐちの そばに ありました'},
+      {q:'でんしゃは あと なんぷんで きますか？',opts:['ごふん','じゅっぷん','にじゅっぷん','さんじゅっぷん'],ans:1,exp:'でんしゃは あと じゅっぷんで きます'},
+    ]
+  },
+  // CULTURE
+  {
+    id:'c8', cat:'culture', diff:'intermediate', title:'にほんの おまつり', titleEn:'Japanese Festivals',
+    passage:'にほんには いろいろな おまつりが あります。なつには はなびたいかいが あります。はなびは とても きれいです。はるには さくらまつりが あります。みんなで こうえんへ いって、さくらの したで おべんとうを たべます。これを「はなみ」と いいます。にほんの まつりには、おみこしや おどりも あります。おまつりで やたいが でます。やたいでは たこやきや わたあめや りんごあめを うっています。こどもたちは やたいが だいすきです。',
+    passageEn:'There are various festivals in Japan. In summer there are fireworks displays. Fireworks are very beautiful. In spring there are cherry blossom festivals. Everyone goes to the park and eats bento under the cherry blossoms. This is called "hanami". Japanese festivals also have portable shrines and dancing. Food stalls appear at festivals. At the stalls they sell takoyaki, cotton candy, and candy apples. Children love food stalls.',
+    questions:[
+      {q:'なつの おまつりは なんですか？',opts:['さくらまつり','はなびたいかい','はなみ','おどり'],ans:1,exp:'なつには はなびたいかいが あります'},
+      {q:'「はなみ」は なんですか？',opts:['はなびを みること','さくらの したで たべること','おみこしを かつぐこと','やたいで かうこと'],ans:1,exp:'さくらの したで おべんとうを たべます。これを「はなみ」といいます'},
+      {q:'やたいで うっていない ものは どれですか？',opts:['たこやき','わたあめ','りんごあめ','すし'],ans:3,exp:'やたいでは たこやきや わたあめや りんごあめを うっています'},
+      {q:'だれが やたいが すきですか？',opts:['おとなたち','こどもたち','せんせいたち','おとしよりたち'],ans:1,exp:'こどもたちは やたいが だいすきです'},
+      {q:'「おみこし」は まつりの なんですか？',opts:['たべもの','おどり','はこびもの（ポータブルシュライン）','はなび'],ans:2,exp:'おみこしや おどりも あります — おみこしはポータブルシュライン'},
+    ]
+  },
+  {
+    id:'c9', cat:'culture', diff:'advanced', title:'にほんの しょくじ マナー', titleEn:'Japanese Dining Manners',
+    passage:'にほんでは、しょくじの まえに「いただきます」と いいます。これは「たべものに かんしゃする」という いみです。たべおわったら「ごちそうさまでした」と いいます。はしを つかうとき、いくつかの きそくが あります。はしを たてに ごはんに さすのは マナー いはんです。それは おそうしきの ときだけ します。また、はしから はしへ たべものを わたすのも よくないです。にほんに きたら、これらの マナーを まもりましょう。',
+    passageEn:'In Japan, you say "itadakimasu" before eating. This means "giving thanks for the food". When you finish eating, you say "gochisousama deshita". There are some rules when using chopsticks. Sticking chopsticks vertically into rice is a violation of manners. That is done only at funerals. Also, passing food from chopsticks to chopsticks is also not good. When you come to Japan, let\'s follow these manners.',
+    questions:[
+      {q:'「いただきます」は どんな いみですか？',opts:['おなかが すいた','たべものに かんしゃする','たべおわった','おいしい'],ans:1,exp:'「たべものに かんしゃする」という いみです'},
+      {q:'はしを ごはんに たてに さすのは いつ しますか？',opts:['まいにち','パーティーで','おそうしきの ときだけ','にほんで'],ans:2,exp:'おそうしきの ときだけ します'},
+      {q:'よくない はしの つかいかたは どれですか？',opts:['はしで たべること','はしから はしへ わたすこと','はしを テーブルに おくこと','はしで すくうこと'],ans:1,exp:'はしから はしへ たべものを わたすのも よくないです'},
+      {q:'たべおわったら なんと いいますか？',opts:['いただきます','おいしかった','ごちそうさまでした','ありがとう'],ans:2,exp:'たべおわったら「ごちそうさまでした」といいます'},
+      {q:'このぶんの テーマは なんですか？',opts:['にほんの りょうり','にほんの しょくじ マナー','はしの れきし','にほんの おまつり'],ans:1,exp:'にほんの しょくじ マナーについて かいてあります'},
+    ]
+  },
+  // NATURE
+  {
+    id:'c10', cat:'nature', diff:'beginner', title:'にほんの きせつ', titleEn:'Japanese Seasons',
+    passage:'にほんには よっつの きせつが あります。はる、なつ、あき、ふゆです。はるは さんがつから ごがつです。さくらが さいて、きれいです。なつは ろくがつから はちがつです。あつくて、うみや プールに いきます。あきは くがつから じゅういちがつです。はが あかく なって、きれいです。ふゆは じゅうにがつから にがつです。さむくて、ゆきが ふります。わたしは あきが いちばん すきです。',
+    passageEn:'Japan has four seasons: spring, summer, autumn, winter. Spring is from March to May. Cherry blossoms bloom and it\'s beautiful. Summer is from June to August. It\'s hot, and people go to the sea or pool. Autumn is from September to November. The leaves turn red and it\'s beautiful. Winter is from December to February. It\'s cold and it snows. I like autumn best.',
+    questions:[
+      {q:'はるは なんがつから なんがつですか？',opts:['いちがつから さんがつ','さんがつから ごがつ','ろくがつから はちがつ','くがつから じゅういちがつ'],ans:1,exp:'はるは さんがつから ごがつです'},
+      {q:'なつに どこへ いきますか？',opts:['やまや こうえんに','うみや プールに','えきや デパートに','がっこうや としょかんに'],ans:1,exp:'うみや プールに いきます'},
+      {q:'あきは どうなりますか？',opts:['さくらが さく','ゆきが ふる','はが あかく なる','あつく なる'],ans:2,exp:'はが あかく なって、きれいです'},
+      {q:'ふゆは なんがつから なんがつですか？',opts:['くがつから じゅういちがつ','じゅうにがつから にがつ','さんがつから ごがつ','ろくがつから はちがつ'],ans:1,exp:'ふゆは じゅうにがつから にがつです'},
+      {q:'わたしは どの きせつが いちばん すきですか？',opts:['はる','なつ','あき','ふゆ'],ans:2,exp:'わたしは あきが いちばん すきです'},
+    ]
+  },
+  {
+    id:'c11', cat:'nature', diff:'intermediate', title:'にほんの やまと かわ', titleEn:'Japanese Mountains and Rivers',
+    passage:'にほんは やまが おおい くにです。にほんで いちばん たかい やまは ふじさんで、たかさは さんぜんななひゃくじゅうろく メートルです。まいとし おおくの ひとが ふじさんに のぼります。にほんには かわも たくさん あります。いちばん ながい かわは しなのがわです。にほんの かわは みじかくて はやいものが おおいです。かわの みずは とても きれいで、さかなが たくさん います。なつには かわで あそぶ こどもたちを よく みます。',
+    passageEn:'Japan is a country with many mountains. The tallest mountain in Japan is Mt. Fuji, with a height of 3,776 metres. Many people climb Mt. Fuji every year. Japan also has many rivers. The longest river is the Shinano River. Japan\'s rivers are mostly short and fast. The river water is very clean and there are many fish. In summer you often see children playing in rivers.',
+    questions:[
+      {q:'にほんで いちばん たかい やまは なんですか？',opts:['くじゅうさん','ふじさん','おんたけさん','しらねさん'],ans:1,exp:'ふじさんで、たかさは さんぜんななひゃくじゅうろく メートルです'},
+      {q:'ふじさんの たかさは なんメートルですか？',opts:['さんぜんろっぴゃくメートル','さんぜんななひゃくじゅうろくメートル','よんぜんメートル','にせんメートル'],ans:1,exp:'たかさは さんぜんななひゃくじゅうろくメートルです'},
+      {q:'にほんの かわは どんな かわが おおいですか？',opts:['ながくて おそい','ながくて はやい','みじかくて はやい','みじかくて おそい'],ans:2,exp:'みじかくて はやいものが おおいです'},
+      {q:'にほんで いちばん ながい かわは なんですか？',opts:['とねがわ','しなのがわ','よどがわ','すみだがわ'],ans:1,exp:'いちばん ながい かわは しなのがわです'},
+      {q:'なつに かわで よく みるのは だれですか？',opts:['おとなたち','りょこうしゃ','こどもたち','さかな'],ans:2,exp:'なつには かわで あそぶ こどもたちを よく みます'},
+    ]
+  },
+];
+
+let compFilter = 'all', compCurrent = null, compAnswers = {};
+
+function filterComp(cat, btn) {
+  document.querySelectorAll('#comp-filter-bar .filter-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active'); compFilter = cat;
+  renderCompList();
+}
+
+function renderCompList() {
+  const el = document.getElementById('comp-passage-list');
+  if (!el) return;
+  const list = compFilter === 'all' ? COMP_PASSAGES : COMP_PASSAGES.filter(p => p.cat === compFilter);
+  const DIFF_COLORS = { beginner:'#06d6a0', intermediate:'#ff9800', advanced:'#e53935' };
+  const CAT_COLORS = { daily:'#ff85a1', school:'#4cc9f0', travel:'#c77dff', culture:'#ffd700', nature:'#06d6a0' };
+  const CAT_LABELS = { daily:'🏠 Daily Life', school:'🏫 School', travel:'✈️ Travel', culture:'🎌 Culture', nature:'🌿 Nature' };
+  el.innerHTML = list.map(p => `
+    <div class="comp-card" onclick="startComp('${p.id}')">
+      <span class="comp-card-tag" style="background:${CAT_COLORS[p.cat]}22;color:${CAT_COLORS[p.cat]};border:1px solid ${CAT_COLORS[p.cat]}44;">${CAT_LABELS[p.cat]}</span>
+      <div class="comp-card-title">${p.title} <span style="font-size:.75rem;font-weight:600;color:#aaa;">— ${p.titleEn}</span></div>
+      <div class="comp-card-preview">${p.passage.substring(0,90)}…</div>
+      <div class="comp-card-meta">
+        <span class="comp-diff" style="background:${DIFF_COLORS[p.diff]}22;color:${DIFF_COLORS[p.diff]};border:1px solid ${DIFF_COLORS[p.diff]}44;">${p.diff}</span>
+        <span style="font-size:.7rem;color:#aaa;">${p.questions.length} questions</span>
+        <span style="font-size:.7rem;color:#aaa;margin-left:auto;">Tap to start →</span>
+      </div>
+    </div>`).join('');
+}
+
+function startComp(id) {
+  compCurrent = COMP_PASSAGES.find(p => p.id === id);
+  if (!compCurrent) return;
+  compAnswers = {};
+  document.getElementById('comp-setup').style.display = 'none';
+  document.getElementById('comp-score-area').style.display = 'none';
+  const testArea = document.getElementById('comp-test-area');
+  testArea.style.display = 'block';
+  // Render passage
+  document.getElementById('comp-passage-card').innerHTML = `
+    <div class="card" style="margin-bottom:1rem;">
+      <div style="display:flex;align-items:center;gap:.7rem;margin-bottom:.75rem;flex-wrap:wrap;">
+        <div style="font-weight:900;color:var(--mid);font-size:1.05rem;">${compCurrent.title}</div>
+        <div style="font-size:.78rem;color:#999;">${compCurrent.titleEn}</div>
+        <button class="tts-btn" style="margin-left:auto;" onclick="speakJP('${compCurrent.passage.replace(/'/g,"\\'")}',this)">🔊 Listen</button>
+      </div>
+      <div class="comp-passage">${compCurrent.passage}</div>
+      <details style="margin-top:.5rem;">
+        <summary style="font-size:.78rem;color:var(--pink);cursor:pointer;font-weight:700;">👁 Show English translation</summary>
+        <div class="comp-passage-rom">${compCurrent.passageEn}</div>
+      </details>
+    </div>`;
+  // Render questions
+  document.getElementById('comp-questions-area').innerHTML = compCurrent.questions.map((q, i) => `
+    <div class="comp-q-card" id="cq_${i}">
+      <div class="comp-q-num">Question ${i + 1} / ${compCurrent.questions.length}</div>
+      <div class="comp-q-text">${q.q}</div>
+      <div style="display:flex;flex-direction:column;gap:.4rem;">
+        ${q.opts.map((o, oi) => `<button class="option-btn" id="cq_${i}_o${oi}" onclick="selectComp(${i},${oi})">${o}</button>`).join('')}
+      </div>
+      <div id="cq_${i}_fb" style="display:none;" class="comp-answer-reveal"></div>
+    </div>`).join('');
+  document.getElementById('comp-submit-btn').style.display = 'inline-block';
+}
+
+function selectComp(qi, oi) {
+  if (compAnswers[qi] !== undefined) return;
+  // Highlight selection
+  compCurrent.questions[qi].opts.forEach((_, j) => {
+    const b = document.getElementById(`cq_${qi}_o${j}`);
+    if (b) { b.style.borderColor = ''; b.style.background = ''; }
+  });
+  const sel = document.getElementById(`cq_${qi}_o${oi}`);
+  if (sel) { sel.style.borderColor = 'var(--pink)'; sel.style.background = 'var(--pink-pale)'; }
+  compAnswers[qi] = oi;
+}
+
+function submitComp() {
+  if (!compCurrent) return;
+  const unanswered = compCurrent.questions.filter((_, i) => compAnswers[i] === undefined).length;
+  if (unanswered > 0) {
+    showToast(`⚠️ Please answer all ${unanswered} remaining question${unanswered > 1 ? 's' : ''}!`);
+    return;
+  }
+  // Reveal answers
+  let correct = 0;
+  compCurrent.questions.forEach((q, i) => {
+    const chosen = compAnswers[i];
+    const isCorrect = chosen === q.ans;
+    if (isCorrect) correct++;
+    q.opts.forEach((_, oi) => {
+      const b = document.getElementById(`cq_${i}_o${oi}`);
+      if (!b) return;
+      b.disabled = true; b.style.borderColor = ''; b.style.background = '';
+      if (oi === q.ans) { b.style.borderColor = '#4caf50'; b.style.background = '#e8f5e9'; b.style.color = '#2e7d32'; }
+      else if (oi === chosen) { b.style.borderColor = '#e53935'; b.style.background = '#ffebee'; b.style.color = '#c62828'; }
+    });
+    const fb = document.getElementById(`cq_${i}_fb`);
+    if (fb) {
+      fb.style.display = 'block';
+      fb.className = `comp-answer-reveal ${isCorrect ? 'correct' : 'wrong'}`;
+      fb.textContent = isCorrect ? `✅ Correct! — ${q.exp}` : `❌ Answer: ${q.opts[q.ans]} — ${q.exp}`;
+    }
+  });
+  document.getElementById('comp-submit-btn').style.display = 'none';
+  const pct = Math.round(correct / compCurrent.questions.length * 100);
+  // Show score banner
+  const scoreEl = document.getElementById('comp-score-area');
+  scoreEl.style.display = 'block';
+  const emoji = pct === 100 ? '🏆' : pct >= 80 ? '🌸' : pct >= 60 ? '✨' : '📖';
+  const msg = pct === 100 ? 'Perfect! Outstanding!' : pct >= 80 ? 'Great comprehension!' : pct >= 60 ? 'Good effort! Review the passage.' : 'Keep practicing — try again!';
+  scoreEl.innerHTML = `
+    <div class="comp-score-banner">
+      <div style="font-size:3rem;margin-bottom:.4rem;">${emoji}</div>
+      <div class="comp-score-big">${correct} / ${compCurrent.questions.length}</div>
+      <div class="comp-score-label">${pct}% — ${msg}</div>
+    </div>
+    <div style="display:flex;gap:.7rem;flex-wrap:wrap;justify-content:center;">
+      <button class="btn" onclick="startComp('${compCurrent.id}')">🔄 Try Again</button>
+      <button class="listen-slow-btn" onclick="resetComp()">← All Passages</button>
+    </div>`;
+  scoreEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  saveScore('Comprehension 🧠', correct, compCurrent.questions.length);
+  if (pct >= 80) setTimeout(() => showCelebration(emoji, pct === 100 ? 'Perfect Reading!' : 'Great Comprehension!', `${pct}% — すごい！`, pct), 500);
+}
+
+function resetComp() {
+  compCurrent = null; compAnswers = {};
+  document.getElementById('comp-setup').style.display = 'block';
+  document.getElementById('comp-test-area').style.display = 'none';
+  document.getElementById('comp-score-area').style.display = 'none';
+}
+
+renderCompList();
 
 const pc=document.getElementById('petals');
 ['🌸','🌺','🌹','✿','❀'].forEach((_,idx)=>{
