@@ -352,6 +352,7 @@ footer span{color:var(--pink);}
   <nav>
     <button class="active" onclick="showSection('home')">🏠 Home</button>
     <button onclick="showSection('grammar')">📖 Grammar</button>
+    <button onclick="showSection('kana')">あ Kana</button>
     <button onclick="showSection('kanji')">漢字 Kanji</button>
     <button onclick="showSection('vocab')">📝 Vocab</button>
     <button onclick="showSection('adjectives')">🔄 Adj. Opposites</button>
@@ -416,6 +417,63 @@ footer span{color:var(--pink);}
     <input type="text" class="search-box" id="grammar-search" placeholder="🔍 Search grammar (e.g. 'te-form', 'particle', 'want')" oninput="filterGrammar()" style="margin-bottom:0;">
   </div>
   <div id="grammar-list"></div>
+</div>
+
+<!-- ====== KANA ====== -->
+<div class="section" id="kana">
+  <div class="section-title">あ Hiragana & Katakana</div>
+  <div class="card" style="background:linear-gradient(135deg,rgba(255,183,197,.2),rgba(199,125,255,.1));margin-bottom:1.25rem;">
+    <p style="font-size:.88rem;color:#555;line-height:1.7;">Kana are the two Japanese syllabic alphabets. <strong>Hiragana</strong> (ひらがな) is used for native Japanese words and grammar. <strong>Katakana</strong> (カタカナ) is used for foreign words, loan words, and emphasis. You must master both before the N5 exam! 🌸</p>
+  </div>
+  <div class="filter-tabs">
+    <button class="filter-tab active" id="kana-tab-hiragana" onclick="showKanaTable('hiragana',this)">ひ Hiragana</button>
+    <button class="filter-tab" id="kana-tab-katakana" onclick="showKanaTable('katakana',this)">カ Katakana</button>
+    <button class="filter-tab" id="kana-tab-quiz" onclick="showKanaTable('quiz',this)">✏️ Kana Quiz</button>
+  </div>
+  <div id="kana-hiragana-view">
+    <div class="card">
+      <div style="font-weight:800;color:var(--mid);margin-bottom:.9rem;">ひらがな — Basic 46 + Combinations</div>
+      <div id="hira-table"></div>
+    </div>
+  </div>
+  <div id="kana-katakana-view" style="display:none;">
+    <div class="card">
+      <div style="font-weight:800;color:var(--mid);margin-bottom:.9rem;">カタカナ — Basic 46 + Combinations</div>
+      <div id="kata-table"></div>
+    </div>
+  </div>
+  <div id="kana-quiz-view" style="display:none;">
+    <div class="card">
+      <div id="kana-quiz-setup" style="text-align:center;padding:1.5rem;">
+        <div style="font-size:3rem;margin-bottom:.75rem;">✏️</div>
+        <h2 style="font-size:1.3rem;font-weight:900;color:var(--mid);margin-bottom:.4rem;">Kana Quiz</h2>
+        <p style="color:#a0607a;margin-bottom:1.25rem;">Test your hiragana and katakana reading!</p>
+        <div style="display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.25rem;">
+          <label style="display:flex;align-items:center;gap:.4rem;font-weight:700;color:var(--mid);font-size:.88rem;cursor:pointer;"><input type="radio" name="kana-type" value="hiragana" checked> Hiragana</label>
+          <label style="display:flex;align-items:center;gap:.4rem;font-weight:700;color:var(--mid);font-size:.88rem;cursor:pointer;"><input type="radio" name="kana-type" value="katakana"> Katakana</label>
+          <label style="display:flex;align-items:center;gap:.4rem;font-weight:700;color:var(--mid);font-size:.88rem;cursor:pointer;"><input type="radio" name="kana-type" value="both"> Both</label>
+        </div>
+        <button class="btn-start" onclick="startKanaQuiz()">Start Kana Quiz! あ</button>
+      </div>
+      <div id="kana-quiz-active" style="display:none;">
+        <div class="timer-text" id="kq2-timer">⏱ 0:15</div>
+        <div class="timer-bar"><div class="timer-fill" id="kq2-timer-fill" style="width:100%"></div></div>
+        <div class="progress-bar-wrap"><div class="progress-fill" id="kq2-progress" style="width:0%"></div></div>
+        <div class="question-num" id="kq2-qnum">Question 1/20</div>
+        <div style="text-align:center;font-size:5rem;font-weight:900;color:var(--dark);margin:1rem 0;letter-spacing:.1em;" id="kq2-char">あ</div>
+        <div class="options" id="kq2-options"></div>
+        <div class="feedback" id="kq2-feedback"></div>
+      </div>
+      <div id="kana-quiz-score" style="display:none;">
+        <div class="score-screen">
+          <div class="score-circle"><span class="score-num" id="kq2-score-num">0/20</span><span class="score-label">Score</span></div>
+          <div class="score-msg" id="kq2-score-msg"></div>
+          <div id="kq2-score-sub" style="color:#a0607a;margin-bottom:1rem;"></div>
+          <button class="btn" onclick="resetKanaQuiz()">Try Again 🔄</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- ====== KANJI ====== -->
@@ -882,6 +940,132 @@ const GRAMMAR_SECTIONS = [
           {jp:'すいえいを することが できません。',rom:'Suiei o suru koto ga dekimasen.',en:'I cannot swim.'},
         ]
       },
+      {
+        pattern:'て形 (Te-form / てけい) — How to make it',
+        meaning:'The te-form is the connector form of verbs — crucial for N5!',
+        structure:'Group 1: sound-change rules | Group 2: drop る + て | Group 3: して / きて',
+        explanation:'The te-form is one of the most important forms in Japanese. Each group makes it differently. Group 1 has 5 sub-rules based on the final syllable. Group 2 is simple: drop る, add て. Group 3 is memorized.',
+        conjugationTable:[
+          ['Ending (G1)','Rule','Example'],
+          ['〜く','→ いて','かく → かいて (write)'],
+          ['〜ぐ','→ いで','およぐ → およいで (swim)'],
+          ['〜す','→ して','はなす → はなして (speak)'],
+          ['〜つ・う・る','→ って','まつ→まって / かう→かって / おわる→おわって'],
+          ['〜ぬ・ぶ・む','→ んで','のむ → のんで (drink)'],
+          ['Group 2: 〜る','drop る + て','たべる → たべて / みる → みて'],
+          ['Group 3: する','→ して','べんきょうする → べんきょうして'],
+          ['Group 3: くる','→ きて','くる → きて'],
+          ['⚠️ Exception','いく → いって','NOT いいて!'],
+        ],
+        examples:[
+          {jp:'はなして、ごはんを たべて、うちへ かえりました。',rom:'Hanashite, gohan o tabete, uchi e kaerimashita.',en:'I talked, ate, and went home.'},
+          {jp:'てを あらって、たべてください。',rom:'Te o aratte, tabete kudasai.',en:'Wash your hands and eat.'},
+        ],
+        badge:'g1',
+        extraNote:'💡 Te-form uses: ①Chaining actions ②〜てください (request) ③〜ています (ongoing) ④〜てもいいですか (permission) ⑤〜てはいけません (prohibition)'
+      },
+      {
+        pattern:'ない形 (Nai-form / ないけい) — Negative plain form',
+        meaning:'Plain (informal) negative: "do not do"',
+        structure:'G1: change last vowel to あ-row + ない | G2: drop る + ない | G3: しない / こない',
+        explanation:'The nai-form is the plain (dictionary-level) negative. It\'s used in casual speech, embedded clauses, and as the base for other patterns like ないでください and なければなりません.',
+        conjugationTable:[
+          ['Group','Verb','Nai-form'],
+          ['G1 (〜く)','かく (write)','かかない'],
+          ['G1 (〜む)','のむ (drink)','のまない'],
+          ['G1 (〜す)','はなす (speak)','はなさない'],
+          ['G1 (〜う)','かう (buy)','かわない ⚠️ NOT かあない'],
+          ['G1 (〜る)','おわる (finish)','おわらない'],
+          ['G2','たべる (eat)','たべない'],
+          ['G2','みる (see)','みない'],
+          ['G3','する (do)','しない'],
+          ['G3','くる (come)','こない'],
+          ['⚠️ Special','ある (exist-non-living)','ない (NOT あらない!)'],
+        ],
+        examples:[
+          {jp:'きょうは がっこうへ いかない。',rom:'Kyou wa gakkou e ikanai.',en:'I\'m not going to school today. (casual)'},
+          {jp:'それを たべないでください。',rom:'Sore o tabenaide kudasai.',en:'Please don\'t eat that.'},
+          {jp:'おかねが ない。',rom:'Okane ga nai.',en:'I have no money.'},
+        ],
+        badge:'g1',
+        extraNote:'The ない-form + でください = "please don\'t do". The ない-form + といけません = "must do" (double negative)'
+      },
+      {
+        pattern:'た形 (Ta-form / たけい) — Plain past form',
+        meaning:'Plain (casual) past tense: "did"',
+        structure:'Same sound changes as te-form, but replace て with た (and で with だ)',
+        explanation:'The ta-form is the plain past tense, used in casual speech. It follows the EXACT same pattern as the te-form — just swap て→た and で→だ. Once you know te-form, ta-form is free!',
+        conjugationTable:[
+          ['Group','Te-form','Ta-form (past)'],
+          ['G1 (〜く)','かいて','かいた (wrote)'],
+          ['G1 (〜ぐ)','およいで','およいだ (swam)'],
+          ['G1 (〜す)','はなして','はなした (spoke)'],
+          ['G1 (〜む/ぶ/ぬ)','のんで','のんだ (drank)'],
+          ['G1 (〜つ/う/る)','まって','まった (waited)'],
+          ['G2','たべて','たべた (ate)'],
+          ['G2','みて','みた (saw)'],
+          ['G3','して','した (did)'],
+          ['G3','きて','きた (came)'],
+        ],
+        examples:[
+          {jp:'きのう えいがを みた。',rom:'Kinou eiga o mita.',en:'I watched a movie yesterday. (casual)'},
+          {jp:'もう たべた？',rom:'Mou tabeta?',en:'Did you already eat?'},
+          {jp:'友だちが きた。',rom:'Tomodachi ga kita.',en:'My friend came.'},
+        ],
+        badge:'g2',
+        extraNote:'Ta-form + あとで = "after doing ~" | Ta-form + り〜たりします = "do things like ~ and ~"'
+      },
+      {
+        pattern:'〜たり〜たりします', meaning:'"Do things like ~ and ~" (non-exhaustive list of actions)',
+        structure:'[Verb ta-form]り [Verb ta-form]り します',
+        explanation:'Use 〜たり〜たりします to list two or more representative actions, implying there are other things too. It\'s a softer, more natural alternative to listing actions with て-form.',
+        examples:[
+          {jp:'しゅうまつは テレビをみたり、ほんをよんだり します。',rom:'Shuumatsu wa terebi o mitari, hon o yondari shimasu.',en:'On weekends I watch TV, read books, and stuff like that.'},
+          {jp:'こどものとき、うたったり、おどったりしました。',rom:'Kodomo no toki, utattari, odottari shimashita.',en:'When I was a child, I would sing, dance, and so on.'},
+        ],
+        extraNote:'The last verb is always します (or した for past). Use at least two 〜たり pairs.'
+      },
+      {
+        pattern:'〜ほうがいい', meaning:'"Had better do ~" / "It\'s better to do ~" (advice)',
+        structure:'[Verb た-form]ほうがいいです / [Verb ない-form]ほうがいいです',
+        explanation:'Use 〜ほうがいい to give advice or recommendations. Positive advice (should do): use た-form. Negative advice (shouldn\'t do): use ない-form + ほうがいい.',
+        examples:[
+          {jp:'もっと ねたほうが いいですよ。',rom:'Motto neta hou ga ii desu yo.',en:'You had better sleep more.'},
+          {jp:'タバコを すわない ほうが いいです。',rom:'Tabako o suwanai hou ga ii desu.',en:'You\'d better not smoke.'},
+          {jp:'びょういんへ いったほうが いいですよ。',rom:'Byouin e itta hou ga ii desu yo.',en:'You should go to the hospital.'},
+        ],
+        extraNote:'〜ほうがいい is gentler advice. For strong obligation, use 〜なければなりません. Think of ほうがいい as "I recommend..." and なければなりません as "You must..."'
+      },
+      {
+        pattern:'〜なければなりません / 〜なくてはいけません', meaning:'"Must do ~" / "Have to do ~"',
+        structure:'[Verb ない-form] → remove い → add ければなりません',
+        explanation:'Two ways to say "must". Both mean "it is not OK if I don\'t do it." なければなりません is slightly more formal. なくてはいけません is more commonly spoken.',
+        examples:[
+          {jp:'くすりを のまなければ なりません。',rom:'Kusuri o nomanakereba narimasen.',en:'I must take medicine.'},
+          {jp:'しゅくだいを しなくては いけません。',rom:'Shukudai o shinakute wa ikemasen.',en:'I have to do my homework.'},
+          {jp:'はやく おきなければ なりません。',rom:'Hayaku okinakereba narimasen.',en:'I must wake up early.'},
+        ],
+        extraNote:'Casual shortcut: 〜なきゃ (e.g. いかなきゃ = I gotta go!) | Opposite: 〜なくてもいいです = "don\'t have to do"'
+      },
+      {
+        pattern:'〜たい (want to do)', meaning:'Expressing desire to do an action',
+        structure:'[Masu-stem]たいです / たくないです / たかったです',
+        explanation:'たい is an い-adjective meaning "want to do". Attach it to the verb stem (drop ます). It conjugates like an い-adjective: たくない (don\'t want), たかった (wanted), たくなかった (didn\'t want). Note: use が (not を) in very formal contexts, but を is commonly accepted.',
+        conjugationTable:[
+          ['Form','たい conjugation','Example'],
+          ['Want to','〜たいです','たべたいです (I want to eat)'],
+          ['Don\'t want to','〜たくないです','いきたくないです (I don\'t want to go)'],
+          ['Wanted to','〜たかったです','ねたかったです (I wanted to sleep)'],
+          ['Didn\'t want to','〜たくなかったです','たべたくなかったです (I didn\'t want to eat)'],
+        ],
+        examples:[
+          {jp:'にほんへ いきたいです。',rom:'Nihon e ikitai desu.',en:'I want to go to Japan.'},
+          {jp:'はやく うちへ かえりたいです。',rom:'Hayaku uchi e kaeritai desu.',en:'I want to go home soon.'},
+          {jp:'きのう ねたかったです。',rom:'Kinou netakatta desu.',en:'I wanted to sleep yesterday.'},
+        ],
+        badge:'iadj',
+        extraNote:'〜たがっています = "seems to want to" (used for 3rd person: かれは くるまを かいたがっています = He seems to want to buy a car)'
+      },
     ]
   },
   {
@@ -1071,6 +1255,88 @@ const GRAMMAR_SECTIONS = [
         examples:[
           {jp:'おちゃは どうですか。',rom:'Ocha wa dou desu ka?',en:'How about some tea?'},
           {jp:'あたらしい しごとは どうですか。',rom:'Atarashii shigoto wa dou desu ka?',en:'How is the new job?'},
+        ]
+      },
+      {
+        pattern:'〜は〜より〜です', meaning:'~ is more ~ than ~ (comparison)',
+        structure:'[A]は [B]より [adjective]です',
+        explanation:'より means "than" in comparisons. Put the thing being compared to after より. To ask which is more: どちらの ほうが〜ですか.',
+        examples:[
+          {jp:'にほんごは えいごより むずかしいです。',rom:'Nihongo wa eigo yori muzukashii desu.',en:'Japanese is more difficult than English.'},
+          {jp:'ねこは いぬより すきです。',rom:'Neko wa inu yori suki desu.',en:'I like cats more than dogs.'},
+          {jp:'どちらのほうが たかいですか。',rom:'Dochira no hou ga takai desu ka?',en:'Which one is more expensive?'},
+        ],
+        extraNote:'Most ~ in a group: 〜の なかで いちばん〜です (e.g. クラスで いちばん はやいです = fastest in the class)'
+      },
+      {
+        pattern:'〜の なかで いちばん〜', meaning:'"The most ~ among ~" (superlative)',
+        structure:'[Group]の なかで いちばん [adjective]です',
+        explanation:'いちばん means "number one / most". Use it to express superlatives. The group/category uses の なかで.',
+        examples:[
+          {jp:'くだものの なかで りんごが いちばん すきです。',rom:'Kudamono no naka de ringo ga ichiban suki desu.',en:'Among fruits, I like apples the most.'},
+          {jp:'クラスで いちばん せが たかいです。',rom:'Kurasu de ichiban se ga takai desu.',en:'I am the tallest in the class.'},
+        ]
+      },
+      {
+        pattern:'感情・感想 adjectives (おもしろい etc.)',
+        meaning:'Feelings and impressions expressed with い-adjectives',
+        structure:'[い-adj feeling]です / [い-adj feeling]と おもいます',
+        explanation:'Many feelings in Japanese are い-adjectives. They describe how something feels or strikes you. These are extremely common in everyday speech and in the N5 exam.',
+        conjugationTable:[
+          ['Japanese','Reading','Meaning'],
+          ['おもしろい','omoshiroi','interesting / funny'],
+          ['たのしい','tanoshii','fun / enjoyable'],
+          ['うれしい','ureshii','happy / glad'],
+          ['かなしい','kanashii','sad'],
+          ['こわい','kowai','scary'],
+          ['はずかしい','hazukashii','embarrassing / shy'],
+          ['むずかしい','muzukashii','difficult'],
+          ['やさしい','yasashii','easy / kind'],
+          ['いそがしい','isogashii','busy'],
+          ['つまらない','tsumaranai','boring'],
+          ['すごい','sugoi','amazing / incredible'],
+          ['かわいい','kawaii','cute'],
+          ['おいしい','oishii','delicious'],
+          ['まずい','mazui','bad tasting'],
+        ],
+        examples:[
+          {jp:'このえいがは おもしろかったです。',rom:'Kono eiga wa omoshirokatta desu.',en:'This movie was interesting.'},
+          {jp:'パーティーは たのしかったです。',rom:'Paatii wa tanoshikatta desu.',en:'The party was fun.'},
+          {jp:'しけんが こわいです。',rom:'Shiken ga kowai desu.',en:'I\'m scared of the exam.'},
+        ],
+        badge:'iadj'
+      },
+      {
+        pattern:'〜がほしい / ほしくない', meaning:'"Want (a thing)" (desire for noun)',
+        structure:'[Noun]が ほしいです / ほしくないです',
+        explanation:'ほしい means "want" for NOUNS (things). It is an い-adjective. Do NOT confuse with たい which is for verbs (wanting to DO something). ほしい uses が to mark what is wanted.',
+        examples:[
+          {jp:'あたらしい パソコンが ほしいです。',rom:'Atarashii pasokon ga hoshii desu.',en:'I want a new computer.'},
+          {jp:'おかねが ほしくないです。',rom:'Okane ga hoshikunai desu.',en:'I don\'t want money.'},
+          {jp:'なにが ほしいですか。',rom:'Nani ga hoshii desu ka?',en:'What do you want?'},
+        ],
+        badge:'iadj',
+        extraNote:'ほしい = want a THING | たい = want to DO something. "水が ほしい" (want water) vs "水を のみたい" (want to drink water)'
+      },
+      {
+        pattern:'〜そうです (looks like / seems)', meaning:'It looks/seems ~ (based on appearance)',
+        structure:'[い-adj remove い / な-adj]そうです | [Verb masu-stem]そうです',
+        explanation:'そうです attached to an adjective or verb stem expresses that something looks or seems a certain way based on visual evidence. Different from 〜そうです for hearsay (with plain form).',
+        examples:[
+          {jp:'このケーキは おいしそうです。',rom:'Kono keeki wa oishisou desu.',en:'This cake looks delicious.'},
+          {jp:'かれは いそがしそうです。',rom:'Kare wa isogashisou desu.',en:'He looks busy.'},
+          {jp:'あめが ふりそうです。',rom:'Ame ga furisou desu.',en:'It looks like it\'s going to rain.'},
+        ],
+        extraNote:'⚠️ いい → よさそう (looks good) | ない → なさそう (looks like there isn\'t)'
+      },
+      {
+        pattern:'〜でしょう / 〜かもしれません', meaning:'Probably ~ / Might ~ (degrees of certainty)',
+        structure:'[Plain form]でしょう | [Plain form]かもしれません',
+        explanation:'でしょう = fairly confident guess (~70%). かもしれません = possibility, less certain (~50%). Both follow the plain form.',
+        examples:[
+          {jp:'あしたは あめでしょう。',rom:'Ashita wa ame deshou.',en:'It will probably rain tomorrow.'},
+          {jp:'かれは にほんじんかも しれません。',rom:'Kare wa nihonjin kamo shiremasen.',en:'He might be Japanese.'},
+          {jp:'きょうは むずかしいかも しれません。',rom:'Kyou wa muzukashii kamo shiremasen.',en:'Today might be difficult.'},
         ]
       },
     ]
@@ -1305,28 +1571,36 @@ const VOCAB=[
   {jp:'でます',read:'Demasu',en:'To exit / leave (G2)',cat:'verb'},
 ];
 
-// ---- WRITING ITEMS ----
+// ---- WRITING ITEMS — large pool, 8 picked randomly each time ----
 const WRITING_ITEMS=[
-  {en:'I eat breakfast every morning.',jp:'まいあさ あさごはんを たべます。',note:'まいあさ = every morning, たべます = eat (G2)'},
-  {en:'She is a student.',jp:'かのじょは がくせいです。',note:'がくせい = student'},
+  {en:'I eat breakfast every morning.',jp:'まいあさ あさごはんを たべます。',note:'まいあさ = every morning, たべます (G2)'},
+  {en:'She is a student.',jp:'かのじょは がくせいです。',note:'がくせい = student, です = polite copula'},
   {en:'There is a cat in the room.',jp:'へやに ねこが います。',note:'います for living things, に = location'},
   {en:'I went to the library yesterday.',jp:'きのう としょかんへ いきました。',note:'Past tense: いきました (G1)'},
-  {en:'Please write your name here.',jp:'ここに なまえを かいてください。',note:'かいてください = please write'},
-  {en:'I want to go to Japan.',jp:'にほんへ いきたいです。',note:'〜たいです = want to do'},
+  {en:'Please write your name here.',jp:'ここに なまえを かいてください。',note:'かいてください = please write (て-form + ください)'},
+  {en:'I want to go to Japan.',jp:'にほんへ いきたいです。',note:'〜たいです = want to do (attach to masu-stem)'},
   {en:'This book is interesting.',jp:'この ほんは おもしろいです。',note:'おもしろい = interesting (い-adj)'},
-  {en:'I am studying Japanese.',jp:'にほんごを べんきょうしています。',note:'〜ています = currently doing'},
-  {en:'Is this a pen?',jp:'これは ぺんですか。',note:'〜ですか = question'},
+  {en:'I am studying Japanese.',jp:'にほんごを べんきょうしています。',note:'〜ています = currently doing (G3 verb)'},
+  {en:'Is this a pen?',jp:'これは ぺんですか。',note:'〜ですか = yes/no question'},
   {en:'I wake up at 7 o\'clock.',jp:'しちじに おきます。',note:'〜じに = at (time), おきます (G2)'},
-  {en:'The room is quiet.',jp:'へやは しずかです。',note:'しずか = な-adjective'},
-  {en:'I don\'t drink coffee.',jp:'コーヒーを のみません。',note:'〜ません = polite negative'},
+  {en:'The room is quiet.',jp:'へやは しずかです。',note:'しずか = な-adjective (no な in predicate position)'},
+  {en:'I don\'t drink coffee.',jp:'コーヒーを のみません。',note:'〜ません = polite negative (G1)'},
+  {en:'You had better sleep early.',jp:'はやく ねたほうが いいですよ。',note:'〜たほうがいい = you should (advice). た-form + ほうがいい'},
+  {en:'I don\'t want to go.',jp:'いきたくないです。',note:'〜たくない = don\'t want to (たい → たくない, like い-adj)'},
+  {en:'Please don\'t eat here.',jp:'ここで たべないでください。',note:'ない-form + でください = please don\'t do'},
+  {en:'He seems busy.',jp:'かれは いそがしそうです。',note:'〜そうです = looks/seems like (remove い + そう)'},
+  {en:'I must do my homework.',jp:'しゅくだいを しなければ なりません。',note:'〜なければなりません = must do (nai-stem + ければ)'},
+  {en:'I think tomorrow will be sunny.',jp:'あしたは はれると おもいます。',note:'〜と おもいます = I think ~ (plain form + と)'},
+  {en:'I like cats more than dogs.',jp:'いぬより ねこのほうが すきです。',note:'より = than, ほうが = the one that is more ~'},
+  {en:'After eating, I watch TV.',jp:'たべたあとで、テレビを みます。',note:'〜たあとで = after doing ~ (た-form + あとで)'},
 ];
 
-// ---- READING TESTS ----
+// ---- READING TESTS — 5 passages, randomly selected each time ----
 const READING_TESTS=[
   {
     title:'田中さんの一日',
     passage:'たなかさんは まいあさ 七時に おきます。あさごはんを たべて、がっこうへ いきます。がっこうは 九時から 三時まで です。ひるごはんは がっこうで たべます。うちへ かえってから、べんきょうします。よる 十一時に ねます。',
-    passageRom:"Tanaka-san wakes up at 7 every morning. She eats breakfast and goes to school. School is from 9 to 3. She eats lunch at school. After returning home, she studies. She sleeps at 11.",
+    passageRom:'Tanaka-san wakes up at 7 every morning. She eats breakfast and goes to school. School is from 9 to 3. She eats lunch at school. After returning home she studies. She sleeps at 11.',
     questions:[
       {q:'What time does Tanaka-san wake up?',opts:['6 o\'clock','7 o\'clock','8 o\'clock','9 o\'clock'],ans:1},
       {q:'Where does she eat lunch?',opts:['At home','At a restaurant','At school','At the station'],ans:2},
@@ -1337,48 +1611,131 @@ const READING_TESTS=[
   {
     title:'かわいいカフェ',
     passage:'これは かわいい カフェです。カフェに テーブルが 五つ あります。コーヒーと おちゃと ケーキが あります。コーヒーは 三百円です。おちゃは 二百円です。ケーキは 四百円です。いつも にぎやかです。',
-    passageRom:"This is a cute café. There are 5 tables. Coffee, tea and cake are available. Coffee is ¥300, tea ¥200, cake ¥400. It's always lively.",
+    passageRom:'This is a cute café. There are 5 tables. Coffee, tea and cake are available. Coffee is ¥300, tea ¥200, cake ¥400. It\'s always lively.',
     questions:[
       {q:'How many tables are in the café?',opts:['3','4','5','6'],ans:2},
       {q:'How much is the coffee?',opts:['200 yen','300 yen','400 yen','500 yen'],ans:1},
       {q:'Which is cheapest?',opts:['Coffee','Tea','Cake','Juice'],ans:1},
       {q:'How is the café described?',opts:['Quiet','Empty','Lively','Small'],ans:2},
     ]
-  }
+  },
+  {
+    title:'やまだくんの しゅみ',
+    passage:'やまださんの しゅみは おんがくを きくことです。まいにち 学校から かえってから、一時間 おんがくを ききます。すきな おんがくは ジャズです。ロックも すきですが、クラシックは あまり すきじゃないです。',
+    passageRom:'Yamada\'s hobby is listening to music. Every day after returning from school, he listens to music for one hour. His favourite genre is jazz. He also likes rock, but doesn\'t really like classical.',
+    questions:[
+      {q:'What is Yamada\'s hobby?',opts:['Playing sports','Listening to music','Reading books','Cooking'],ans:1},
+      {q:'How long does he listen to music each day?',opts:['30 minutes','1 hour','2 hours','3 hours'],ans:1},
+      {q:'What is his favourite kind of music?',opts:['Rock','Classical','Jazz','Pop'],ans:2},
+      {q:'How does he feel about classical music?',opts:['Loves it','Doesn\'t really like it','Hates it','Doesn\'t know it'],ans:1},
+    ]
+  },
+  {
+    title:'スーパーで',
+    passage:'きょう、おかあさんと スーパーへ いきました。りんごと バナナと ぎゅうにゅうを かいました。りんごは 百円でした。バナナは 二百円でした。ぎゅうにゅうは 百五十円でした。ぜんぶで 四百五十円 はらいました。',
+    passageRom:'Today I went to the supermarket with my mother. We bought apples, bananas and milk. Apples were ¥100, bananas ¥200, milk ¥150. We paid ¥450 in total.',
+    questions:[
+      {q:'Who did the speaker go shopping with?',opts:['Father','Mother','Friend','Teacher'],ans:1},
+      {q:'What did they NOT buy?',opts:['Apples','Bananas','Milk','Eggs'],ans:3},
+      {q:'How much were the bananas?',opts:['100 yen','150 yen','200 yen','250 yen'],ans:2},
+      {q:'How much did they pay in total?',opts:['350 yen','400 yen','450 yen','500 yen'],ans:2},
+    ]
+  },
+  {
+    title:'はるのてがみ',
+    passage:'はるに なりました。きょうは てんきが いいです。そらは あおくて、はなが きれいです。こうえんに こどもたちが います。こどもたちは たのしそうです。わたしも こうえんへ いきたいです。',
+    passageRom:'Spring has come. Today the weather is nice. The sky is blue and the flowers are pretty. There are children in the park. The children look like they\'re having fun. I want to go to the park too.',
+    questions:[
+      {q:'What season is it?',opts:['Summer','Autumn','Winter','Spring'],ans:3},
+      {q:'How is the weather described?',opts:['Rainy','Windy','Nice/fine','Cloudy'],ans:2},
+      {q:'Who is in the park?',opts:['Teachers','Dogs','Children','Friends'],ans:2},
+      {q:'What does the writer want to do?',opts:['Go to school','Go to the park','Buy flowers','Meet friends'],ans:1},
+    ]
+  },
 ];
 
-// ---- EXAM QUESTIONS ----
+// ---- EXAM QUESTIONS — large randomized pool ----
 const EXAM_QUESTIONS=[
-  {type:'grammar',q:'わたし___がくせいです。',opts:['は','が','を','で'],ans:0,exp:'は marks the topic'},
-  {type:'grammar',q:'毎日、コーヒー___のみます。',opts:['が','を','は','も'],ans:1,exp:'を marks the direct object'},
-  {type:'grammar',q:'えき___いきます。',opts:['で','を','へ','が'],ans:2,exp:'へ/に marks direction of movement'},
-  {type:'grammar',q:'きのう がっこうへ ___。',opts:['いきます','いきました','いきません','いきたい'],ans:1,exp:'Past polite: いきました'},
-  {type:'grammar',q:'ねこが へやに ___。',opts:['あります','います','いきます','みます'],ans:1,exp:'います for living beings'},
-  {type:'grammar',q:'にほんごを はなす___ できます。',opts:['が','を','ことが','のを'],ans:2,exp:'〜ことができます = can do'},
-  {type:'grammar',q:'この ほんは ___です。(interesting)',opts:['おいしい','たかい','おもしろい','かわいい'],ans:2,exp:'おもしろい = interesting'},
-  {type:'grammar',q:'たべる___ てを あらいます。(before eating)',opts:['まえに','あとで','ときに','から'],ans:0,exp:'〜まえに = before'},
-  {type:'grammar',q:'みて___。(Please look)',opts:['ください','います','います','ません'],ans:0,exp:'〜てください = please do'},
-  {type:'grammar',q:'にほんへ いき___。(I want to go)',opts:['たいです','ません','ました','ています'],ans:0,exp:'〜たいです = want to do'},
+  // GRAMMAR — particles
+  {type:'grammar',q:'わたし___がくせいです。',opts:['は','が','を','で'],ans:0,exp:'は marks the topic of the sentence'},
+  {type:'grammar',q:'毎日、コーヒー___のみます。',opts:['が','を','は','も'],ans:1,exp:'を marks the direct object of the verb'},
+  {type:'grammar',q:'えき___いきます。',opts:['で','を','へ','が'],ans:2,exp:'へ marks direction of movement'},
+  {type:'grammar',q:'がっこう___べんきょうします。',opts:['へ','に','で','を'],ans:2,exp:'で marks where the action takes place'},
+  {type:'grammar',q:'ともだち___えいがを みます。',opts:['が','を','と','で'],ans:2,exp:'と means "with" when doing something together'},
+  {type:'grammar',q:'ねこ___いぬ___います。(both cats and dogs)',opts:['が・が','も・も','は・は','と・と'],ans:1,exp:'も〜も means "both ~ and ~"'},
+  {type:'grammar',q:'くじ___ごじ___はたらきます。',opts:['に・まで','から・まで','で・に','は・が'],ans:1,exp:'から〜まで = from ~ to ~'},
+  {type:'grammar',q:'はし___たべます。(eat with chopsticks)',opts:['を','に','で','へ'],ans:2,exp:'で marks the tool or means used'},
+  {type:'grammar',q:'にほんご___じょうずですね。',opts:['を','は','が','も'],ans:2,exp:'が marks the object of じょうず・すき・きらい'},
+  // GRAMMAR — verb forms
+  {type:'grammar',q:'きのう がっこうへ ___。',opts:['いきます','いきました','いきません','いきたい'],ans:1,exp:'Past polite: いきました (G1 past)'},
+  {type:'grammar',q:'いま ほんを ___。(currently reading)',opts:['よみます','よみました','よんでいます','よみたい'],ans:2,exp:'〜ています = currently doing (ongoing action)'},
+  {type:'grammar',q:'みて___。(Please look)',opts:['ください','います','ません','した'],ans:0,exp:'〜てください = please do ~'},
+  {type:'grammar',q:'にほんへ いき___。(I want to go)',opts:['たいです','ません','ました','ています'],ans:0,exp:'〜たいです = want to do (attach to masu-stem)'},
+  {type:'grammar',q:'「たべる」のて形は？',opts:['たべって','たべいて','たべて','たべんで'],ans:2,exp:'G2 te-form: drop る → add て → たべて'},
+  {type:'grammar',q:'「のむ」のて形は？',opts:['のんで','のみて','のむて','のいで'],ans:0,exp:'G1 〜む ending: む → んで → のんで'},
+  {type:'grammar',q:'「かく」のて形は？',opts:['かって','かいて','かして','かんで'],ans:1,exp:'G1 〜く ending: く → いて → かいて (except いく→いって)'},
+  {type:'grammar',q:'「たべる」のない形は？',opts:['たべない','たべない','たべらない','たべりない'],ans:0,exp:'G2 nai-form: drop る → add ない → たべない'},
+  {type:'grammar',q:'「のむ」のない形は？',opts:['のみない','のまない','のむない','のんない'],ans:1,exp:'G1 〜む: change む→ま + ない → のまない'},
+  {type:'grammar',q:'「する」のない形は？',opts:['すない','さない','しない','せない'],ans:2,exp:'G3 irregular: する → しない'},
+  {type:'grammar',q:'「くる」のて形は？',opts:['くて','きて','こて','かて'],ans:1,exp:'G3 irregular: くる → きて'},
+  // GRAMMAR — patterns
+  {type:'grammar',q:'ねこが へやに ___。(there is a cat)',opts:['あります','います','いきます','みます'],ans:1,exp:'います for living beings; あります for objects'},
+  {type:'grammar',q:'つくえの うえに ほん___ あります。',opts:['が','を','は','に'],ans:0,exp:'が marks what exists with あります/います'},
+  {type:'grammar',q:'にほんごを はなす___ できます。',opts:['が','を','ことが','のを'],ans:2,exp:'〜ことができます = to be able to do ~'},
+  {type:'grammar',q:'たべる___ てを あらいます。(before eating)',opts:['まえに','あとで','ときに','から'],ans:0,exp:'〜まえに = before doing ~ (use dictionary form)'},
+  {type:'grammar',q:'しゅくだいを した___、テレビを みます。',opts:['まえに','あとで','から','ので'],ans:1,exp:'〜あとで = after doing ~ (use た-form)'},
+  {type:'grammar',q:'あめだ___、うちにいます。(because it\'s raining)',opts:['から','ので','が','けど'],ans:0,exp:'〜から = because (direct reason)'},
+  {type:'grammar',q:'もっと ねた___ いいですよ。(you should sleep more)',opts:['ほうが','ことが','のが','だけが'],ans:0,exp:'〜たほうがいい = you had better do ~ (advice)'},
+  {type:'grammar',q:'くすりを ___なければ なりません。(must take medicine)',opts:['のみ','のま','のむ','のん'],ans:1,exp:'〜なければなりません uses nai-stem: のま + なければ'},
+  {type:'grammar',q:'あした あめ___ おもいます。',opts:['だと','をと','にと','へと'],ans:0,exp:'〜だと おもいます = I think it is/will be ~'},
+  {type:'grammar',q:'このケーキは おいし___。(looks delicious)',opts:['そうです','でしょう','かもしれません','ようです'],ans:0,exp:'〜そうです = looks/seems like ~ (visual evidence)'},
+  {type:'grammar',q:'にほんごが じょうず___ なりたい。',opts:['に','を','が','は'],ans:0,exp:'〜になります = become: use に for な-adj and nouns'},
+  {type:'grammar',q:'この ほんは ___です。(interesting)',opts:['おいしい','むずかしい','おもしろい','かわいい'],ans:2,exp:'おもしろい = interesting / funny'},
+  {type:'grammar',q:'しずか___ へやです。(quiet room)',opts:['の','な','に','で'],ans:1,exp:'な-adjectives need な before a noun'},
+  {type:'grammar',q:'にほんごは えいご___ むずかしいです。(more than)',opts:['より','ほど','だけ','まで'],ans:0,exp:'より = than (used in comparisons)'},
+  // KANJI
   {type:'kanji',q:'「山」の よみかたは？',opts:['かわ','やま','うみ','そら'],ans:1,exp:'山 = やま (mountain)'},
   {type:'kanji',q:'「水」の よみかたは？',opts:['ひ','かぜ','みず','くも'],ans:2,exp:'水 = みず (water)'},
   {type:'kanji',q:'「母」の いみは？',opts:['father','mother','child','friend'],ans:1,exp:'母 = はは (mother)'},
   {type:'kanji',q:'「大きい」の よみかたは？',opts:['ちいさい','ひくい','おおきい','あかるい'],ans:2,exp:'大きい = おおきい (big)'},
   {type:'kanji',q:'「六時」は なんじですか？',opts:['5 o\'clock','6 o\'clock','7 o\'clock','8 o\'clock'],ans:1,exp:'六 = ろく, 六時 = 6 o\'clock'},
   {type:'kanji',q:'「右」の よみかたは？',opts:['ひだり','まえ','みぎ','うしろ'],ans:2,exp:'右 = みぎ (right)'},
-  {type:'kanji',q:'「食べます」の いみは？',opts:['to drink','to eat','to read','to write'],ans:1,exp:'食べます = たべます (to eat)'},
+  {type:'kanji',q:'「食べます」の いみは？',opts:['to drink','to eat','to read','to write'],ans:1,exp:'食べます = たべます (to eat) — 食 = food'},
   {type:'kanji',q:'「電話」の よみかたは？',opts:['でんき','でんわ','でんしゃ','でんぱ'],ans:1,exp:'電話 = でんわ (telephone)'},
   {type:'kanji',q:'「百」は？',opts:['10','100','1000','10000'],ans:1,exp:'百 = ひゃく (100)'},
   {type:'kanji',q:'「先生」の よみかたは？',opts:['がくせい','せんせい','ともだち','かぞく'],ans:1,exp:'先生 = せんせい (teacher)'},
-  {type:'vocab',q:'「かわいい」の いみは？',opts:['scary','cute','delicious','cold'],ans:1,exp:'かわいい = cute'},
+  {type:'kanji',q:'「左」の よみかたは？',opts:['みぎ','うえ','ひだり','した'],ans:2,exp:'左 = ひだり (left)'},
+  {type:'kanji',q:'「父」の いみは？',opts:['mother','brother','father','sister'],ans:2,exp:'父 = ちち (my father)'},
+  {type:'kanji',q:'「雨」の よみかたは？',opts:['かぜ','ゆき','あめ','くも'],ans:2,exp:'雨 = あめ (rain)'},
+  {type:'kanji',q:'「目」の よみかたは？',opts:['て','あし','め','みみ'],ans:2,exp:'目 = め (eye)'},
+  {type:'kanji',q:'「千」は？',opts:['100','1,000','10,000','100,000'],ans:1,exp:'千 = せん (1,000)'},
+  {type:'kanji',q:'「花」の いみは？',opts:['tree','river','mountain','flower'],ans:3,exp:'花 = はな (flower)'},
+  {type:'kanji',q:'「下」の よみかたは？(below)',opts:['うえ','なか','した','まえ'],ans:2,exp:'下 = した (under/below)'},
+  {type:'kanji',q:'「学校」の よみかたは？',opts:['だいがく','がっこう','こうこう','しょうがく'],ans:1,exp:'学校 = がっこう (school)'},
+  {type:'kanji',q:'「毎日」の よみかたは？',opts:['まいあさ','まいにち','まいばん','まいしゅう'],ans:1,exp:'毎日 = まいにち (every day)'},
+  {type:'kanji',q:'「友だち」の「友」の よみかたは？',opts:['とも','あに','こ','ひと'],ans:0,exp:'友 = とも (friend) → 友だち = ともだち'},
+  // VOCAB
+  {type:'vocab',q:'「かわいい」の いみは？',opts:['scary','cute','delicious','cold'],ans:1,exp:'かわいい = cute (い-adjective)'},
   {type:'vocab',q:'「としょかん」は？',opts:['hospital','post office','library','restaurant'],ans:2,exp:'としょかん = library'},
   {type:'vocab',q:'「あした」は？',opts:['today','yesterday','tomorrow','now'],ans:2,exp:'あした = tomorrow'},
   {type:'vocab',q:'「ともだち」は？',opts:['family','teacher','student','friend'],ans:3,exp:'ともだち = friend'},
-  {type:'vocab',q:'「のみます」は？',opts:['to eat','to drink','to sleep','to go'],ans:1,exp:'のみます = to drink (G1)'},
+  {type:'vocab',q:'「のみます」は？',opts:['to eat','to drink','to sleep','to go'],ans:1,exp:'のみます = to drink (Group 1)'},
   {type:'vocab',q:'「まいにち」は？',opts:['every week','every month','every day','every year'],ans:2,exp:'まいにち = every day'},
-  {type:'vocab',q:'「げんきです」は？',opts:['I am tired','I am fine/well','I am sad','I am busy'],ans:1,exp:'げんき = energetic/healthy'},
-  {type:'vocab',q:'「たかい」の はんたいは？',opts:['おいしい','ちいさい','やすい','あたらしい'],ans:2,exp:'たかい(expensive) → opposite: やすい(cheap)'},
+  {type:'vocab',q:'「げんきです」は？',opts:['I am tired','I am fine/well','I am sad','I am busy'],ans:1,exp:'げんき = energetic / healthy (な-adj)'},
+  {type:'vocab',q:'「たかい」の はんたいは？',opts:['おいしい','ちいさい','やすい','あたらしい'],ans:2,exp:'たかい(expensive) ↔ やすい(cheap)'},
   {type:'vocab',q:'「ゆうびんきょく」は？',opts:['bank','post office','school','hospital'],ans:1,exp:'ゆうびんきょく = post office'},
-  {type:'vocab',q:'「べんきょうします」の グループは？',opts:['Group 1','Group 2','Group 3','Irregular'],ans:2,exp:'べんきょうします = Group 3 (〜します compound)'},
+  {type:'vocab',q:'「むずかしい」の はんたいは？',opts:['おもしろい','やさしい','たのしい','こわい'],ans:1,exp:'むずかしい(difficult) ↔ やさしい(easy)'},
+  {type:'vocab',q:'「おおきい」の はんたいは？',opts:['たかい','ながい','ちいさい','あかるい'],ans:2,exp:'おおきい(big) ↔ ちいさい(small)'},
+  {type:'vocab',q:'「あたらしい」の はんたいは？',opts:['おもい','ふるい','くらい','せまい'],ans:1,exp:'あたらしい(new) ↔ ふるい(old)'},
+  {type:'vocab',q:'「おもしろい」の いみは？',opts:['boring','delicious','interesting','scary'],ans:2,exp:'おもしろい = interesting / funny (い-adj)'},
+  {type:'vocab',q:'「うれしい」の いみは？',opts:['sad','happy/glad','tired','nervous'],ans:1,exp:'うれしい = happy / glad (い-adj)'},
+  {type:'vocab',q:'「いそがしい」の いみは？',opts:['interesting','quiet','busy','warm'],ans:2,exp:'いそがしい = busy (い-adj)'},
+  {type:'vocab',q:'「ほしい」の いみは？',opts:['I want to do','I want (a thing)','I like','I can'],ans:1,exp:'ほしい = want a THING (noun が ほしい)'},
+  {type:'vocab',q:'「たのしい」の いみは？',opts:['boring','delicious','cute','fun'],ans:3,exp:'たのしい = fun / enjoyable (い-adj)'},
+  {type:'vocab',q:'「しずか（な）」の はんたいは？',opts:['きれい','にぎやか','げんき','べんり'],ans:1,exp:'しずか(quiet) ↔ にぎやか(lively/noisy)'},
+  {type:'vocab',q:'「べんきょうします」の グループは？',opts:['Group 1','Group 2','Group 3','Irregular'],ans:2,exp:'べんきょうします = Group 3 (〜する compound verb)'},
+  {type:'vocab',q:'「たべる」の グループは？',opts:['Group 1','Group 2','Group 3','Irregular'],ans:1,exp:'たべる = Group 2 (RU-verb: e-sound before る)'},
+  {type:'vocab',q:'「いく」の グループは？',opts:['Group 1','Group 2','Group 3','Irregular'],ans:0,exp:'いく = Group 1 (U-verb ending in く)'},
 ];
 
 // ---- RESOURCES ----
@@ -1413,13 +1770,45 @@ const STUDY_PLAN=[
 //  RENDER FUNCTIONS
 // ============================================================
 
+const SECTION_TIPS = {
+  home:"🏠 Welcome back! Pick a section to study. Hana-chan is cheering for you! 🌸",
+  grammar:"📖 Grammar time! Check the conjugation tables — they're gold for the exam!",
+  kana:"あ Kana first! Master hiragana & katakana before anything else!",
+  kanji:"漢字 Click a kanji card to highlight it. Use stroke count to help remember!",
+  vocab:"📝 Filter by category to study one group at a time. Less overwhelm, more progress!",
+  adjectives:"🎨 Opposite pairs = double the vocab for half the effort! Smart studying!",
+  flashcards:"🃏 Shuffle the deck! Random order helps real memory, not just order memory!",
+  'kanji-mcq':"✏️ 30 seconds per question — just like the real exam! Stay calm and focused!",
+  reading:"📚 Read the questions FIRST, then the passage. It helps you know what to look for!",
+  writing:"✍️ Even a rough attempt helps! Don't leave blanks — try your best!",
+  'mock-exam':"📋 Exam mode! Treat this like the real thing. Deep breath, you've got this! 🌸",
+  'study-plan':"📅 Consistency beats intensity! 1 hour daily > 7 hours once a week!",
+  resources:"🔗 Jisho.org is your best friend for looking up any Japanese word or kanji!",
+};
+
 function showSection(id){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  const sec = document.getElementById(id);
+  if(sec) sec.classList.add('active');
   document.querySelectorAll('nav button').forEach(b=>{
+    b.classList.remove('active');
     if(b.getAttribute('onclick')&&b.getAttribute('onclick').includes(`'${id}'`))b.classList.add('active');
   });
+  // Mascot tip — runs after data is defined (deferred)
+  setTimeout(()=>{
+    if(typeof mascotBubbleTimer==='undefined') return;
+    const bubble=document.getElementById('mascot-bubble');
+    if(!bubble) return;
+    const tip=SECTION_TIPS[id];
+    if(tip){
+      bubble.innerHTML=tip;
+      bubble.classList.remove('hidden');
+      bubble.style.animation='none';void bubble.offsetWidth;
+      bubble.style.animation='bubblePop .3s cubic-bezier(.34,1.56,.64,1)';
+      clearTimeout(mascotBubbleTimer);
+      mascotBubbleTimer=setTimeout(()=>bubble.classList.add('hidden'),5000);
+    }
+  }, 0);
 }
 
 // --- GRAMMAR ---
@@ -1490,6 +1879,160 @@ function toggleCollapse(uid){
   btn.textContent=el.classList.contains('open')?'📊 Hide conjugation table ▴':'📊 Show conjugation table ▾';
 }
 renderGrammar();
+
+// ============================================================
+//  KANA DATA & RENDER
+// ============================================================
+const HIRAGANA_ROWS=[
+  {row:'あ行',cells:[{k:'あ',r:'a'},{k:'い',r:'i'},{k:'う',r:'u'},{k:'え',r:'e'},{k:'お',r:'o'}]},
+  {row:'か行',cells:[{k:'か',r:'ka'},{k:'き',r:'ki'},{k:'く',r:'ku'},{k:'け',r:'ke'},{k:'こ',r:'ko'}]},
+  {row:'さ行',cells:[{k:'さ',r:'sa'},{k:'し',r:'shi'},{k:'す',r:'su'},{k:'せ',r:'se'},{k:'そ',r:'so'}]},
+  {row:'た行',cells:[{k:'た',r:'ta'},{k:'ち',r:'chi'},{k:'つ',r:'tsu'},{k:'て',r:'te'},{k:'と',r:'to'}]},
+  {row:'な行',cells:[{k:'な',r:'na'},{k:'に',r:'ni'},{k:'ぬ',r:'nu'},{k:'ね',r:'ne'},{k:'の',r:'no'}]},
+  {row:'は行',cells:[{k:'は',r:'ha'},{k:'ひ',r:'hi'},{k:'ふ',r:'fu'},{k:'へ',r:'he'},{k:'ほ',r:'ho'}]},
+  {row:'ま行',cells:[{k:'ま',r:'ma'},{k:'み',r:'mi'},{k:'む',r:'mu'},{k:'め',r:'me'},{k:'も',r:'mo'}]},
+  {row:'や行',cells:[{k:'や',r:'ya'},{k:'',r:''},{k:'ゆ',r:'yu'},{k:'',r:''},{k:'よ',r:'yo'}]},
+  {row:'ら行',cells:[{k:'ら',r:'ra'},{k:'り',r:'ri'},{k:'る',r:'ru'},{k:'れ',r:'re'},{k:'ろ',r:'ro'}]},
+  {row:'わ行',cells:[{k:'わ',r:'wa'},{k:'',r:''},{k:'',r:''},{k:'',r:''},{k:'を',r:'wo'}]},
+  {row:'ん',cells:[{k:'ん',r:'n'},{k:'',r:''},{k:'',r:''},{k:'',r:''},{k:'',r:''}]},
+  {row:'が行',cells:[{k:'が',r:'ga'},{k:'ぎ',r:'gi'},{k:'ぐ',r:'gu'},{k:'げ',r:'ge'},{k:'ご',r:'go'}]},
+  {row:'ざ行',cells:[{k:'ざ',r:'za'},{k:'じ',r:'ji'},{k:'ず',r:'zu'},{k:'ぜ',r:'ze'},{k:'ぞ',r:'zo'}]},
+  {row:'だ行',cells:[{k:'だ',r:'da'},{k:'ぢ',r:'ji'},{k:'づ',r:'zu'},{k:'で',r:'de'},{k:'ど',r:'do'}]},
+  {row:'ば行',cells:[{k:'ば',r:'ba'},{k:'び',r:'bi'},{k:'ぶ',r:'bu'},{k:'べ',r:'be'},{k:'ぼ',r:'bo'}]},
+  {row:'ぱ行',cells:[{k:'ぱ',r:'pa'},{k:'ぴ',r:'pi'},{k:'ぷ',r:'pu'},{k:'ぺ',r:'pe'},{k:'ぽ',r:'po'}]},
+  {row:'きゃ etc',cells:[{k:'きゃ',r:'kya'},{k:'きゅ',r:'kyu'},{k:'きょ',r:'kyo'},{k:'しゃ',r:'sha'},{k:'しゅ',r:'shu'}]},
+  {row:'しょ etc',cells:[{k:'しょ',r:'sho'},{k:'ちゃ',r:'cha'},{k:'ちゅ',r:'chu'},{k:'ちょ',r:'cho'},{k:'にゃ',r:'nya'}]},
+  {row:'ひゃ etc',cells:[{k:'にゅ',r:'nyu'},{k:'にょ',r:'nyo'},{k:'ひゃ',r:'hya'},{k:'ひゅ',r:'hyu'},{k:'ひょ',r:'hyo'}]},
+  {row:'みゃ etc',cells:[{k:'みゃ',r:'mya'},{k:'みゅ',r:'myu'},{k:'みょ',r:'myo'},{k:'りゃ',r:'rya'},{k:'りょ',r:'ryo'}]},
+  {row:'ぎゃ etc',cells:[{k:'ぎゃ',r:'gya'},{k:'ぎゅ',r:'gyu'},{k:'ぎょ',r:'gyo'},{k:'じゃ',r:'ja'},{k:'じゅ',r:'ju'}]},
+  {row:'じょ etc',cells:[{k:'じょ',r:'jo'},{k:'びゃ',r:'bya'},{k:'びゅ',r:'byu'},{k:'びょ',r:'byo'},{k:'ぴゃ',r:'pya'}]},
+];
+
+const KATAKANA_ROWS=[
+  {row:'ア行',cells:[{k:'ア',r:'a'},{k:'イ',r:'i'},{k:'ウ',r:'u'},{k:'エ',r:'e'},{k:'オ',r:'o'}]},
+  {row:'カ行',cells:[{k:'カ',r:'ka'},{k:'キ',r:'ki'},{k:'ク',r:'ku'},{k:'ケ',r:'ke'},{k:'コ',r:'ko'}]},
+  {row:'サ行',cells:[{k:'サ',r:'sa'},{k:'シ',r:'shi'},{k:'ス',r:'su'},{k:'セ',r:'se'},{k:'ソ',r:'so'}]},
+  {row:'タ行',cells:[{k:'タ',r:'ta'},{k:'チ',r:'chi'},{k:'ツ',r:'tsu'},{k:'テ',r:'te'},{k:'ト',r:'to'}]},
+  {row:'ナ行',cells:[{k:'ナ',r:'na'},{k:'ニ',r:'ni'},{k:'ヌ',r:'nu'},{k:'ネ',r:'ne'},{k:'ノ',r:'no'}]},
+  {row:'ハ行',cells:[{k:'ハ',r:'ha'},{k:'ヒ',r:'hi'},{k:'フ',r:'fu'},{k:'ヘ',r:'he'},{k:'ホ',r:'ho'}]},
+  {row:'マ行',cells:[{k:'マ',r:'ma'},{k:'ミ',r:'mi'},{k:'ム',r:'mu'},{k:'メ',r:'me'},{k:'モ',r:'mo'}]},
+  {row:'ヤ行',cells:[{k:'ヤ',r:'ya'},{k:'',r:''},{k:'ユ',r:'yu'},{k:'',r:''},{k:'ヨ',r:'yo'}]},
+  {row:'ラ行',cells:[{k:'ラ',r:'ra'},{k:'リ',r:'ri'},{k:'ル',r:'ru'},{k:'レ',r:'re'},{k:'ロ',r:'ro'}]},
+  {row:'ワ行',cells:[{k:'ワ',r:'wa'},{k:'',r:''},{k:'',r:''},{k:'',r:''},{k:'ヲ',r:'wo'}]},
+  {row:'ン',cells:[{k:'ン',r:'n'},{k:'',r:''},{k:'',r:''},{k:'',r:''},{k:'',r:''}]},
+  {row:'ガ行',cells:[{k:'ガ',r:'ga'},{k:'ギ',r:'gi'},{k:'グ',r:'gu'},{k:'ゲ',r:'ge'},{k:'ゴ',r:'go'}]},
+  {row:'ザ行',cells:[{k:'ザ',r:'za'},{k:'ジ',r:'ji'},{k:'ズ',r:'zu'},{k:'ゼ',r:'ze'},{k:'ゾ',r:'zo'}]},
+  {row:'ダ行',cells:[{k:'ダ',r:'da'},{k:'ヂ',r:'ji'},{k:'ヅ',r:'zu'},{k:'デ',r:'de'},{k:'ド',r:'do'}]},
+  {row:'バ行',cells:[{k:'バ',r:'ba'},{k:'ビ',r:'bi'},{k:'ブ',r:'bu'},{k:'ベ',r:'be'},{k:'ボ',r:'bo'}]},
+  {row:'パ行',cells:[{k:'パ',r:'pa'},{k:'ピ',r:'pi'},{k:'プ',r:'pu'},{k:'ペ',r:'pe'},{k:'ポ',r:'po'}]},
+];
+
+function buildKanaTable(rows, container){
+  let html=`<div style="overflow-x:auto;">
+  <table style="border-collapse:collapse;min-width:360px;width:100%;">
+  <thead><tr>
+    <th style="background:linear-gradient(135deg,var(--pink),#e05f88);color:white;padding:.4rem .6rem;font-size:.72rem;border-radius:.4rem 0 0 0;">Row</th>
+    <th style="background:linear-gradient(135deg,var(--pink),#e05f88);color:white;padding:.4rem .6rem;font-size:.72rem;">あ/ア</th>
+    <th style="background:linear-gradient(135deg,var(--pink),#e05f88);color:white;padding:.4rem .6rem;font-size:.72rem;">い/イ</th>
+    <th style="background:linear-gradient(135deg,var(--pink),#e05f88);color:white;padding:.4rem .6rem;font-size:.72rem;">う/ウ</th>
+    <th style="background:linear-gradient(135deg,var(--pink),#e05f88);color:white;padding:.4rem .6rem;font-size:.72rem;">え/エ</th>
+    <th style="background:linear-gradient(135deg,var(--pink),#e05f88);color:white;padding:.4rem .6rem;font-size:.72rem;border-radius:0 .4rem 0 0;">お/オ</th>
+  </tr></thead><tbody>`;
+  rows.forEach((row,ri)=>{
+    html+=`<tr style="background:${ri%2===0?'white':'rgba(255,240,243,.4)'};">
+      <td style="padding:.4rem .6rem;font-size:.7rem;font-weight:700;color:var(--mid);white-space:nowrap;">${row.row}</td>`;
+    row.cells.forEach(c=>{
+      if(c.k){
+        html+=`<td style="padding:.5rem;text-align:center;">
+          <div style="font-size:1.5rem;font-weight:700;color:var(--dark);line-height:1;">${c.k}</div>
+          <div style="font-size:.65rem;color:var(--pink);font-weight:600;margin-top:.15rem;">${c.r}</div>
+        </td>`;
+      } else {
+        html+=`<td style="padding:.5rem;text-align:center;background:rgba(255,182,193,.08);"><span style="color:#ddd;">—</span></td>`;
+      }
+    });
+    html+=`</tr>`;
+  });
+  html+=`</tbody></table></div>`;
+  document.getElementById(container).innerHTML=html;
+}
+buildKanaTable(HIRAGANA_ROWS,'hira-table');
+buildKanaTable(KATAKANA_ROWS,'kata-table');
+
+function showKanaTable(type,btn){
+  document.querySelectorAll('#kana .filter-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('kana-hiragana-view').style.display=type==='hiragana'?'block':'none';
+  document.getElementById('kana-katakana-view').style.display=type==='katakana'?'block':'none';
+  document.getElementById('kana-quiz-view').style.display=type==='quiz'?'block':'none';
+}
+
+// --- KANA QUIZ ---
+let kanaQuizPool=[], kanaQIndex=0, kanaQScore=0, kanaQTimer=null, kanaQTimeLeft=15;
+function buildKanaPool(type){
+  let pool=[];
+  const hiraFlat=HIRAGANA_ROWS.flatMap(r=>r.cells.filter(c=>c.k));
+  const kataFlat=KATAKANA_ROWS.flatMap(r=>r.cells.filter(c=>c.k));
+  if(type==='hiragana'||type==='both') pool.push(...hiraFlat.map(c=>({char:c.k,ans:c.r,script:'hiragana'})));
+  if(type==='katakana'||type==='both') pool.push(...kataFlat.map(c=>({char:c.k,ans:c.r,script:'katakana'})));
+  return pool.filter(c=>c.char&&c.ans);
+}
+function startKanaQuiz(){
+  const type=document.querySelector('input[name="kana-type"]:checked').value;
+  kanaQuizPool=buildKanaPool(type).sort(()=>Math.random()-.5).slice(0,20);
+  kanaQIndex=0; kanaQScore=0;
+  document.getElementById('kana-quiz-setup').style.display='none';
+  document.getElementById('kana-quiz-active').style.display='block';
+  document.getElementById('kana-quiz-score').style.display='none';
+  showKanaQ();
+}
+function showKanaQ(){
+  if(kanaQIndex>=kanaQuizPool.length){endKanaQuiz();return;}
+  const q=kanaQuizPool[kanaQIndex];
+  document.getElementById('kq2-qnum').textContent=`Question ${kanaQIndex+1} / ${kanaQuizPool.length}`;
+  document.getElementById('kq2-progress').style.width=`${(kanaQIndex/kanaQuizPool.length)*100}%`;
+  document.getElementById('kq2-char').textContent=q.char;
+  document.getElementById('kq2-feedback').className='feedback';
+  // Build 4 options: correct + 3 random from pool
+  const others=kanaQuizPool.filter((_,i)=>i!==kanaQIndex).sort(()=>Math.random()-.5).slice(0,3).map(x=>x.ans);
+  const allOpts=[q.ans,...others].sort(()=>Math.random()-.5);
+  const correctIdx=allOpts.indexOf(q.ans);
+  document.getElementById('kq2-options').innerHTML=allOpts.map((o,i)=>`<button class="option-btn" onclick="answerKana(${i},${correctIdx})">${o}</button>`).join('');
+  startKanaTimer();
+}
+function startKanaTimer(){
+  kanaQTimeLeft=15; clearInterval(kanaQTimer); updateKanaTimer();
+  kanaQTimer=setInterval(()=>{kanaQTimeLeft--;updateKanaTimer();
+    if(kanaQTimeLeft<=0){clearInterval(kanaQTimer);
+      document.querySelectorAll('#kq2-options .option-btn').forEach(b=>b.disabled=true);
+      const fb=document.getElementById('kq2-feedback');fb.className='feedback wrong';fb.textContent=`⏰ Time! Answer: ${kanaQuizPool[kanaQIndex].ans}`;
+      setTimeout(()=>{kanaQIndex++;showKanaQ();},1600);
+    }},1000);
+}
+function updateKanaTimer(){document.getElementById('kq2-timer').textContent=`⏱ 0:${kanaQTimeLeft.toString().padStart(2,'0')}`;document.getElementById('kq2-timer-fill').style.width=`${(kanaQTimeLeft/15)*100}%`;}
+function answerKana(i,correct){
+  clearInterval(kanaQTimer);
+  document.querySelectorAll('#kq2-options .option-btn').forEach(b=>b.disabled=true);
+  document.querySelectorAll('#kq2-options .option-btn')[correct].classList.add('correct');
+  const fb=document.getElementById('kq2-feedback');
+  if(i===correct){kanaQScore++;document.querySelectorAll('#kq2-options .option-btn')[i].classList.add('correct');fb.className='feedback correct';fb.textContent='✅ Correct!';}
+  else{document.querySelectorAll('#kq2-options .option-btn')[i].classList.add('wrong');fb.className='feedback wrong';fb.textContent=`❌ It's: ${kanaQuizPool[kanaQIndex].ans}`;}
+  setTimeout(()=>{kanaQIndex++;showKanaQ();},1400);
+}
+function endKanaQuiz(){
+  clearInterval(kanaQTimer);
+  document.getElementById('kana-quiz-active').style.display='none';
+  document.getElementById('kana-quiz-score').style.display='block';
+  const pct=Math.round((kanaQScore/kanaQuizPool.length)*100);
+  document.getElementById('kq2-score-num').textContent=`${kanaQScore}/${kanaQuizPool.length}`;
+  document.getElementById('kq2-score-msg').textContent=pct>=90?'🌸 Perfect kana master!':pct>=70?'✨ Great! Almost there!':pct>=50?'💪 Keep practicing!':'📖 Review the kana chart and try again!';
+  document.getElementById('kq2-score-sub').textContent=`${pct}% accuracy`;
+}
+function resetKanaQuiz(){
+  document.getElementById('kana-quiz-setup').style.display='block';
+  document.getElementById('kana-quiz-active').style.display='none';
+  document.getElementById('kana-quiz-score').style.display='none';
+}
 
 // --- KANJI ---
 function renderKanji(filter='all'){
@@ -1734,11 +2277,9 @@ let exBreakdown={grammar:0,kanji:0,vocab:0};
 function startExam(){
   exIndex=0;exScore=0;exAnswered=false;exTimeLeft=2100;
   exBreakdown={grammar:0,kanji:0,vocab:0};
-  examQs=[
-    ...EXAM_QUESTIONS.filter(q=>q.type==='grammar').sort(()=>Math.random()-.5),
-    ...EXAM_QUESTIONS.filter(q=>q.type==='kanji').sort(()=>Math.random()-.5),
-    ...EXAM_QUESTIONS.filter(q=>q.type==='vocab').sort(()=>Math.random()-.5),
-  ];
+  // Randomly pick 10 of each type from large pool
+  const pick=(type,n)=>[...EXAM_QUESTIONS.filter(q=>q.type===type)].sort(()=>Math.random()-.5).slice(0,n);
+  examQs=[...pick('grammar',10),...pick('kanji',10),...pick('vocab',10)];
   document.getElementById('exam-setup').style.display='none';
   document.getElementById('exam-quiz').style.display='block';
   document.getElementById('exam-score').style.display='none';
@@ -1826,33 +2367,6 @@ setTimeout(()=>{
     mascotBubbleTimer = setTimeout(()=>bubble.classList.add('hidden'), 5000);
   }, 20000);
 }, 4000);
-
-// Section-based mascot tips
-const sectionTips = {
-  grammar: "📖 Grammar time! Check the conjugation tables — they're gold for the exam!",
-  kanji: "漢字 Click a kanji card to highlight it. Use stroke count to help remember!",
-  vocab: "📝 Filter by category to study one group at a time. Less overwhelm, more progress!",
-  adjectives: "🎨 Opposite pairs = double the vocab for half the effort! Smart studying!",
-  flashcards: "🃏 Shuffle the deck! Random order helps real memory, not just order memory!",
-  'kanji-mcq': "✏️ 30 seconds per question — just like the real exam! Stay calm and focused!",
-  reading: "📚 Read the questions FIRST, then the passage. It helps you know what to look for!",
-  writing: "✍️ Even a rough attempt helps! Don't leave blanks — try your best!",
-  'mock-exam': "📋 Exam mode! Treat this like the real thing. Deep breath, you've got this! 🌸",
-  'study-plan': "📅 Consistency beats intensity! 1 hour daily > 7 hours once a week!",
-  resources: "🔗 Jisho.org is your best friend for looking up any Japanese word or kanji!",
-};
-const _origShowSection = showSection;
-function showSection(id){
-  _origShowSection(id);
-  if(sectionTips[id]){
-    const bubble = document.getElementById('mascot-bubble');
-    bubble.innerHTML = sectionTips[id];
-    bubble.classList.remove('hidden');
-    bubble.style.animation='none';void bubble.offsetWidth;bubble.style.animation='bubblePop .3s cubic-bezier(.34,1.56,.64,1)';
-    clearTimeout(mascotBubbleTimer);
-    mascotBubbleTimer = setTimeout(()=>bubble.classList.add('hidden'), 5000);
-  }
-}
 
 // --- PETALS ---
 const pc=document.getElementById('petals');
