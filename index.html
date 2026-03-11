@@ -348,6 +348,63 @@ footer span{color:var(--pink);}
 .ctr-chart-rom{font-size:.62rem;color:var(--pink);}
 .ctr-chart-cell.irregular{background:linear-gradient(135deg,#fff3cd,#ffeeba);border-color:#f0c040;}
 .ctr-chart-cell.irregular .ctr-chart-rom{color:#856404;}
+
+/* ===== TTS BUTTON ===== */
+.tts-btn{display:inline-flex;align-items:center;gap:.3rem;background:linear-gradient(135deg,#e8f4ff,#b3d9ff);border:1.5px solid #90c4ff;border-radius:2rem;padding:.22rem .7rem;font-size:.72rem;font-weight:700;color:#1565c0;cursor:pointer;transition:all .18s;margin-top:.4rem;font-family:inherit;}
+.tts-btn:hover{background:linear-gradient(135deg,#d0eaff,#90c4ff);transform:scale(1.05);}
+.tts-btn.speaking{background:linear-gradient(135deg,#fff3e0,#ffcc80);border-color:#ffb74d;color:#e65100;animation:pulse .8s ease-in-out infinite alternate;}
+@keyframes pulse{from{box-shadow:0 0 0 0 rgba(255,183,77,.4);}to{box-shadow:0 0 0 6px rgba(255,183,77,0);}}
+.tts-global-bar{display:flex;align-items:center;gap:.7rem;background:white;border-radius:1rem;padding:.6rem 1rem;border:1.5px solid rgba(255,182,193,.3);margin-bottom:1rem;flex-wrap:wrap;}
+.tts-speed-btn{background:#fff0f5;border:1.5px solid var(--pink-light);border-radius:.6rem;padding:.25rem .65rem;font-size:.75rem;font-weight:700;color:var(--mid);cursor:pointer;transition:all .15s;font-family:inherit;}
+.tts-speed-btn.active,.tts-speed-btn:hover{background:var(--pink);color:white;border-color:var(--pink);}
+
+/* ===== SRS (Spaced Repetition) ===== */
+.srs-bar{display:flex;align-items:center;gap:.5rem;margin-top:.6rem;flex-wrap:wrap;}
+.srs-know-btn{display:inline-flex;align-items:center;gap:.25rem;background:linear-gradient(135deg,#e8f5e9,#a5d6a7);border:1.5px solid #81c784;border-radius:2rem;padding:.22rem .8rem;font-size:.72rem;font-weight:700;color:#1b5e20;cursor:pointer;transition:all .18s;font-family:inherit;}
+.srs-know-btn:hover{background:linear-gradient(135deg,#c8e6c9,#66bb6a);transform:scale(1.05);}
+.srs-review-btn{display:inline-flex;align-items:center;gap:.25rem;background:linear-gradient(135deg,#fff3e0,#ffcc80);border:1.5px solid #ffb74d;border-radius:2rem;padding:.22rem .8rem;font-size:.72rem;font-weight:700;color:#e65100;cursor:pointer;transition:all .18s;font-family:inherit;}
+.srs-review-btn:hover{background:linear-gradient(135deg,#ffe0b2,#ffa726);transform:scale(1.05);}
+.srs-badge{font-size:.68rem;font-weight:800;border-radius:2rem;padding:.15rem .6rem;}
+.srs-badge.known{background:#e8f5e9;color:#2e7d32;border:1px solid #81c784;}
+.srs-badge.review{background:#fff3e0;color:#e65100;border:1px solid #ffb74d;}
+
+/* ===== LISTENING SECTION ===== */
+.listen-category{margin-bottom:1.5rem;}
+.listen-cat-header{font-weight:900;color:var(--mid);font-size:.95rem;margin-bottom:.7rem;display:flex;align-items:center;gap:.5rem;padding:.5rem .9rem;background:linear-gradient(135deg,rgba(255,183,197,.3),rgba(199,125,255,.15));border-radius:.9rem;}
+.listen-card{background:white;border-radius:1.2rem;padding:1rem 1.15rem;border:2px solid rgba(255,182,193,.25);box-shadow:0 3px 10px var(--shadow);margin-bottom:.7rem;transition:border-color .2s;}
+.listen-card:hover{border-color:var(--pink-light);}
+.listen-jp{font-size:1.25rem;font-weight:700;color:var(--dark);margin-bottom:.25rem;}
+.listen-rom{font-size:.78rem;color:var(--pink);font-style:italic;margin-bottom:.15rem;}
+.listen-en{font-size:.8rem;color:#666;}
+.listen-actions{display:flex;gap:.5rem;margin-top:.65rem;flex-wrap:wrap;align-items:center;}
+.listen-play-btn{display:inline-flex;align-items:center;gap:.35rem;background:linear-gradient(135deg,var(--pink),#e05f88);color:white;border:none;border-radius:2rem;padding:.35rem 1rem;font-size:.78rem;font-weight:700;cursor:pointer;transition:all .2s;font-family:inherit;box-shadow:0 3px 8px rgba(255,133,161,.4);}
+.listen-play-btn:hover{transform:translateY(-2px);box-shadow:0 5px 14px rgba(255,133,161,.5);}
+.listen-play-btn.playing{background:linear-gradient(135deg,#ff9800,#f57c00);animation:pulse .7s ease-in-out infinite alternate;}
+.listen-slow-btn{display:inline-flex;align-items:center;gap:.3rem;background:#fff8fb;border:1.5px solid var(--pink-light);border-radius:2rem;padding:.3rem .85rem;font-size:.74rem;font-weight:700;color:var(--mid);cursor:pointer;font-family:inherit;transition:all .18s;}
+.listen-slow-btn:hover{background:var(--pink-pale);border-color:var(--pink);}
+.listen-reveal{display:inline-flex;align-items:center;gap:.3rem;background:#f0f4ff;border:1.5px solid #b3c6ff;border-radius:2rem;padding:.3rem .85rem;font-size:.74rem;font-weight:700;color:#1a3a8f;cursor:pointer;font-family:inherit;transition:all .18s;}
+.listen-reveal:hover{background:#dce8ff;}
+
+/* ===== PROGRESS DASHBOARD ===== */
+.prog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.85rem;margin-bottom:1.5rem;}
+.prog-stat{background:white;border-radius:1.2rem;padding:1rem;text-align:center;border:2px solid rgba(255,182,193,.25);box-shadow:0 3px 10px var(--shadow);}
+.prog-stat-num{font-size:2rem;font-weight:900;line-height:1;}
+.prog-stat-label{font-size:.7rem;color:#888;font-weight:600;margin-top:.3rem;}
+.prog-bar-wrap{background:#ffe4ec;border-radius:2rem;height:10px;overflow:hidden;margin:.4rem 0;}
+.prog-bar-fill{height:100%;border-radius:2rem;transition:width .8s cubic-bezier(.4,0,.2,1);}
+.streak-flame{font-size:2.5rem;filter:drop-shadow(0 2px 6px rgba(255,100,0,.4));}
+.prog-section-card{background:white;border-radius:1.25rem;padding:1.1rem 1.25rem;border:2px solid rgba(255,182,193,.25);box-shadow:0 3px 10px var(--shadow);margin-bottom:1rem;}
+.prog-section-title{font-weight:800;color:var(--mid);font-size:.9rem;margin-bottom:.75rem;display:flex;align-items:center;justify-content:space-between;}
+.prog-item-row{display:flex;align-items:center;gap:.6rem;margin-bottom:.4rem;font-size:.8rem;}
+.prog-item-label{flex:1;color:#555;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.prog-item-score{font-weight:800;color:var(--mid);min-width:45px;text-align:right;}
+.score-history-list{max-height:220px;overflow-y:auto;}
+.score-history-item{display:flex;align-items:center;gap:.7rem;padding:.45rem .6rem;border-radius:.75rem;margin-bottom:.3rem;background:#fff8fb;border:1px solid rgba(255,182,193,.2);font-size:.78rem;}
+.shi-type{font-size:.7rem;background:var(--pink-pale);border:1px solid var(--pink-light);border-radius:.4rem;padding:.05rem .4rem;font-weight:700;color:var(--mid);white-space:nowrap;}
+.shi-score{font-weight:900;color:var(--pink);margin-left:auto;}
+.shi-date{font-size:.65rem;color:#bbb;}
+.srs-progress-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem;}
+.srs-pill{border-radius:2rem;padding:.25rem .8rem;font-size:.74rem;font-weight:700;}
 </style>
 </head>
 <body>
@@ -408,6 +465,8 @@ footer span{color:var(--pink);}
     <button onclick="showSection('study-plan')">📅 Study Plan</button>
     <button onclick="showSection('resources')">🔗 Resources</button>
     <button onclick="showSection('counters')">🔢 Counters</button>
+    <button onclick="showSection('listening')">🎧 Listening</button>
+    <button onclick="showSection('progress')">📊 Progress</button>
   </nav>
 </header>
 
@@ -894,7 +953,29 @@ footer span{color:var(--pink);}
   <div id="counters-list"></div>
 </div>
 
-<!-- ====== STUDY PLAN ====== -->
+<!-- ====== LISTENING PRACTICE ====== -->
+<div class="section" id="listening">
+  <div class="section-title">🎧 Listening Practice</div>
+  <div class="card" style="background:linear-gradient(135deg,rgba(255,183,197,.2),rgba(199,125,255,.1));margin-bottom:1.25rem;">
+    <p style="font-size:.88rem;color:#555;line-height:1.75;">Use your browser's built-in Japanese text-to-speech to hear native pronunciation! 🇯🇵 Press <strong>▶ Play</strong> for normal speed or <strong>🐢 Slow</strong> for careful listening. Try to repeat after each sentence!</p>
+    <div class="tts-global-bar" style="margin-top:.85rem;">
+      <span style="font-size:.8rem;font-weight:700;color:var(--mid);">🎛 Speed:</span>
+      <button class="tts-speed-btn active" id="speed-slow" onclick="setTTSSpeed(0.6,this)">🐢 Slow (0.6×)</button>
+      <button class="tts-speed-btn" id="speed-normal" onclick="setTTSSpeed(1.0,this)">🚶 Normal (1×)</button>
+      <button class="tts-speed-btn" id="speed-fast" onclick="setTTSSpeed(1.3,this)">🏃 Fast (1.3×)</button>
+      <button class="tts-speed-btn" id="speed-native" onclick="setTTSSpeed(1.6,this)">⚡ Native (1.6×)</button>
+      <span style="margin-left:auto;font-size:.75rem;color:#aaa;" id="tts-status">Ready ✓</span>
+    </div>
+  </div>
+  <div id="listening-list"></div>
+</div>
+
+<!-- ====== PROGRESS DASHBOARD ====== -->
+<div class="section" id="progress">
+  <div class="section-title">📊 My Progress</div>
+  <div id="prog-content"></div>
+</div>
+</main>
 <div class="section" id="study-plan">
   <div class="section-title">📅 8-Week N5 Study Plan</div>
   <div class="card" style="background:linear-gradient(135deg,rgba(255,183,197,.2),rgba(199,125,255,.1));margin-bottom:1.25rem;">
@@ -1989,6 +2070,8 @@ function showSection(id){
     b.classList.remove('active');
     if(b.getAttribute('onclick')&&b.getAttribute('onclick').includes(`'${id}'`))b.classList.add('active');
   });
+  // Render progress dashboard when that section is shown
+  if(id === 'progress') setTimeout(renderProgress, 0);
   // Mascot tip — runs after data is defined (deferred)
   setTimeout(()=>{
     if(typeof mascotBubbleTimer==='undefined') return;
@@ -2017,7 +2100,6 @@ buildGrammarList();
 function renderGrammar(filterText=''){
   const list=document.getElementById('grammar-list');
   const ft=filterText.toLowerCase();
-  // Group by section
   let html='';
   GRAMMAR_SECTIONS.forEach(sec=>{
     const items=sec.items.filter(item=>!ft||item.pattern.toLowerCase().includes(ft)||item.meaning.toLowerCase().includes(ft)||item.explanation.toLowerCase().includes(ft));
@@ -2041,25 +2123,31 @@ function renderGrammar(filterText=''){
           </div>`;
       }
       let extraHtml=item.extraNote?`<div style="background:#fff8fb;border-radius:.65rem;padding:.5rem .85rem;font-size:.8rem;color:#7a3b5a;margin-top:.6rem;border-left:3px solid var(--pink-light);">💡 ${item.extraNote}</div>`:'';
+      // Build example rows with TTS + SRS built in
+      const exHtml=item.examples.map((ex,ei)=>{
+        const eid=`gex_${uid}_${ei}`;
+        const safeJp=ex.jp.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+        return `<div class="grammar-example" id="${eid}">
+          <div class="jp">${ex.jp}</div>
+          <div class="rom">${ex.rom}</div>
+          <div class="en">${ex.en}</div>
+          <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.35rem;align-items:center;">
+            <button class="tts-btn" onclick="speakJP('${safeJp}',this)">🔊 Listen</button>
+            <button class="tts-btn" style="background:linear-gradient(135deg,#fff3e0,#ffe0b2);border-color:#ffb74d;color:#e65100;" onclick="speakJP('${safeJp}',this,0.5)">🐢 Slow</button>
+            <button class="srs-know-btn" style="font-size:.68rem;padding:.15rem .6rem;" onclick="markSRS('grammar','${eid}','known');this.textContent='✅ Saved!';">✅ Know it</button>
+            <button class="srs-review-btn" style="font-size:.68rem;padding:.15rem .6rem;" onclick="markSRS('grammar','${eid}','review');this.textContent='🔁 Saved!';">🔁 Review</button>
+          </div>
+        </div>`;
+      }).join('');
       html+=`<div class="grammar-card">
         <div class="grammar-card-header">
-          <div>
-            ${badge}
-            <span class="grammar-pattern">${item.pattern}</span>
-          </div>
+          <div>${badge}<span class="grammar-pattern">${item.pattern}</span></div>
           <span class="grammar-meaning-tag">${item.meaning}</span>
         </div>
         <div class="grammar-structure">${item.structure}</div>
         <div class="grammar-explanation">${item.explanation}</div>
-        <div class="grammar-examples">
-          ${item.examples.map(ex=>`<div class="grammar-example">
-            <div class="jp">${ex.jp}</div>
-            <div class="rom">${ex.rom}</div>
-            <div class="en">${ex.en}</div>
-          </div>`).join('')}
-        </div>
-        ${conjHtml}
-        ${extraHtml}
+        <div class="grammar-examples">${exHtml}</div>
+        ${conjHtml}${extraHtml}
       </div>`;
     });
     html+='</div>';
@@ -3209,7 +3297,394 @@ setTimeout(()=>{
   }, 20000);
 }, 4000);
 
-// --- PETALS ---
+// ============================================================
+//  TEXT-TO-SPEECH
+// ============================================================
+let ttsSpeed = 0.65;
+let _ttsActive = null;
+
+function setTTSSpeed(speed, btn) {
+  ttsSpeed = speed;
+  document.querySelectorAll('.tts-speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+// speakJP — used everywhere (grammar, listening, vocab, etc.)
+function speakJP(text, btn, speed) {
+  const synth = window.speechSynthesis;
+  if (!synth) { alert('Text-to-speech is not supported in this browser. Try Chrome or Edge!'); return; }
+  synth.cancel();
+  // Toggle off if already speaking this button
+  if (btn && btn.dataset.speaking === '1') {
+    btn.dataset.speaking = '0';
+    btn.classList.remove('playing','speaking');
+    const statusEl = document.getElementById('tts-status');
+    if (statusEl) statusEl.textContent = 'Stopped ■';
+    return;
+  }
+  const rate = (speed !== undefined) ? speed : ttsSpeed;
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'ja-JP';
+  utter.rate = rate;
+  utter.pitch = 1.05;
+  // Pick best Japanese voice available
+  const voices = synth.getVoices();
+  const jaVoice = voices.find(v => v.lang === 'ja-JP') || voices.find(v => v.lang.startsWith('ja'));
+  if (jaVoice) utter.voice = jaVoice;
+
+  if (btn) {
+    btn.dataset.speaking = '1';
+    btn.classList.add('playing');
+  }
+  const statusEl = document.getElementById('tts-status');
+  if (statusEl) statusEl.textContent = '🔊 Speaking...';
+
+  utter.onend = utter.onerror = () => {
+    if (btn) { btn.dataset.speaking = '0'; btn.classList.remove('playing','speaking'); }
+    if (statusEl) statusEl.textContent = 'Ready ✓';
+  };
+  synth.speak(utter);
+}
+// Alias for backwards compat
+const speakJapanese = speakJP;
+
+// Voices load async in some browsers — ensure we can find ja voice
+if (window.speechSynthesis) {
+  window.speechSynthesis.onvoiceschanged = () => {};
+}
+
+// ============================================================
+//  SRS — SPACED REPETITION
+// ============================================================
+function getSRSData() {
+  try { return JSON.parse(localStorage.getItem('sakura_srs') || '{}'); } catch(e) { return {}; }
+}
+function saveSRSData(d) {
+  try { localStorage.setItem('sakura_srs', JSON.stringify(d)); } catch(e) {}
+}
+function markSRS(type, id, status) {
+  const d = getSRSData();
+  if (!d[type]) d[type] = {};
+  d[type][id] = { status, date: new Date().toISOString() };
+  saveSRSData(d);
+  // Update badge on card
+  const card = document.getElementById(id);
+  if (card) {
+    card.querySelectorAll('.srs-badge').forEach(b => b.remove());
+    const badge = document.createElement('span');
+    badge.className = `srs-badge ${status}`;
+    badge.textContent = status === 'known' ? '✅ Known' : '🔁 Review';
+    const actions = card.querySelector('.listen-actions');
+    if (actions) actions.appendChild(badge);
+  }
+  if (document.getElementById('progress').classList.contains('active')) renderProgress();
+}
+function getSRSBadge(type, id) {
+  const d = getSRSData();
+  const item = d[type] && d[type][id];
+  if (!item) return '';
+  return `<span class="srs-badge ${item.status}">${item.status === 'known' ? '✅ Known' : '🔁 Review'}</span>`;
+}
+
+// ============================================================
+//  SCORE TRACKER
+// ============================================================
+function saveScore(type, score, total) {
+  try {
+    const h = JSON.parse(localStorage.getItem('sakura_scores') || '[]');
+    h.unshift({ type, score, total, pct: Math.round(score/total*100), date: new Date().toISOString() });
+    if (h.length > 100) h.pop();
+    localStorage.setItem('sakura_scores', JSON.stringify(h));
+  } catch(e) {}
+}
+function getScores() {
+  try { return JSON.parse(localStorage.getItem('sakura_scores') || '[]'); } catch(e) { return []; }
+}
+
+// Patch quiz end functions to save scores
+const _ee = endExam;
+function endExam() {
+  _ee();
+  saveScore('Mock Exam 📋', exScore, examQs.length);
+}
+const _sr = submitReading;
+function submitReading() {
+  _sr();
+  const test = READING_TESTS[rdCurrentTest];
+  if (!test) return;
+  let s = 0;
+  test.questions.forEach((q, i) => { if (rdAnswers[i] === q.ans) s++; });
+  saveScore('Reading 📚', s, test.questions.length);
+}
+
+// ============================================================
+//  STREAK TRACKER
+// ============================================================
+function getStreak() {
+  try {
+    const raw = localStorage.getItem('sakura_streak');
+    const d = raw ? JSON.parse(raw) : { streak: 0, lastDate: '' };
+    const today = new Date().toDateString();
+    const last = d.lastDate ? new Date(d.lastDate).toDateString() : '';
+    const yesterday = new Date(Date.now() - 86400000).toDateString();
+    if (last === today) return d; // already recorded today
+    if (last === yesterday) d.streak = (d.streak || 0) + 1;
+    else d.streak = 1;
+    d.lastDate = new Date().toISOString();
+    localStorage.setItem('sakura_streak', JSON.stringify(d));
+    return d;
+  } catch(e) { return { streak: 1 }; }
+}
+getStreak(); // record visit on page load
+
+// ============================================================
+//  LISTENING PRACTICE DATA & RENDER
+// ============================================================
+const LISTEN_CATEGORIES = [
+  { title: '🌅 Greetings & Daily Phrases', icon: '🌅', items: [
+    { jp: 'おはようございます。', rom: 'Ohayou gozaimasu.', en: 'Good morning. (polite)' },
+    { jp: 'こんにちは！', rom: 'Konnichiwa!', en: 'Hello! / Good afternoon!' },
+    { jp: 'こんばんは。', rom: 'Konbanwa.', en: 'Good evening.' },
+    { jp: 'おやすみなさい。', rom: 'Oyasuminasai.', en: 'Good night.' },
+    { jp: 'ありがとうございます。', rom: 'Arigatou gozaimasu.', en: 'Thank you very much.' },
+    { jp: 'すみません。', rom: 'Sumimasen.', en: 'Excuse me. / Sorry.' },
+    { jp: 'はじめまして。どうぞ よろしく。', rom: 'Hajimemashite. Douzo yoroshiku.', en: 'Nice to meet you.' },
+    { jp: 'おげんきですか。', rom: 'Ogenki desu ka?', en: 'How are you?' },
+    { jp: 'はい、げんきです。ありがとう。', rom: 'Hai, genki desu. Arigatou.', en: 'Yes, I\'m fine. Thank you.' },
+    { jp: 'またね！', rom: 'Mata ne!', en: 'See you later!' },
+    { jp: 'いってきます！', rom: 'Ittekimasu!', en: 'I\'m heading out!' },
+    { jp: 'おかえりなさい。', rom: 'Okaerinasai.', en: 'Welcome back.' },
+    { jp: 'いただきます！', rom: 'Itadakimasu!', en: 'Let\'s eat! (before meals)' },
+    { jp: 'ごちそうさまでした。', rom: 'Gochisousama deshita.', en: 'Thank you for the meal.' },
+  ]},
+  { title: '🛒 Shopping & Numbers', icon: '🏪', items: [
+    { jp: 'これは いくらですか。', rom: 'Kore wa ikura desu ka?', en: 'How much is this?' },
+    { jp: 'ひゃくえんです。', rom: 'Hyaku-en desu.', en: 'It\'s 100 yen.' },
+    { jp: 'これを ください。', rom: 'Kore o kudasai.', en: 'Please give me this.' },
+    { jp: 'りんごを みっつ ください。', rom: 'Ringo o mittsu kudasai.', en: 'Three apples, please.' },
+    { jp: 'たかいですね。やすいのは ありますか。', rom: 'Takai desu ne. Yasui no wa arimasu ka?', en: 'That\'s expensive! Do you have a cheaper one?' },
+    { jp: 'クレジットカードは つかえますか。', rom: 'Kurejitto kaado wa tsukaemasu ka?', en: 'Can I use a credit card?' },
+    { jp: 'レシートを ください。', rom: 'Reshiito o kudasai.', en: 'Please give me a receipt.' },
+    { jp: 'ふくろは いりますか。', rom: 'Fukuro wa irimasu ka?', en: 'Do you need a bag?' },
+  ]},
+  { title: '🕐 Time & Dates', icon: '📅', items: [
+    { jp: 'いま なんじですか。', rom: 'Ima nanji desu ka?', en: 'What time is it now?' },
+    { jp: 'ごぜん くじはんです。', rom: 'Gozen kuji han desu.', en: 'It\'s 9:30 AM.' },
+    { jp: 'きょうは なんようびですか。', rom: 'Kyou wa nan-youbi desu ka?', en: 'What day of the week is today?' },
+    { jp: 'きょうは もくようびです。', rom: 'Kyou wa mokuyoubi desu.', en: 'Today is Thursday.' },
+    { jp: 'たんじょうびは いつですか。', rom: 'Tanjoubi wa itsu desu ka?', en: 'When is your birthday?' },
+    { jp: 'わたしの たんじょうびは しちがつ ふつかです。', rom: 'Watashi no tanjoubi wa shichigatsu futsuka desu.', en: 'My birthday is July 2nd.' },
+    { jp: 'あしたは なんがつ なんにちですか。', rom: 'Ashita wa nangatsu nannichi desu ka?', en: 'What is tomorrow\'s date?' },
+    { jp: 'よじに あいましょう。', rom: 'Yoji ni aimashou.', en: 'Let\'s meet at 4 o\'clock.' },
+  ]},
+  { title: '📚 Study & School', icon: '🏫', items: [
+    { jp: 'にほんごを べんきょうしています。', rom: 'Nihongo o benkyou shite imasu.', en: 'I am studying Japanese.' },
+    { jp: 'まいにち にじかん べんきょうします。', rom: 'Mainichi ni-jikan benkyou shimasu.', en: 'I study for 2 hours every day.' },
+    { jp: 'このかんじの よみかたは なんですか。', rom: 'Kono kanji no yomikata wa nan desu ka?', en: 'What is the reading of this kanji?' },
+    { jp: 'もういちど いってください。', rom: 'Mou ichido itte kudasai.', en: 'Please say it one more time.' },
+    { jp: 'ゆっくり はなしてください。', rom: 'Yukkuri hanashite kudasai.', en: 'Please speak slowly.' },
+    { jp: 'わかりません。', rom: 'Wakarimasen.', en: 'I don\'t understand.' },
+    { jp: 'にほんごが すこし はなせます。', rom: 'Nihongo ga sukoshi hanasemasu.', en: 'I can speak a little Japanese.' },
+    { jp: 'もう いちど かいてください。', rom: 'Mou ichido kaite kudasai.', en: 'Please write it one more time.' },
+  ]},
+  { title: '🏠 Home & Family', icon: '👨‍👩‍👧', items: [
+    { jp: 'かぞくは よにんです。', rom: 'Kazoku wa yo-nin desu.', en: 'My family has four people.' },
+    { jp: 'ちちは さんじゅうごさいです。', rom: 'Chichi wa sanjuugo-sai desu.', en: 'My father is 35 years old.' },
+    { jp: 'いもうとは がくせいです。', rom: 'Imouto wa gakusei desu.', en: 'My younger sister is a student.' },
+    { jp: 'へやに ねこが います。', rom: 'Heya ni neko ga imasu.', en: 'There is a cat in the room.' },
+    { jp: 'うちに かえってから、ばんごはんを たべます。', rom: 'Uchi ni kaette kara, bangohan o tabemasu.', en: 'After returning home, I eat dinner.' },
+    { jp: 'まいあさ はちじに おきます。', rom: 'Maiasa hachiji ni okimasu.', en: 'I wake up at 8 every morning.' },
+    { jp: 'つくえの うえに ほんが あります。', rom: 'Tsukue no ue ni hon ga arimasu.', en: 'There is a book on the desk.' },
+  ]},
+  { title: '🍜 Food & Restaurant', icon: '🍣', items: [
+    { jp: 'なにが たべたいですか。', rom: 'Nani ga tabetai desu ka?', en: 'What do you want to eat?' },
+    { jp: 'すしが だいすきです！', rom: 'Sushi ga daisuki desu!', en: 'I love sushi!' },
+    { jp: 'このりょうりは おいしいですね。', rom: 'Kono ryouri wa oishii desu ne.', en: 'This dish is delicious, isn\'t it?' },
+    { jp: 'みずを いっぱい ください。', rom: 'Mizu o ippai kudasai.', en: 'One glass of water, please.' },
+    { jp: 'おかいけいを おねがいします。', rom: 'Okaikei o onegaishimasu.', en: 'The bill, please.' },
+    { jp: 'からいものは すこし にがてです。', rom: 'Karai mono wa sukoshi nigate desu.', en: 'I\'m not very good with spicy food.' },
+    { jp: 'なんにん さまですか。', rom: 'Nan-nin-sama desu ka?', en: 'How many in your party?' },
+    { jp: 'えいごの メニューは ありますか。', rom: 'Eigo no menyuu wa arimasu ka?', en: 'Do you have an English menu?' },
+  ]},
+  { title: '🚉 Transport & Directions', icon: '🗺️', items: [
+    { jp: 'えきは どこですか。', rom: 'Eki wa doko desu ka?', en: 'Where is the station?' },
+    { jp: 'まっすぐ いって、みぎに まがってください。', rom: 'Massugu itte, migi ni magatte kudasai.', en: 'Go straight, then turn right.' },
+    { jp: 'このでんしゃは とうきょうへ いきますか。', rom: 'Kono densha wa Toukyou e ikimasu ka?', en: 'Does this train go to Tokyo?' },
+    { jp: 'つぎのえきは なんですか。', rom: 'Tsugi no eki wa nan desu ka?', en: 'What is the next station?' },
+    { jp: 'バスていは ちかくに ありますか。', rom: 'Basutei wa chikaku ni arimasu ka?', en: 'Is there a bus stop nearby?' },
+    { jp: 'とうきょうまで いくらですか。', rom: 'Toukyou made ikura desu ka?', en: 'How much to Tokyo?' },
+    { jp: 'このでんしゃは なんじに でますか。', rom: 'Kono densha wa nanji ni demasu ka?', en: 'What time does this train depart?' },
+  ]},
+  { title: '🌤 Weather & Seasons', icon: '🌸', items: [
+    { jp: 'きょうの てんきは どうですか。', rom: 'Kyou no tenki wa dou desu ka?', en: 'How is the weather today?' },
+    { jp: 'はれています。きもちが いいですね。', rom: 'Harete imasu. Kimochi ga ii desu ne.', en: 'It\'s sunny. It feels nice, doesn\'t it?' },
+    { jp: 'あしたは あめが ふるでしょう。', rom: 'Ashita wa ame ga furu deshou.', en: 'It will probably rain tomorrow.' },
+    { jp: 'ふゆは さむいですが、なつは あついです。', rom: 'Fuyu wa samui desu ga, natsu wa atsui desu.', en: 'Winter is cold but summer is hot.' },
+    { jp: 'はるが いちばん すきな きせつです。', rom: 'Haru ga ichiban suki na kisetsu desu.', en: 'Spring is my favourite season.' },
+    { jp: 'かぜが つよいですね。', rom: 'Kaze ga tsuyoi desu ne.', en: 'The wind is strong, isn\'t it?' },
+  ]},
+];
+
+function renderListening() {
+  const list = document.getElementById('listening-list');
+  if (!list) return;
+  const srs = getSRSData();
+  list.innerHTML = LISTEN_CATEGORIES.map((cat, ci) => `
+    <div class="listen-category">
+      <div class="listen-cat-header">${cat.icon} ${cat.title}</div>
+      ${cat.items.map((item, ii) => {
+        const id = `lc${ci}_${ii}`;
+        const srsItem = srs['listen'] && srs['listen'][id];
+        const srsBadge = srsItem ? `<span class="srs-badge ${srsItem.status}">${srsItem.status==='known'?'✅ Known':'🔁 Review'}</span>` : '';
+        const safeJp = item.jp.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+        return `<div class="listen-card" id="${id}">
+          <div class="listen-jp">${item.jp}</div>
+          <div class="listen-rom" id="${id}_rom" style="display:none;">${item.rom}</div>
+          <div class="listen-en" id="${id}_en" style="display:none;">${item.en}</div>
+          <div class="listen-actions">
+            <button class="listen-play-btn" onclick="speakJP('${safeJp}',this)">▶ Play</button>
+            <button class="listen-slow-btn" onclick="speakJP('${safeJp}',this,0.45)">🐢 Slow</button>
+            <button class="listen-reveal" onclick="toggleListenReveal('${id}',this)">👁 Show</button>
+            ${srsBadge}
+          </div>
+          <div class="srs-bar">
+            <button class="srs-know-btn" onclick="markSRS('listen','${id}','known');this.textContent='✅ Saved!'">✅ I know this</button>
+            <button class="srs-review-btn" onclick="markSRS('listen','${id}','review');this.textContent='🔁 Saved!'">🔁 Review again</button>
+          </div>
+        </div>`;
+      }).join('')}
+    </div>`
+  ).join('');
+}
+
+function toggleListenReveal(id, btn) {
+  const rom = document.getElementById(id + '_rom');
+  const en = document.getElementById(id + '_en');
+  const showing = rom.style.display !== 'none';
+  rom.style.display = showing ? 'none' : 'block';
+  en.style.display = showing ? 'none' : 'block';
+  btn.textContent = showing ? '👁 Show' : '🙈 Hide';
+}
+
+renderListening();
+
+// ============================================================
+//  PROGRESS DASHBOARD
+// ============================================================
+function renderProgress() {
+  const el = document.getElementById('prog-content');
+  if (!el) return;
+  const scores = getScores();
+  const srs = getSRSData();
+  const streak = getStreak();
+
+  const srsListen = srs['listen'] || {};
+  const knownL = Object.values(srsListen).filter(x => x.status === 'known').length;
+  const reviewL = Object.values(srsListen).filter(x => x.status === 'review').length;
+  const totalL = LISTEN_CATEGORIES.reduce((a, c) => a + c.items.length, 0);
+
+  const srsGrammar = srs['grammar'] || {};
+  const knownG = Object.values(srsGrammar).filter(x => x.status === 'known').length;
+
+  const avgPct = scores.length ? Math.round(scores.reduce((a,s) => a+s.pct, 0) / scores.length) : 0;
+  const bestScore = scores.reduce((best, s) => s.pct > (best?.pct||0) ? s : best, null);
+  const byType = {};
+  scores.forEach(s => { if (!byType[s.type] || s.pct > byType[s.type].pct) byType[s.type] = s; });
+
+  const streakFire = streak.streak >= 14 ? '🔥🔥🔥' : streak.streak >= 7 ? '🔥🔥' : streak.streak >= 3 ? '🔥' : '✨';
+  const streakColor = streak.streak >= 7 ? '#ff5722' : streak.streak >= 3 ? '#ff9800' : '#c77dff';
+
+  el.innerHTML = `
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.85rem;margin-bottom:1.5rem;">
+      <div class="prog-stat" style="border-color:${streakColor}44;">
+        <div style="font-size:2rem;">${streakFire}</div>
+        <div class="prog-stat-num" style="color:${streakColor};">${streak.streak}</div>
+        <div class="prog-stat-label">Day Streak 🔥</div>
+      </div>
+      <div class="prog-stat" style="border-color:#4cc9f044;">
+        <div style="font-size:2rem;">📝</div>
+        <div class="prog-stat-num" style="color:#0077b6;">${scores.length}</div>
+        <div class="prog-stat-label">Quizzes Done</div>
+      </div>
+      <div class="prog-stat" style="border-color:#06d6a044;">
+        <div style="font-size:2rem;">⭐</div>
+        <div class="prog-stat-num" style="color:#06d6a0;">${avgPct}%</div>
+        <div class="prog-stat-label">Avg Score</div>
+      </div>
+      <div class="prog-stat" style="border-color:#c77dff44;">
+        <div style="font-size:2rem;">🎧</div>
+        <div class="prog-stat-num" style="color:#c77dff;">${knownL}</div>
+        <div class="prog-stat-label">Phrases Known</div>
+      </div>
+      <div class="prog-stat" style="border-color:#ff85a144;">
+        <div style="font-size:2rem;">📖</div>
+        <div class="prog-stat-num" style="color:var(--pink);">${knownG}</div>
+        <div class="prog-stat-label">Grammar Known</div>
+      </div>
+      <div class="prog-stat" style="border-color:#ffd70044;">
+        <div style="font-size:2rem;">🏆</div>
+        <div class="prog-stat-num" style="color:#f57f17;">${bestScore ? bestScore.pct+'%' : '—'}</div>
+        <div class="prog-stat-label">Best Score</div>
+      </div>
+    </div>
+
+    <div class="prog-section-card">
+      <div class="prog-section-title"><span>🎧 Listening Practice</span><span style="font-size:.72rem;color:#aaa;">${knownL+reviewL}/${totalL} rated</span></div>
+      ${[['✅ Known',knownL,'#4caf50','linear-gradient(90deg,#a5d6a7,#4caf50)'],
+         ['🔁 Review',reviewL,'#ff9800','linear-gradient(90deg,#ffcc80,#ffa726)'],
+         ['⬜ Not seen',totalL-knownL-reviewL,'#aaa','#e0e0e0']].map(([label,n,col,grad])=>`
+        <div class="prog-item-row">
+          <span style="min-width:80px;font-size:.79rem;">${label}</span>
+          <div style="flex:1;"><div class="prog-bar-wrap"><div class="prog-bar-fill" style="width:${Math.round(n/totalL*100)}%;background:${grad};"></div></div></div>
+          <span class="prog-item-score" style="color:${col};">${n}</span>
+        </div>`).join('')}
+    </div>
+
+    <div class="prog-section-card">
+      <div class="prog-section-title"><span>🏆 Personal Bests by Category</span></div>
+      ${Object.keys(byType).length === 0
+        ? `<p style="color:#aaa;font-size:.82rem;padding:.5rem 0;">Complete a quiz to see your bests here! 🌸<br>Try the <strong>Mock Exam</strong> or <strong>Reading Test</strong>.</p>`
+        : Object.entries(byType).map(([type,s]) => {
+            const col = s.pct>=80?'#4caf50':s.pct>=60?'#ff9800':'#e53935';
+            const grad = s.pct>=80?'linear-gradient(90deg,#a5d6a7,#4caf50)':s.pct>=60?'linear-gradient(90deg,#ffcc80,#ffa726)':'linear-gradient(90deg,#ef9a9a,#e53935)';
+            return `<div class="prog-item-row">
+              <span class="prog-item-label">${type}</span>
+              <div style="flex:1;margin:0 .5rem;"><div class="prog-bar-wrap"><div class="prog-bar-fill" style="width:${s.pct}%;background:${grad};"></div></div></div>
+              <span class="prog-item-score" style="color:${col};">${s.score}/${s.total} (${s.pct}%)</span>
+            </div>`;
+          }).join('')
+      }
+    </div>
+
+    <div class="prog-section-card">
+      <div class="prog-section-title">
+        <span>📈 Recent Quiz History</span>
+        ${scores.length ? `<button onclick="if(confirm('Clear all history?')){localStorage.removeItem('sakura_scores');renderProgress();}" style="font-size:.7rem;background:#fff0f0;border:1.5px solid #ffcdd2;border-radius:.5rem;padding:.2rem .6rem;color:#c62828;cursor:pointer;font-family:inherit;">🗑 Clear</button>` : ''}
+      </div>
+      <div class="score-history-list">
+        ${scores.length === 0
+          ? `<p style="color:#bbb;font-size:.82rem;text-align:center;padding:1.2rem;">No quizzes done yet! Take the Mock Exam or Reading Test to start tracking. 🌸</p>`
+          : scores.slice(0,25).map(s => {
+              const col = s.pct>=80?'#4caf50':s.pct>=60?'#ff9800':'#e53935';
+              return `<div class="score-history-item">
+                <span class="shi-type">${s.type}</span>
+                <div style="flex:1;margin:0 .5rem;"><div style="background:#ffe4ec;border-radius:2rem;height:5px;overflow:hidden;"><div style="height:100%;width:${s.pct}%;background:${col};border-radius:2rem;"></div></div></div>
+                <span class="shi-score" style="color:${col};">${s.score}/${s.total}</span>
+                <span class="shi-date">${new Date(s.date).toLocaleDateString()}</span>
+              </div>`;
+            }).join('')
+        }
+      </div>
+    </div>
+
+    <div style="display:flex;gap:.65rem;flex-wrap:wrap;margin-top:.5rem;">
+      <button class="listen-play-btn" onclick="showSection('mock-exam')">📋 Mock Exam</button>
+      <button class="listen-play-btn" style="background:linear-gradient(135deg,#c77dff,#9b59b6);" onclick="showSection('reading')">📚 Reading</button>
+      <button class="listen-play-btn" style="background:linear-gradient(135deg,#4cc9f0,#0077b6);" onclick="showSection('listening')">🎧 Listening</button>
+      <button class="listen-play-btn" style="background:linear-gradient(135deg,#06d6a0,#028a5b);" onclick="showSection('grammar')">📖 Grammar</button>
+    </div>`;
+}
+
 const pc=document.getElementById('petals');
 ['🌸','🌺','🌹','✿','❀'].forEach((_,idx)=>{
   for(let i=0;i<3;i++){
