@@ -619,6 +619,90 @@ body.dark .comp-q-card{background:#2a1422;border-color:rgba(255,133,161,.2);}
 .comp-answer-reveal{margin-top:.5rem;padding:.5rem .75rem;border-radius:.7rem;font-size:.8rem;font-weight:700;}
 .comp-answer-reveal.correct{background:#e8f5e9;color:#2e7d32;}
 .comp-answer-reveal.wrong{background:#ffebee;color:#c62828;}
+
+/* ===== EGYPT CLOCK ===== */
+#eg-clock{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.3);
+  border-radius:.75rem;padding:.25rem .65rem;flex-shrink:0;min-width:72px;cursor:default;
+}
+#eg-clock .clk-time{font-size:.85rem;font-weight:900;color:white;line-height:1.2;letter-spacing:.03em;}
+#eg-clock .clk-label{font-size:.52rem;color:rgba(255,255,255,.7);font-weight:700;letter-spacing:.06em;text-transform:uppercase;}
+body.dark #eg-clock{background:rgba(255,133,161,.1);border-color:rgba(255,133,161,.25);}
+
+/* ===== AMBIENT SOUND ===== */
+#ambient-btn{
+  display:flex;align-items:center;gap:.35rem;flex-shrink:0;
+  background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.3);
+  color:white;font-family:inherit;font-size:.72rem;font-weight:700;
+  padding:.28rem .7rem;border-radius:.75rem;cursor:pointer;transition:all .2s;white-space:nowrap;
+}
+#ambient-btn:hover,#ambient-btn.playing{background:rgba(255,255,255,.28);border-color:rgba(255,255,255,.6);}
+#ambient-btn.playing{box-shadow:0 0 12px rgba(255,255,255,.3);}
+body.dark #ambient-btn{background:rgba(255,133,161,.1);border-color:rgba(255,133,161,.25);}
+body.dark #ambient-btn.playing{box-shadow:0 0 14px rgba(255,133,161,.3);}
+#ambient-panel{
+  position:absolute;top:calc(100% + 8px);right:0;z-index:500;
+  background:white;border-radius:1.1rem;padding:.75rem;
+  box-shadow:0 8px 32px rgba(0,0,0,.18);border:1.5px solid rgba(255,182,193,.3);
+  display:none;min-width:200px;
+}
+#ambient-panel.open{display:block;}
+body.dark #ambient-panel{background:#2a1422;border-color:rgba(255,133,161,.2);box-shadow:0 8px 32px rgba(0,0,0,.5);}
+.amb-option{display:flex;align-items:center;gap:.6rem;padding:.5rem .65rem;border-radius:.65rem;cursor:pointer;transition:background .15s;font-size:.82rem;font-weight:700;color:var(--dark);}
+.amb-option:hover{background:var(--pink-pale);}
+.amb-option.active{background:linear-gradient(135deg,rgba(255,133,161,.18),rgba(199,125,255,.12));color:var(--mid);}
+.amb-vol-row{display:flex;align-items:center;gap:.5rem;padding:.45rem .65rem 0;font-size:.72rem;color:#999;font-weight:700;}
+.amb-vol-row input[type=range]{flex:1;accent-color:var(--pink);}
+body.dark .amb-option{color:#f0d0dc;}
+body.dark .amb-option:hover{background:rgba(255,133,161,.12);}
+#ambient-wrap{position:relative;flex-shrink:0;}
+
+/* ===== GLOBAL SEARCH ===== */
+#gsearch-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;display:none;align-items:flex-start;justify-content:center;padding-top:5vh;backdrop-filter:blur(4px);}
+#gsearch-overlay.open{display:flex;}
+#gsearch-box{background:white;border-radius:1.5rem;width:min(680px,94vw);box-shadow:0 20px 60px rgba(0,0,0,.3);overflow:hidden;}
+body.dark #gsearch-box{background:#2a1422;box-shadow:0 20px 60px rgba(0,0,0,.6),0 0 40px rgba(255,133,161,.08);}
+#gsearch-input-wrap{display:flex;align-items:center;padding:.9rem 1.2rem;gap:.75rem;border-bottom:1.5px solid rgba(255,182,193,.2);}
+#gsearch-input{flex:1;border:none;outline:none;font-size:1.05rem;font-family:inherit;font-weight:600;background:transparent;color:var(--dark);}
+body.dark #gsearch-input{color:#f0d0dc;}
+#gsearch-input::placeholder{color:#ccc;}
+#gsearch-close{background:rgba(255,182,193,.2);border:none;border-radius:.5rem;cursor:pointer;font-size:.9rem;padding:.3rem .55rem;color:var(--mid);}
+#gsearch-results{max-height:62vh;overflow-y:auto;padding:.5rem .6rem .75rem;}
+.gsr-section-label{font-size:.6rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#bbb;padding:.6rem .6rem .3rem;}
+.gsr-item{display:flex;align-items:center;gap:.85rem;padding:.65rem .8rem;border-radius:.85rem;cursor:pointer;transition:background .15s;}
+.gsr-item:hover{background:var(--pink-pale);}
+body.dark .gsr-item:hover{background:rgba(255,133,161,.1);}
+.gsr-icon{font-size:1.3rem;width:28px;text-align:center;flex-shrink:0;}
+.gsr-main{flex:1;min-width:0;}
+.gsr-title{font-weight:800;font-size:.88rem;color:var(--dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+body.dark .gsr-title{color:#f0d0dc;}
+.gsr-sub{font-size:.72rem;color:#aaa;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.gsr-tag{font-size:.6rem;font-weight:800;border-radius:.4rem;padding:.1rem .45rem;flex-shrink:0;}
+#gsearch-empty{text-align:center;padding:2.5rem 1rem;color:#bbb;font-size:.9rem;}
+#gsearch-hint{text-align:center;padding:1.5rem 1rem;color:#ccc;font-size:.82rem;line-height:1.8;}
+#gsearch-shortcut{display:flex;align-items:center;gap:.3rem;background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.3);border-radius:.6rem;padding:.22rem .6rem;font-size:.7rem;font-weight:700;color:white;cursor:pointer;flex-shrink:0;}
+#gsearch-shortcut:hover{background:rgba(255,255,255,.28);}
+body.dark #gsearch-shortcut{background:rgba(255,133,161,.1);border-color:rgba(255,133,161,.25);}
+
+/* ===== STROKE ORDER MODAL ===== */
+#stroke-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:800;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
+#stroke-modal-overlay.open{display:flex;}
+#stroke-modal{background:white;border-radius:1.75rem;padding:1.75rem;width:min(480px,94vw);box-shadow:0 20px 60px rgba(0,0,0,.3);position:relative;}
+body.dark #stroke-modal{background:#2a1422;box-shadow:0 20px 60px rgba(0,0,0,.6),0 0 40px rgba(255,133,161,.08);}
+#stroke-modal-close{position:absolute;top:1rem;right:1rem;background:rgba(255,182,193,.2);border:none;border-radius:.6rem;cursor:pointer;font-size:.9rem;padding:.35rem .65rem;color:var(--mid);font-weight:700;}
+.stroke-display{text-align:center;margin:1rem 0;}
+.stroke-canvas-wrap{display:flex;justify-content:center;align-items:center;margin:1rem 0;}
+#stroke-svg-area{width:200px;height:200px;border:2.5px solid rgba(255,182,193,.35);border-radius:1.2rem;background:linear-gradient(135deg,#fffef8,#fff5f8);position:relative;overflow:hidden;}
+body.dark #stroke-svg-area{background:rgba(20,8,16,.6);border-color:rgba(255,133,161,.2);}
+.stroke-grid-line{stroke:rgba(255,182,193,.3);stroke-width:1;}
+.stroke-path{fill:none;stroke:#3d1a2e;stroke-width:10;stroke-linecap:round;stroke-linejoin:round;}
+body.dark .stroke-path{stroke:#ffd0e0;}
+.stroke-num-badge{position:absolute;font-size:.6rem;font-weight:900;background:var(--pink);color:white;border-radius:50%;width:16px;height:16px;display:flex;align-items:center;justify-content:center;}
+.stroke-controls{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-top:.75rem;}
+.stroke-btn{padding:.4rem 1rem;border-radius:2rem;font-size:.8rem;font-weight:700;cursor:pointer;border:2px solid rgba(255,182,193,.4);background:var(--pink-pale);color:var(--mid);font-family:inherit;transition:all .18s;}
+.stroke-btn:hover,.stroke-btn.active{background:var(--pink);color:white;border-color:var(--pink);}
+.stroke-step-info{text-align:center;font-size:.78rem;color:#aaa;margin-top:.4rem;min-height:1.2em;}
 </style>
 <body>
 <div id="petals"></div>
@@ -671,13 +755,54 @@ body.dark .comp-q-card{background:#2a1422;border-color:rgba(255,133,161,.2);}
     <span class="logo-icon">🌸</span>
     <div class="logo-text"><h1>Sakura Study!</h1><p>JLPT N5 — Complete Study Guide</p></div>
   </div>
+  <!-- Egypt Clock -->
+  <div id="eg-clock" title="Cairo, Egypt 🇪🇬">
+    <div class="clk-time" id="clk-time">--:--</div>
+    <div class="clk-label">🇪🇬 Cairo</div>
+  </div>
+  <!-- Global Search -->
+  <button id="gsearch-shortcut" onclick="openSearch()" title="Search everything (press /)">🔍 <kbd style="background:rgba(255,255,255,.2);border-radius:.3rem;padding:.05rem .3rem;font-size:.65rem;">/</kbd></button>
+  <!-- Ambient Sound -->
+  <div id="ambient-wrap">
+    <button id="ambient-btn" onclick="toggleAmbientPanel()" title="Ambient sounds">🎵 Sounds</button>
+    <div id="ambient-panel">
+      <div style="font-size:.7rem;font-weight:900;color:#aaa;padding:.2rem .65rem .5rem;letter-spacing:.06em;text-transform:uppercase;">🎵 Study Ambience</div>
+      <div class="amb-option" id="amb_off" onclick="setAmbient('off',this)">🔇 Off</div>
+      <div class="amb-option" id="amb_rain" onclick="setAmbient('rain',this)">🌧️ Soft Rain</div>
+      <div class="amb-option" id="amb_cafe" onclick="setAmbient('cafe',this)">☕ Café Chatter</div>
+      <div class="amb-option" id="amb_temple" onclick="setAmbient('temple',this)">⛩️ Temple Bells</div>
+      <div class="amb-option" id="amb_forest" onclick="setAmbient('forest',this)">🌿 Forest Breeze</div>
+      <div class="amb-option" id="amb_lofi" onclick="setAmbient('lofi',this)">🎹 Lo-fi Tones</div>
+      <div class="amb-vol-row">🔊 Volume <input type="range" id="amb-vol" min="0" max="1" step="0.05" value="0.35" oninput="setAmbientVol(this.value)"></div>
+    </div>
+  </div>
   <button id="dark-toggle" onclick="toggleDark()">🌙 Dark</button>
   <nav>
     <button class="active" onclick="showSection('home')">🏠 Home</button>
-    <button onclick="showSection('progress')">📊 Progress</button>
-    <button onclick="showSection('bookmarks')">⭐ Bookmarks</button>
   </nav>
 </header>
+
+<!-- GLOBAL SEARCH MODAL -->
+<div id="gsearch-overlay" onclick="closeSearchIfOutside(event)">
+  <div id="gsearch-box">
+    <div id="gsearch-input-wrap">
+      <span style="font-size:1.2rem;">🔍</span>
+      <input id="gsearch-input" type="text" placeholder="Search kanji, grammar, vocab, phrases…" oninput="runSearch(this.value)" autocomplete="off" spellcheck="false">
+      <button id="gsearch-close" onclick="closeSearch()">✕ Esc</button>
+    </div>
+    <div id="gsearch-results">
+      <div id="gsearch-hint">Type to search across <strong>all 20 sections</strong> — kanji, grammar, vocab, phrases, counters &amp; more.<br><span style="font-size:.75rem;color:#ddd;">Tip: press <kbd style="background:#eee;border-radius:.3rem;padding:.1rem .35rem;color:#555;">/</kbd> anywhere to open</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- STROKE ORDER MODAL -->
+<div id="stroke-modal-overlay" onclick="closeStrokeIfOutside(event)">
+  <div id="stroke-modal">
+    <button id="stroke-modal-close" onclick="closeStrokeModal()">✕ Close</button>
+    <div id="stroke-modal-content"></div>
+  </div>
+</div>
 
 <!-- SIDEBAR OVERLAY -->
 <div id="sidebar-overlay" onclick="closeSidebar()"></div>
@@ -2531,6 +2656,575 @@ function toggleCollapse(uid){
 renderGrammar();
 
 // ============================================================
+//  EGYPT CLOCK
+// ============================================================
+function updateClock() {
+  const el = document.getElementById('clk-time');
+  if (!el) return;
+  const now = new Date();
+  // Egypt is UTC+2 (EET) — no DST complications for a fixed offset approach
+  const egypt = new Date(now.toLocaleString('en-US', { timeZone: 'Africa/Cairo' }));
+  const h = String(egypt.getHours()).padStart(2,'0');
+  const m = String(egypt.getMinutes()).padStart(2,'0');
+  const s = String(egypt.getSeconds()).padStart(2,'0');
+  el.textContent = h + ':' + m + ':' + s;
+}
+updateClock();
+setInterval(updateClock, 1000);
+
+// ============================================================
+//  AMBIENT SOUND ENGINE (Web Audio API — no external files)
+// ============================================================
+let ambCtx = null, ambNodes = [], ambCurrent = 'off', ambVol = 0.35;
+
+function getAudioCtx() {
+  if (!ambCtx) ambCtx = new (window.AudioContext || window.webkitAudioContext)();
+  return ambCtx;
+}
+
+function stopAmbient() {
+  ambNodes.forEach(n => { try { n.stop(); } catch(e){} });
+  ambNodes = [];
+}
+
+function makeWhiteNoise(ctx, gainVal, filterFreq, filterType) {
+  const bufSize = ctx.sampleRate * 4;
+  const buf = ctx.createBuffer(1, bufSize, ctx.sampleRate);
+  const data = buf.getChannelData(0);
+  for (let i = 0; i < bufSize; i++) data[i] = Math.random() * 2 - 1;
+  const src = ctx.createBufferSource();
+  src.buffer = buf; src.loop = true;
+  const filter = ctx.createBiquadFilter();
+  filter.type = filterType || 'lowpass';
+  filter.frequency.value = filterFreq;
+  const gain = ctx.createGain();
+  gain.gain.value = gainVal * ambVol;
+  src.connect(filter); filter.connect(gain); gain.connect(ctx.destination);
+  src.start(); ambNodes.push(src);
+  return gain;
+}
+
+function makeTone(ctx, freq, gainVal, waveType) {
+  const osc = ctx.createOscillator();
+  osc.type = waveType || 'sine'; osc.frequency.value = freq;
+  const gain = ctx.createGain();
+  gain.gain.value = gainVal * ambVol;
+  osc.connect(gain); gain.connect(ctx.destination);
+  osc.start(); ambNodes.push(osc);
+  return gain;
+}
+
+function makeRainAmbient(ctx) {
+  makeWhiteNoise(ctx, 0.55, 1800, 'lowpass');
+  makeWhiteNoise(ctx, 0.18, 400, 'lowpass');
+  // occasional drip pings
+  function drip() {
+    if (ambCurrent !== 'rain') return;
+    const o = ctx.createOscillator(); o.type = 'sine';
+    o.frequency.setValueAtTime(1200 + Math.random()*600, ctx.currentTime);
+    o.frequency.exponentialRampToValueAtTime(300, ctx.currentTime + 0.35);
+    const g = ctx.createGain(); g.gain.setValueAtTime(0.04 * ambVol, ctx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.35);
+    o.connect(g); g.connect(ctx.destination); o.start(); o.stop(ctx.currentTime + 0.35);
+    setTimeout(drip, 400 + Math.random() * 1200);
+  }
+  drip();
+}
+
+function makeCafeAmbient(ctx) {
+  makeWhiteNoise(ctx, 0.07, 3200, 'bandpass');
+  makeWhiteNoise(ctx, 0.04, 800, 'lowpass');
+  function chatter() {
+    if (ambCurrent !== 'cafe') return;
+    const freqs = [220, 280, 350, 420, 180];
+    freqs.forEach(f => {
+      const o = ctx.createOscillator(); o.type = 'triangle'; o.frequency.value = f + Math.random()*60;
+      const g = ctx.createGain(); const t = ctx.currentTime;
+      g.gain.setValueAtTime(0, t);
+      g.gain.linearRampToValueAtTime(0.012 * ambVol, t + 0.1);
+      g.gain.linearRampToValueAtTime(0, t + 0.3 + Math.random()*0.4);
+      o.connect(g); g.connect(ctx.destination); o.start(t); o.stop(t + 0.6);
+    });
+    setTimeout(chatter, 600 + Math.random() * 1400);
+  }
+  chatter();
+  // cup clinks
+  function clink() {
+    if (ambCurrent !== 'cafe') return;
+    const o = ctx.createOscillator(); o.type = 'sine'; o.frequency.value = 900 + Math.random()*300;
+    const g = ctx.createGain(); const t = ctx.currentTime;
+    g.gain.setValueAtTime(0.06 * ambVol, t);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.5);
+    o.connect(g); g.connect(ctx.destination); o.start(t); o.stop(t + 0.5);
+    setTimeout(clink, 3000 + Math.random() * 5000);
+  }
+  clink();
+}
+
+function makeTempleAmbient(ctx) {
+  makeWhiteNoise(ctx, 0.025, 600, 'lowpass');
+  const bellFreqs = [220, 293, 370, 440, 587];
+  function bell() {
+    if (ambCurrent !== 'temple') return;
+    const f = bellFreqs[Math.floor(Math.random() * bellFreqs.length)];
+    [1, 2, 3, 4].forEach((harm, i) => {
+      const o = ctx.createOscillator(); o.type = 'sine'; o.frequency.value = f * harm;
+      const g = ctx.createGain(); const t = ctx.currentTime;
+      g.gain.setValueAtTime(0.06 * ambVol / (i + 1), t);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 3 + i);
+      o.connect(g); g.connect(ctx.destination); o.start(t); o.stop(t + 4 + i);
+    });
+    setTimeout(bell, 4000 + Math.random() * 6000);
+  }
+  bell();
+}
+
+function makeForestAmbient(ctx) {
+  makeWhiteNoise(ctx, 0.12, 2000, 'bandpass');
+  makeWhiteNoise(ctx, 0.06, 300, 'lowpass');
+  function bird() {
+    if (ambCurrent !== 'forest') return;
+    const baseF = 800 + Math.random() * 1200;
+    for (let i = 0; i < 3 + Math.floor(Math.random()*3); i++) {
+      const o = ctx.createOscillator(); o.type = 'sine';
+      const t = ctx.currentTime + i * 0.18;
+      o.frequency.setValueAtTime(baseF, t);
+      o.frequency.exponentialRampToValueAtTime(baseF * 1.4, t + 0.1);
+      const g = ctx.createGain();
+      g.gain.setValueAtTime(0.04 * ambVol, t);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.15);
+      o.connect(g); g.connect(ctx.destination); o.start(t); o.stop(t + 0.2);
+    }
+    setTimeout(bird, 1500 + Math.random() * 3500);
+  }
+  bird();
+}
+
+function makeLofiAmbient(ctx) {
+  makeWhiteNoise(ctx, 0.025, 500, 'lowpass'); // vinyl hiss
+  const scale = [261, 294, 329, 349, 392, 440, 494, 523];
+  let noteIdx = 0;
+  function note() {
+    if (ambCurrent !== 'lofi') return;
+    const freq = scale[noteIdx % scale.length] * (Math.random() > 0.7 ? 0.5 : 1);
+    noteIdx++;
+    const o = ctx.createOscillator(); o.type = Math.random()>0.5?'triangle':'sine';
+    o.frequency.value = freq;
+    const g = ctx.createGain(); const t = ctx.currentTime;
+    g.gain.setValueAtTime(0, t);
+    g.gain.linearRampToValueAtTime(0.06 * ambVol, t + 0.05);
+    g.gain.setValueAtTime(0.06 * ambVol, t + 0.3);
+    g.gain.linearRampToValueAtTime(0, t + 0.5);
+    o.connect(g); g.connect(ctx.destination); o.start(t); o.stop(t + 0.6);
+    setTimeout(note, 350 + Math.random() * 500);
+  }
+  note();
+}
+
+const AMBIENT_MAKERS = { rain: makeRainAmbient, cafe: makeCafeAmbient, temple: makeTempleAmbient, forest: makeForestAmbient, lofi: makeLofiAmbient };
+
+function setAmbient(type, btn) {
+  stopAmbient();
+  ambCurrent = type;
+  document.querySelectorAll('.amb-option').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const ambBtn = document.getElementById('ambient-btn');
+  const icons = { off:'🎵 Sounds', rain:'🌧️ Rain', cafe:'☕ Café', temple:'⛩️ Temple', forest:'🌿 Forest', lofi:'🎹 Lo-fi' };
+  ambBtn.textContent = icons[type] || '🎵 Sounds';
+  if (type === 'off') { ambBtn.classList.remove('playing'); return; }
+  const ctx = getAudioCtx();
+  if (ctx.state === 'suspended') ctx.resume();
+  AMBIENT_MAKERS[type](ctx);
+  ambBtn.classList.add('playing');
+  document.getElementById('ambient-panel').classList.remove('open');
+}
+
+function setAmbientVol(v) {
+  ambVol = parseFloat(v);
+  // Restart current ambient to apply new volume
+  if (ambCurrent !== 'off') {
+    const btn = document.getElementById('amb_' + ambCurrent);
+    if (btn) setAmbient(ambCurrent, btn);
+  }
+}
+
+function toggleAmbientPanel() {
+  document.getElementById('ambient-panel').classList.toggle('open');
+}
+// Close ambient panel when clicking outside
+document.addEventListener('click', e => {
+  const wrap = document.getElementById('ambient-wrap');
+  if (wrap && !wrap.contains(e.target)) document.getElementById('ambient-panel').classList.remove('open');
+});
+
+// ============================================================
+//  GLOBAL SEARCH
+// ============================================================
+function openSearch() {
+  document.getElementById('gsearch-overlay').classList.add('open');
+  setTimeout(() => document.getElementById('gsearch-input').focus(), 50);
+}
+function closeSearch() {
+  document.getElementById('gsearch-overlay').classList.remove('open');
+  document.getElementById('gsearch-input').value = '';
+  document.getElementById('gsearch-results').innerHTML = `<div id="gsearch-hint">Type to search across <strong>all 20 sections</strong> — kanji, grammar, vocab, phrases, counters &amp; more.<br><span style="font-size:.75rem;color:#ddd;">Tip: press <kbd style="background:#eee;border-radius:.3rem;padding:.1rem .35rem;color:#555;">/</kbd> anywhere to open</span></div>`;
+}
+function closeSearchIfOutside(e) {
+  if (e.target === document.getElementById('gsearch-overlay')) closeSearch();
+}
+document.addEventListener('keydown', e => {
+  if (e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+    e.preventDefault(); openSearch();
+  }
+  if (e.key === 'Escape') { closeSearch(); closeStrokeModal(); }
+});
+
+function runSearch(q) {
+  const res = document.getElementById('gsearch-results');
+  if (!q || q.trim().length < 1) { closeSearch(); openSearch(); return; }
+  const term = q.trim().toLowerCase();
+  const results = [];
+
+  // Search KANJI
+  (typeof KANJI !== 'undefined' ? KANJI : []).forEach(k => {
+    if (k.char.includes(term) || k.meaning.toLowerCase().includes(term) ||
+        k.on.toLowerCase().includes(term) || (k.kun||'').toLowerCase().includes(term)) {
+      results.push({ section:'kanji', icon:'漢', tag:'Kanji', tagColor:'#4cc9f0',
+        title: k.char + ' — ' + k.meaning, sub: 'On: ' + k.on + (k.kun?' · Kun: '+k.kun:'') + ' · ' + k.strokes + ' strokes',
+        action: () => { showSection('kanji'); }
+      });
+    }
+  });
+
+  // Search VOCAB
+  (typeof VOCAB !== 'undefined' ? VOCAB : []).forEach(v => {
+    if (v.jp.includes(term) || v.read.toLowerCase().includes(term) || v.en.toLowerCase().includes(term)) {
+      results.push({ section:'vocab', icon:'📝', tag:'Vocab', tagColor:'#ffcc80',
+        title: v.jp + ' (' + v.read + ')', sub: v.en + ' · ' + v.cat,
+        action: () => { showSection('vocab'); }
+      });
+    }
+  });
+
+  // Search GRAMMAR
+  (typeof GRAMMAR_SECTIONS !== 'undefined' ? GRAMMAR_SECTIONS : []).forEach(sec => {
+    sec.items.forEach(item => {
+      if (item.pattern.toLowerCase().includes(term) || item.meaning.toLowerCase().includes(term) ||
+          (item.explanation||'').toLowerCase().includes(term)) {
+        results.push({ section:'grammar', icon:'📖', tag:'Grammar', tagColor:'#ff85a1',
+          title: item.pattern, sub: item.meaning + ' — ' + sec.title,
+          action: () => { showSection('grammar'); }
+        });
+      }
+    });
+  });
+
+  // Search SURVIVAL PHRASES
+  (typeof SURVIVAL_PHRASES !== 'undefined' ? SURVIVAL_PHRASES : []).forEach(p => {
+    if (p.jp.includes(term) || p.rom.toLowerCase().includes(term) || p.en.toLowerCase().includes(term)) {
+      results.push({ section:'phrases', icon:'💬', tag:'Phrases', tagColor:'#06d6a0',
+        title: p.jp, sub: p.rom + ' — ' + p.en,
+        action: () => { showSection('phrases'); }
+      });
+    }
+  });
+
+  // Search COUNTERS
+  (typeof COUNTERS !== 'undefined' ? COUNTERS : []).forEach(c => {
+    if (c.name.toLowerCase().includes(term) || c.suffix.includes(term) || c.desc.toLowerCase().includes(term)) {
+      results.push({ section:'counters', icon:'🔢', tag:'Counters', tagColor:'#a5d6a7',
+        title: c.suffix + ' — ' + c.name, sub: c.desc,
+        action: () => { showSection('counters'); }
+      });
+    }
+  });
+
+  // Search COMPREHENSION
+  (typeof COMP_PASSAGES !== 'undefined' ? COMP_PASSAGES : []).forEach(p => {
+    if (p.title.toLowerCase().includes(term) || p.titleEn.toLowerCase().includes(term) || p.passage.includes(term)) {
+      results.push({ section:'comprehension', icon:'🧠', tag:'Comprehension', tagColor:'#f7c59f',
+        title: p.title + ' — ' + p.titleEn, sub: p.diff + ' · ' + p.questions.length + ' questions',
+        action: () => { showSection('comprehension'); }
+      });
+    }
+  });
+
+  if (results.length === 0) {
+    res.innerHTML = `<div id="gsearch-empty">😔 No results for "<strong>${q}</strong>" — try a different word or kanji</div>`;
+    return;
+  }
+
+  const grouped = {};
+  results.forEach(r => { if (!grouped[r.tag]) grouped[r.tag] = []; grouped[r.tag].push(r); });
+  let html = '';
+  Object.entries(grouped).forEach(([tag, items]) => {
+    html += `<div class="gsr-section-label">${tag} (${items.length})</div>`;
+    items.slice(0, 8).forEach(item => {
+      html += `<div class="gsr-item" onclick="(${item.action.toString()})();closeSearch();">
+        <div class="gsr-icon">${item.icon}</div>
+        <div class="gsr-main">
+          <div class="gsr-title">${item.title}</div>
+          <div class="gsr-sub">${item.sub}</div>
+        </div>
+        <span class="gsr-tag" style="background:${item.tagColor}22;color:${item.tagColor};border:1px solid ${item.tagColor}44;">${item.tag}</span>
+      </div>`;
+    });
+    if (items.length > 8) html += `<div style="font-size:.72rem;color:#aaa;padding:.3rem .8rem;">…and ${items.length-8} more — keep typing to narrow down</div>`;
+  });
+  res.innerHTML = html;
+}
+
+// ============================================================
+//  STROKE ORDER ANIMATIONS
+// ============================================================
+// Stroke data: each kanji maps to an array of SVG path strings
+// Coordinate system: 0-200 x 0-200 viewBox
+// Strokes are drawn sequentially with animation
+const STROKE_DATA = {
+  '一': [['M20,100 L180,100']],
+  '二': [['M30,70 L170,70'],['M20,130 L180,130']],
+  '三': [['M40,55 L160,55'],['M20,100 L180,100'],['M30,145 L170,145']],
+  '四': [['M40,30 L40,170'],['M160,30 L160,170'],['M40,30 L160,30'],['M40,100 L160,100'],['M70,100 L70,170'],['M120,100 L120,170'],['M40,170 L160,170']],
+  '五': [['M30,50 L170,50'],['M100,50 L100,110'],['M30,110 L170,110'],['M50,110 Q40,155 80,170 Q120,185 160,165'],['M30,165 L170,165']],
+  '六': [['M100,25 L100,60'],['M60,60 L140,60'],['M50,90 Q30,140 60,175'],['M150,90 Q170,140 140,175']],
+  '七': [['M30,65 L170,65'],['M120,30 Q115,100 80,175']],
+  '八': [['M95,35 Q75,80 40,170'],['M105,35 Q125,80 160,170']],
+  '九': [['M55,35 Q100,75 100,120 Q100,170 60,175'],['M145,70 Q120,100 60,105']],
+  '十': [['M100,25 L100,175'],['M25,100 L175,100']],
+  '百': [['M60,30 L140,30'],['M100,30 L100,70'],['M25,70 L175,70'],['M55,70 L55,175'],['M55,100 L145,100'],['M55,130 L145,130'],['M55,175 L145,175'],['M145,70 L145,175']],
+  '千': [['M30,55 L170,55'],['M100,25 L100,175'],['M30,120 L170,120']],
+  '万': [['M30,50 L170,50'],['M110,50 Q170,110 155,175'],['M110,90 Q80,145 40,170']],
+  '円': [['M50,25 L50,175'],['M150,25 L150,175'],['M50,25 L150,25'],['M50,85 L150,85'],['M50,175 L150,175'],['M85,85 L85,175'],['M115,85 L115,175']],
+  '日': [['M45,25 L45,175'],['M155,25 L155,175'],['M45,25 L155,25'],['M45,100 L155,100'],['M45,175 L155,175']],
+  '月': [['M50,25 Q35,100 45,175'],['M155,25 L155,175'],['M50,25 L155,25'],['M52,100 L155,100'],['M50,175 L155,175']],
+  '年': [['M60,35 L140,35'],['M100,35 L100,75'],['M30,75 L170,75'],['M70,75 L70,175'],['M70,120 L145,120'],['M145,75 L145,175'],['M70,175 L145,175']],
+  '時': [['M35,30 L35,175'],['M35,85 L90,85'],['M35,130 L90,130'],['M65,30 L65,85'],['M110,30 L110,175'],['M110,80 Q145,55 170,80'],['M110,120 Q145,105 170,120'],['M110,160 Q145,150 170,160']],
+  '分': [['M75,30 L100,70'],['M125,30 L100,70'],['M100,70 L100,175'],['M60,120 L140,120']],
+  '何': [['M50,30 L50,175'],['M50,80 L140,80'],['M50,130 L95,130'],['M110,30 L110,175'],['M140,30 L140,80'],['M140,80 Q165,120 150,175'],['M110,50 L140,50']],
+  '人': [['M100,25 Q75,80 40,175'],['M105,25 Q130,90 165,175']],
+  '山': [['M100,25 L100,175'],['M30,175 L30,90 Q65,30 100,25'],['M170,175 L170,90 Q135,30 100,25']],
+  '川': [['M65,25 Q55,100 65,175'],['M100,25 L100,175'],['M135,25 Q145,100 135,175']],
+  '田': [['M40,25 L40,175'],['M160,25 L160,175'],['M40,25 L160,25'],['M40,100 L160,100'],['M40,175 L160,175'],['M100,25 L100,175']],
+  '木': [['M100,25 L100,175'],['M30,85 L170,85'],['M40,175 Q70,130 100,110'],['M160,175 Q130,130 100,110']],
+  '火': [['M100,30 L100,90'],['M45,175 Q75,130 100,90'],['M155,175 Q125,130 100,90'],['M65,130 Q100,155 135,130']],
+  '水': [['M100,25 L100,175'],['M45,70 Q75,90 100,85'],['M155,70 Q125,90 100,85'],['M40,145 Q70,165 100,155'],['M160,145 Q130,165 100,155']],
+  '金': [['M100,25 L100,100'],['M40,65 L160,65'],['M60,100 L140,100'],['M35,135 L165,135'],['M55,175 Q100,155 145,175'],['M75,135 L55,175'],['M125,135 L145,175']],
+  '土': [['M100,25 L100,155'],['M30,155 L170,155'],['M50,90 L150,90']],
+  '天': [['M40,55 L160,55'],['M25,100 L175,100'],['M100,100 Q65,140 45,175'],['M100,100 Q135,140 155,175']],
+  '気': [['M55,30 L55,175'],['M55,75 L145,75'],['M55,120 L100,120'],['M105,30 L105,75'],['M145,30 L145,75'],['M100,120 Q130,148 155,130'],['M100,148 Q115,165 100,178']],
+  '大': [['M100,25 L100,175'],['M25,80 L175,80'],['M35,175 Q67,130 100,110'],['M165,175 Q133,130 100,110']],
+  '小': [['M100,30 L100,175'],['M45,75 Q55,110 50,140'],['M155,75 Q145,110 150,140']],
+  '上': [['M100,25 L100,155'],['M30,155 L170,155'],['M55,75 L145,75']],
+  '下': [['M100,25 L100,155'],['M30,55 L170,55'],['M85,155 L100,175 L115,155']],
+  '中': [['M100,25 L100,175'],['M40,70 L40,130 L160,130 L160,70 L40,70']],
+  '本': [['M100,25 L100,175'],['M30,85 L170,85'],['M40,175 Q70,130 100,110'],['M160,175 Q130,130 100,110'],['M80,135 L120,135']],
+  '白': [['M65,25 Q50,90 55,175'],['M135,25 Q150,90 145,175'],['M55,25 L145,25'],['M55,75 L145,75'],['M55,120 L145,120'],['M55,175 L145,175']],
+  '見': [['M55,30 L145,30'],['M100,30 L100,90'],['M45,90 L155,90'],['M65,90 Q55,140 40,175'],['M100,90 L100,175'],['M135,90 Q145,140 160,175']],
+  '聞': [['M40,25 L40,175'],['M160,25 L160,175'],['M40,25 L160,25'],['M40,85 L160,85'],['M40,175 L160,175'],['M100,25 L100,85'],['M70,85 L70,175'],['M130,85 L130,175'],['M70,130 L130,130']],
+  '食': [['M100,25 L100,75'],['M40,55 L160,55'],['M55,75 L145,75'],['M60,75 L40,175'],['M100,75 L100,175'],['M140,75 L160,175'],['M55,120 L145,120']],
+  '飲': [['M55,25 L55,175'],['M55,70 L130,70'],['M55,120 L115,120'],['M95,25 Q130,60 165,45'],['M130,70 Q155,100 150,175'],['M115,120 Q135,148 130,175']],
+  '行': [['M100,25 L100,75'],['M50,50 L150,50'],['M55,75 L55,175'],['M145,75 L145,175'],['M55,125 L145,125'],['M55,175 L145,175']],
+  '来': [['M100,25 L100,75'],['M40,65 L160,65'],['M40,110 L160,110'],['M45,175 Q72,140 100,120'],['M155,175 Q128,140 100,120']],
+  '帰': [['M55,25 L55,175'],['M55,80 L145,80'],['M100,25 L100,80'],['M145,25 L145,175'],['M55,130 L145,130'],['M55,175 L145,175']],
+  '出': [['M100,25 L100,175'],['M55,70 L55,125 L145,125 L145,70'],['M40,175 L160,175']],
+  '入': [['M95,25 Q65,80 35,175'],['M100,25 Q130,90 165,175']],
+  '買': [['M45,35 L155,35'],['M100,35 L100,80'],['M40,80 L160,80'],['M70,80 L70,175'],['M130,80 L130,175'],['M70,120 L130,120'],['M70,175 L130,175'],['M45,55 L155,55']],
+  '読': [['M40,35 L40,175'],['M40,90 L120,90'],['M40,135 L120,135'],['M80,35 L80,90'],['M130,35 Q165,65 160,100 Q155,140 130,175'],['M120,90 Q140,112 120,135']],
+  '書': [['M50,35 L150,35'],['M50,70 L150,70'],['M50,105 L150,105'],['M65,35 L65,105'],['M100,35 L100,105'],['M135,35 L135,105'],['M55,140 L145,140'],['M100,140 L100,175'],['M60,175 L140,175']],
+  '話': [['M35,35 L35,175'],['M35,90 L95,90'],['M35,140 L95,140'],['M65,35 L65,90'],['M105,35 L105,175'],['M145,35 Q175,60 170,90 Q165,120 145,130'],['M105,90 L145,90'],['M105,130 L160,130'],['M115,155 Q140,165 115,180']],
+  '聴': [['M35,30 L35,175'],['M35,80 L90,80'],['M35,130 L90,130'],['M65,30 L65,80'],['M100,30 L100,90'],['M130,30 L165,50'],['M100,90 L165,90'],['M130,90 L130,175'],['M100,130 L165,130'],['M100,175 L165,175']],
+  '語': [['M35,30 L35,175'],['M35,80 L95,80'],['M35,130 L95,130'],['M65,30 L65,80'],['M105,30 L105,175'],['M140,30 L165,60'],['M105,75 L165,75'],['M105,115 L165,115'],['M105,155 L165,155'],['M105,175 L165,175']],
+  '学': [['M70,25 L130,25'],['M100,25 L100,75'],['M45,55 L155,55'],['M55,75 L145,75'],['M100,75 L100,175'],['M55,120 L145,120']],
+  '校': [['M40,30 L40,175'],['M40,85 L100,85'],['M40,135 L100,135'],['M70,30 L70,85'],['M110,30 L110,175'],['M140,30 Q165,50 165,85 Q165,120 140,140'],['M110,85 L155,85'],['M110,140 L155,140']],
+  '先': [['M70,25 L130,25'],['M100,25 L100,100'],['M30,75 L170,75'],['M55,100 L145,100'],['M75,150 Q100,175 125,150'],['M100,100 L100,175']],
+  '生': [['M100,25 L100,175'],['M30,75 L170,75'],['M30,120 L170,120'],['M60,25 L140,25']],
+  '電': [['M40,25 L40,120'],['M160,25 L160,120'],['M40,25 L160,25'],['M40,75 L160,75'],['M40,120 L160,120'],['M100,25 L100,120'],['M55,120 Q40,148 55,175'],['M100,120 L100,175'],['M145,120 Q160,148 145,175']],
+  '車': [['M100,25 L100,175'],['M30,65 L170,65'],['M30,120 L170,120'],['M55,25 L55,65'],['M145,25 L145,65'],['M40,175 L160,175']],
+  '駅': [['M35,30 L35,175'],['M35,90 L100,90'],['M35,140 L100,140'],['M65,30 L65,90'],['M110,30 Q140,55 140,90 Q140,120 115,140'],['M110,90 L140,90'],['M110,140 L155,175'],['M140,140 L110,175']],
+  '国': [['M35,25 L35,175'],['M165,25 L165,175'],['M35,25 L165,25'],['M35,175 L165,175'],['M90,70 L90,130 L125,130 L125,70 L90,70'],['M100,130 L100,160']],
+  '私': [['M55,25 Q40,80 45,175'],['M55,70 L120,70'],['M85,25 L85,70'],['M120,25 L120,70'],['M130,30 Q165,55 160,85 Q155,120 130,140'],['M120,70 Q145,90 140,140'],['M120,140 L100,175'],['M140,140 L160,175']],
+  '友': [['M40,50 L160,50'],['M70,50 Q55,100 40,175'],['M100,50 L100,100'],['M150,50 Q160,100 145,175'],['M60,120 L140,120']],
+  '父': [['M70,30 L130,30'],['M70,30 L40,175'],['M130,30 L160,175'],['M40,115 L160,115']],
+  '母': [['M55,25 L55,175'],['M55,70 L145,70'],['M55,120 L145,120'],['M145,25 L145,175'],['M80,70 L80,120'],['M120,70 L120,120'],['M30,175 L170,175']],
+  '子': [['M65,30 Q110,55 130,75'],['M100,35 L100,100'],['M30,100 L170,100'],['M85,100 Q70,145 55,175'],['M115,100 Q130,145 145,175']],
+  '女': [['M100,30 L100,90'],['M30,90 L170,90'],['M45,175 Q72,140 100,110 Q128,140 155,175'],['M65,65 L135,65']],
+  '男': [['M40,25 L160,25'],['M100,25 L100,85'],['M40,85 L160,85'],['M70,85 L70,175'],['M130,85 L130,175'],['M70,130 L130,130'],['M70,175 L130,175']],
+  '好': [['M55,25 L55,100'],['M25,65 L85,65'],['M85,25 L85,100'],['M115,25 Q150,45 150,75 Q150,105 115,120'],['M115,120 Q140,148 130,175'],['M115,75 L150,75']],
+  '高': [['M100,25 L100,75'],['M45,55 L155,55'],['M55,75 L145,75'],['M55,75 L55,145 L145,145 L145,75'],['M55,110 L145,110'],['M70,145 L70,175'],['M130,145 L130,175'],['M70,175 L130,175']],
+  '安': [['M100,25 L100,75'],['M30,55 L170,55'],['M70,100 L130,100'],['M55,130 Q100,165 145,130'],['M100,100 L100,175']],
+  '新': [['M45,30 L45,175'],['M45,80 L115,80'],['M45,130 L115,130'],['M75,30 L75,80'],['M125,30 L125,80'],['M155,30 L125,60'],['M125,80 Q155,100 155,135 Q155,160 130,175'],['M115,80 Q140,100 140,130 Q140,150 120,165']],
+  '古': [['M40,50 L160,50'],['M100,50 L100,175'],['M45,95 L155,95'],['M55,175 L145,175']],
+  '長': [['M100,25 L100,75'],['M35,55 L165,55'],['M55,75 L145,75'],['M60,75 Q45,120 50,175'],['M140,75 Q155,120 150,175'],['M55,120 L145,120'],['M50,175 L150,175']],
+  '多': [['M35,40 L165,40'],['M45,80 Q100,65 155,80'],['M35,120 L165,120'],['M45,160 Q100,145 155,160']],
+  '少': [['M100,25 L100,100'],['M35,75 L165,75'],['M60,125 Q80,155 70,180'],['M140,100 Q155,140 140,175']],
+  '毎': [['M100,25 L100,75'],['M35,55 L165,55'],['M55,75 L55,175'],['M145,75 L145,175'],['M55,120 L145,120'],['M55,175 L145,175'],['M80,75 L80,120'],['M120,75 L120,120']],
+  '今': [['M100,25 L100,80'],['M30,60 L170,60'],['M65,80 L135,80'],['M55,130 Q100,115 145,130'],['M100,80 L100,175']],
+  '週': [['M40,30 L40,175'],['M160,30 L160,175'],['M40,30 L160,30'],['M40,80 L160,80'],['M40,130 L160,130'],['M40,175 L160,175'],['M100,30 L100,175']],
+  '午': [['M100,25 L100,75'],['M30,55 L170,55'],['M100,75 L100,175'],['M40,120 L160,120']],
+  '前': [['M100,25 L100,80'],['M30,55 L170,55'],['M55,80 L55,175'],['M145,80 L145,175'],['M55,120 L145,120'],['M55,175 L145,175'],['M80,80 L80,120'],['M120,80 L120,120']],
+  '後': [['M55,25 L55,175'],['M55,75 L130,75'],['M55,130 L130,130'],['M90,25 L90,75'],['M140,25 Q170,50 170,80 Q170,115 140,130'],['M130,75 Q155,95 155,120 Q155,145 130,160'],['M130,130 L155,175']],
+  '東': [['M100,25 L100,175'],['M30,70 L170,70'],['M30,120 L170,120'],['M55,25 L55,70'],['M145,25 L145,70'],['M40,175 Q70,148 100,130'],['M160,175 Q130,148 100,130']],
+  '西': [['M35,35 L165,35'],['M45,35 L45,155'],['M155,35 L155,155'],['M45,90 L155,90'],['M45,155 L155,155'],['M75,90 L75,155'],['M125,90 L125,155']],
+  '南': [['M100,25 L100,75'],['M35,55 L165,55'],['M50,75 L50,175'],['M150,75 L150,175'],['M50,120 L150,120'],['M50,175 L150,175'],['M100,75 L100,175'],['M50,75 L150,75']],
+  '北': [['M75,25 L75,100'],['M75,65 L155,65'],['M155,25 L155,100'],['M30,125 L170,125'],['M60,125 Q50,155 60,175'],['M100,125 L100,175'],['M140,125 Q150,155 140,175']],
+  '右': [['M100,25 Q70,65 35,90'],['M100,25 Q130,65 165,90'],['M65,90 L135,90'],['M100,90 L100,175']],
+  '左': [['M100,25 Q70,65 35,90'],['M100,25 Q130,65 165,90'],['M65,90 L135,90'],['M100,90 L100,175'],['M55,65 L145,65']],
+};
+
+let strokeCurrent = null, strokeStepIdx = 0, strokeAnimTimer = null;
+
+function openStrokeModal(char, e) {
+  if (e) e.stopPropagation();
+  strokeCurrent = char;
+  strokeStepIdx = 0;
+  clearInterval(strokeAnimTimer);
+  renderStrokeModal(char);
+  document.getElementById('stroke-modal-overlay').classList.add('open');
+}
+
+function closeStrokeModal() {
+  document.getElementById('stroke-modal-overlay').classList.remove('open');
+  clearInterval(strokeAnimTimer);
+  strokeCurrent = null;
+}
+
+function closeStrokeIfOutside(e) {
+  if (e.target === document.getElementById('stroke-modal-overlay')) closeStrokeModal();
+}
+
+function renderStrokeModal(char) {
+  const k = (typeof KANJI !== 'undefined' ? KANJI : []).find(k => k.char === char);
+  if (!k) return;
+  const strokes = STROKE_DATA[char] || [];
+  const hasStrokes = strokes.length > 0;
+
+  const content = document.getElementById('stroke-modal-content');
+  content.innerHTML = `
+    <div style="text-align:center;margin-bottom:1rem;">
+      <div style="font-size:.7rem;font-weight:800;color:var(--pink);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.3rem;">Stroke Order</div>
+      <div style="font-size:1.1rem;font-weight:900;color:var(--mid);">${char} — ${k.meaning}</div>
+      <div style="font-size:.78rem;color:#aaa;margin-top:.2rem;">On: ${k.on} · Kun: ${k.kun||'—'} · ${k.strokes} stroke${k.strokes!==1?'s':''}</div>
+    </div>
+    <div class="stroke-canvas-wrap">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:.5rem;">
+        <svg id="stroke-svg-area" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <!-- Grid lines -->
+          <line x1="100" y1="0" x2="100" y2="200" class="stroke-grid-line"/>
+          <line x1="0" y1="100" x2="200" y2="100" class="stroke-grid-line"/>
+          <line x1="0" y1="0" x2="200" y2="200" class="stroke-grid-line" style="stroke-dasharray:4,6;stroke:rgba(255,182,193,.15)"/>
+          <line x1="200" y1="0" x2="0" y2="200" class="stroke-grid-line" style="stroke-dasharray:4,6;stroke:rgba(255,182,193,.15)"/>
+          <text x="100" y="115" text-anchor="middle" font-size="120" font-family="serif" fill="rgba(255,182,193,0.08)" dominant-baseline="middle">${char}</text>
+          <g id="stroke-paths"></g>
+        </svg>
+        <div class="stroke-step-info" id="stroke-step-info">${hasStrokes ? 'Press Play to animate stroke order' : '✏️ ' + k.strokes + ' strokes — tap the kanji to hear it'}</div>
+      </div>
+    </div>
+    <div class="stroke-controls">
+      ${hasStrokes ? `
+      <button class="stroke-btn" onclick="strokePlay()">▶ Play</button>
+      <button class="stroke-btn" onclick="strokeBack()">⟨ Back</button>
+      <button class="stroke-btn" onclick="strokeStepFwd()">Next ⟩</button>
+      <button class="stroke-btn" onclick="strokeReset()">↺ Reset</button>
+      ` : '<div style="color:#aaa;font-size:.8rem;font-style:italic;">Stroke animation coming soon for this kanji</div>'}
+      <button class="stroke-btn" onclick="speakJP('${char}',this)">🔊 Listen</button>
+    </div>`;
+
+  if (hasStrokes) drawStrokes(char, strokes.length);
+}
+
+let currentStrokeIdx = 0;
+
+function drawStrokes(char, upTo) {
+  const strokes = STROKE_DATA[char] || [];
+  const g = document.getElementById('stroke-paths');
+  if (!g) return;
+  g.innerHTML = '';
+  for (let i = 0; i < Math.min(upTo, strokes.length); i++) {
+    const strokePaths = strokes[i];
+    const color = i === upTo - 1 ? '#ff85a1' : '#3d1a2e';
+    const group = document.createElementNS('http://www.w3.org/2000/svg','g');
+    strokePaths.forEach(d => {
+      const path = document.createElementNS('http://www.w3.org/2000/svg','path');
+      path.setAttribute('d', d);
+      path.setAttribute('fill','none');
+      path.setAttribute('stroke', color);
+      path.setAttribute('stroke-width','9');
+      path.setAttribute('stroke-linecap','round');
+      path.setAttribute('stroke-linejoin','round');
+      // Animate the newest stroke
+      if (i === upTo - 1) {
+        const len = 300;
+        path.style.strokeDasharray = len;
+        path.style.strokeDashoffset = len;
+        path.style.transition = 'stroke-dashoffset 0.55s ease';
+        setTimeout(() => { path.style.strokeDashoffset = 0; }, 30);
+      }
+      group.appendChild(path);
+    });
+    // Stroke number badge
+    const firstPath = strokePaths[0];
+    const match = firstPath.match(/M([\d.]+),([\d.]+)/);
+    if (match) {
+      const bx = parseFloat(match[1]), by = parseFloat(match[2]);
+      const circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
+      circle.setAttribute('cx', bx); circle.setAttribute('cy', by); circle.setAttribute('r','10');
+      circle.setAttribute('fill', i === upTo-1 ? '#ff85a1' : 'rgba(100,50,80,0.5)');
+      const text = document.createElementNS('http://www.w3.org/2000/svg','text');
+      text.setAttribute('x', bx); text.setAttribute('y', by);
+      text.setAttribute('text-anchor','middle'); text.setAttribute('dominant-baseline','central');
+      text.setAttribute('font-size','9'); text.setAttribute('fill','white'); text.setAttribute('font-weight','900');
+      text.textContent = i + 1;
+      group.appendChild(circle); group.appendChild(text);
+    }
+    g.appendChild(group);
+    // Darken previous strokes
+    if (i < upTo - 1) {
+      group.querySelectorAll('path').forEach(p => p.setAttribute('stroke','rgba(61,26,46,0.45)'));
+    }
+  }
+  currentStrokeIdx = upTo;
+  const info = document.getElementById('stroke-step-info');
+  if (info) {
+    const total = strokes.length;
+    if (upTo === 0) info.textContent = 'Press Play or Next to start';
+    else if (upTo >= total) info.textContent = `✅ All ${total} strokes complete!`;
+    else info.textContent = `Stroke ${upTo} of ${total}`;
+  }
+}
+
+function strokePlay() {
+  if (!strokeCurrent) return;
+  const strokes = STROKE_DATA[strokeCurrent] || [];
+  if (!strokes.length) return;
+  clearInterval(strokeAnimTimer);
+  currentStrokeIdx = 0;
+  drawStrokes(strokeCurrent, 0);
+  let i = 1;
+  strokeAnimTimer = setInterval(() => {
+    drawStrokes(strokeCurrent, i);
+    i++;
+    if (i > strokes.length) clearInterval(strokeAnimTimer);
+  }, 700);
+}
+
+function strokeStepFwd() {
+  if (!strokeCurrent) return;
+  const strokes = STROKE_DATA[strokeCurrent] || [];
+  if (currentStrokeIdx < strokes.length) drawStrokes(strokeCurrent, currentStrokeIdx + 1);
+}
+
+function strokeBack() {
+  if (!strokeCurrent) return;
+  const next = Math.max(0, currentStrokeIdx - 1);
+  drawStrokes(strokeCurrent, next);
+}
+
+function strokeReset() {
+  clearInterval(strokeAnimTimer);
+  if (strokeCurrent) drawStrokes(strokeCurrent, 0);
+}
+
+// ============================================================
 //  KANA DATA & RENDER
 // ============================================================
 const HIRAGANA_ROWS=[
@@ -2703,6 +3397,7 @@ function renderKanji(filter='all'){
       </div>
       <span class="kanji-stroke">✏️ ${k.strokes} stroke${k.strokes!==1?'s':''}</span>
       <span class="kanji-jlpt">N5</span>
+      <button class="stroke-btn" style="font-size:.68rem;padding:.25rem .65rem;margin-top:.4rem;width:100%;" onclick="openStrokeModal('${k.char}',event)">✏️ Stroke Order</button>
       ${k.words.map(w=>`<div class="kanji-example-word"><span class="kw-jp" style="cursor:pointer;" onclick="speakJP('${w.jp}',this)">${w.jp}</span> <span style="color:#aaa;font-size:.7rem;">(${w.read})</span><div class="kw-en">${w.en}</div></div>`).join('')}
     </div>`;
   }).join('');
