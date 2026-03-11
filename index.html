@@ -241,11 +241,109 @@ main{position:relative;z-index:5;padding:1.5rem;max-width:1200px;margin:0 auto;}
 ::-webkit-scrollbar{width:5px;}
 ::-webkit-scrollbar-track{background:#fff0f3;}
 ::-webkit-scrollbar-thumb{background:var(--pink-light);border-radius:3px;}
-@media(max-width:600px){.options{grid-template-columns:1fr;}.home-grid{grid-template-columns:repeat(2,1fr);}main{padding:.9rem;}header{padding:.65rem .9rem;}.kanji-detail-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));}.adj-grid{grid-template-columns:1fr;}}
+@media(max-width:600px){.options{grid-template-columns:1fr;}.home-grid{grid-template-columns:repeat(2,1fr);}main{padding:.9rem;}header{padding:.65rem .9rem;}.kanji-detail-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));}.adj-grid{grid-template-columns:1fr;}.mascot-wrap{bottom:.75rem;right:.75rem;}.mascot-svg{width:70px;height:70px;}}
+
+/* ===== MASCOT ===== */
+.mascot-wrap{
+  position:fixed;bottom:1.25rem;right:1.25rem;
+  z-index:999;display:flex;flex-direction:column;align-items:flex-end;gap:.5rem;
+  pointer-events:none;
+}
+.mascot-bubble{
+  background:white;border:2.5px solid var(--pink-light);
+  border-radius:1.25rem 1.25rem 0 1.25rem;
+  padding:.6rem .9rem;font-size:.8rem;font-weight:700;
+  color:var(--mid);max-width:200px;line-height:1.5;
+  box-shadow:0 4px 20px var(--shadow);
+  pointer-events:none;
+  animation:bubblePop .3s cubic-bezier(.34,1.56,.64,1);
+  position:relative;
+}
+.mascot-bubble::after{
+  content:'';position:absolute;bottom:-10px;right:18px;
+  border:5px solid transparent;border-top-color:var(--pink-light);
+}
+.mascot-bubble.hidden{display:none;}
+@keyframes bubblePop{from{transform:scale(0) translateY(10px);opacity:0;}to{transform:scale(1) translateY(0);opacity:1;}}
+
+.mascot-svg{
+  width:82px;height:82px;cursor:pointer;pointer-events:all;
+  filter:drop-shadow(0 4px 12px rgba(255,133,161,.4));
+  animation:mascotFloat 3s ease-in-out infinite;
+  transition:transform .2s;
+}
+.mascot-svg:hover{transform:scale(1.12);}
+@keyframes mascotFloat{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-8px);}
+}
+.mascot-svg:active{transform:scale(.95);}
+
+/* ===== FOOTER ===== */
+footer{
+  position:relative;z-index:5;
+  text-align:center;padding:1.25rem 1.5rem;
+  background:linear-gradient(135deg,rgba(255,133,161,.12),rgba(199,125,255,.08));
+  border-top:1.5px solid rgba(255,182,193,.3);
+  margin-top:1rem;
+}
+footer p{font-size:.75rem;color:#a0607a;font-weight:600;}
+footer span{color:var(--pink);}
+
+/* ===== HOME TIMELINE MINI ===== */
+.home-timeline{display:flex;overflow-x:auto;gap:.75rem;padding:.5rem .25rem 1rem;scrollbar-width:thin;}
+.home-timeline::-webkit-scrollbar{height:4px;}
+.home-timeline::-webkit-scrollbar-thumb{background:var(--pink-light);border-radius:2px;}
+.htl-card{
+  flex-shrink:0;width:170px;background:white;border-radius:1.25rem;
+  padding:1rem;border:2px solid;box-shadow:0 3px 12px var(--shadow);
+  cursor:pointer;transition:all .2s;
+}
+.htl-card:hover{transform:translateY(-4px);box-shadow:0 8px 22px var(--shadow);}
+.htl-week{font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;margin-bottom:.2rem;}
+.htl-emoji{font-size:1.8rem;display:block;margin-bottom:.3rem;}
+.htl-title{font-size:.78rem;font-weight:800;color:var(--dark);line-height:1.4;}
+.htl-tasks{font-size:.68rem;color:#888;margin-top:.35rem;line-height:1.5;}
 </style>
 </head>
 <body>
 <div id="petals"></div>
+
+<!-- ===== MASCOT: Hana-chan ===== -->
+<div class="mascot-wrap" id="mascot-wrap">
+  <div class="mascot-bubble" id="mascot-bubble">こんにちは！I'm Hana-chan! 🌸<br>Tap me for study tips!</div>
+  <svg class="mascot-svg" id="mascot-svg" viewBox="0 0 120 120" onclick="mascotTap()" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="60" cy="78" rx="28" ry="22" fill="#ffb7c5"/>
+    <ellipse cx="30" cy="80" rx="9" ry="6" fill="#ffb7c5" transform="rotate(-20 30 80)"/>
+    <ellipse cx="90" cy="80" rx="9" ry="6" fill="#ffb7c5" transform="rotate(20 90 80)"/>
+    <ellipse cx="60" cy="82" rx="16" ry="14" fill="#ff85a1" opacity=".45"/>
+    <polygon points="50,70 58,74 50,78" fill="#e05f88"/>
+    <polygon points="70,70 62,74 70,78" fill="#e05f88"/>
+    <circle cx="60" cy="74" r="3.5" fill="#e05f88"/>
+    <circle cx="60" cy="50" r="26" fill="#ffe4ec"/>
+    <polygon points="36,30 28,10 46,24" fill="#ffb7c5"/>
+    <polygon points="37,29 31,15 44,25" fill="#ff85a1" opacity=".7"/>
+    <polygon points="84,30 92,10 74,24" fill="#ffb7c5"/>
+    <polygon points="83,29 89,15 76,25" fill="#ff85a1" opacity=".7"/>
+    <ellipse cx="50" cy="50" rx="5.5" ry="6" fill="#3d1a2e"/>
+    <ellipse cx="70" cy="50" rx="5.5" ry="6" fill="#3d1a2e"/>
+    <circle cx="52" cy="48" r="2" fill="white"/>
+    <circle cx="72" cy="48" r="2" fill="white"/>
+    <ellipse cx="42" cy="57" rx="6" ry="4" fill="#ff85a1" opacity=".5"/>
+    <ellipse cx="78" cy="57" rx="6" ry="4" fill="#ff85a1" opacity=".5"/>
+    <ellipse cx="60" cy="56" rx="2.5" ry="1.5" fill="#e05f88"/>
+    <path d="M53 61 Q60 67 67 61" stroke="#e05f88" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <polygon points="60,24 50,16 54,26" fill="#ff85a1"/>
+    <polygon points="60,24 70,16 66,26" fill="#ff85a1"/>
+    <circle cx="60" cy="24" r="4" fill="#e05f88"/>
+    <rect x="88" y="74" width="18" height="14" rx="2" fill="#c77dff"/>
+    <rect x="89" y="75" width="16" height="12" rx="1" fill="#e8d5ff"/>
+    <line x1="97" y1="75" x2="97" y2="87" stroke="#c77dff" stroke-width="1.5"/>
+    <line x1="91" y1="79" x2="95" y2="79" stroke="#c77dff" stroke-width="1"/>
+    <line x1="91" y1="82" x2="95" y2="82" stroke="#c77dff" stroke-width="1"/>
+  </svg>
+</div>
+
 <header>
   <div class="logo">
     <span class="logo-icon">🌸</span>
@@ -288,7 +386,16 @@ main{position:relative;z-index:5;padding:1.5rem;max-width:1200px;margin:0 auto;}
     <div class="home-card" onclick="showSection('study-plan')"><span class="icon">📅</span><h3>Study Plan</h3><p>8-week timeline to N5</p></div>
     <div class="home-card" onclick="showSection('resources')"><span class="icon">🔗</span><h3>Resources</h3><p>Best N5 study websites</p></div>
   </div>
-  <div class="card" style="margin-top:1.25rem;background:linear-gradient(135deg,rgba(255,183,197,.25),rgba(155,246,255,.15));">
+  <!-- HOME MINI TIMELINE -->
+  <div class="card" style="margin-top:1.25rem;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem;flex-wrap:wrap;gap:.5rem;">
+      <div style="font-weight:900;color:var(--mid);font-size:1rem;">📅 Your 8-Week Study Roadmap</div>
+      <button class="btn" style="font-size:.75rem;padding:.35rem 1rem;" onclick="showSection('study-plan')">See Full Plan →</button>
+    </div>
+    <div class="home-timeline" id="home-timeline"></div>
+  </div>
+
+  <div class="card" style="background:linear-gradient(135deg,rgba(255,183,197,.25),rgba(155,246,255,.15));">
     <div style="font-weight:800;color:var(--mid);margin-bottom:.75rem;">💡 N5 At a Glance</div>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.6rem;">
       <div style="text-align:center;background:white;padding:.7rem;border-radius:1rem;border:2px solid var(--pink-light);"><div style="font-size:1.4rem;font-weight:900;color:var(--pink);">~800</div><div style="font-size:.7rem;color:#888;">Vocabulary</div></div>
@@ -1655,6 +1762,98 @@ function examNext(){exIndex++;showExamQ();}
 function endExam(){clearInterval(exTimer);document.getElementById('exam-quiz').style.display='none';document.getElementById('exam-score').style.display='block';const pct=Math.round((exScore/examQs.length)*100);document.getElementById('ex-score-num').textContent=`${exScore}/${examQs.length}`;const msgs=['📚 Keep studying! You\'ve got this!','💪 Good effort! Focus on weak areas.','✨ Great work! Almost ready!','🌸 Outstanding! You\'re ready for N5!'];document.getElementById('ex-score-msg').textContent=pct>=80?msgs[3]:pct>=70?msgs[2]:pct>=50?msgs[1]:msgs[0];document.getElementById('ex-score-sub').textContent=`${pct}% — ${pct>=60?'Pass level reached! 🎉':'Keep studying to reach passing level (60%+)'}`;const gT=EXAM_QUESTIONS.filter(q=>q.type==='grammar').length,kT=EXAM_QUESTIONS.filter(q=>q.type==='kanji').length,vT=EXAM_QUESTIONS.filter(q=>q.type==='vocab').length;document.getElementById('ex-breakdown').innerHTML=`<div style="font-weight:700;color:var(--mid);margin-bottom:.4rem;">Section Breakdown:</div><div style="display:flex;flex-direction:column;gap:.3rem;"><div style="display:flex;justify-content:space-between;background:#fff0f3;padding:.35rem .7rem;border-radius:.7rem;"><span>📖 Grammar</span><span style="font-weight:800;color:var(--pink);">${exBreakdown.grammar}/${gT}</span></div><div style="display:flex;justify-content:space-between;background:#fff0f3;padding:.35rem .7rem;border-radius:.7rem;"><span>漢字 Kanji</span><span style="font-weight:800;color:var(--pink);">${exBreakdown.kanji}/${kT}</span></div><div style="display:flex;justify-content:space-between;background:#fff0f3;padding:.35rem .7rem;border-radius:.7rem;"><span>📝 Vocab</span><span style="font-weight:800;color:var(--pink);">${exBreakdown.vocab}/${vT}</span></div></div>`;}
 function resetExam(){document.getElementById('exam-setup').style.display='block';document.getElementById('exam-quiz').style.display='none';document.getElementById('exam-score').style.display='none';}
 
+// --- HOME MINI TIMELINE ---
+function renderHomeTimeline(){
+  const c=document.getElementById('home-timeline');
+  if(!c)return;
+  c.innerHTML=STUDY_PLAN.map((w,i)=>`
+    <div class="htl-card" style="border-color:${w.color}20;border-left:4px solid ${w.color};" onclick="showSection('study-plan')" title="See full plan">
+      <div class="htl-week" style="color:${w.color};">${w.week}</div>
+      <span class="htl-emoji">${w.emoji}</span>
+      <div class="htl-title">${w.title}</div>
+      <div class="htl-tasks">${w.tasks[0]}</div>
+    </div>`).join('');
+}
+renderHomeTimeline();
+
+// --- MASCOT ---
+const MASCOT_TIPS = [
+  "💡 Tip: Practice hiragana every morning for just 5 minutes!",
+  "🌸 Remember: いい (good) is irregular! Negative = よくない, not いくない!",
+  "⚡ Group 3 only has 2 verbs: する and くる. Easy to remember!",
+  "漢字 Try to write each kanji 5 times while saying its meaning out loud!",
+  "🔵 Particles are everything! は, が, を, に, で — master these first!",
+  "🎯 For JLPT N5 you need 110/180 points to pass. You've got this!",
+  "📖 Reading tip: Guess meaning from context, even if you don't know every word!",
+  "🃏 Flashcards work best with spaced repetition — review right before you forget!",
+  "✨ な-adjectives need な before nouns: しずかなへや (quiet room)!",
+  "⏰ 〜ています can mean ongoing action OR a resultant state. Context matters!",
+  "🌺 To say 'I want to do X': take the ます stem and add たい！ e.g. たべたい！",
+  "💪 Study a little every day rather than a lot once a week. 継続は力なり！",
+  "🎨 い-adjectives ending: negative → くない, past → かった. Easy pattern!",
+  "📝 Memorize verb groups by their ending sound — RU verbs are usually Group 2!",
+  "🌸 You're doing amazing! がんばれ！Keep going! 応援してるよ！",
+  "🔄 Opposite adjectives help double your vocab — learn pairs, not singles!",
+  "🎵 Try humming Japanese words to a tune — music helps memory!",
+  "☕ Take breaks! Study 25 min → 5 min break (Pomodoro technique) works great!",
+];
+let mascotTipIndex = Math.floor(Math.random()*MASCOT_TIPS.length);
+let mascotBubbleTimer = null;
+let mascotVisible = true;
+
+function mascotTap(){
+  const bubble = document.getElementById('mascot-bubble');
+  mascotTipIndex = (mascotTipIndex + 1) % MASCOT_TIPS.length;
+  bubble.classList.remove('hidden');
+  bubble.style.animation = 'none';
+  void bubble.offsetWidth;
+  bubble.style.animation = 'bubblePop .3s cubic-bezier(.34,1.56,.64,1)';
+  bubble.innerHTML = MASCOT_TIPS[mascotTipIndex];
+  clearTimeout(mascotBubbleTimer);
+  mascotBubbleTimer = setTimeout(()=>bubble.classList.add('hidden'), 5000);
+}
+
+// Auto-show tip after 4 seconds, then hide, cycle every 20s
+setTimeout(()=>{
+  const bubble = document.getElementById('mascot-bubble');
+  bubble.classList.add('hidden');
+  setInterval(()=>{
+    mascotTipIndex = (mascotTipIndex + 1) % MASCOT_TIPS.length;
+    bubble.innerHTML = MASCOT_TIPS[mascotTipIndex];
+    bubble.classList.remove('hidden');
+    bubble.style.animation='none';void bubble.offsetWidth;bubble.style.animation='bubblePop .3s cubic-bezier(.34,1.56,.64,1)';
+    clearTimeout(mascotBubbleTimer);
+    mascotBubbleTimer = setTimeout(()=>bubble.classList.add('hidden'), 5000);
+  }, 20000);
+}, 4000);
+
+// Section-based mascot tips
+const sectionTips = {
+  grammar: "📖 Grammar time! Check the conjugation tables — they're gold for the exam!",
+  kanji: "漢字 Click a kanji card to highlight it. Use stroke count to help remember!",
+  vocab: "📝 Filter by category to study one group at a time. Less overwhelm, more progress!",
+  adjectives: "🎨 Opposite pairs = double the vocab for half the effort! Smart studying!",
+  flashcards: "🃏 Shuffle the deck! Random order helps real memory, not just order memory!",
+  'kanji-mcq': "✏️ 30 seconds per question — just like the real exam! Stay calm and focused!",
+  reading: "📚 Read the questions FIRST, then the passage. It helps you know what to look for!",
+  writing: "✍️ Even a rough attempt helps! Don't leave blanks — try your best!",
+  'mock-exam': "📋 Exam mode! Treat this like the real thing. Deep breath, you've got this! 🌸",
+  'study-plan': "📅 Consistency beats intensity! 1 hour daily > 7 hours once a week!",
+  resources: "🔗 Jisho.org is your best friend for looking up any Japanese word or kanji!",
+};
+const _origShowSection = showSection;
+function showSection(id){
+  _origShowSection(id);
+  if(sectionTips[id]){
+    const bubble = document.getElementById('mascot-bubble');
+    bubble.innerHTML = sectionTips[id];
+    bubble.classList.remove('hidden');
+    bubble.style.animation='none';void bubble.offsetWidth;bubble.style.animation='bubblePop .3s cubic-bezier(.34,1.56,.64,1)';
+    clearTimeout(mascotBubbleTimer);
+    mascotBubbleTimer = setTimeout(()=>bubble.classList.add('hidden'), 5000);
+  }
+}
+
 // --- PETALS ---
 const pc=document.getElementById('petals');
 ['🌸','🌺','🌹','✿','❀'].forEach((_,idx)=>{
@@ -1670,5 +1869,11 @@ const pc=document.getElementById('petals');
   }
 });
 </script>
+
+<footer>
+  <p>🌸 <span>Sakura Study!</span> — JLPT N5 Complete Study Guide</p>
+  <p style="margin-top:.3rem;">© 2025 <span>Ahmed El Bourgy</span>. All rights reserved. Made with 💕 for Japanese learners everywhere.</p>
+</footer>
+
 </body>
 </html>
