@@ -745,7 +745,322 @@ body.dark .stroke-path{stroke:#ffd0e0;}
 .stroke-btn:hover,.stroke-btn.active{background:var(--pink);color:white;border-color:var(--pink);}
 .stroke-step-info{text-align:center;font-size:.78rem;color:#aaa;margin-top:.4rem;min-height:1.2em;}
 </style>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut,
+    onAuthStateChanged, updateProfile, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail
+  } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+  import { getFirestore, doc, setDoc, getDoc, updateDoc, serverTimestamp
+  } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDWeOYL1qYUlu9cTdwgbBafOHAdhtYHf6M",
+    authDomain: "japanese-website-70e89.firebaseapp.com",
+    projectId: "japanese-website-70e89",
+    storageBucket: "japanese-website-70e89.firebasestorage.app",
+    messagingSenderId: "17723436403",
+    appId: "1:17723436403:web:382fe6b4ad5fac80642906"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+  const googleProvider = new GoogleAuthProvider();
+
+  window._sakuraAuth = auth;
+  window._sakuraDB = db;
+  window._sakuraFirebase = {
+    auth, db, googleProvider,
+    createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut,
+    onAuthStateChanged, updateProfile, signInWithPopup, sendPasswordResetEmail,
+    doc, setDoc, getDoc, updateDoc, serverTimestamp
+  };
+
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      window._sakuraUser = user;
+      try {
+        const userDoc = await getDoc(doc(db, 'users', user.uid));
+        if (userDoc.exists()) {
+          window._sakuraUserData = userDoc.data();
+        } else {
+          const newData = {
+            displayName: user.displayName || user.email.split('@')[0],
+            email: user.email, createdAt: serverTimestamp(), lastLogin: serverTimestamp(),
+            streak: 1, lastStudyDate: new Date().toISOString(),
+            scores: [], srs: {}, bookmarks: {},
+            customEntries: { vocab: [], kanji: [], grammar: [], adj: [], counters: [] }
+          };
+          await setDoc(doc(db, 'users', user.uid), newData);
+          window._sakuraUserData = newData;
+        }
+        await updateDoc(doc(db, 'users', user.uid), { lastLogin: serverTimestamp() });
+      } catch(e) { console.warn('Firestore error:', e); window._sakuraUserData = null; }
+      if (typeof showMainApp === 'function') showMainApp(user);
+    } else {
+      window._sakuraUser = null; window._sakuraUserData = null;
+      if (typeof showLandingPage === 'function') showLandingPage();
+    }
+  });
+
+  window.sakuraSaveToCloud = async (field, data) => {
+    if (!window._sakuraUser) return;
+    try { await updateDoc(doc(db, 'users', window._sakuraUser.uid), { [field]: data, lastLogin: serverTimestamp() }); }
+    catch(e) { console.warn('Cloud save failed:', e); }
+  };
+
+  window.sakuraGetCloudStreak = () => {
+    if (!window._sakuraUserData) return { streak: 1 };
+    return { streak: window._sakuraUserData.streak || 1, lastStudyDate: window._sakuraUserData.lastStudyDate };
+  };
+</script>
+<style>
+/* ═══ LANDING PAGE + AUTH MODAL STYLES ═══ */
+#landing-overlay {
+  position:fixed;inset:0;z-index:9999;
+  background:linear-gradient(145deg,#fff0f3 0%,#ffe4f0 40%,#f8d6ff 70%,#ffd6f0 100%);
+  overflow-y:auto;font-family:'Nunito','Noto Sans JP',sans-serif;
+  transition:opacity .5s ease,transform .5s ease;
+}
+#landing-overlay.hiding{opacity:0;transform:translateY(-30px);pointer-events:none;}
+#landing-overlay.hidden{display:none;}
+.landing-bg{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0;}
+.bg-petal{position:absolute;font-size:1.2rem;opacity:.18;animation:bgFloat linear infinite;}
+@keyframes bgFloat{0%{transform:translateY(-5vh) rotate(0deg);opacity:0;}10%{opacity:.2;}90%{opacity:.15;}100%{transform:translateY(105vh) rotate(540deg);opacity:0;}}
+.ln-nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;background:rgba(255,255,255,.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,182,193,.3);box-shadow:0 2px 20px rgba(255,133,161,.12);}
+.ln-logo{display:flex;align-items:center;gap:.6rem;font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;color:#e05f88;}
+.ln-nav-btns{display:flex;gap:.75rem;}
+.ln-btn-ghost{background:none;border:2px solid #ff85a1;color:#e05f88;font-family:'Nunito',sans-serif;font-weight:800;font-size:.88rem;padding:.45rem 1.2rem;border-radius:2rem;cursor:pointer;transition:all .2s;}
+.ln-btn-ghost:hover{background:#ff85a1;color:white;transform:translateY(-2px);}
+.ln-btn-solid{background:linear-gradient(135deg,#ff85a1,#e05f88);border:none;color:white;font-family:'Nunito',sans-serif;font-weight:800;font-size:.88rem;padding:.45rem 1.2rem;border-radius:2rem;cursor:pointer;transition:all .2s;box-shadow:0 4px 14px rgba(255,133,161,.4);}
+.ln-btn-solid:hover{transform:translateY(-2px);}
+.ln-hero{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;text-align:center;padding:5rem 2rem 4rem;}
+.ln-hero-badge{display:inline-flex;align-items:center;background:linear-gradient(135deg,rgba(255,133,161,.15),rgba(123,45,139,.1));border:1.5px solid rgba(255,133,161,.4);border-radius:2rem;padding:.4rem 1.1rem;font-size:.8rem;font-weight:800;color:#7b2d8b;margin-bottom:1.5rem;animation:badgePop .6s cubic-bezier(.34,1.56,.64,1) .1s both;}
+@keyframes badgePop{from{opacity:0;transform:scale(.7) translateY(10px);}to{opacity:1;transform:scale(1) translateY(0);}}
+.ln-hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,7vw,5.5rem);font-weight:900;line-height:1.08;color:#2d0a1f;animation:heroSlide .7s cubic-bezier(.34,1.4,.64,1) .2s both;margin-bottom:.5rem;}
+@keyframes heroSlide{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+.ln-hero-title .highlight{background:linear-gradient(135deg,#ff85a1,#7b2d8b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.ln-hero-sub{font-size:1.15rem;color:#7a3b5a;line-height:1.8;max-width:560px;margin:1rem auto 2.5rem;font-weight:600;animation:heroSlide .7s cubic-bezier(.34,1.4,.64,1) .35s both;}
+.ln-hero-cta{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;animation:heroSlide .7s cubic-bezier(.34,1.4,.64,1) .5s both;}
+.ln-cta-primary{display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,#ff85a1,#c77dff,#4cc9f0);background-size:200% 200%;color:white;border:none;font-family:'Nunito',sans-serif;font-size:1.05rem;font-weight:900;padding:.9rem 2.2rem;border-radius:3rem;cursor:pointer;box-shadow:0 8px 30px rgba(255,133,161,.45);transition:all .3s;animation:gradShift 3s ease infinite;}
+@keyframes gradShift{0%,100%{background-position:0% 50%;}50%{background-position:100% 50%;}}
+.ln-cta-primary:hover{transform:translateY(-4px) scale(1.02);}
+.ln-cta-secondary{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.8);border:2px solid rgba(255,133,161,.4);color:#7a3b5a;font-family:'Nunito',sans-serif;font-size:1.05rem;font-weight:800;padding:.9rem 2.2rem;border-radius:3rem;cursor:pointer;transition:all .2s;}
+.ln-cta-secondary:hover{border-color:#ff85a1;background:white;transform:translateY(-2px);}
+.ln-stats{position:relative;z-index:1;display:flex;justify-content:center;flex-wrap:wrap;gap:2.5rem;padding:2.5rem 2rem;background:rgba(255,255,255,.6);backdrop-filter:blur(12px);border-top:1px solid rgba(255,182,193,.25);border-bottom:1px solid rgba(255,182,193,.25);}
+.ln-stat{text-align:center;}
+.ln-stat-num{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:900;background:linear-gradient(135deg,#e05f88,#7b2d8b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.ln-stat-label{font-size:.78rem;font-weight:700;color:#7a3b5a;margin-top:.2rem;}
+.ln-features{position:relative;z-index:1;padding:5rem 2rem;max-width:1100px;margin:0 auto;}
+.ln-section-header{text-align:center;margin-bottom:3.5rem;}
+.ln-section-tag{display:inline-block;background:linear-gradient(135deg,rgba(255,133,161,.15),rgba(199,125,255,.12));border:1.5px solid rgba(199,125,255,.3);border-radius:2rem;padding:.3rem 1rem;font-size:.75rem;font-weight:800;color:#7b2d8b;letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem;}
+.ln-section-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:900;color:#2d0a1f;line-height:1.2;margin-bottom:.75rem;}
+.ln-section-sub{font-size:1rem;color:#7a3b5a;font-weight:600;line-height:1.7;max-width:540px;margin:0 auto;}
+.ln-features-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;}
+.ln-feature-card{background:rgba(255,255,255,.82);backdrop-filter:blur(16px);border-radius:1.75rem;padding:2rem 1.75rem;border:1.5px solid rgba(255,182,193,.25);box-shadow:0 4px 20px rgba(255,133,161,.1);transition:all .28s;position:relative;overflow:hidden;}
+.ln-feature-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(255,133,161,.22);border-color:rgba(255,133,161,.4);}
+.ln-feat-icon{font-size:2.5rem;margin-bottom:1rem;display:block;}
+.ln-feat-title{font-size:1.05rem;font-weight:900;color:#2d0a1f;margin-bottom:.5rem;}
+.ln-feat-desc{font-size:.85rem;color:#7a3b5a;line-height:1.7;font-weight:600;}
+.ln-feat-tag{display:inline-block;margin-top:.85rem;background:linear-gradient(135deg,rgba(255,133,161,.12),rgba(199,125,255,.1));border-radius:2rem;padding:.2rem .75rem;font-size:.7rem;font-weight:800;color:#e05f88;border:1px solid rgba(255,133,161,.25);}
+.ln-cloud-section{position:relative;z-index:1;background:linear-gradient(135deg,#2d0a1f,#1a0832,#0d0620);padding:5rem 2rem;text-align:center;overflow:hidden;}
+.ln-cloud-inner{position:relative;z-index:1;max-width:800px;margin:0 auto;}
+.ln-cloud-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;color:white;margin-bottom:1rem;}
+.ln-cloud-title .glow{background:linear-gradient(135deg,#ff85a1,#c77dff,#9bf6ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.ln-cloud-sub{color:rgba(255,255,255,.7);font-size:1rem;line-height:1.8;margin-bottom:3rem;font-weight:600;}
+.ln-benefits-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.25rem;text-align:left;}
+.ln-benefit{background:rgba(255,255,255,.07);border:1px solid rgba(255,133,161,.2);border-radius:1.25rem;padding:1.25rem 1.35rem;display:flex;align-items:flex-start;gap:.85rem;transition:all .2s;}
+.ln-benefit:hover{background:rgba(255,133,161,.12);border-color:rgba(255,133,161,.4);transform:translateY(-2px);}
+.ln-benefit-icon{font-size:1.6rem;flex-shrink:0;}
+.ln-benefit-text strong{display:block;font-size:.9rem;font-weight:800;color:white;margin-bottom:.25rem;}
+.ln-benefit-text span{font-size:.78rem;color:rgba(255,255,255,.6);line-height:1.5;}
+.ln-cta-banner{position:relative;z-index:1;margin:3rem auto 5rem;max-width:1100px;background:linear-gradient(135deg,#ff85a1,#e05f88,#c77dff,#9b59b6);border-radius:2.5rem;padding:4rem 3rem;text-align:center;box-shadow:0 20px 60px rgba(255,133,161,.4);overflow:hidden;}
+.ln-cta-banner h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;color:white;margin-bottom:.75rem;position:relative;z-index:1;}
+.ln-cta-banner p{color:rgba(255,255,255,.88);font-size:1rem;margin-bottom:2rem;font-weight:600;position:relative;z-index:1;}
+.ln-cta-banner .cta-group{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;}
+.btn-white{background:white;color:#e05f88;border:none;font-family:'Nunito',sans-serif;font-size:1rem;font-weight:900;padding:.85rem 2rem;border-radius:2.5rem;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.2);transition:all .22s;}
+.btn-white:hover{transform:translateY(-3px);}
+.btn-outline-white{background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.5);color:white;font-family:'Nunito',sans-serif;font-size:1rem;font-weight:800;padding:.85rem 2rem;border-radius:2.5rem;cursor:pointer;transition:all .22s;}
+.btn-outline-white:hover{background:rgba(255,255,255,.3);transform:translateY(-2px);}
+.ln-footer{background:rgba(255,255,255,.7);border-top:1px solid rgba(255,182,193,.3);padding:2rem;text-align:center;font-size:.78rem;color:#7a3b5a;font-weight:700;position:relative;z-index:1;}
+#auth-modal-overlay{position:fixed;inset:0;z-index:99999;background:rgba(30,5,25,.7);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .3s;}
+#auth-modal-overlay.open{opacity:1;pointer-events:all;}
+#auth-modal{background:white;border-radius:2rem;width:100%;max-width:440px;box-shadow:0 30px 80px rgba(255,133,161,.35);overflow:hidden;transform:scale(.92) translateY(20px);transition:transform .35s cubic-bezier(.34,1.56,.64,1);}
+#auth-modal-overlay.open #auth-modal{transform:scale(1) translateY(0);}
+.auth-header{background:linear-gradient(135deg,#ff85a1,#c77dff);padding:2.2rem 2rem 1.8rem;text-align:center;position:relative;}
+.auth-header-icon{font-size:3rem;margin-bottom:.5rem;display:block;}
+.auth-header h2{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;color:white;}
+.auth-header p{color:rgba(255,255,255,.85);font-size:.85rem;margin-top:.25rem;font-weight:600;}
+.auth-close{position:absolute;top:1rem;right:1rem;background:rgba(255,255,255,.25);border:none;color:white;width:30px;height:30px;border-radius:.5rem;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;}
+.auth-tabs{display:flex;border-bottom:1.5px solid rgba(255,182,193,.3);background:#fff;}
+.auth-tab{flex:1;padding:.85rem;border:none;background:none;font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:800;color:#c0a0b0;cursor:pointer;transition:all .2s;border-bottom:3px solid transparent;margin-bottom:-1.5px;}
+.auth-tab.active{color:#ff85a1;border-bottom-color:#ff85a1;}
+.auth-body{padding:1.75rem 2rem 2rem;}
+.auth-panel{display:none;}
+.auth-panel.active{display:block;}
+.auth-field{margin-bottom:1.1rem;}
+.auth-field label{display:block;font-size:.75rem;font-weight:800;color:#7a3b5a;margin-bottom:.35rem;text-transform:uppercase;letter-spacing:.05em;}
+.auth-field input{width:100%;padding:.7rem 1rem;border:1.5px solid rgba(255,182,193,.5);border-radius:.85rem;font-family:'Nunito',sans-serif;font-size:.95rem;background:#fff8fb;color:#2d0a1f;outline:none;transition:border-color .2s,box-shadow .2s;}
+.auth-field input:focus{border-color:#ff85a1;box-shadow:0 0 0 3px rgba(255,133,161,.15);}
+.auth-field input::placeholder{color:#d0a8be;}
+.auth-error{background:#ffebee;border:1.5px solid #ef9a9a;border-radius:.75rem;padding:.6rem .9rem;font-size:.82rem;font-weight:700;color:#c62828;margin-bottom:1rem;display:none;}
+.auth-error.show{display:block;}
+.auth-success{background:#e8f5e9;border:1.5px solid #a5d6a7;border-radius:.75rem;padding:.6rem .9rem;font-size:.82rem;font-weight:700;color:#2e7d32;margin-bottom:1rem;display:none;}
+.auth-success.show{display:block;}
+.auth-submit{width:100%;padding:.85rem;margin-top:.5rem;background:linear-gradient(135deg,#ff85a1,#e05f88);border:none;border-radius:1rem;color:white;font-family:'Nunito',sans-serif;font-size:1rem;font-weight:900;cursor:pointer;transition:all .2s;box-shadow:0 4px 16px rgba(255,133,161,.4);}
+.auth-submit:hover{transform:translateY(-2px);}
+.auth-submit:disabled{opacity:.6;cursor:not-allowed;transform:none;}
+.auth-divider{display:flex;align-items:center;gap:.75rem;margin:1.25rem 0;font-size:.75rem;font-weight:700;color:#ccc;}
+.auth-divider::before,.auth-divider::after{content:'';flex:1;height:1px;background:rgba(255,182,193,.35);}
+.auth-google{width:100%;padding:.75rem;border:2px solid rgba(255,182,193,.4);background:white;border-radius:1rem;font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:800;color:#555;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.6rem;transition:all .2s;}
+.auth-google:hover{border-color:#ff85a1;background:#fff0f3;transform:translateY(-1px);}
+.auth-google svg{width:18px;height:18px;}
+.auth-forgot{text-align:right;margin-top:.4rem;}
+.auth-forgot button{background:none;border:none;font-family:'Nunito',sans-serif;font-size:.75rem;font-weight:700;color:#ff85a1;cursor:pointer;}
+@keyframes authSpin{to{transform:rotate(360deg);}}
+.auth-spinner{display:inline-block;width:18px;height:18px;border:3px solid rgba(255,255,255,.4);border-top-color:white;border-radius:50%;animation:authSpin .7s linear infinite;vertical-align:middle;margin-right:.4rem;}
+#user-menu-wrap{position:relative;flex-shrink:0;}
+#user-avatar-btn{display:flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.2);border:1.5px solid rgba(255,255,255,.4);border-radius:2rem;padding:.3rem .75rem .3rem .4rem;cursor:pointer;font-family:'Nunito',sans-serif;font-size:.78rem;font-weight:800;color:white;transition:all .2s;max-width:160px;}
+#user-avatar-btn:hover{background:rgba(255,255,255,.32);}
+.ua-avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#ffd700,#ff85a1);display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:900;color:white;flex-shrink:0;border:2px solid rgba(255,255,255,.5);}
+.ua-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:80px;}
+#user-dropdown{position:absolute;top:calc(100% + 8px);right:0;background:white;border-radius:1.1rem;min-width:220px;box-shadow:0 12px 40px rgba(0,0,0,.15);padding:.6rem;z-index:500;display:none;animation:ddPop .22s cubic-bezier(.34,1.5,.64,1);}
+@keyframes ddPop{from{opacity:0;transform:scale(.9) translateY(-8px);}to{opacity:1;transform:scale(1) translateY(0);}}
+#user-dropdown.open{display:block;}
+.dd-header{padding:.85rem .9rem;border-bottom:1px solid rgba(255,182,193,.2);margin-bottom:.4rem;}
+.dd-name{font-weight:900;color:#2d0a1f;font-size:.9rem;}
+.dd-email{font-size:.72rem;color:#aaa;margin-top:.15rem;}
+.dd-streak{display:flex;align-items:center;gap:.3rem;margin-top:.5rem;font-size:.78rem;font-weight:800;color:#e65100;}
+.dd-item{display:flex;align-items:center;gap:.6rem;padding:.6rem .9rem;border-radius:.7rem;font-size:.85rem;font-weight:700;color:#555;cursor:pointer;transition:all .15s;border:none;background:none;width:100%;text-align:left;font-family:'Nunito',sans-serif;}
+.dd-item:hover{background:#fff0f3;color:#e05f88;}
+.dd-item.danger{color:#e53935;}
+.dd-item.danger:hover{background:#ffebee;color:#c62828;}
+.dd-divider{height:1px;background:rgba(255,182,193,.25);margin:.4rem .9rem;}
+body.dark #user-dropdown{background:#2a1422;border:1px solid rgba(255,133,161,.2);}
+body.dark .dd-name{color:#f0d0dc;}
+body.dark .dd-item{color:#c0a0b0;}
+body.dark .dd-item:hover{background:rgba(255,133,161,.12);color:#ff85a1;}
+@media(max-width:600px){.ln-hero{padding:3rem 1.25rem 2.5rem;}.ln-features{padding:3rem 1.25rem;}.ln-cloud-section{padding:3rem 1.25rem;}.auth-body{padding:1.25rem 1.5rem 1.5rem;}}
+</style>
 <body>
+<div id="landing-overlay">
+  <div class="landing-bg" id="landing-bg-petals"></div>
+  <nav class="ln-nav">
+    <div class="ln-logo"><span>🌸</span> Sakura Study!</div>
+    <div class="ln-nav-btns">
+      <button class="ln-btn-ghost" onclick="openAuthModal('login')">Sign In</button>
+      <button class="ln-btn-solid" onclick="openAuthModal('signup')">Get Started Free →</button>
+    </div>
+  </nav>
+  <section class="ln-hero">
+    <div class="ln-hero-badge">✨ Free Forever · No Credit Card · Start Today</div>
+    <h1 class="ln-hero-title">Learn Japanese<br><span class="highlight">the beautiful way</span></h1>
+    <p class="ln-hero-sub">The most comprehensive JLPT N5 study platform — kanji, grammar, listening, flashcards, mock exams, streak tracking, and cloud sync. 🌸</p>
+    <div class="ln-hero-cta">
+      <button class="ln-cta-primary" onclick="openAuthModal('signup')">🌸 Start Learning Free</button>
+      <button class="ln-cta-secondary" onclick="openAuthModal('login')">🔑 Sign In</button>
+    </div>
+  </section>
+  <div class="ln-stats">
+    <div class="ln-stat"><div class="ln-stat-num">80+</div><div class="ln-stat-label">N5 Kanji</div></div>
+    <div class="ln-stat"><div class="ln-stat-num">800+</div><div class="ln-stat-label">Vocabulary words</div></div>
+    <div class="ln-stat"><div class="ln-stat-num">50+</div><div class="ln-stat-label">Grammar patterns</div></div>
+    <div class="ln-stat"><div class="ln-stat-num">20+</div><div class="ln-stat-label">Study sections</div></div>
+    <div class="ln-stat"><div class="ln-stat-num">100%</div><div class="ln-stat-label">Free, forever</div></div>
+  </div>
+  <section class="ln-features">
+    <div class="ln-section-header">
+      <div class="ln-section-tag">🗂 Everything You Need</div>
+      <h2 class="ln-section-title">20 sections. One beautiful app.</h2>
+      <p class="ln-section-sub">Every tool you need to pass JLPT N5 — all in one place, all free.</p>
+    </div>
+    <div class="ln-features-grid">
+      <div class="ln-feature-card"><span class="ln-feat-icon">漢</span><div class="ln-feat-title">80 N5 Kanji</div><div class="ln-feat-desc">Every kanji with on/kun readings, stroke count, animated stroke-order animations, and example words.</div><span class="ln-feat-tag">📖 Study</span></div>
+      <div class="ln-feature-card"><span class="ln-feat-icon">📖</span><div class="ln-feat-title">Complete Grammar Guide</div><div class="ln-feat-desc">て-form, ない-form, た-form, all particles, and 50+ patterns with conjugation tables and audio.</div><span class="ln-feat-tag">📖 Study</span></div>
+      <div class="ln-feature-card"><span class="ln-feat-icon">🃏</span><div class="ln-feat-title">Smart Flashcards</div><div class="ln-feat-desc">Shuffle-able flashcards for vocab, kanji, grammar patterns, and adjective opposites.</div><span class="ln-feat-tag">🎯 Practice</span></div>
+      <div class="ln-feature-card"><span class="ln-feat-icon">📋</span><div class="ln-feat-title">Mock N5 Exam</div><div class="ln-feat-desc">30-question timed exam with grammar, kanji, and vocab — just like the real JLPT N5.</div><span class="ln-feat-tag">🎯 Practice</span></div>
+      <div class="ln-feature-card"><span class="ln-feat-icon">🎧</span><div class="ln-feat-title">Listening Practice</div><div class="ln-feat-desc">60+ sentences with native TTS playback at adjustable speeds.</div><span class="ln-feat-tag">🎯 Practice</span></div>
+      <div class="ln-feature-card"><span class="ln-feat-icon">🧠</span><div class="ln-feat-title">Reading Comprehension</div><div class="ln-feat-desc">11 passages with multiple-choice questions and explanations.</div><span class="ln-feat-tag">📚 Reading</span></div>
+      <div class="ln-feature-card"><span class="ln-feat-icon">🔢</span><div class="ln-feat-title">Counter System</div><div class="ln-feat-desc">Master 〜本, 〜枚, 〜人, 〜時, 〜分 with full irregular tables.</div><span class="ln-feat-tag">📖 Study</span></div>
+      <div class="ln-feature-card"><span class="ln-feat-icon">💬</span><div class="ln-feat-title">Survival Phrases</div><div class="ln-feat-desc">60+ real-life phrases with TTS for shopping, transport, restaurants, and emergencies.</div><span class="ln-feat-tag">🗺️ Real Life</span></div>
+      <div class="ln-feature-card"><span class="ln-feat-icon">📊</span><div class="ln-feat-title">Progress Dashboard</div><div class="ln-feat-desc">Streak tracking, quiz history, SRS progress, and section breakdowns.</div><span class="ln-feat-tag">📈 Track</span></div>
+      <div class="ln-feature-card"><span class="ln-feat-icon">📗</span><div class="ln-feat-title">AI Dictionary</div><div class="ln-feat-desc">Look up any word, kanji, or English term with readings and examples instantly.</div><span class="ln-feat-tag">🔍 Tools</span></div>
+      <div class="ln-feature-card"><span class="ln-feat-icon">🎌</span><div class="ln-feat-title">Anime Corner</div><div class="ln-feat-desc">Trending anime with Japanese synopses and TTS for immersion reading.</div><span class="ln-feat-tag">🎮 Fun</span></div>
+      <div class="ln-feature-card"><span class="ln-feat-icon">✦</span><div class="ln-feat-title">Custom Content</div><div class="ln-feat-desc">Add your own kanji, vocab, grammar patterns and counters — synced to cloud.</div><span class="ln-feat-tag">⭐ Personal</span></div>
+    </div>
+  </section>
+  <section class="ln-cloud-section">
+    <div class="ln-cloud-inner">
+      <div class="ln-section-tag" style="background:rgba(255,133,161,.12);border-color:rgba(255,133,161,.25);color:#ff85a1;">☁️ Cloud Account Benefits</div>
+      <h2 class="ln-cloud-title">Your progress,<br><span class="glow">everywhere you go</span></h2>
+      <p class="ln-cloud-sub">Create a free account and your streak, scores, bookmarks, and custom entries follow you across every device.</p>
+      <div class="ln-benefits-list">
+        <div class="ln-benefit"><span class="ln-benefit-icon">🔥</span><div class="ln-benefit-text"><strong>Study Streak Tracking</strong><span>Your daily streak saved to the cloud. Never lose progress again.</span></div></div>
+        <div class="ln-benefit"><span class="ln-benefit-icon">📊</span><div class="ln-benefit-text"><strong>Quiz Score History</strong><span>All your scores stored permanently in your profile.</span></div></div>
+        <div class="ln-benefit"><span class="ln-benefit-icon">⭐</span><div class="ln-benefit-text"><strong>Bookmarks Synced</strong><span>Star grammar and kanji on one device, access on another.</span></div></div>
+        <div class="ln-benefit"><span class="ln-benefit-icon">🧠</span><div class="ln-benefit-text"><strong>SRS Progress Saved</strong><span>Your "know it / review" ratings stored in the cloud.</span></div></div>
+        <div class="ln-benefit"><span class="ln-benefit-icon">✦</span><div class="ln-benefit-text"><strong>Custom Entries Synced</strong><span>Your custom kanji and vocab accessible everywhere.</span></div></div>
+        <div class="ln-benefit"><span class="ln-benefit-icon">🔒</span><div class="ln-benefit-text"><strong>Secure &amp; Private</strong><span>Powered by Firebase. Encrypted, only accessible to you.</span></div></div>
+      </div>
+    </div>
+  </section>
+  <div class="ln-cta-banner">
+    <h2>Ready to pass JLPT N5? 🌸</h2>
+    <p>Join thousands of learners. Create your free account in seconds.</p>
+    <div class="cta-group">
+      <button class="btn-white" onclick="openAuthModal('signup')">🌸 Create Free Account</button>
+      <button class="btn-outline-white" onclick="openAuthModal('login')">Already have an account? Sign in →</button>
+    </div>
+  </div>
+  <div class="ln-footer">
+    <p>🌸 <strong>Sakura Study!</strong> — JLPT N5 Complete Study Guide</p>
+    <p style="margin-top:.3rem;">© 2026 Ahmed El Bourgy. Made with 💕</p>
+  </div>
+</div>
+
+<div id="auth-modal-overlay" onclick="if(event.target===this)closeAuthModal()">
+  <div id="auth-modal">
+    <div class="auth-header">
+      <span class="auth-header-icon">🌸</span>
+      <h2 id="auth-modal-title">Welcome to Sakura Study!</h2>
+      <p id="auth-modal-sub">Sign in to sync your progress to the cloud</p>
+      <button class="auth-close" onclick="closeAuthModal()">✕</button>
+    </div>
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tab-login" onclick="switchAuthTab('login')">Sign In</button>
+      <button class="auth-tab" id="tab-signup" onclick="switchAuthTab('signup')">Create Account</button>
+    </div>
+    <div class="auth-body">
+      <div class="auth-error" id="auth-error"></div>
+      <div class="auth-success" id="auth-success"></div>
+      <div class="auth-panel active" id="panel-login">
+        <div class="auth-field"><label>Email</label><input type="email" id="login-email" placeholder="your@email.com" autocomplete="email"></div>
+        <div class="auth-field"><label>Password</label><input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password"></div>
+        <div class="auth-forgot"><button onclick="handleForgotPassword()">Forgot password?</button></div>
+        <button class="auth-submit" id="btn-login" onclick="handleLogin()">Sign In 🌸</button>
+        <div class="auth-divider">or</div>
+        <button class="auth-google" onclick="handleGoogleAuth()">
+          <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          Continue with Google
+        </button>
+      </div>
+      <div class="auth-panel" id="panel-signup">
+        <div class="auth-field"><label>Display Name</label><input type="text" id="signup-name" placeholder="Your name" autocomplete="name"></div>
+        <div class="auth-field"><label>Email</label><input type="email" id="signup-email" placeholder="your@email.com" autocomplete="email"></div>
+        <div class="auth-field"><label>Password</label><input type="password" id="signup-password" placeholder="At least 6 characters" autocomplete="new-password"></div>
+        <div class="auth-field"><label>Confirm Password</label><input type="password" id="signup-confirm" placeholder="Repeat password" autocomplete="new-password"></div>
+        <button class="auth-submit" id="btn-signup" onclick="handleSignup()">Create Account 🌸</button>
+        <div class="auth-divider">or</div>
+        <button class="auth-google" onclick="handleGoogleAuth()">
+          <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          Continue with Google
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="petals"></div>
 <canvas id="confetti-canvas"></canvas>
 <div class="celebration-banner" id="celeb-banner">
@@ -7036,5 +7351,135 @@ function submitCustom(type) {
 // ── Track current filters for re-render ──
 </script>
 
+<script>
+// ══════════════════════════════════════════════════════════
+//  SAKURA STUDY — AUTH SYSTEM
+// ══════════════════════════════════════════════════════════
+(function() {
+  var ids = ['app-body','petals','mascot-wrap','confetti-canvas','celeb-banner','sidebar','sidebar-overlay'];
+  ids.forEach(function(id) { var el = document.getElementById(id); if (el) el.style.display = 'none'; });
+  var h = document.querySelector('header'); if (h) h.style.display = 'none';
+  var f = document.querySelector('footer'); if (f) f.style.display = 'none';
+})();
+window._authResolved = false;
+setTimeout(function() { if (!window._authResolved) { console.warn('Auth timeout'); showLandingPage(); } }, 6000);
+
+function showLandingPage() {
+  window._authResolved = true;
+  var overlay = document.getElementById('landing-overlay');
+  if (overlay) { overlay.classList.remove('hiding','hidden'); overlay.style.display = ''; }
+  ['app-body','petals','mascot-wrap','confetti-canvas','celeb-banner','sidebar','sidebar-overlay'].forEach(function(id) { var el=document.getElementById(id); if(el) el.style.display='none'; });
+  var h=document.querySelector('header'); if(h) h.style.display='none';
+  var f=document.querySelector('footer'); if(f) f.style.display='none';
+}
+
+function showMainApp(user) {
+  window._authResolved = true;
+  var overlay = document.getElementById('landing-overlay');
+  if (overlay) { overlay.classList.add('hiding'); setTimeout(function() { overlay.classList.add('hidden'); overlay.style.display='none'; }, 500); }
+  ['app-body','petals','mascot-wrap','confetti-canvas','celeb-banner','sidebar','sidebar-overlay'].forEach(function(id) { var el=document.getElementById(id); if(el) { el.style.display=''; el.style.visibility=''; el.style.opacity=''; } });
+  var h=document.querySelector('header'); if(h) { h.style.display=''; h.style.visibility=''; }
+  var f=document.querySelector('footer'); if(f) { f.style.display=''; f.style.visibility=''; }
+  injectUserMenu(user);
+  syncCloudToLocal();
+  setTimeout(function() {
+    var name = user.displayName || (user.email?user.email.split('@')[0]:'') || 'there';
+    if (typeof showToast === 'function') showToast('🌸 Welcome back, ' + name + '!');
+    if (typeof renderHomeRings === 'function') renderHomeRings();
+  }, 800);
+}
+
+(function() {
+  function spawnPetals() {
+    var el = document.getElementById('landing-bg-petals'); if(!el) return;
+    var emojis = ['🌸','🌺','✿','❀','🌷','🌹'];
+    for(var i=0;i<25;i++) { var p=document.createElement('div'); p.className='bg-petal'; p.textContent=emojis[Math.floor(Math.random()*emojis.length)]; p.style.left=Math.random()*100+'vw'; p.style.animationDuration=(12+Math.random()*18)+'s'; p.style.animationDelay=(Math.random()*20)+'s'; p.style.fontSize=(0.7+Math.random()*1.2)+'rem'; el.appendChild(p); }
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',spawnPetals); else spawnPetals();
+})();
+
+function syncCloudToLocal() {
+  var ud = window._sakuraUserData; if(!ud) return;
+  try {
+    if(ud.scores&&ud.scores.length) localStorage.setItem('sakura_scores',JSON.stringify(ud.scores));
+    if(ud.srs) localStorage.setItem('sakura_srs',JSON.stringify(ud.srs));
+    if(ud.bookmarks) localStorage.setItem('sakura_bm',JSON.stringify(ud.bookmarks));
+    if(ud.streak) localStorage.setItem('sakura_streak',JSON.stringify({streak:ud.streak,lastDate:ud.lastStudyDate}));
+    if(ud.customEntries) Object.entries(ud.customEntries).forEach(function(kv) { if(kv[1]&&kv[1].length) localStorage.setItem('sakura_custom_'+kv[0],JSON.stringify(kv[1])); });
+  } catch(e) {}
+}
+
+async function syncAllToCloud() {
+  if(!window._sakuraUser) return; closeUserDropdown();
+  if(typeof showToast==='function') showToast('☁️ Syncing…');
+  try {
+    var f=window._sakuraFirebase;
+    await f.updateDoc(f.doc(window._sakuraDB,'users',window._sakuraUser.uid),{
+      scores:JSON.parse(localStorage.getItem('sakura_scores')||'[]'),
+      srs:JSON.parse(localStorage.getItem('sakura_srs')||'{}'),
+      bookmarks:JSON.parse(localStorage.getItem('sakura_bm')||'{}'),
+      streak:JSON.parse(localStorage.getItem('sakura_streak')||'{"streak":1}').streak,
+      customEntries:{vocab:JSON.parse(localStorage.getItem('sakura_custom_vocab')||'[]'),kanji:JSON.parse(localStorage.getItem('sakura_custom_kanji')||'[]'),grammar:JSON.parse(localStorage.getItem('sakura_custom_grammar')||'[]'),adj:JSON.parse(localStorage.getItem('sakura_custom_adj')||'[]'),counters:JSON.parse(localStorage.getItem('sakura_custom_counters')||'[]')}
+    });
+    if(typeof showToast==='function') showToast('✅ Synced!');
+  } catch(e) { if(typeof showToast==='function') showToast('⚠️ Sync failed'); }
+}
+
+var _origLSSet=localStorage.setItem.bind(localStorage);
+localStorage.setItem=function(key,value) {
+  _origLSSet(key,value);
+  if(!window._sakuraUser||!window.sakuraSaveToCloud) return;
+  if(key==='sakura_bm') { clearTimeout(window._sb); window._sb=setTimeout(function(){try{window.sakuraSaveToCloud('bookmarks',JSON.parse(value));}catch(e){}},2000); }
+  if(key==='sakura_srs') { clearTimeout(window._ss); window._ss=setTimeout(function(){try{window.sakuraSaveToCloud('srs',JSON.parse(value));}catch(e){}},2000); }
+  if(key==='sakura_streak') { clearTimeout(window._sk); window._sk=setTimeout(function(){try{var d=JSON.parse(value);window.sakuraSaveToCloud('streak',d.streak||1);window.sakuraSaveToCloud('lastStudyDate',d.lastDate||new Date().toISOString());}catch(e){}},2000); }
+  ['vocab','kanji','grammar','adj','counters'].forEach(function(t) {
+    if(key==='sakura_custom_'+t) { clearTimeout(window['_sc_'+t]); window['_sc_'+t]=setTimeout(function(){try{window.sakuraSaveToCloud('customEntries',{vocab:JSON.parse(localStorage.getItem('sakura_custom_vocab')||'[]'),kanji:JSON.parse(localStorage.getItem('sakura_custom_kanji')||'[]'),grammar:JSON.parse(localStorage.getItem('sakura_custom_grammar')||'[]'),adj:JSON.parse(localStorage.getItem('sakura_custom_adj')||'[]'),counters:JSON.parse(localStorage.getItem('sakura_custom_counters')||'[]')});}catch(e){}},3000); }
+  });
+};
+
+var _wss=setInterval(function(){if(typeof window.saveScore==='function'&&window._sakuraFirebase){clearInterval(_wss);var _o=window.saveScore;window.saveScore=async function(t,s,tot){_o(t,s,tot);if(window._sakuraUser){try{await window.sakuraSaveToCloud('scores',JSON.parse(localStorage.getItem('sakura_scores')||'[]').slice(0,100));}catch(e){}}};}},300);
+
+function injectUserMenu(user) {
+  var header=document.querySelector('header'); if(!header) return;
+  var ex=document.getElementById('user-menu-wrap'); if(ex) ex.remove();
+  var name=user.displayName||(user.email?user.email.split('@')[0]:'')||'User';
+  var init=name.charAt(0).toUpperCase();
+  var streak=1; try{streak=JSON.parse(localStorage.getItem('sakura_streak')||'{"streak":1}').streak;}catch(e){}
+  var fire=streak>=7?'🔥🔥':streak>=3?'🔥':'✨';
+  var wrap=document.createElement('div'); wrap.id='user-menu-wrap';
+  wrap.innerHTML='<button id="user-avatar-btn" onclick="toggleUserDropdown()"><div class="ua-avatar">'+init+'</div><span class="ua-name">'+name+'</span></button><div id="user-dropdown"><div class="dd-header"><div class="dd-name">'+name+'</div><div class="dd-email">'+(user.email||'')+'</div><div class="dd-streak">'+fire+' '+streak+' day streak</div></div><button class="dd-item" onclick="showSection(\'progress\');closeUserDropdown()">📊 My Progress</button><button class="dd-item" onclick="showSection(\'bookmarks\');closeUserDropdown()">⭐ Bookmarks</button><button class="dd-item" onclick="showSection(\'study-plan\');closeUserDropdown()">📅 Study Plan</button><div class="dd-divider"></div><button class="dd-item" onclick="syncAllToCloud()">☁️ Sync to Cloud</button><div class="dd-divider"></div><button class="dd-item danger" onclick="handleSignOut()">🚪 Sign Out</button></div>';
+  header.appendChild(wrap);
+  document.addEventListener('click',function(e){var w=document.getElementById('user-menu-wrap');if(w&&!w.contains(e.target))closeUserDropdown();});
+}
+function toggleUserDropdown(){var d=document.getElementById('user-dropdown');if(d)d.classList.toggle('open');}
+function closeUserDropdown(){var d=document.getElementById('user-dropdown');if(d)d.classList.remove('open');}
+setInterval(function(){var dd=document.querySelector('.dd-streak');if(!dd)return;try{var d=JSON.parse(localStorage.getItem('sakura_streak')||'{"streak":1}');var f=d.streak>=7?'🔥🔥':d.streak>=3?'🔥':'✨';dd.textContent=f+' '+d.streak+' day streak';}catch(e){}},60000);
+
+function openAuthModal(tab){tab=tab||'login';var o=document.getElementById('auth-modal-overlay');if(o)o.classList.add('open');switchAuthTab(tab);clearAuthMessages();setTimeout(function(){var el=tab==='login'?document.getElementById('login-email'):document.getElementById('signup-name');if(el)el.focus();},350);}
+function closeAuthModal(){var o=document.getElementById('auth-modal-overlay');if(o)o.classList.remove('open');}
+function switchAuthTab(tab){
+  var pL=document.getElementById('panel-login'),pS=document.getElementById('panel-signup');
+  var tL=document.getElementById('tab-login'),tS=document.getElementById('tab-signup');
+  var ti=document.getElementById('auth-modal-title'),su=document.getElementById('auth-modal-sub');
+  if(pL)pL.classList.toggle('active',tab==='login');if(pS)pS.classList.toggle('active',tab==='signup');
+  if(tL)tL.classList.toggle('active',tab==='login');if(tS)tS.classList.toggle('active',tab==='signup');
+  if(ti)ti.textContent=tab==='login'?'Welcome back! 🌸':'Join Sakura Study! 🌸';
+  if(su)su.textContent=tab==='login'?'Sign in to sync your progress':'Create your free account today';
+  clearAuthMessages();
+}
+function showAuthError(msg){var el=document.getElementById('auth-error');if(el){el.textContent=msg;el.classList.add('show');}var ok=document.getElementById('auth-success');if(ok)ok.classList.remove('show');}
+function showAuthSuccess(msg){var el=document.getElementById('auth-success');if(el){el.textContent=msg;el.classList.add('show');}var err=document.getElementById('auth-error');if(err)err.classList.remove('show');}
+function clearAuthMessages(){var e=document.getElementById('auth-error'),s=document.getElementById('auth-success');if(e)e.classList.remove('show');if(s)s.classList.remove('show');}
+function setAuthLoading(id,loading,label){var btn=document.getElementById(id);if(!btn)return;btn.disabled=loading;btn.innerHTML=loading?'<span class="auth-spinner"></span> Please wait…':label;}
+function friendlyAuthError(code){var m={'auth/user-not-found':'No account found with that email.','auth/wrong-password':'Incorrect password.','auth/email-already-in-use':'Account already exists. Try signing in!','auth/weak-password':'Password must be at least 6 characters.','auth/invalid-email':'Please enter a valid email.','auth/network-request-failed':'Network error. Check your connection.','auth/popup-closed-by-user':'Sign-in popup was closed.','auth/too-many-requests':'Too many attempts. Please wait.','auth/invalid-credential':'Incorrect email or password.'};return m[code]||'Something went wrong. Please try again.';}
+
+async function handleLogin(){if(!window._sakuraFirebase){showAuthError('Firebase not ready.');return;}var email=document.getElementById('login-email').value.trim(),password=document.getElementById('login-password').value;if(!email||!password){showAuthError('Please fill in all fields.');return;}setAuthLoading('btn-login',true,'Sign In 🌸');try{await window._sakuraFirebase.signInWithEmailAndPassword(window._sakuraFirebase.auth,email,password);closeAuthModal();}catch(e){showAuthError(friendlyAuthError(e.code));}finally{setAuthLoading('btn-login',false,'Sign In 🌸');}}
+async function handleSignup(){if(!window._sakuraFirebase){showAuthError('Firebase not ready.');return;}var name=document.getElementById('signup-name').value.trim(),email=document.getElementById('signup-email').value.trim(),password=document.getElementById('signup-password').value,confirm=document.getElementById('signup-confirm').value;if(!name){showAuthError('Please enter your name.');return;}if(!email){showAuthError('Please enter your email.');return;}if(password.length<6){showAuthError('Password must be at least 6 characters.');return;}if(password!==confirm){showAuthError("Passwords don't match.");return;}setAuthLoading('btn-signup',true,'Create Account 🌸');try{var cred=await window._sakuraFirebase.createUserWithEmailAndPassword(window._sakuraFirebase.auth,email,password);await window._sakuraFirebase.updateProfile(cred.user,{displayName:name});closeAuthModal();}catch(e){showAuthError(friendlyAuthError(e.code));}finally{setAuthLoading('btn-signup',false,'Create Account 🌸');}}
+async function handleGoogleAuth(){if(!window._sakuraFirebase){showAuthError('Firebase not ready.');return;}try{await window._sakuraFirebase.signInWithPopup(window._sakuraFirebase.auth,window._sakuraFirebase.googleProvider);closeAuthModal();}catch(e){if(e.code!=='auth/popup-closed-by-user')showAuthError(friendlyAuthError(e.code));}}
+async function handleForgotPassword(){if(!window._sakuraFirebase)return;var email=document.getElementById('login-email').value.trim();if(!email){showAuthError('Enter your email above first.');return;}try{await window._sakuraFirebase.sendPasswordResetEmail(window._sakuraFirebase.auth,email);showAuthSuccess('Password reset email sent! Check your inbox 📧');}catch(e){showAuthError(friendlyAuthError(e.code));}}
+async function handleSignOut(){closeUserDropdown();if(!window._sakuraFirebase)return;try{window._authResolved=false;await window._sakuraFirebase.signOut(window._sakuraFirebase.auth);showLandingPage();}catch(e){console.error('Sign out:',e);}}
+
+(function(){function bind(id,fn){var el=document.getElementById(id);if(el)el.addEventListener('keydown',function(e){if(e.key==='Enter')fn();});}bind('login-password',handleLogin);bind('signup-confirm',handleSignup);var le=document.getElementById('login-email');if(le)le.addEventListener('keydown',function(e){if(e.key==='Enter'){var p=document.getElementById('login-password');if(p)p.focus();}});})();
+</script>
 </body>
 </html>
