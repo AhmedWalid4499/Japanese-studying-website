@@ -942,6 +942,102 @@ body.dark .dd-name{color:#f0d0dc;}
 body.dark .dd-item{color:#c0a0b0;}
 body.dark .dd-item:hover{background:rgba(255,133,161,.12);color:#ff85a1;}
 @media(max-width:600px){.ln-hero{padding:3rem 1.25rem 2.5rem;}.ln-features{padding:3rem 1.25rem;}.ln-cloud-section{padding:3rem 1.25rem;}.auth-body{padding:1.25rem 1.5rem 1.5rem;}}
+
+/* ═══ PROFILE PAGE ═══ */
+.profile-hero{background:linear-gradient(135deg,#ff85a1,#c77dff);border-radius:1.75rem;padding:2.5rem 2rem;text-align:center;position:relative;overflow:hidden;margin-bottom:1.5rem;box-shadow:0 8px 32px rgba(255,133,161,.35);}
+.profile-avatar-wrap{position:relative;display:inline-block;margin-bottom:1rem;}
+.profile-avatar-img{width:110px;height:110px;border-radius:50%;object-fit:cover;border:4px solid white;box-shadow:0 4px 20px rgba(0,0,0,.2);}
+.profile-avatar-placeholder{width:110px;height:110px;border-radius:50%;background:linear-gradient(135deg,#ffd700,#ff85a1);display:flex;align-items:center;justify-content:center;font-size:3rem;font-weight:900;color:white;border:4px solid white;box-shadow:0 4px 20px rgba(0,0,0,.2);}
+.profile-avatar-edit{position:absolute;bottom:4px;right:4px;background:white;border:none;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.2);font-size:.9rem;transition:all .2s;}
+.profile-avatar-edit:hover{transform:scale(1.1);}
+.profile-name{font-size:1.5rem;font-weight:900;color:white;margin-bottom:.2rem;}
+.profile-email{font-size:.82rem;color:rgba(255,255,255,.8);margin-bottom:.75rem;}
+.profile-streak-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.2);border:1.5px solid rgba(255,255,255,.4);border-radius:2rem;padding:.3rem .9rem;font-size:.82rem;font-weight:800;color:white;}
+.profile-stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.85rem;margin-bottom:1.5rem;}
+.profile-stat-card{background:white;border-radius:1.2rem;padding:1rem;text-align:center;border:2px solid rgba(255,182,193,.25);box-shadow:0 3px 10px rgba(255,133,161,.1);}
+body.dark .profile-stat-card{background:#2a1422;border-color:rgba(255,133,161,.2);}
+.profile-stat-num{font-size:2rem;font-weight:900;background:linear-gradient(135deg,#ff85a1,#c77dff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1;}
+.profile-stat-label{font-size:.7rem;color:#888;font-weight:700;margin-top:.3rem;}
+.profile-section-card{background:white;border-radius:1.25rem;padding:1.25rem 1.4rem;border:2px solid rgba(255,182,193,.2);box-shadow:0 3px 10px rgba(255,133,161,.08);margin-bottom:1rem;}
+body.dark .profile-section-card{background:#2a1422;border-color:rgba(255,133,161,.18);}
+.profile-section-card h3{font-size:.92rem;font-weight:900;color:var(--mid);margin-bottom:1rem;display:flex;align-items:center;gap:.4rem;}
+.profile-edit-field{margin-bottom:.85rem;}
+.profile-edit-field label{display:block;font-size:.72rem;font-weight:800;color:#7a3b5a;margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.05em;}
+.profile-edit-field input{width:100%;padding:.6rem .9rem;border:1.5px solid rgba(255,182,193,.5);border-radius:.85rem;font-family:inherit;font-size:.9rem;background:#fff8fb;color:#2d0a1f;outline:none;transition:border-color .2s;}
+.profile-edit-field input:focus{border-color:#ff85a1;box-shadow:0 0 0 3px rgba(255,133,161,.15);}
+body.dark .profile-edit-field input{background:#1f0f1a;border-color:rgba(255,133,161,.3);color:#f0d0dc;}
+.profile-save-btn{background:linear-gradient(135deg,#ff85a1,#e05f88);color:white;border:none;border-radius:1rem;padding:.65rem 1.75rem;font-family:inherit;font-size:.9rem;font-weight:800;cursor:pointer;transition:all .2s;box-shadow:0 4px 14px rgba(255,133,161,.4);}
+.profile-save-btn:hover{transform:translateY(-2px);}
+.profile-upload-area{border:2px dashed rgba(255,133,161,.4);border-radius:1rem;padding:1.25rem;text-align:center;cursor:pointer;transition:all .2s;background:rgba(255,240,243,.4);}
+.profile-upload-area:hover{border-color:#ff85a1;background:rgba(255,182,193,.15);}
+.profile-upload-area p{font-size:.82rem;color:#a0607a;font-weight:600;margin-top:.4rem;}
+#profile-pic-input{display:none;}
+.upload-progress{height:6px;background:#ffe0e9;border-radius:3px;overflow:hidden;margin-top:.75rem;display:none;}
+.upload-progress-bar{height:100%;background:linear-gradient(90deg,#ff85a1,#c77dff);border-radius:3px;transition:width .3s;}
+
+/* ═══ FLOATING CHAT ═══ */
+#chat-fab{position:fixed;bottom:1.5rem;left:1.5rem;z-index:990;background:linear-gradient(135deg,#ff85a1,#e05f88);border:none;border-radius:50%;width:56px;height:56px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 20px rgba(255,133,161,.5);transition:all .25s;font-size:1.4rem;}
+#chat-fab:hover{transform:scale(1.1);box-shadow:0 8px 28px rgba(255,133,161,.6);}
+#chat-fab-badge{position:absolute;top:-4px;right:-4px;background:#e53935;color:white;border-radius:50%;width:20px;height:20px;font-size:.62rem;font-weight:900;display:flex;align-items:center;justify-content:center;border:2px solid white;display:none;}
+#chat-panel{position:fixed;bottom:5.5rem;left:1.5rem;z-index:989;width:340px;max-height:520px;background:white;border-radius:1.5rem;box-shadow:0 8px 40px rgba(0,0,0,.18);border:1.5px solid rgba(255,182,193,.3);display:none;flex-direction:column;overflow:hidden;animation:chatPop .25s cubic-bezier(.34,1.5,.64,1);}
+body.dark #chat-panel{background:#1f0f1a;border-color:rgba(255,133,161,.2);}
+@keyframes chatPop{from{opacity:0;transform:scale(.92) translateY(12px);}to{opacity:1;transform:scale(1) translateY(0);}}
+#chat-panel.open{display:flex;}
+.chat-header{background:linear-gradient(135deg,#ff85a1,#e05f88);padding:.85rem 1.1rem;display:flex;align-items:center;gap:.65rem;flex-shrink:0;}
+.chat-header-title{font-weight:900;color:white;font-size:.95rem;flex:1;}
+.chat-header-btn{background:rgba(255,255,255,.2);border:none;color:white;border-radius:.5rem;width:28px;height:28px;cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center;transition:background .15s;}
+.chat-header-btn:hover{background:rgba(255,255,255,.35);}
+/* Conversation list */
+#chat-conv-list{flex:1;overflow-y:auto;padding:.5rem;}
+.chat-conv-item{display:flex;align-items:center;gap:.75rem;padding:.65rem .8rem;border-radius:1rem;cursor:pointer;transition:background .15s;}
+.chat-conv-item:hover{background:rgba(255,182,193,.12);}
+body.dark .chat-conv-item:hover{background:rgba(255,133,161,.1);}
+.chat-conv-item.active{background:rgba(255,133,161,.15);}
+.chat-conv-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#ffd700,#ff85a1);display:flex;align-items:center;justify-content:center;font-weight:900;color:white;font-size:1rem;flex-shrink:0;overflow:hidden;}
+.chat-conv-avatar img{width:100%;height:100%;object-fit:cover;}
+.chat-conv-info{flex:1;min-width:0;}
+.chat-conv-name{font-weight:800;font-size:.85rem;color:#2d0a1f;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+body.dark .chat-conv-name{color:#f0d0dc;}
+.chat-conv-preview{font-size:.72rem;color:#aaa;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:.1rem;}
+.chat-conv-time{font-size:.65rem;color:#ccc;flex-shrink:0;}
+.chat-unread{background:#ff85a1;color:white;border-radius:50%;width:18px;height:18px;font-size:.6rem;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+/* Invite new chat */
+.chat-invite-bar{padding:.65rem .85rem;border-top:1px solid rgba(255,182,193,.2);flex-shrink:0;display:flex;gap:.5rem;}
+.chat-invite-input{flex:1;border:1.5px solid rgba(255,182,193,.45);border-radius:.75rem;padding:.4rem .75rem;font-family:inherit;font-size:.78rem;outline:none;background:#fff8fb;color:#2d0a1f;}
+body.dark .chat-invite-input{background:#2a1422;border-color:rgba(255,133,161,.3);color:#f0d0dc;}
+.chat-invite-input:focus{border-color:#ff85a1;}
+.chat-invite-btn{background:linear-gradient(135deg,#ff85a1,#e05f88);border:none;border-radius:.75rem;color:white;font-size:.75rem;font-weight:800;padding:.4rem .85rem;cursor:pointer;white-space:nowrap;transition:all .15s;}
+.chat-invite-btn:hover{transform:translateY(-1px);}
+/* Chat window */
+#chat-window{display:none;flex-direction:column;flex:1;overflow:hidden;}
+#chat-window.open{display:flex;}
+.chat-win-header{background:rgba(255,240,243,.8);padding:.6rem .85rem;display:flex;align-items:center;gap:.6rem;border-bottom:1px solid rgba(255,182,193,.2);flex-shrink:0;}
+body.dark .chat-win-header{background:rgba(42,20,34,.9);border-color:rgba(255,133,161,.15);}
+.chat-win-back{background:none;border:none;cursor:pointer;font-size:1rem;color:var(--pink);padding:.1rem .3rem;}
+.chat-win-name{font-weight:900;font-size:.88rem;color:#2d0a1f;flex:1;}
+body.dark .chat-win-name{color:#f0d0dc;}
+.chat-win-status{font-size:.65rem;color:#4caf50;font-weight:700;}
+#chat-messages{flex:1;overflow-y:auto;padding:.75rem .85rem;display:flex;flex-direction:column;gap:.5rem;}
+.msg-row{display:flex;align-items:flex-end;gap:.4rem;}
+.msg-row.mine{flex-direction:row-reverse;}
+.msg-bubble{max-width:75%;padding:.5rem .85rem;border-radius:1.1rem;font-size:.82rem;line-height:1.5;word-break:break-word;}
+.msg-bubble.mine{background:linear-gradient(135deg,#ff85a1,#e05f88);color:white;border-radius:1.1rem 1.1rem 0 1.1rem;}
+.msg-bubble.theirs{background:#f0f0f0;color:#2d0a1f;border-radius:1.1rem 1.1rem 1.1rem 0;}
+body.dark .msg-bubble.theirs{background:#2a1422;color:#f0d0dc;}
+.msg-time{font-size:.6rem;color:#bbb;margin-bottom:.2rem;flex-shrink:0;}
+.msg-avatar-sm{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#ffd700,#ff85a1);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:900;color:white;flex-shrink:0;overflow:hidden;}
+.msg-avatar-sm img{width:100%;height:100%;object-fit:cover;}
+.chat-input-row{display:flex;gap:.5rem;padding:.65rem .85rem;border-top:1px solid rgba(255,182,193,.2);flex-shrink:0;}
+body.dark .chat-input-row{border-color:rgba(255,133,161,.15);}
+#chat-msg-input{flex:1;border:1.5px solid rgba(255,182,193,.45);border-radius:1.5rem;padding:.45rem .9rem;font-family:inherit;font-size:.82rem;outline:none;background:#fff8fb;color:#2d0a1f;resize:none;}
+body.dark #chat-msg-input{background:#2a1422;border-color:rgba(255,133,161,.3);color:#f0d0dc;}
+#chat-msg-input:focus{border-color:#ff85a1;}
+#chat-send-btn{background:linear-gradient(135deg,#ff85a1,#e05f88);border:none;border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:white;font-size:1rem;transition:all .2s;flex-shrink:0;}
+#chat-send-btn:hover{transform:scale(1.08);}
+.chat-empty{text-align:center;padding:2rem 1rem;color:#bbb;font-size:.82rem;}
+.chat-typing{font-size:.7rem;color:#ff85a1;font-style:italic;padding:.2rem .85rem;min-height:1.2em;}
+@media(max-width:400px){#chat-panel{width:calc(100vw - 2rem);left:1rem;}}
+
 </style>
 <body>
 <div id="landing-overlay">
@@ -1226,6 +1322,7 @@ body.dark .dd-item:hover{background:rgba(255,133,161,.12);color:#ff85a1;}
   <button class="sidebar-btn" id="sb_mock-exam" onclick="sbGo('mock-exam')"><span class="sb-icon">📋</span> Mock Exam</button>
   <div class="sidebar-divider"></div>
   <div class="sidebar-section-label">📈 Track & Plan</div>
+  <button class="sidebar-btn" id="sb_profile" onclick="sbGo('profile')"><span class="sb-icon">👤</span> My Profile</button>
   <button class="sidebar-btn" id="sb_progress" onclick="sbGo('progress')"><span class="sb-icon">📊</span> My Progress</button>
   <button class="sidebar-btn" id="sb_bookmarks" onclick="sbGo('bookmarks')"><span class="sb-icon">⭐</span> Bookmarks</button>
   <button class="sidebar-btn" id="sb_study-plan" onclick="sbGo('study-plan')"><span class="sb-icon">📅</span> Study Plan</button>
@@ -1945,6 +2042,105 @@ body.dark .dd-item:hover{background:rgba(255,133,161,.12);color:#ff85a1;}
   <div id="dict-history-wrap" style="margin-top:1.5rem;display:none;">
     <div style="font-weight:900;color:var(--mid);font-size:.85rem;margin-bottom:.6rem;">🕐 Recent Searches</div>
     <div id="dict-history" style="display:flex;flex-wrap:wrap;gap:.45rem;"></div>
+  </div>
+</div>
+
+
+<!-- ====== PROFILE ====== -->
+<div class="section" id="profile">
+  <div class="section-title">👤 My Profile</div>
+
+  <!-- Hero card -->
+  <div class="profile-hero">
+    <div class="profile-avatar-wrap">
+      <div id="profile-avatar-display"></div>
+      <button class="profile-avatar-edit" onclick="document.getElementById('profile-pic-input').click()" title="Change photo">📷</button>
+      <input type="file" id="profile-pic-input" accept="image/*" onchange="handleProfilePicUpload(this)">
+    </div>
+    <div class="profile-name" id="profile-hero-name">Loading…</div>
+    <div class="profile-email" id="profile-hero-email"></div>
+    <div class="profile-streak-badge" id="profile-hero-streak">🔥 — day streak</div>
+    <div class="upload-progress" id="upload-progress"><div class="upload-progress-bar" id="upload-progress-bar" style="width:0%"></div></div>
+    <div id="upload-status" style="font-size:.75rem;color:rgba(255,255,255,.85);margin-top:.4rem;min-height:1.1em;font-weight:700;"></div>
+  </div>
+
+  <!-- Stats -->
+  <div class="profile-stats-grid" id="profile-stats-grid"></div>
+
+  <!-- Edit profile -->
+  <div class="profile-section-card">
+    <h3>✏️ Edit Profile</h3>
+    <div class="profile-edit-field">
+      <label>Display Name</label>
+      <input type="text" id="profile-edit-name" placeholder="Your name">
+    </div>
+    <div style="display:flex;gap:.65rem;flex-wrap:wrap;align-items:center;">
+      <button class="profile-save-btn" onclick="saveProfileName()">💾 Save Name</button>
+      <span id="profile-save-status" style="font-size:.78rem;color:#4caf50;font-weight:700;"></span>
+    </div>
+  </div>
+
+  <!-- Upload area (alternative) -->
+  <div class="profile-section-card">
+    <h3>🖼️ Profile Picture</h3>
+    <div class="profile-upload-area" onclick="document.getElementById('profile-pic-input').click()">
+      <div style="font-size:2rem;">📷</div>
+      <p>Click or drag to upload a photo<br><span style="font-size:.72rem;color:#c0a0b0;">JPG, PNG or GIF — max 5MB</span></p>
+    </div>
+    <p style="font-size:.72rem;color:#aaa;margin-top:.5rem;">💡 Your photo is stored in Firebase Storage and shows in the header and chat.</p>
+  </div>
+
+  <!-- Account info -->
+  <div class="profile-section-card">
+    <h3>🔐 Account</h3>
+    <div style="font-size:.82rem;color:#888;line-height:2;">
+      <div><strong style="color:var(--mid);">Email:</strong> <span id="profile-account-email">—</span></div>
+      <div><strong style="color:var(--mid);">Member since:</strong> <span id="profile-account-joined">—</span></div>
+      <div><strong style="color:var(--mid);">Username (for chat):</strong> <span id="profile-account-username" style="font-family:monospace;background:#fff0f3;padding:.1rem .4rem;border-radius:.4rem;color:var(--pink);font-weight:700;">—</span></div>
+    </div>
+    <p style="font-size:.72rem;color:#aaa;margin-top:.75rem;">💬 Share your <strong>username</strong> with friends so they can start a chat with you!</p>
+  </div>
+</div>
+
+<!-- ====== FLOATING CHAT ====== -->
+<button id="chat-fab" onclick="toggleChatPanel()" title="Messages" style="display:none;">
+  💬
+  <span id="chat-fab-badge"></span>
+</button>
+
+<div id="chat-panel">
+  <div class="chat-header">
+    <div id="chat-header-avatar" class="msg-avatar-sm" style="width:32px;height:32px;font-size:.85rem;"></div>
+    <div class="chat-header-title" id="chat-header-title">💬 Messages</div>
+    <button class="chat-header-btn" onclick="toggleChatPanel()" title="Close">✕</button>
+  </div>
+
+  <!-- Conversation list view -->
+  <div id="chat-conv-view" style="display:flex;flex-direction:column;flex:1;overflow:hidden;">
+    <div id="chat-conv-list" style="flex:1;overflow-y:auto;padding:.5rem;">
+      <div class="chat-empty">No conversations yet.<br>Invite a friend below! 🌸</div>
+    </div>
+    <div class="chat-invite-bar">
+      <input class="chat-invite-input" id="chat-invite-input" placeholder="Enter username to chat…" onkeydown="if(event.key==='Enter')startChat()">
+      <button class="chat-invite-btn" onclick="startChat()">Chat →</button>
+    </div>
+  </div>
+
+  <!-- Chat window view -->
+  <div id="chat-window">
+    <div class="chat-win-header">
+      <button class="chat-win-back" onclick="backToConvList()">←</button>
+      <div>
+        <div class="chat-win-name" id="chat-win-name">—</div>
+        <div class="chat-win-status" id="chat-win-status"></div>
+      </div>
+    </div>
+    <div id="chat-messages"></div>
+    <div class="chat-typing" id="chat-typing"></div>
+    <div class="chat-input-row">
+      <input id="chat-msg-input" placeholder="Type a message… 🌸" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage();}">
+      <button id="chat-send-btn" onclick="sendMessage()">➤</button>
+    </div>
   </div>
 </div>
 
@@ -7362,7 +7558,7 @@ function submitCustom(type) {
   var f = document.querySelector('footer'); if (f) f.style.display = 'none';
 })();
 window._authResolved = false;
-setTimeout(function() { if (!window._authResolved) { console.warn('Auth timeout'); showLandingPage(); } }, 6000);
+setTimeout(function() { if (!window._authResolved) { console.warn('Auth timeout'); showLandingPage(); } }, 10000);
 
 function showLandingPage() {
   window._authResolved = true;
@@ -7480,6 +7676,493 @@ async function handleForgotPassword(){if(!window._sakuraFirebase)return;var emai
 async function handleSignOut(){closeUserDropdown();if(!window._sakuraFirebase)return;try{window._authResolved=false;await window._sakuraFirebase.signOut(window._sakuraFirebase.auth);showLandingPage();}catch(e){console.error('Sign out:',e);}}
 
 (function(){function bind(id,fn){var el=document.getElementById(id);if(el)el.addEventListener('keydown',function(e){if(e.key==='Enter')fn();});}bind('login-password',handleLogin);bind('signup-confirm',handleSignup);var le=document.getElementById('login-email');if(le)le.addEventListener('keydown',function(e){if(e.key==='Enter'){var p=document.getElementById('login-password');if(p)p.focus();}});})();
+</script>
+
+
+
+
+<script>
+
+function _renderAvatar(container, name, photoURL, size) {
+  if (!container) return;
+  container.innerHTML = '';
+  if (photoURL) {
+    var img = document.createElement('img');
+    img.className = 'profile-avatar-img';
+    img.src = photoURL;
+    img.style.width = size + 'px';
+    img.style.height = size + 'px';
+    img.style.objectFit = 'cover';
+    img.onerror = function() {
+      container.innerHTML = '<div class="profile-avatar-placeholder" style="width:' + size + 'px;height:' + size + 'px;">' + name.charAt(0).toUpperCase() + '</div>';
+    };
+    container.appendChild(img);
+  } else {
+    container.innerHTML = '<div class="profile-avatar-placeholder" style="width:' + size + 'px;height:' + size + 'px;">' + name.charAt(0).toUpperCase() + '</div>';
+  }
+}
+
+// ══════════════════════════════════════════════════════════
+//  PROFILE PAGE + CHAT SYSTEM
+// ══════════════════════════════════════════════════════════
+
+// ── Extend showMainApp (defined above as plain function) ──
+// We patch it at call time, not at parse time, to avoid capture issues
+var _profileChatReady = false;
+var _origShowMainAppPC = null;
+
+function _setupProfileChatAfterLogin(user) {
+  // Show chat FAB
+  var fab = document.getElementById('chat-fab');
+  if (fab) fab.style.display = 'flex';
+  // Apply saved photo to header avatar
+  var photo = (user && user.photoURL) || (window._sakuraUserData && window._sakuraUserData.photoURL) || '';
+  if (photo) _updateHeaderAvatar(photo);
+  // Add profile button to dropdown if not already there
+  var dd = document.getElementById('user-dropdown');
+  if (dd && !dd.querySelector('#dd-profile-btn')) {
+    var firstItem = dd.querySelector('.dd-item');
+    if (firstItem) {
+      var btn = document.createElement('button');
+      btn.className = 'dd-item';
+      btn.id = 'dd-profile-btn';
+      btn.innerHTML = '👤 My Profile';
+      btn.onclick = function() { showSection('profile'); closeUserDropdown(); };
+      dd.insertBefore(btn, firstItem);
+    }
+  }
+}
+
+// Patch: wrap the existing showMainApp using a simple post-call hook
+// We do this after DOM is ready so the function exists
+(function() {
+  var _orig = showMainApp;
+  showMainApp = function(user) {
+    _orig(user);
+    setTimeout(function() { _setupProfileChatAfterLogin(user); }, 950);
+  };
+})();
+
+// ── Header avatar update ──
+function _updateHeaderAvatar(photoURL) {
+  var btn = document.getElementById('user-avatar-btn');
+  if (!btn) return;
+  var av = btn.querySelector('.ua-avatar');
+  if (av && photoURL) {
+    av.style.backgroundImage = 'url(' + photoURL + ')';
+    av.style.backgroundSize = 'cover';
+    av.style.backgroundPosition = 'center';
+    av.textContent = '';
+  }
+}
+
+// ── Profile page ──
+function renderProfilePage() {
+  var user = window._sakuraUser;
+  if (!user) return;
+  var ud = window._sakuraUserData || {};
+  var name = user.displayName || user.email.split('@')[0];
+  var username = (name.toLowerCase().replace(/[^a-z0-9]/g, '') + '_' + user.uid.slice(0, 5));
+
+  // Hero
+  var heroName = document.getElementById('profile-hero-name');
+  var heroEmail = document.getElementById('profile-hero-email');
+  var heroStreak = document.getElementById('profile-hero-streak');
+  var editName = document.getElementById('profile-edit-name');
+  var accEmail = document.getElementById('profile-account-email');
+  var accUser = document.getElementById('profile-account-username');
+  var accJoined = document.getElementById('profile-account-joined');
+
+  if (heroName) heroName.textContent = name;
+  if (heroEmail) heroEmail.textContent = user.email;
+  if (editName) editName.value = name;
+  if (accEmail) accEmail.textContent = user.email;
+  if (accUser) accUser.textContent = username;
+
+  var streak = 1;
+  try { streak = JSON.parse(localStorage.getItem('sakura_streak') || '{"streak":1}').streak; } catch(e) {}
+  var fire = streak >= 7 ? '🔥🔥' : streak >= 3 ? '🔥' : '✨';
+  if (heroStreak) heroStreak.textContent = fire + ' ' + streak + ' day streak';
+
+  if (ud.createdAt && ud.createdAt.seconds && accJoined) {
+    accJoined.textContent = new Date(ud.createdAt.seconds * 1000).toLocaleDateString('en-GB', {year:'numeric',month:'long',day:'numeric'});
+  }
+
+  // Avatar
+  var avatarWrap = document.getElementById('profile-avatar-display');
+  var photo = user.photoURL || ud.photoURL || '';
+  if (avatarWrap) {
+    if (photo) {
+      _renderAvatar(avatarWrap, name, photo, 110);
+    } else {
+      avatarWrap.innerHTML = '<div class="profile-avatar-placeholder" style="width:110px;height:110px;">' + name.charAt(0).toUpperCase() + '</div>';
+    }
+  }
+
+  // Stats
+  var statsGrid = document.getElementById('profile-stats-grid');
+  if (statsGrid) {
+    var scores = [];
+    try { scores = JSON.parse(localStorage.getItem('sakura_scores') || '[]'); } catch(e) {}
+    var avgPct = scores.length ? Math.round(scores.reduce(function(a,s){return a+s.pct;}, 0) / scores.length) : 0;
+    var srs = {};
+    try { srs = JSON.parse(localStorage.getItem('sakura_srs') || '{}'); } catch(e) {}
+    var knownListen = Object.values(srs.listen || {}).filter(function(x){return x.status==='known';}).length;
+    var bm = {};
+    try { bm = JSON.parse(localStorage.getItem('sakura_bm') || '{}'); } catch(e) {}
+    var kanjiCount = Object.values(bm).filter(function(b){return b.type==='kanji';}).length;
+
+    var stats = [
+      {icon:'🔥', val:streak, label:'Day Streak', color:'#ff9800'},
+      {icon:'📝', val:scores.length, label:'Quizzes Done', color:'#4cc9f0'},
+      {icon:'⭐', val:avgPct+'%', label:'Avg Score', color:'#06d6a0'},
+      {icon:'🎧', val:knownListen, label:'Phrases Known', color:'#c77dff'},
+      {icon:'漢', val:kanjiCount, label:'Kanji Bookmarked', color:'#ff85a1'},
+    ];
+    statsGrid.innerHTML = stats.map(function(s) {
+      return '<div class="profile-stat-card"><div style="font-size:1.6rem;">' + s.icon + '</div>' +
+        '<div class="profile-stat-num" style="background:linear-gradient(135deg,' + s.color + ',' + s.color + 'aa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">' + s.val + '</div>' +
+        '<div class="profile-stat-label">' + s.label + '</div></div>';
+    }).join('');
+  }
+
+  // Save username to Firestore for chat lookup
+  if (window._sakuraUser && window._sakuraFirebase) {
+    var f = window._sakuraFirebase;
+    f.updateDoc(f.doc(window._sakuraDB, 'users', user.uid), {
+      username: username,
+      photoURL: user.photoURL || ud.photoURL || ''
+    }).catch(function(e) { console.warn('Username save:', e); });
+  }
+}
+
+async function handleProfilePicUpload(input) {
+  var file = input.files[0];
+  if (!file || !window._sakuraUser) return;
+  if (file.size > 5 * 1024 * 1024) {
+    if (typeof showToast === 'function') showToast('⚠️ Max file size is 5MB');
+    return;
+  }
+
+  var progressWrap = document.getElementById('upload-progress');
+  var progressBar = document.getElementById('upload-progress-bar');
+  var statusEl = document.getElementById('upload-status');
+  if (progressWrap) progressWrap.style.display = 'block';
+  if (statusEl) statusEl.textContent = 'Uploading…';
+
+  try {
+    var { getStorage, ref, uploadBytes, getDownloadURL } = await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js');
+    var storageInstance = getStorage(window._sakuraFirebase.auth.app);
+    var path = 'avatars/' + window._sakuraUser.uid + '/profile.jpg';
+    var fileRef = ref(storageInstance, path);
+    if (progressBar) progressBar.style.width = '40%';
+    await uploadBytes(fileRef, file);
+    if (progressBar) progressBar.style.width = '80%';
+    var url = await getDownloadURL(fileRef);
+    if (progressBar) progressBar.style.width = '100%';
+
+    await window._sakuraFirebase.updateProfile(window._sakuraUser, { photoURL: url });
+    var f = window._sakuraFirebase;
+    await f.updateDoc(f.doc(window._sakuraDB, 'users', window._sakuraUser.uid), { photoURL: url });
+
+    if (statusEl) statusEl.textContent = '✅ Photo updated!';
+    if (progressWrap) progressWrap.style.display = 'none';
+    _updateHeaderAvatar(url);
+    renderProfilePage();
+    if (typeof showToast === 'function') showToast('🌸 Profile photo updated!');
+  } catch(e) {
+    if (progressWrap) progressWrap.style.display = 'none';
+    if (statusEl) statusEl.textContent = '⚠️ Storage not enabled yet. Enable Firebase Storage in your console.';
+    console.warn('Photo upload failed:', e);
+  }
+}
+
+async function saveProfileName() {
+  var newName = document.getElementById('profile-edit-name').value.trim();
+  if (!newName || !window._sakuraUser) return;
+  var statusEl = document.getElementById('profile-save-status');
+  if (statusEl) { statusEl.textContent = 'Saving…'; statusEl.style.color = '#888'; }
+  try {
+    await window._sakuraFirebase.updateProfile(window._sakuraUser, { displayName: newName });
+    var f = window._sakuraFirebase;
+    await f.updateDoc(f.doc(window._sakuraDB, 'users', window._sakuraUser.uid), { displayName: newName });
+    if (statusEl) { statusEl.textContent = '✅ Saved!'; statusEl.style.color = '#4caf50'; }
+    var heroName = document.getElementById('profile-hero-name');
+    if (heroName) heroName.textContent = newName;
+    var nameEl = document.querySelector('.ua-name');
+    if (nameEl) nameEl.textContent = newName;
+    var ddName = document.querySelector('.dd-name');
+    if (ddName) ddName.textContent = newName;
+    setTimeout(function() { if (statusEl) statusEl.textContent = ''; }, 2500);
+    if (typeof showToast === 'function') showToast('✅ Name updated!');
+  } catch(e) {
+    if (statusEl) { statusEl.textContent = '⚠️ Failed: ' + e.message; statusEl.style.color = '#e53935'; }
+  }
+}
+
+// ══════════════════════════════════════════════════════════
+//  CHAT SYSTEM
+// ══════════════════════════════════════════════════════════
+
+var _chatOpen = false;
+var _activeConvId = null;
+var _chatMsgListener = null;
+var _chatConvListener = null;
+var _rtdbInstance = null;
+
+async function _getRTDB() {
+  if (_rtdbInstance) return _rtdbInstance;
+  try {
+    var mod = await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js');
+    _rtdbInstance = {
+      db: mod.getDatabase(window._sakuraFirebase.auth.app),
+      ref: mod.ref, set: mod.set, get: mod.get, push: mod.push,
+      onValue: mod.onValue, off: mod.off,
+      query: mod.query, orderByChild: mod.orderByChild, limitToLast: mod.limitToLast
+    };
+  } catch(e) {
+    console.warn('RTDB not available:', e);
+    _rtdbInstance = null;
+  }
+  return _rtdbInstance;
+}
+
+function toggleChatPanel() {
+  _chatOpen = !_chatOpen;
+  var panel = document.getElementById('chat-panel');
+  if (_chatOpen) {
+    panel.classList.add('open');
+    _showConvList();
+    _loadConversations();
+  } else {
+    panel.classList.remove('open');
+  }
+}
+
+function _showConvList() {
+  var convView = document.getElementById('chat-conv-view');
+  var winView = document.getElementById('chat-window');
+  if (convView) convView.style.display = 'flex';
+  if (winView) winView.style.display = 'none';
+  var title = document.getElementById('chat-header-title');
+  if (title) title.textContent = '💬 Messages';
+  var headerAv = document.getElementById('chat-header-avatar');
+  if (headerAv && window._sakuraUser) {
+    var me = window._sakuraUser;
+    if (me.photoURL) headerAv.innerHTML = '<img src="' + me.photoURL + '" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">';
+    else headerAv.textContent = (me.displayName || me.email || 'U').charAt(0).toUpperCase();
+  }
+  _activeConvId = null;
+}
+
+function backToConvList() { _showConvList(); }
+
+async function startChat() {
+  var input = document.getElementById('chat-invite-input');
+  var query = input ? input.value.trim().toLowerCase() : '';
+  if (!query || !window._sakuraUser) return;
+
+  if (typeof showToast === 'function') showToast('🔍 Looking up "' + query + '"…');
+
+  try {
+    var { getDocs, collection, where, query: fsQuery } = await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js');
+    var q = fsQuery(collection(window._sakuraDB, 'users'), where('username', '==', query));
+    var snap = await getDocs(q);
+
+    if (snap.empty) {
+      if (typeof showToast === 'function') showToast('⚠️ User "' + query + '" not found');
+      return;
+    }
+    var otherDoc = snap.docs[0];
+    var otherId = otherDoc.id;
+    var otherData = otherDoc.data();
+    if (otherId === window._sakuraUser.uid) {
+      if (typeof showToast === 'function') showToast('💬 That is you! Share your username with a friend 🌸');
+      return;
+    }
+    if (input) input.value = '';
+    var convId = [window._sakuraUser.uid, otherId].sort().join('_');
+    await _openChatWindow(convId, otherId, otherData.displayName || otherData.username || 'User', otherData.photoURL || '');
+  } catch(e) {
+    if (typeof showToast === 'function') showToast('⚠️ Could not find user');
+    console.error(e);
+  }
+}
+
+async function _openChatWindow(convId, otherId, otherName, otherPhoto) {
+  _activeConvId = convId;
+
+  var convView = document.getElementById('chat-conv-view');
+  var winView = document.getElementById('chat-window');
+  if (convView) convView.style.display = 'none';
+  if (winView) winView.style.display = 'flex';
+
+  var winName = document.getElementById('chat-win-name');
+  var headerTitle = document.getElementById('chat-header-title');
+  var headerAv = document.getElementById('chat-header-avatar');
+  if (winName) winName.textContent = otherName;
+  if (headerTitle) headerTitle.textContent = otherName;
+  if (headerAv) {
+    if (otherPhoto) headerAv.innerHTML = '<img src="' + otherPhoto + '" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">';
+    else headerAv.textContent = otherName.charAt(0).toUpperCase();
+  }
+
+  var messagesEl = document.getElementById('chat-messages');
+  if (messagesEl) messagesEl.innerHTML = '<div class="chat-empty">Loading…</div>';
+
+  var db = await _getRTDB();
+  if (!db) {
+    if (messagesEl) messagesEl.innerHTML = '<div class="chat-empty" style="color:#e53935;">⚠️ Enable Firebase Realtime Database in your console first.</div>';
+    return;
+  }
+
+  // Remove previous listener
+  if (_chatMsgListener) {
+    try { db.off(db.ref(db.db, 'chats/' + _activeConvId + '/messages')); } catch(e) {}
+    _chatMsgListener = null;
+  }
+
+  // Create conversation record
+  var myUid = window._sakuraUser.uid;
+  var myName = window._sakuraUser.displayName || window._sakuraUser.email.split('@')[0];
+  var myPhoto = window._sakuraUser.photoURL || '';
+  try {
+    await db.set(db.ref(db.db, 'users_chats/' + myUid + '/conversations/' + convId), {
+      otherId: otherId, otherName: otherName, otherPhoto: otherPhoto, updatedAt: Date.now()
+    });
+    await db.set(db.ref(db.db, 'users_chats/' + otherId + '/conversations/' + convId), {
+      otherId: myUid, otherName: myName, otherPhoto: myPhoto, updatedAt: Date.now()
+    });
+  } catch(e) { console.warn('Conv record:', e); }
+
+  // Listen to messages
+  var msgRef = db.query(db.ref(db.db, 'chats/' + convId + '/messages'), db.orderByChild('ts'), db.limitToLast(80));
+  _chatMsgListener = db.onValue(msgRef, function(snap) {
+    if (!messagesEl) return;
+    messagesEl.innerHTML = '';
+    var msgs = [];
+    snap.forEach(function(child) { msgs.push(child.val()); });
+    if (!msgs.length) {
+      messagesEl.innerHTML = '<div class="chat-empty">No messages yet — say こんにちは! 🌸</div>';
+      return;
+    }
+    msgs.forEach(function(msg) {
+      var isMine = msg.senderId === window._sakuraUser.uid;
+      var row = document.createElement('div');
+      row.className = 'msg-row' + (isMine ? ' mine' : '');
+      var time = msg.ts ? new Date(msg.ts).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}) : '';
+      if (!isMine) {
+        var av = document.createElement('div');
+        av.className = 'msg-avatar-sm';
+        if (otherPhoto) av.innerHTML = '<img src="' + otherPhoto + '" style="width:100%;height:100%;object-fit:cover;">';
+        else av.textContent = otherName.charAt(0).toUpperCase();
+        row.appendChild(av);
+      }
+      var bubble = document.createElement('div');
+      bubble.className = 'msg-bubble ' + (isMine ? 'mine' : 'theirs');
+      bubble.textContent = msg.text || '';
+      row.appendChild(bubble);
+      var timeEl = document.createElement('div');
+      timeEl.className = 'msg-time';
+      timeEl.textContent = time;
+      row.appendChild(timeEl);
+      messagesEl.appendChild(row);
+    });
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  });
+
+  var msgInput = document.getElementById('chat-msg-input');
+  if (msgInput) msgInput.focus();
+}
+
+async function sendMessage() {
+  var input = document.getElementById('chat-msg-input');
+  var text = input ? input.value.trim() : '';
+  if (!text || !_activeConvId || !window._sakuraUser) return;
+  if (input) input.value = '';
+
+  var db = await _getRTDB();
+  if (!db) return;
+
+  var msg = {
+    senderId: window._sakuraUser.uid,
+    senderName: window._sakuraUser.displayName || window._sakuraUser.email.split('@')[0],
+    text: text,
+    ts: Date.now()
+  };
+  try {
+    await db.push(db.ref(db.db, 'chats/' + _activeConvId + '/messages'), msg);
+    // Update conversation timestamp
+    var myUid = window._sakuraUser.uid;
+    var convSnap = await db.get(db.ref(db.db, 'users_chats/' + myUid + '/conversations/' + _activeConvId));
+    if (convSnap.exists()) {
+      var convData = convSnap.val();
+      await db.set(db.ref(db.db, 'users_chats/' + myUid + '/conversations/' + _activeConvId), Object.assign({}, convData, {updatedAt: Date.now(), lastMsg: text}));
+      await db.set(db.ref(db.db, 'users_chats/' + convData.otherId + '/conversations/' + _activeConvId), {
+        otherId: myUid,
+        otherName: window._sakuraUser.displayName || window._sakuraUser.email.split('@')[0],
+        otherPhoto: window._sakuraUser.photoURL || '',
+        updatedAt: Date.now(), lastMsg: text
+      });
+    }
+  } catch(e) {
+    if (typeof showToast === 'function') showToast('⚠️ Could not send');
+    console.error(e);
+  }
+}
+
+async function _loadConversations() {
+  if (!window._sakuraUser) return;
+  var db = await _getRTDB();
+  var list = document.getElementById('chat-conv-list');
+  if (!list) return;
+
+  if (!db) {
+    list.innerHTML = '<div class="chat-empty">No conversations yet.<br>Invite a friend below! 🌸</div>';
+    return;
+  }
+
+  var myUid = window._sakuraUser.uid;
+  if (_chatConvListener) {
+    try { db.off(db.ref(db.db, 'users_chats/' + myUid + '/conversations')); } catch(e) {}
+  }
+  var convRef = db.ref(db.db, 'users_chats/' + myUid + '/conversations');
+  _chatConvListener = db.onValue(convRef, function(snap) {
+    list.innerHTML = '';
+    var convs = [];
+    snap.forEach(function(child) { convs.push({id: child.key, data: child.val()}); });
+    convs.sort(function(a,b) { return (b.data.updatedAt||0) - (a.data.updatedAt||0); });
+    if (!convs.length) {
+      list.innerHTML = '<div class="chat-empty">No conversations yet.<br>Invite a friend below! 🌸</div>';
+      return;
+    }
+    convs.forEach(function(conv) {
+      var d = conv.data;
+      var item = document.createElement('div');
+      item.className = 'chat-conv-item';
+      var avHtml = d.otherPhoto
+        ? '<img src="' + d.otherPhoto + '" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">'
+        : (d.otherName||'?').charAt(0).toUpperCase();
+      var time = d.updatedAt ? new Date(d.updatedAt).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}) : '';
+      var preview = d.lastMsg ? (d.lastMsg.length > 28 ? d.lastMsg.slice(0,28)+'…' : d.lastMsg) : 'Tap to open chat';
+      item.innerHTML = '<div class="chat-conv-avatar">' + avHtml + '</div>' +
+        '<div class="chat-conv-info"><div class="chat-conv-name">' + (d.otherName||'User') + '</div>' +
+        '<div class="chat-conv-preview">' + preview + '</div></div>' +
+        '<div class="chat-conv-time">' + time + '</div>';
+      item.onclick = function() { _openChatWindow(conv.id, d.otherId, d.otherName||'User', d.otherPhoto||''); };
+      list.appendChild(item);
+    });
+  });
+}
+
+// Hook showSection for profile rendering
+(function() {
+  var _origSS = showSection;
+  showSection = function(id) {
+    _origSS(id);
+    if (id === 'profile') setTimeout(renderProfilePage, 60);
+  };
+})();
 </script>
 </body>
 </html>
